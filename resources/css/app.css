@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* Estilos de la barra de desplazamiento */
+body {
+    /* Ocultar la barra de desplazamiento por defecto */
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: transparent;
+  }
+  
+  /* Estilos de la barra de desplazamiento */
+  body::-webkit-scrollbar {
+    width: 8px; /* Define el ancho de la barra*/
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background-color: rgb(97, 90, 240);
+    border-radius: 4px; /* Redondeado de la barra */
+  }
+  
+  body::-webkit-scrollbar-track {
+    background-color: rgb(243 244 246); /* Color del fondo de la barra */
+  }
+
+/* Estilos de la barra de navegación */
+nav{
+    padding: 8px 10px 12px 10px;
+}
+.nav-busqueda input{
+    padding: 10px 60px 10px 15px;
+}
+
+/* Estilos del enfoque del input del navbar */
+.focus\:ring-2:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(156, 163, 175, 0.5);
+}
+
+.nav-search {
+    column-gap: 0.10rem;
+}
+
+/* Estilos de las imágenes de las categorías de la landing */
+
+#categorias img{
+  aspect-ratio: 4/3;
+  object-fit: cover;
+}
+
+.productos img{
+  aspect-ratio: 4/3;
+  object-fit: contain;
+}
+
+.desc-producto{
+  border: 0.5px solid #9B9E9C;
+  border-radius: 8px;
+}
