@@ -26,9 +26,15 @@ Developed with adaptability and growth in mind, PCGlobal stands as the ideal sol
 #### Frontend:
 - **Tailwind**: CSS framework for rapid and responsive design.
 
-## Developers
+## Developers' Information
 
-* **Daniel**: [Perfil](https://github.com/DanielEspitia1507)
+* **Work Group**: 2686374-2
+
+* **Subgroup**: GAES 8
+
+### Developers' Full Names
+
+* **Daniel Espitia**: [Perfil](https://github.com/DanielEspitia1507)
 
 * **Damián Felipe Rengifo Rincon**: [Perfil](https://github.com/DamianRengifo)
 
