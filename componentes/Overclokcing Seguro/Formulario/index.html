@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>Formulario de Registro</title>
+</head>
+<body>
+    <img src="images/logo.png" alt="Neocortex">
+    <form name="form" action="registro.php" method="post"><p>
+        <section class="datos">
+            <h1>Pantalla de compra</h1>
+            <p>Nombres:</p>
+            <input class="personal" type="text" name="nombres" id="nombres" required placeholder="Ingrese sus nombres">
+            <p>Apellidos:</p>
+            <input class="personal" type="text" name="apellidos" id="apellidos" required placeholder="Ingrese sus apellidos">
+            <p>Télefono:</p>
+            <input class="personal" type="number" name="teléfono" id="teléfono" required placeholder="Ingrese su teléfono">
+                <section class="tipo-doc">
+                    <p>Tipo de Documento</p>
+                    <select class="tipo-doc-a" name="documento" id="documento-tipo" required>
+                        <option value="T.I">T.I</option>
+                        <option value="C.C">C.C</option>
+                        <option value="C.E">C.E</option>
+                        <option value="Pasaporte">Pasaporte</option>
+                    </select>
+                </section>
+                <section class="documento-a">
+                    <p>N° De Documento:</p>
+                    <input class="documento" type="number" name="num-documento" id="documento-num" required placeholder="Ingrese su número de documento">
+                </section>
+                <section class="producto-a">
+                    <p>Tipo de Servicio: OverClocking Seguro</p>
+                    <p>Ensamblaje a Comprar:</p>
+                    <select class="producto-com" name="producto" id="producto">
+                        <option>Overclokcing Seguro Básico</option>
+                        <option>Overclokcing Seguro General</option>
+                        <option>Overclokcing Seguro Premium</option>
+                    </select>
+                </section>
+                    <section class="cantidad-a">
+                        <p>CANTIDAD</p>
+                        <select name="cantidad" id="cantidad" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select><br>
+                    </section>
+                    <section class="info-a">
+                        <p>Correo Eléctronico:</p>
+                        <input class="info" type="email" name="correo" id="correo" required placeholder="Ingrese su correo">
+                        <p>Dirección:</p>
+                        <input class="info" type="text" name="dirección" id="dirección" required placeholder="Ingrese su dirección">
+                        <p>Código Postal:</p>
+                        <input class="info" type="number" name="postal" id="postal" required placeholder="Ingrese el código postal"><p>
+                    </section>
+                    <section class="pago-a">
+                        <p>Método de Pago:</p>
+                        <select class="pago-com" name="metodo-pago" id="metodo-pago" required><br>
+                            <option value="Tarjeta de Credito ">Tarjeta de Credito</option>
+                            <option value="Tarjeta de Debito">Tarjeta de Debito</option>
+                            <option value="Tarjeta de Debito">PSE</option>
+                        </select><br><br>
+                            <p>N° de Tarjeta:</p>
+                            <input class="pago-com" type="number" name="tarjeta-num" id="tarjeta-num" placeholder="Ingrese su número de tarjeta">
+                            <p>Fecha de vencimiento:</p>
+                            <input class="pago-com" type="date" name="fecha" id="fecha" required>
+                            <p>CVV</p>
+                            <input class="pago-com" type="number" name="cvv" id="cvv" required placeholder="Ingrese el CVV de su tarjeta"><br><br>
+                        <p>METODO DE ENVIO</p>
+                        <select class="pago-com" name="metodo-envio" id="metodo-envio" required>
+                            <option value="Domicilio">Domicilio</option>
+                            <option value="Visitanos en nuestra Tienda!">¡Visitanos en nuestra Tienda!</option>
+                        </select><br><br>
+                    </section>
+                            <button class="buttons" type="submit" value="Registrar">Comprar</button>
+                            <button class="buttons" type="reset" value="Borrar">Borrar Datos</button>
+        </section>
+
+    </form>                    
+</body>
+</html>

@@ -1,0 +1,120 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+
+}
+.box{
+    text-align: center;
+}
+a{
+    color: black;
+    text-decoration: none;
+}
+a:hover {
+    color: #33006C;
+    cursor: pointer;
+  }
+strong{
+    text-align: center;
+    direction: ltr; 
+    margin: 15%;
+}
+footer{
+    text-align: center;
+    background:radial-gradient(200px top, ellipse, white, #E6D800, black);
+    position: relative;
+    margin-top: -10px;
+    width: 100%;
+    padding: 50px ;
+    
+}
+footer{
+    padding: 90px   0;
+    text-align: center;
+    font-size: 18px;
+}
+.name{
+    width: 100%;
+    height: 225px;
+    background: #FF0000;
+    transform: skewY(-5deg);
+}
+
+.name .content{
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    left: 25%;
+}
+
+.name .content .p-1 {
+    color: #FFF8F0;
+    font-family: 'Baloo Tama 2', sans-serif;
+    font-weight: Bold;
+    font-size: 24px;
+    transform: skewY(4deg);
+    padding: 45px;
+    font-family: 'Tiro Kannada', serif;
+}
+.name .image{
+    position: absolute;
+    top: 25%;
+    right: 13%;
+    width: 180px;
+    height: 180px;
+    transform: skewY(5deg);
+}
+.name .result{
+    font-family: 'Courgette', cursive;
+}
+#producto .image_proc{
+   float: left;
+   margin-left: 15px;
+   padding: 0px;
+   border: 4px #FF0000 inset;
+   border-radius: 5px;
+}
+#descripción .descrip .título{
+    font-weight: bold;
+    font-size: 24px;
+}
+ul {
+  margin: 5px;
+  border-radius: 8px;
+  padding: 0;
+  color: #fff;
+  background-color: #FF0000;;
+}
+footer{
+    padding: 90px 0;
+    text-align: center;
+    font-size: 18px;
+    margin-top: 10px;
+    width: 100%;
+    padding: 50px ;
+    border-radius: 4px;
+}
+#vid{
+    background-color: black;
+    margin-left: 500px;
+    padding-left: 40px;
+    text-align: center;
+}
+#producto .espec{
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    margin-left: 45%;
+    font-size: 20px;
+}
+#producto .espec h5{
+    color: #FF0000;;
+    font-size: 20px;
+}
+#producto .espec h4{    
+    font-weight: 700;
+}

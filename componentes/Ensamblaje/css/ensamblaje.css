@@ -1,0 +1,257 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+
+}
+.box{
+    text-align: center;
+}
+#componentes.box img{
+    width: 100%;
+}
+#componentes.box p{
+    color: #666;
+    padding: 10px;
+}
+#componentes .box{
+    display: inline-block;
+    text-align: center;
+    width: 31%;
+    margin: 1%;
+    background-color: white;
+}
+#componentes{
+    background-color: whitesmoke; 
+}
+a{
+    color: black;
+    text-decoration: none;
+}
+a:hover {
+    color: #33006C;
+    cursor: pointer;
+  }
+strong{
+    text-align: center;
+    direction: ltr; 
+    margin: 15%;
+}
+footer{
+    text-align: center;
+    background:radial-gradient(200px top, ellipse, white, #E6D800, black);
+    position: relative;
+    margin-top: -10px;
+    width: 100%;
+    padding: 50px ;
+    
+}
+footer{
+    padding: 90px 0;
+    text-align: center;
+    font-size: 18px;
+}
+.name{
+    width: 100%;
+    height: 225px;
+    background: #E6D800;
+    transform: skewY(-5deg);
+}
+
+.name .content{
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    left: 25%;
+}
+
+.name .content .p-1 {
+    color: #FFF8F0;
+    font-family: 'Baloo Tama 2', sans-serif;
+    font-weight: Bold;
+    font-size: 24px;
+    transform: skewY(4deg);
+    padding: 45px;
+    font-family: 'Tiro Kannada', serif;
+}
+.name .image{
+    position: absolute;
+    top: 25%;
+    right: 13%;
+    width: 180px;
+    height: 180px;
+    transform: skewY(5deg);
+}
+
+.name .result{
+    font-family: 'Courgette', cursive;
+}
+
+.name_2{
+    width: 100%;
+    height: 225px;
+    background: #E6D800;
+    transform: skewY(-5deg);
+}
+
+.name_2 .content{
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    left: 25%;
+}
+
+.name_2 .content .p-1 {
+    color: #FFF8F0;
+    font-family: 'Baloo Tama 2', sans-serif;
+    font-weight: Bold;
+    font-size: 24px;
+    transform: skewY(4deg);
+    padding: 45px;
+    font-family: 'Tiro Kannada', serif;
+}
+
+.name_2 .image{
+    position: absolute;
+    top: 25%;
+    right: 13%;
+    width: 180px;
+    height: 180px;
+    transform: skewY(5deg);
+}
+
+.name_2 .result{
+    font-family: 'Courgette', cursive;
+}
+.name_3{
+    width: 100%;
+    height: 225px;
+    background: #E6D800;
+    transform: skewY(-5deg);
+}
+.name_3 .content{
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    left: 25%;
+}
+.name_3 .content .p-1 {
+    color: #FFF8F0;
+    font-family: 'Baloo Tama 2', sans-serif;
+    font-weight: Bold;
+    font-size: 24px;
+    transform: skewY(4deg);
+    padding: 45px;
+    font-family: 'Tiro Kannada', serif;
+}
+.name_3 .image{
+    position: absolute;
+    top: 25%;
+    right: 13%;
+    width: 180px;
+    height: 180px;
+    transform: skewY(5deg);
+}
+.name_3 .result{
+    font-family: 'Courgette', cursive;
+}
+
+.name_4{
+    width: 100%;
+    height: 225px;
+    background: #E6D800;
+    transform: skewY(-5deg);
+}
+.name_4 .content{
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    left: 25%;
+}
+.name_4 .content .p-1 {
+    color: #FFF8F0;
+    font-family: 'Baloo Tama 2', sans-serif;
+    font-weight: Bold;
+    font-size: 24px;
+    transform: skewY(4deg);
+    padding: 45px;
+    font-family: 'Tiro Kannada', serif;
+}
+.name_4 .image{
+    position: absolute;
+    top: 25%;
+    right: 13%;
+    width: 180px;
+    height: 180px;
+    transform: skewY(5deg);
+}
+.name_4 .result{
+    font-family: 'Courgette', cursive;
+}
+.name_5{
+    width: 100%;
+    height: 225px;
+    background: #E6D800;
+    transform: skewY(-5deg);
+}
+.name_5 .content{
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    left: 25%;
+}
+.name_5 .content .p-1 {
+    color: #FFF8F0;
+    font-family: 'Baloo Tama 2', sans-serif;
+    font-weight: Bold;
+    font-size: 24px;
+    transform: skewY(4deg);
+    padding: 45px;
+    font-family: 'Tiro Kannada', serif;
+}
+.name_5 .image{
+    position: absolute;
+    top: 25%;
+    right: 13%;
+    width: 180px;
+    height: 180px;
+    transform: skewY(5deg);
+}
+.name_5 .result{
+    font-family: 'Courgette', cursive;
+}
+.name_6{
+    width: 100%;
+    height: 225px;
+    background: #E6D800;
+    transform: skewY(-5deg);
+}
+.name_6 .content{
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    left: 25%;
+}
+.name_6 .content .p-1 {
+    color: #FFF8F0;
+    font-family: 'Baloo Tama 2', sans-serif;
+    font-weight: Bold;
+    font-size: 24px;
+    transform: skewY(4deg);
+    padding: 45px;
+    font-family: 'Tiro Kannada', serif;
+}
+.name_6 .image{
+    position: absolute;
+    top: 25%;
+    right: 13%;
+    width: 180px;
+    height: 180px;
+    transform: skewY(5deg);
+}
+.name_6 .result{
+    font-family: 'Courgette', cursive;
+}

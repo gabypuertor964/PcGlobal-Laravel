@@ -1,0 +1,18 @@
+nav{
+    background-color: rgb(116, 75, 204);
+}
+input.submit{
+    background-color: rgb(116, 75, 204);
+    color: #FFFF;
+}
+input.submit:hover{
+    background-color: rgb(106, 72, 180);
+    color: #FFFF;
+}
+.brand{
+    margin-left: 5px;
+}
+.brand img{
+    width: 125px;
+    height: 100%;
+}

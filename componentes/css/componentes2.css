@@ -1,0 +1,30 @@
+.card a{
+    background-color: rgb(116, 75, 204);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.card a:hover{
+    background-color: rgb(83, 48, 158);
+    color: rgba(122, 119, 119, 0.815);
+}
+.flex a{
+    background-color: rgb(116, 75, 204);
+}
+.flex a:hover{
+    background-color: rgb(83, 48, 158);
+    color: rgba(255, 255, 255, 0.815);
+}
+.flex a.outline_{
+    background-color: transparent;
+    border: 2px solid rgb(116, 75, 204);
+    color: rgb(116, 75, 204);
+}
+.flex a.outline_:hover{
+    background-color: rgb(116, 75, 204);
+    color: rgba(255, 255, 255, 0.815);
+    font-weight: 400;
+}
+.flex h1.mar{
+    color: rgb(116, 75, 204);
+    font-size: 20px;
+}

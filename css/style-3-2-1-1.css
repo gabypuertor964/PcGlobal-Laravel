@@ -1,0 +1,308 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Archivo', sans-serif !important; 
+}
+header{
+    position: static;
+    z-index: 3;
+    padding: 10px 0;
+    width: 100%;
+    background-color: rgb(116, 75, 204);
+    line-height: 1;
+    height: 90px;
+}   
+header nav{
+    margin-top: 10px;
+}     
+header nav a{
+    z-index: 3;
+    font-size: 14px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    margin-left: 10px;
+    padding: 10px 15px;
+    font-family: 'Lobster', cursive;
+}
+header nav a.princ:hover{
+    color: #e7e3e3;
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.6);
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    transition: all .2s;
+}
+#portafolio{
+    background-color: whitesmoke; 
+}
+#portafolio.box{
+    padding: 10px;
+}
+#portafolio .box a{
+    color: black;
+    text-decoration:none;
+}
+#portafolio .box{     
+    margin-bottom: 44px;
+    padding-top: 2.5px;
+    margin-right: 10px;
+}
+#portafolio .box :hover{
+    cursor: pointer;
+    transform: scale(0.9);
+    -webkit-transform: scale(0.9);
+    -ms-transform: scale(1.6);
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    transition: all .2s;
+    border-radius: 10px;
+    text-decoration: none;
+}
+#portafolio .box h3:hover{
+    cursor: pointer;
+    transform: scale(0.9);
+    -webkit-transform: scale(0.9);
+    -ms-transform: scale(1.6);
+    text-decoration: none;
+}
+footer{
+    padding: 90px 0;
+    text-align: center;
+    font-size: 18px;
+}
+section{
+    padding: 80px 0;
+}
+section h2{
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 80px;
+    font-family: 'Lobster', cursive;
+}
+.container{
+    text-decoration: none;
+}
+.box a{
+    text-decoration: none;
+    color: #000;
+}
+#contacto{
+    max-width: 800px;
+    width: 90%;
+    margin: auto;
+    padding: 40px;
+    background: #E5E5E5;
+    margin-top: 30px;
+    border-radius: 10px;
+}
+.carousel{
+    margin-top: -79.6px;
+    margin-right: 70px;
+    margin-left: 70px;
+}
+.formulario{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+.formulario__label{
+    display: block;
+    font-weight: 700;
+    padding: 10px;
+    cursor: pointer;
+}
+.formulario__grupo-input{
+    position: relative;
+}
+.formulario__input{
+    width: 100%;
+    background: #fff;
+    border: 3px solid transparent;
+    border-radius: 3px;
+    height: 45px;
+    line-height: 45px; 
+    padding: 0 40px 0 10px;
+    transition: .3s ease all;
+}
+.formulario__textarea{
+    background: #fff;
+    border: 3px solid transparent;
+    border-radius: 3px;
+    line-height: 45px; 
+    padding: 0 40px 0 10px;
+    transition: .3s ease all;
+    width: 207%;
+}
+.formulario__input-error{
+    font-size: 12px;
+    margin-bottom: 0;
+    display: none;
+}
+.formulario__input-error-activo{
+    display: block;
+}
+.formulario__validacion-estado{
+    position:absolute;
+    right: 10px;
+    bottom: 8px;
+    z-index: 100;
+    font-size: 16px;
+    opacity: 0;
+}
+.formulario__input:focus{
+    border: 3px solid #0075FF;
+    outline: none;
+    box-shadow: 3px 0px 30px rgba(163,163,163);
+}
+.formulario__textarea:focus{
+    border: 3px solid #0075FF;
+    outline: none;
+    box-shadow: 3px 0px 30px rgba(163,163,163);
+}
+.formulario__checkbox{
+    margin-right: 10px;
+}
+.formulario__grupo-terminos,
+.formulario__mensaje,
+.formulario__grupo-btn-enviar{
+    grid-column: span 2;
+}
+.formulario__mensaje{
+    height: 45px;
+    line-height: 45px;
+    background: #F66060;
+    border-radius: 3px;
+    display: none;
+}
+.formulario__mensaje-activo{
+    display: block;
+}
+.formulario__mensaje p{
+    margin: 0;
+}
+.formulario__grupo-btn-enviar{
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+}
+.formulario__btn{
+    height: 45px;
+    line-height: 45px;
+    width: 30%;
+    background: #000;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: .1s ease all;
+}
+.formulario a.text-primary{
+    text-decoration: none;
+}
+.modal-footer button.btn-outline{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    color: rgb(116, 75, 204);
+    border: 2px solid rgb(116, 75, 204);
+    background-color: transparent;
+}
+.modal-footer button.btn-outline:hover{
+    color: #FFFF;
+    border: 2px solid rgb(116, 75, 204);
+    background-color: rgb(116, 75, 204);
+}
+.formulario__btn:hover{
+    box-shadow: 3px 0px 30px rgba(163, 163, 163, 1);
+}
+.formulario__mensaje-exito{
+    font-size: 14px;
+    color: #119200;
+    display: none;
+}
+.formulario__mensaje-exito-activo{
+    display: block;
+}
+/* Estilos para Validación */
+.formulario__grupo-correcto .formulario__validacion-estado{
+    color: #1ed12d;
+    opacity: 1;
+}
+.formulario__grupo-incorrecto .formulario__label{
+    color: #bb2929;
+    opacity: 1;
+}
+
+.formulario__grupo-incorrecto .formulario__validacion-estado{
+    color: #bb2929;
+    opacity: 1;
+}
+.formulario__grupo-incorrecto .formulario__input{
+    border: 3px solid #bb2929;
+}
+/* ----- -----  Mediaqueries ----- ----- */
+@media screen and (max-width: 800px) {
+	.formulario {
+		grid-template-columns: 1fr;
+	}
+
+	.formulario__grupo-terminos, 
+	.formulario__mensaje,
+	.formulario__grupo-btn-enviar {
+		grid-column: 1;
+	}
+
+	.formulario__btn {
+		width: 100%;
+	}
+    .formulario__textarea{
+        width: 100%;
+    }
+}
+@media only screen and (min-width: 320px) and (max-width: 755px){
+    ul{
+        display: none !important;
+    }
+    .dropdown{
+        display:table;
+    }
+    .dpdn-2{
+        display: contents;
+    }
+}
+@media only screen and (min-width: 756px){
+    .dropdown{
+        display: none;
+    }
+    .dpdn-2{
+        display: contents;
+    }
+}
+
+@media only screen and (min-width: 1650px){
+    .carousel img{
+        height: 882px;
+    }
+}
+@media only screen and (min-width: 320px) and (max-width: 575px){
+    .carousel img{
+        height: 205px;
+    }
+}
+@media only screen and (min-width: 576px) and (max-width: 775px){
+    .carousel img{
+        height: 360px;
+    }
+}
+@media only screen and (min-width: 776px) and (max-width: 960px){
+    .carousel img{
+        height: 460px;
+    }
+}
+@media only screen and (min-width: 2050px){
+    .carousel img{
+        height: 1219px;
+    }
+}

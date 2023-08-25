@@ -1,0 +1,80 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cabin', sans-serif;
+    font-weight: 400;
+    background: #0F2027;
+    background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);
+    background: linear-gradient(to right, #2C5364, #203A43, #0F2027);   
+}
+
+.datos{
+    -webkit-box-shadow: -4px 1px 11px 2px rgba(255,255,255,0.66); 
+    box-shadow: -4px 1px 11px 2px rgba(255,255,255,0.66);
+    width: 500px;
+    background: #0F2027;
+    background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);
+    background: linear-gradient(to right, #2C5364, #203A43, #0F2027);   
+    padding: 30px;
+    margin: auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    border-radius: 14px;
+    color: white;
+}
+
+.datos h1{
+    font-size: 25px;
+    margin-bottom: 20px;
+    text-align: center;
+    margin: 10px 0;
+    font-weight: 800;
+    font-family: 'Pacifico', cursive;
+
+}
+
+.datos .personal, .documento, .tipo-doc-a, .producto-com, .cantidad-a, .info-a, .pago-com, .info{
+    width: 100%;
+    background: #0F2027;
+    background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);
+    background: linear-gradient(to right, #2C5364, #203A43, #0F2027);    
+    padding: 10px;
+    border-radius: 30px;
+    margin-bottom: 15px;
+}
+
+::placeholder { color: white; }
+
+select {
+    color: black;
+    width: 100%;
+    background: #0F2027;
+    background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);
+    background: linear-gradient(to right, #2C5364, #203A43, #0F2027);    
+    padding: 10px;
+    border-radius: 30px;
+    margin-bottom: 15px;
+}
+
+.buttons{
+    padding: 10px;
+    border-radius: 30px;
+    margin-bottom: 4px;
+    background: whitesmoke;
+    width: 110px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    background: #0F2027;
+    background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);
+    background: linear-gradient(to right, #2C5364, #203A43, #0F2027); 
+    color: white;
+}
+img{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 310px;
+    height: 120px;
+    padding: 0;
+}
