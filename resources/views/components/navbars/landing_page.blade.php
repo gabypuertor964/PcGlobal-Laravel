@@ -2,12 +2,14 @@
 <header class="h-24 bg-indigo-600 overflow-hidden">
   <nav class="mx-4 sm:mx-12 flex font-medium text-white h-full items-center text-sm gap-x-6 gap-y-3">
     <div class="nav-1 flex flex-col sm:flex-row items-center justify-between w-full h-full">
+
       <!-- Logo #1 (Para pantallas más grandes que las de celular) -->
       <div class="nav-logo-pag pe-10 py-2 hidden sm:flex">
         <a href="{{route('index')}}" class="text-white hover:text-gray-400">
           <p>Logo</p>
         </a>
       </div>
+
       <!-- Formulario de búsqueda -->
       <div class="flex flex-grow px-2 sm:px-4 justify-center">
         <form action="#" class="flex nav-search">
@@ -17,12 +19,14 @@
           </button>
         </form>
       </div>
+
       <div class="nav-right flex gap-12 w-full sm:w-fit">
         <!-- Enlaces de productos -->
         <div class="nav-productos justify-evenly hidden lg:flex gap-4 ps-3">
           <p><a class="hover:text-gray-200" href="{{route('categorias')}}">Categorías</a></p>
           <p><a class="hover:text-gray-200" href="#">PQRS</a></p>
         </div>
+
         <!-- Enlaces de login y carrito -->
         <div class="nav-login hidden lg:flex gap-4">
           <a href="{{route("login")}}" class="hover:text-gray-200">
@@ -31,6 +35,7 @@
           <div class="border"></div>
           <p><a href="" class="hover:text-gray-200"><i class="fa-solid fa-cart-shopping"></i></a></p>
         </div>
+        
         <!-- Logo #2 (Este es para el responsive) -->
         <div class="nav-logo-pag py-2 flex lg:hidden gap-3 w-full justify-between mt-1 items-center">
           <a href="{{route('index')}}" class="text-white flex sm:hidden hover:text-gray-400">
@@ -39,6 +44,7 @@
           {{-- Ícono del menú --}}
           <button><i class="fa-solid fa-bars text-md bg-indigo-700 p-2 rounded-md" id="boton-menu-responsive"></i></button>
         </div>
+        
       </div>
     </div>
   </nav>

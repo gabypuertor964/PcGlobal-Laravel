@@ -30,7 +30,7 @@
     </head>
 
     {{-- 
-        Nombre directiva: @yield('nombre_seccion','valor_default')
+        Nombre directiva: @yield('nombre_seccion','valor_default')<
         
         Explicacion: Esta directiva declara un componente asignándole un nombre y un valor por defecto en caso de no declararse en la vista que importa el componente.
         
