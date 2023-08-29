@@ -31,6 +31,8 @@ return new class extends Migration
 
                 $table->unsignedInteger("id_trabajador")->comment("Id Trabajador");
 
+                $table->unsignedInteger("id_tipo_pqrs")->comment("Id tipo PQRS");
+
                 $table->unsignedInteger("id_estado")->comment("Id estado PQRS");
 
                 $table->string("descripcion",255)->unique()->comment("Descripcion de la PQRS");
@@ -48,6 +50,8 @@ return new class extends Migration
                 $table->foreign("id_trabajador")->references("id")->on("users");
 
                 $table->foreign("id_estado")->references("id")->on("estados");
+
+                $table->foreign("id_tipo_pqrs")->references("id")->on("tipo_pqrs");
             //
         });
     }
