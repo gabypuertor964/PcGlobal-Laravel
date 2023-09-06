@@ -310,13 +310,13 @@ return [
         'classes_content' => '',
 
         //Clases CSS Adicionales aplicadas a la barra de lateral
-        'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+        'classes_sidebar' => 'sidebar-light-primary elevation-4',
 
         //Clases CSS Adicionales aplicadas a la barra de busqueda del sidebar
         'classes_sidebar_nav' => '',
 
         //Clases CSS Adicionales aplicadas a la barra de navegacion de la cabecera
-        'classes_topnav' => 'navbar-black navbar-dark',
+        'classes_topnav' => 'navbar-light navbar-light',
 
         //Clases CSS Adicionales aplicadas a la navegacion de la barra de navegacion superior
         'classes_topnav_nav' => 'navbar-expand',
@@ -406,7 +406,7 @@ return [
         'right_sidebar_icon' => 'fas fa-cogs',
 
         //Tema a usar: Dark o Light (Default)
-        'right_sidebar_theme' => 'dark',
+        'right_sidebar_theme' => 'light',
 
         //Activar Efecto deslizante
         'right_sidebar_slide' => true,

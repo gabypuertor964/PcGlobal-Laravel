@@ -8,12 +8,6 @@
 
 @section('content')
   <p>Panel Cliente</p>
-
-  <form action="{{route("logout")}}" method="post">
-    @csrf
-    
-    <button type="submit" class="btn btn-primary">Cerrar Sesion</button>
-  </form>
 @stop
 
 @section('css')
