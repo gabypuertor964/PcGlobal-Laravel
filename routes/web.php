@@ -40,7 +40,7 @@ use Illuminate\Support\Facades\Route;
 
 # Ruta del detalle del producto
 Route::controller(productoController::class)->group(function(){
-    Route::get('categorias/{categoria}/{producto}','show')->name('categoria.producto');
+    Route::get('productos/{producto}','show')->name('categoria.producto');
 });
 
 //Rutas de Autenticacion para usuarios que no hayan iniciado sesion (guest)

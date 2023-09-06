@@ -24,10 +24,7 @@ class authController extends Controller
         $sexos=sexos::all();
 
         //Retornar vista de registro enviando los datos requeridos
-        return view("auth.register",[
-            'tipos_documento'=>$tipos_documento,
-            'sexos'=>$sexos
-        ]);
+        return view("auth.register", compact('tipos_documento','sexos'));
     }
 
     # Redireccion a dashboard segun rol del usuario

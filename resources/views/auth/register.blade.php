@@ -4,99 +4,99 @@
     <form action="" method="post">
         @csrf
 
-        PEPE
-
-        {{-- Name field --}}
-        <div class="input-group mb-3">
-            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
-                   value="{{ old('name') }}" placeholder="{{ __('adminlte::adminlte.full_name') }}" autofocus>
-
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-user {{ config('adminlte.classes_auth_icon', '') }}"></span>
+        <div class="row">
+            <div class="col">
+                {{-- Name field --}}
+                <div class="input-group mb-3">
+                    <input type="text" name="nombres" class="form-control @error('nombres') is-invalid @enderror"
+                           value="{{ old('nombres') }}" placeholder="Nombres" autofocus>
+        
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                        </div>
+                    </div>
+        
+                    @error('nombres')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
-            </div>
-
-            @error('name')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-        </div>
-
-        {{-- Email field --}}
-        <div class="input-group mb-3">
-            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
-                   value="{{ old('email') }}" placeholder="{{ __('adminlte::adminlte.email') }}">
-
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-envelope {{ config('adminlte.classes_auth_icon', '') }}"></span>
+        
+                {{-- Email field --}}
+                <div class="input-group mb-3">
+                    <input type="text" name="apellidos" class="form-control @error('apellidos') is-invalid @enderror"
+                           value="{{ old('apellidos') }}" placeholder="Apellidos">
+        
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                        </div>
+                    </div>
+        
+                    @error('apellidos')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
-            </div>
-
-            @error('email')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-        </div>
-
-        {{-- Password field --}}
-        <div class="input-group mb-3">
-            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
-                   placeholder="{{ __('adminlte::adminlte.password') }}">
-
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-lock {{ config('adminlte.classes_auth_icon', '') }}"></span>
+        
+                {{-- Password field --}}
+                <div class="input-group mb-3">
+                    <select class="form-select">
+                        <option selected>Open this select menu</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+        
+                    @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
-            </div>
-
-            @error('password')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-        </div>
-
-        {{-- Password field --}}
-        <div class="input-group mb-3">
-            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
-                   placeholder="{{ __('adminlte::adminlte.password') }}">
-
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-lock {{ config('adminlte.classes_auth_icon', '') }}"></span>
+        
+                {{-- Password field --}}
+                <div class="input-group mb-3">
+                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
+                           placeholder="{{ __('adminlte::adminlte.password') }}">
+        
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                        </div>
+                    </div>
+        
+                    @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
-            </div>
-
-            @error('password')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-        </div>
-
-        {{-- Password field --}}
-        <div class="input-group mb-3">
-            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
-                   placeholder="{{ __('adminlte::adminlte.password') }}">
-
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-lock {{ config('adminlte.classes_auth_icon', '') }}"></span>
+        
+                {{-- Password field --}}
+                <div class="input-group mb-3">
+                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
+                           placeholder="{{ __('adminlte::adminlte.password') }}">
+        
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                        </div>
+                    </div>
+        
+                    @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
-            </div>
-
-            @error('password')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-        </div>
-
-        {{-- Password field --}}
+        
+               </div>
+               <div class="col">
+                 {{-- Password field --}}
         <div class="input-group mb-3">
             <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
                    placeholder="{{ __('adminlte::adminlte.password') }}">
@@ -169,6 +169,8 @@
                 </span>
             @enderror
         </div>
+        </div>
+    </div>
 
         {{-- Register button --}}
         <button type="submit" class="btn btn-block {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">

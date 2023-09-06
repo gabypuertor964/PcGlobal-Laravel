@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categoria;
 use Illuminate\Http\Request;
 use App\Models\productos;
 use Illuminate\Support\Facades\File;
@@ -10,12 +9,10 @@ use Parsedown;
 
 class ProductoController extends Controller
 {
-    public function show($categoriaSlug, $productoSlug){
-        // Buscar la categoría por su slug
-        $categoria = Categoria::where('slug', $categoriaSlug)->firstOrFail();
+    public function show(productos $producto){
 
-        // Buscar el producto en la categoría por su slug
-        $producto = $categoria->productos()->where('slug', $productoSlug)->firstOrFail();
+        $categoria = $producto->categoria;
+        $marca = $producto->marca;
 
         if (file_exists(public_path('storage/'. $producto->descripcion_1))){
             $contenidoMd = File::get(public_path('storage/'.$producto->descripcion_1));
@@ -42,6 +39,6 @@ class ProductoController extends Controller
         $descripciones = compact('descripcion_1', 'descripcion_2');
 
 
-        return view('productos.producto',compact('categoria', 'producto','descripciones'));
+        return view('productos.producto',compact('categoria','marca','producto','descripciones'));
     }
 }
