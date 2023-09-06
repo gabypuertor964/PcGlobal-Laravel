@@ -113,7 +113,7 @@ return [
     |
     */
 
-    /* */
+    /* Icono Card Vistas de autenticacion */
         'auth_logo' => [
             'enabled' => false,
             'img' => [
@@ -179,12 +179,26 @@ return [
     |
     */
 
-    'usermenu_enabled' => true,
-    'usermenu_header' => false,
-    'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => false,
-    'usermenu_desc' => false,
-    'usermenu_profile_url' => false,
+    /* Configuraciones Menu del usuario */
+
+        // Habilitar Menu del usuario (Boton)
+        'usermenu_enabled' => false,
+
+        // Activacion del encabezado del menu de navegacion
+        'usermenu_header' => false,
+
+        // Color de la cabecera del menu del usuario
+        'usermenu_header_class' => 'bg-primary',
+
+        // Habilitar la visualizacion de la imagen del usuario (Requiere metodo adminlte_image() en el modelo User)
+        'usermenu_image' => false,
+
+        // Habilitar la visualizacion de la descripcion del usuario (Requiere metodo adminlte_desc() en el modelo User)
+        'usermenu_desc' => false,
+
+        // Habilitar URL perfil del usuario (Requiere metodo adminlte_profile_url() en el modelo User)
+        'usermenu_profile_url' => false,
+    //
 
     /*
     |--------------------------------------------------------------------------
@@ -198,12 +212,37 @@ return [
     |
     */
 
-    'layout_topnav' => null,
-    'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
-    'layout_fixed_navbar' => null,
-    'layout_fixed_footer' => null,
-    'layout_dark_mode' => null,
+    /* Configuraciones generales Layouts Admin */
+
+        /*
+            null/False -> Barra de navegacion lateral
+            True -> Barra de Navegacion superior
+        */
+        'layout_topnav' => null,
+
+        /*
+            Null/False -> Contenido ocupa toda la pantalla
+            True -> Contenido se muestra en forma de caja
+        */
+        'layout_boxed' => null,
+
+        /*
+            Null/False -> Elemento no fijo
+            True -> Ejemplo es Fijo o siempre visible
+
+            Nota:
+                Sidebar: Barra de navegacion lateral
+                Navbar: Barra de navegacion superior
+                Footer: Pie de pagina
+            --
+        */
+        'layout_fixed_sidebar' => true,
+        'layout_fixed_navbar' => true,
+        'layout_fixed_footer' => null,
+
+        //Activar o desactivar modo oscuro en el Panel
+        'layout_dark_mode' => false,
+    //
 
     /*
     |--------------------------------------------------------------------------
@@ -217,12 +256,26 @@ return [
     |
     */
 
-    'classes_auth_card' => 'card-outline card-primary',
-    'classes_auth_header' => '',
-    'classes_auth_body' => '',
-    'classes_auth_footer' => '',
-    'classes_auth_icon' => '',
-    'classes_auth_btn' => 'btn-flat btn-primary',
+    /* Clases Formularios de Autenticacion */
+
+        //Clases CSS Adicionadas a la estructura card de Bootstrap
+        'classes_auth_card' => 'card-outline card-primary',
+
+        //Clases CSS Adicionales Aplicadas al encabezado de la card de Bootstrap
+        'classes_auth_header' => '',
+
+        //Clases CSS Adicionales Aplicadas al cuerpo de la card de Bootstrap
+        'classes_auth_body' => '',
+
+        //Clases CSS Adicionales Aplicadas al pie de pagina de la card de Bootstrap
+        'classes_auth_footer' => '',
+
+        //Clases CSS Adicionales Aplicadas al icono de autenticacion de la card de Bootstrap
+        'classes_auth_icon' => '',
+
+        //Clases CSS Adicionales Aplicadas al boton submit del formulario de autenticacion de Bootstrap
+        'classes_auth_btn' => 'btn-flat btn-primary',
+    //
 
     /*
     |--------------------------------------------------------------------------
@@ -236,17 +289,41 @@ return [
     |
     */
 
-    'classes_body' => '',
-    'classes_brand' => '',
-    'classes_brand_text' => '',
-    'classes_content_wrapper' => '',
-    'classes_content_header' => '',
-    'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
-    'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-white navbar-light',
-    'classes_topnav_nav' => 'navbar-expand',
-    'classes_topnav_container' => 'container',
+    /* Clases Panel de Administracion */
+
+        //Clases CSS Adicionales aplicadas a la etiqueta Body
+        'classes_body' => '',
+
+        //Clases CSS Adicionales aplicadas al area de la marca (Logo y Nombre)
+        'classes_brand' => '',
+
+        //Clases CSS Adicionales aplicadas al texto o nombre de la empresa
+        'classes_brand_text' => '',
+
+        //Clases CSS Adicionales aplicadas al contenedor del contenido principal
+        'classes_content_wrapper' => '',
+
+        //Clases CSS Adicionales aplicadas aL encabezado principal
+        'classes_content_header' => '',
+
+        //Clases CSS Adicionales aplicadas al contenido principal
+        'classes_content' => '',
+
+        //Clases CSS Adicionales aplicadas a la barra de lateral
+        'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+
+        //Clases CSS Adicionales aplicadas a la barra de busqueda del sidebar
+        'classes_sidebar_nav' => '',
+
+        //Clases CSS Adicionales aplicadas a la barra de navegacion de la cabecera
+        'classes_topnav' => 'navbar-black navbar-dark',
+
+        //Clases CSS Adicionales aplicadas a la navegacion de la barra de navegacion superior
+        'classes_topnav_nav' => 'navbar-expand',
+
+        //Clases CSS Adicionales aplicadas al contenedor de la batrra de navegacion superior
+        'classes_topnav_container' => 'container',
+    //
 
     /*
     |--------------------------------------------------------------------------
@@ -260,15 +337,44 @@ return [
     |
     */
 
-    'sidebar_mini' => 'lg',
-    'sidebar_collapse' => false,
-    'sidebar_collapse_auto_size' => false,
-    'sidebar_collapse_remember' => false,
-    'sidebar_collapse_remember_no_transition' => true,
-    'sidebar_scrollbar_theme' => 'os-theme-light',
-    'sidebar_scrollbar_auto_hide' => 'l',
-    'sidebar_nav_accordion' => true,
-    'sidebar_nav_animation_speed' => 300,
+    # Barra de navegacion Principal
+
+        /*
+            Configurar modo de contraccion segun resolucion
+        
+            Modos:
+                1. lg: Activar en resoluciones >=992
+                2. md: Activar en resoluciones >=768
+                3. xs: Siempre habilitado
+                4. null: Desactivado
+            --  
+        */
+        'sidebar_mini' => 'xs',
+
+        # Activar/Desactivar el modo de contraccion automatico
+        'sidebar_collapse' => true,
+
+        # Activar/Desactivar Redimension automatica segun el contenido
+        'sidebar_collapse_auto_size' => false,
+
+        # Guardar el estado de la barra para la proxuma ejecucion
+        'sidebar_collapse_remember' => true,
+
+        # Activar/Desactivar transicion de contraccion cuando se establece el guardado de estado
+        'sidebar_collapse_remember_no_transition' => false,
+
+        # Establecer Tema barra lateral
+        'sidebar_scrollbar_theme' => 'os-theme-white',
+
+        # Establecer en que momento la barra lateral se oculatara (l: Automatico, s: Siempre visible)
+        'sidebar_scrollbar_auto_hide' => 'l',
+
+        # Activar/Desactivar navegacion en forma de acordeon (Solo un select activo a la vez)
+        'sidebar_nav_accordion' => true,
+
+        # Velocidad en milisegundo de la animacion de despliegue de los menus desplegables
+        'sidebar_nav_animation_speed' => 300,
+    //
 
     /*
     |--------------------------------------------------------------------------
@@ -282,13 +388,61 @@ return [
     |
     */
 
-    'right_sidebar' => false,
-    'right_sidebar_icon' => 'fas fa-cogs',
-    'right_sidebar_theme' => 'dark',
-    'right_sidebar_slide' => true,
-    'right_sidebar_push' => true,
-    'right_sidebar_scrollbar_theme' => 'os-theme-light',
-    'right_sidebar_scrollbar_auto_hide' => 'l',
+    /* 
+        Barra Secundaria  
+
+        Usos:
+            1. Informacion contextual o detallado
+            2. Acceso rapido a herramientas
+            3. Widgets o miniaplicaciones
+            4. Navegacion secundaria
+            5. Personalizacion de la experiencia
+        --
+    */
+        //Activacion barra de navegacion
+        'right_sidebar' => false,
+
+        //Icono de accesp
+        'right_sidebar_icon' => 'fas fa-cogs',
+
+        //Tema a usar: Dark o Light (Default)
+        'right_sidebar_theme' => 'dark',
+
+        //Activar Efecto deslizante
+        'right_sidebar_slide' => true,
+
+        //Activar Adaptacion del contenido principal (Se mueve a la izquierda)
+        'right_sidebar_push' => true,
+
+        /* 
+            Estilos de la Barra lateral:
+
+            1. 'os-theme-dark': Este es el tema oscuro predeterminado para la barra de desplazamiento. Proporciona una apariencia oscura y se combina bien con temas oscuros en general.
+
+            2. 'os-theme-light': Este tema ofrece una barra de desplazamiento de apariencia más clara, lo que puede ser adecuado si estás utilizando un tema claro en tu aplicación.
+
+            3. 'os-theme-light-inverse': Similar al tema claro, pero con un aspecto invertido.
+
+            4. 'os-theme-minimal-dark': Un tema minimalista de barra de desplazamiento con un diseño oscuro.
+
+            5. 'os-theme-minimal-light': Un tema minimalista con un diseño claro.
+
+            6. 'os-theme-thick-dark': Este tema proporciona barras de desplazamiento más anchas y se adapta a un aspecto más audaz y oscuro.
+
+            7. 'os-theme-thin': Un tema minimalista con barras de desplazamiento más delgadas.
+
+            8. 'os-theme-lw': Un tema ligero con barras de desplazamiento más estilizadas.
+        */
+        'right_sidebar_scrollbar_theme' => 'os-theme-dark',
+
+        /*  
+            Tipo de ocultamiento en estado de inactividad
+            
+            l: Automatico 
+            s: Siempre visible 
+        */
+        'right_sidebar_scrollbar_auto_hide' => 'l',
+    //
 
     /*
     |--------------------------------------------------------------------------
@@ -302,14 +456,39 @@ return [
     |
     */
 
-    'use_route_url' => false,
-    'dashboard_url' => 'home',
-    'logout_url' => 'logout',
-    'login_url' => 'login',
-    'register_url' => 'register',
-    'password_reset_url' => 'password/reset',
-    'password_email_url' => 'password/email',
-    'profile_url' => false,
+    /* Definicion de Rutas */
+
+        // Emplear el metodo url:False o el Metodo Route: True para la generacion de las rutas 
+        'use_route_url' => true,
+
+        // Nombre de Ruta/URL de redireccion al dashboard
+        'dashboard_url' => 'redirect',
+
+        // Nombre de Ruta/URL de cerrado de sesion
+        'logout_url' => 'logout',
+
+        // Nombre de Ruta/URL de acceso a la vista de login
+        'login_url' => 'login',
+
+        // Nombre de Ruta/URL de acceso a la vista de registro (Clientes)
+        'register_url' => 'clientRegister',
+
+        // Nombre de Ruta/URL de acceso a la vista "olvide mi contraseña"
+        'password_reset_url' => 'password.request',
+
+        /*
+            Nombre de Ruta/URL de acceso a vista de retroalimentacion positiva tras el envio de un correo de recuperacion de contraseña 
+            
+            Ejemplo: 
+                "Se ha enviado un correo electronico con las instrucciones para recuperar su contraseña"
+            --
+
+            Nota: En el caso de Fortify que no provee la infraestrucutra para una vista de retroalimentacion al usuario, el valor de 'password_email_url' es la ruta de cambio de contraseña como tal (Donde se solicita el token)
+        */
+        'password_email_url' => 'password.reset',
+
+        'profile_url' => false,
+    //
 
     /*
     |--------------------------------------------------------------------------
@@ -323,9 +502,15 @@ return [
     |
     */
 
-    'enabled_laravel_mix' => false,
-    'laravel_mix_css_path' => 'css/app.css',
-    'laravel_mix_js_path' => 'js/app.js',
+    # Habilitar Laravel Mix (Requiere instalacion de paquete)
+
+        //Habilitar Laravel Mix (Antecesor de Vite)
+        'enabled_laravel_mix' => false,
+
+        //Ruta de los archivos CSS y JS compilados por Laravel Mix
+        'laravel_mix_css_path' => 'css/app.css',
+        'laravel_mix_js_path' => 'js/app.js',
+    //
 
     /*
     |--------------------------------------------------------------------------
@@ -344,11 +529,11 @@ return [
         [
             'type'         => 'navbar-search',
             'text'         => 'search',
-            'topnav_right' => true,
+            'topnav_right' => false,
         ],
         [
             'type'         => 'fullscreen-widget',
-            'topnav_right' => true,
+            'topnav_right' => false,
         ],
 
         // Sidebar items:
@@ -381,6 +566,7 @@ return [
         ],
         [
             'text'    => 'multilevel',
+            'can' => 'pepe',
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
                 [
@@ -469,6 +655,7 @@ return [
     |
     */
 
+    # Plugins usados por el Panel
     'plugins' => [
         'Datatables' => [
             'active' => false,
@@ -555,25 +742,51 @@ return [
     |
     */
 
-    'iframe' => [
-        'default_tab' => [
-            'url' => null,
-            'title' => null,
+    #Configuracion Unico IFrame a usar
+        'iframe' => [
+
+            # Configuracion IFrame (n)
+            'default_tab' => [
+
+                //Url del contenido
+                'url' => null,
+
+                //Titulo del contenido
+                'title' => null,
+            ],
+            'buttons' => [
+
+                // Habilitar boton de cerrar el Iframe actual
+                'close' => true,
+
+                // Habilitar boton cerrar todos lo Ifames
+                'close_all' => true,
+
+                // Habilitar boton cerrar todos los Iframes excepto el actual
+                'close_all_other' => true,
+
+                // Habilitar boton para desplazarse hacia la izquierda si el contenido del Iframe es mas ancho que el Iframe
+                'scroll_left' => true,
+
+                // Habilitar boton para desplazarse hacia la derecha si el contenido del Iframe es mas ancho que el Iframe
+                'scroll_right' => true,
+
+                // Boton para habilitar el modo pantalla completa
+                'fullscreen' => true,
+            ],
+            'options' => [
+
+                //Tiempo en Milisegundos que se muestra una pantalla de carga al cargar el contenido del Iframe
+                'loading_screen' => 1000,
+
+                // Habilitar el mostrado automatico del Iframe al cargar
+                'auto_show_new_tab' => true,
+
+                // Representar el titulo del Iframe en la pestaña del navegador
+                'use_navbar_items' => true,
+            ],
         ],
-        'buttons' => [
-            'close' => true,
-            'close_all' => true,
-            'close_all_other' => true,
-            'scroll_left' => true,
-            'scroll_right' => true,
-            'fullscreen' => true,
-        ],
-        'options' => [
-            'loading_screen' => 1000,
-            'auto_show_new_tab' => true,
-            'use_navbar_items' => true,
-        ],
-    ],
+    //
 
     /*
     |--------------------------------------------------------------------------
@@ -587,5 +800,11 @@ return [
     |
     */
 
-    'livewire' => false,
+    /* 
+        Habilitar soporte Livewire (Requiere instalacion de paquete)
+
+        Nota: Livewire es un framework de Laravel que permite crear componentes de interfaz de usuario (UI) dinamicos sin escribir codigo Javascript (Sitios de una sola pagina)
+    */
+        'livewire' => false,
+    //
 ];

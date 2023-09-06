@@ -58,6 +58,6 @@ Route::controller(productoController::class)->group(function(){
     Route::middleware(['auth'])->group(function () {
 
         //Ruta encaqrgada de realizar la redireccion al dashboard correspondiente segun el rol del usuario
-        Route::get('/redirect',[authController::class,'redirect']);
+        Route::get('/redirect',[authController::class,'redirect'])->name('redirect');
     });
 //
