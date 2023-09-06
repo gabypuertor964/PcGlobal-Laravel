@@ -20,18 +20,17 @@ use Illuminate\Support\Facades\Route;
             2. Ruta de redireccion
             3. Login (Ruta proporcionada por Fortify)
         --
-
     --
 */
 
 /*
-    Nota: La landing page al requerir informacion actualizada de la base de datos, se emplea un controlador el cual realizara dichos procesos
+    Nota: A causa de que la Landing Page requiere informacion actualizada de la BD para su funcionamiento se empleara un controlador dedicado a la misma
 */
     Route::controller(landingPageController::class)->group(function(){
         //Vista: Home
         Route::get('/', 'index')->name('index');
 
-        //Vista: Categorías landing
+        //Vista: Categorias landing
         Route::get('/#categorias', 'index')->name('categorias');
 
         // Vista: Categorias productos
@@ -39,15 +38,10 @@ use Illuminate\Support\Facades\Route;
     });
 //
 
-/*
-    Rutas del producto seleccionado
-*/
-    Route::controller(productoController::class)->group(function(){
-        Route::get('categorias/{categoria}/{producto}','show')->name('categoria.producto');
-    });
-
-
-//
+# Ruta del detalle del producto
+Route::controller(productoController::class)->group(function(){
+    Route::get('categorias/{categoria}/{producto}','show')->name('categoria.producto');
+});
 
 //Rutas de Autenticacion para usuarios que no hayan iniciado sesion (guest)
     Route::middleware(['guest'])->group(function () {

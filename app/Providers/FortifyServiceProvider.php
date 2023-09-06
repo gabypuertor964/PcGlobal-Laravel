@@ -29,8 +29,10 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        # Definicion vista de login
         Fortify::loginView('auth.login');
 
+        # Redireccion a controlador personalizado
         Fortify::registerView(function(){
             return redirect()->route('registerView');
         });

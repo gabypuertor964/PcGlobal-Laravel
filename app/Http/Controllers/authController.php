@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\authValidate;
+use App\Models\sexos;
+use App\Models\tipos_documento;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -10,18 +12,15 @@ use Illuminate\Support\Facades\Hash;
 
 class authController extends Controller
 {
-    /*
-        Nombre Metodo: registerView
 
-        Objetivo: Emplear los procedimientos almacenados y consultar aquellos datos requeridos por la vista de registro, para luego realiza la respectiva redirección
-    */
+    # Redireccion vista registro clientes
     public function registerView(){
 
         //Consultar tipos de documento
-        $tipos_documento=DB::select("CALL PA_consultar_tipos_documento()");
+        $tipos_documento=tipos_documento::all();
 
         //Consultar sexos
-        $sexos=DB::select("CALL PA_consultar_sexos()");
+        $sexos=sexos::all();
 
         //Retornar vista de registro enviando los datos requeridos
         return view("auth.register",[
@@ -30,11 +29,7 @@ class authController extends Controller
         ]);
     }
 
-    /*
-        Nombre Metodo: redirect
-
-        Objetivo: Validar el rol del usuario y realizar su respectiva redirección al dashboard correspondiente
-    */
+    # Redireccion segun rol
     public function redirect(){
 
         //Obtener toda la información del usuario autenticado
