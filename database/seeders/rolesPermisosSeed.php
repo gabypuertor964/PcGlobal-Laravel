@@ -27,18 +27,12 @@ class rolesPermisosSeed extends Seeder
             //Buscar y eliminar algun caracterer especial en el valor de la columna sigla
             $registro[0]=str_replace("﻿","",$registro[0]);
 
-            //Consulta o Creacion rol
+            //Consulta o Creacion rol + Permiso del mismo nombre
             $rol=Role::findOrCreate($registro[0]);
+            $permiso=Permission::findOrCreate($registro[0]);
 
-            //Validar si existe informacion de un permiso en el registro actual
-            if(isset($registro[1])){
-
-                //Consulta o creacion permiso
-                $permiso=Permission::findOrCreate($registro[1]);
-
-                //Asigancion del permiso al rol
-                $rol->syncPermissions([$permiso]);
-            }
+            //Asigancion del permiso al rol
+            $rol->syncPermissions([$permiso]);
         }
     }
 }
