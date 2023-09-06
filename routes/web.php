@@ -57,7 +57,7 @@ Route::controller(productoController::class)->group(function(){
 //Rutas accesibles unicamente por usuarios logueados (auth)
     Route::middleware(['auth'])->group(function () {
 
-        //Ruta encaqrgada de realizar la redireccion al dashboard segun el rol del usuario
+        //Ruta encaqrgada de realizar la redireccion al dashboard correspondiente segun el rol del usuario
         Route::get('/redirect',[authController::class,'redirect']);
     });
 //

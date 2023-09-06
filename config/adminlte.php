@@ -14,9 +14,17 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
-    'title_prefix' => '',
-    'title_postfix' => '',
+    /* Configuracion etiqueta <title></title> */
+
+        # Titulo por defecto (Cuando no se especifique un titulo en una vista)
+        'title' => 'Home',
+
+        # Prefijo: Pcglobal + Title
+        'title_prefix' => 'PcGlobal |',
+
+        # Sufijo: Title + PcGlobal
+        'title_postfix' => '',
+    //
 
     /*
     |--------------------------------------------------------------------------
@@ -30,8 +38,14 @@ return [
     |
     */
 
-    'use_ico_only' => false,
-    'use_full_favicon' => false,
+    /* Configuracion favicon */
+
+        # Usar favicon individual: public/favicons/favicon.ico
+        'use_ico_only' => true,
+
+        # Usar favicon en diferentes resoluciones segun el dispositivo: public/favicons/*
+        'use_full_favicon' => false,
+    //
 
     /*
     |--------------------------------------------------------------------------
@@ -47,9 +61,11 @@ return [
     |
     */
 
-    'google_fonts' => [
-        'allowed' => true,
-    ],
+    # Usar google fonts (Requiere conexion a internet)
+        'google_fonts' => [
+            'allowed' => true,
+        ],
+    //
 
     /*
     |--------------------------------------------------------------------------
@@ -63,12 +79,26 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
-    'logo_img_xl' => null,
-    'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'Admin Logo',
+    /* Configuracion Logo Panel */
+
+        # Texto acompañante al Logo (Estructura HTML)
+        'logo' => '<b>PcGlobal</b>',
+
+        # Icono Logotipo (Version Pequeña)
+        'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+
+        # Clases CSS para el Logo (Version Pequeña)
+        'logo_img_class' => 'brand-image img-circle elevation-3',
+
+        # Icono Logotipo (Version Grande)
+        'logo_img_xl' => null,
+
+        # Clases CSS para el Logo (Version Grande)
+        'logo_img_xl_class' => 'brand-image-xs',
+
+        # Texto alternativo en caso que no se muestre el Logo
+        'logo_img_alt' => 'Logo PcGlobal',
+    //
 
     /*
     |--------------------------------------------------------------------------
@@ -83,16 +113,26 @@ return [
     |
     */
 
-    'auth_logo' => [
-        'enabled' => false,
-        'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-            'alt' => 'Auth Logo',
-            'class' => '',
-            'width' => 50,
-            'height' => 50,
+    /* */
+        'auth_logo' => [
+            'enabled' => false,
+            'img' => [
+
+                // Ruta de la imagen a mostrar
+                'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+
+                // Texto alternativo en caso que no se muestre la imagen
+                'alt' => 'Auth Logo',
+
+                // Clases CSS para la imagen
+                'class' => '',
+
+                // Alto (Height) y Ancho (Width) de la imagen (px)
+                'width' => 50,
+                'height' => 50,
+            ],
         ],
-    ],
+    //
 
     /*
     |--------------------------------------------------------------------------
@@ -106,16 +146,26 @@ return [
     |
     */
 
-    'preloader' => [
-        'enabled' => true,
-        'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-            'alt' => 'AdminLTE Preloader Image',
-            'effect' => 'animation__shake',
-            'width' => 60,
-            'height' => 60,
+    /* Animacion pre carga del Dashboard */
+        'preloader' => [
+            'enabled' => true,
+            'img' => [
+
+                // Ruta de la imagen a mostrar
+                'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+
+                // Texto alternativo en caso que no se muestre la imagen
+                'alt' => 'Logo PcGlobal',
+
+                // Animacion a realizar
+                'effect' => 'animation__shake',
+
+                // Alto (Height) y Ancho (Width) de la imagen (px)
+                'width' => 60,
+                'height' => 60,
+            ],
         ],
-    ],
+    //
 
     /*
     |--------------------------------------------------------------------------
