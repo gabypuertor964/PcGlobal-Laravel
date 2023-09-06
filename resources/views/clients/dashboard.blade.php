@@ -1,12 +1,25 @@
-{{-- Declaracion e importacion componente principal --}}
-@extends('layouts.dashboard')
+@extends('adminlte::page')
 
-{{-- Declaracion complemtento etiqueta litle del Header --}}
-@section('title','Dashboard')
+@section('title', 'Dashboard')
 
-{{-- Declaracion contenido principal de la pagina web --}}
+@section('content_header')
+    <h1>Dashboard</h1>
+@stop
+
 @section('content')
+  <p>Panel Cliente</p>
 
-  Dashboard Cliente
-  
-@endsection
+  <form action="{{route("logout")}}" method="post">
+    @csrf
+    
+    <button type="submit" class="btn btn-primary">Cerrar Sesion</button>
+  </form>
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+    <script> console.log('Hi!'); </script>
+@stop
