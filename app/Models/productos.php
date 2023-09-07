@@ -18,8 +18,4 @@ class productos extends Model
     public function categoria(){
         return $this->belongsTo('App\Models\Categoria', 'id_categoria');
     }
-
-    public function marca(){
-        return $this->belongsTo('App\Models\marcas', 'id_marca');
-    }
 }

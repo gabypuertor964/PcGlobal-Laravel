@@ -17,10 +17,10 @@ return [
     /* Configuracion etiqueta <title></title> */
 
         # Titulo por defecto (Cuando no se especifique un titulo en una vista)
-        'title' => 'PcGlobal',
+        'title' => 'Home',
 
         # Prefijo: Pcglobal + Title
-        'title_prefix' => 'Inicia sesión o crea una cuenta -',
+        'title_prefix' => 'PcGlobal |',
 
         # Sufijo: Title + PcGlobal
         'title_postfix' => '',

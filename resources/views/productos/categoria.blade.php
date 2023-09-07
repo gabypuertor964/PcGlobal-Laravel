@@ -25,7 +25,7 @@
           <p class="text-center py-2 border-t border-gray-600 mx-10">${{ number_format($producto->precio, 0, '.', '.') }} COP</p>
           {{-- El segundo argumento de number_format especifica la cantidad de decimales (en este caso, 0), el tercer argumento es el separador decimal (en este caso, un punto) y el cuarto argumento es el separador de miles (también un punto). --}}
           <p class="flex">
-            <a href="{{route('categoria.producto',$producto->slug)}}" class="bg-indigo-600 hover:bg-indigo-700 text-center mx-auto mb-3 rounded text-white py-2 px-8">Detalles</a>
+            <a href="{{route('categoria.producto',[$categoria->slug,$producto->slug])}}" class="bg-indigo-600 hover:bg-indigo-700 text-center mx-auto mb-3 rounded text-white py-2 px-8">Detalles</a>
           </p>
         </div>
       @empty
