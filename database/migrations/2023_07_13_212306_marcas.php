@@ -15,14 +15,6 @@ return new class extends Migration
             /* 
                 Nombre campo: id
                 Tipo: Llave Primaria
-
-                Caracteristicas:
-                    1.unsignedInteger -> Valores enteros de -2^31 a 2^31-1
-
-                    2.Unsigned -> No acepta valores Negativos
-
-                    3.auto_increment -> Valores Auto Incrementales
-                //
             */
             $table->increments('id')->comment("Llave Primaria");
             $table->string("nombre",50)->unique()->comment("Nombre Marca");
