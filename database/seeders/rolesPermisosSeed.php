@@ -14,63 +14,25 @@ class rolesPermisosSeed extends Seeder
      */
     public function run(): void
     {
-        //Datos de los roles y permisos
-        $roles=[
-            [
-                'name'=>'atencion_cliente',
-                'permisos'=>[
-                    'pqrs.create',
-                    'pqrs.read',
-                    'pqrs.update',
-                    'pqrs.delete',
-                ]
-            ],
-            [
-                'name'=>'vendedor',
-                'permisos'=>[
-                    'facturation.create',
-                    'facturation.read',
-                    'facturation.update',
-                    'facturation.delete',
-                ]
-            ],
-            [
-                'name'=>'almacenista',
-                'permisos'=>[
-                    'inventory.create',
-                    'inventory.read',
-                    'inventory.update',
-                    'inventory.delete',
-                ]
-            ],
-            [
-                'name'=>'gerente',
-                'permisos'=>[
-                    'gerency.create',
-                    'gerency.read',
-                    'gerency.update',
-                    'gerency.delete',
+        //Abrir el archivo csv en modo de lectura y luego guardarlo en una variable
+        $scvTiposDocumento=fopen(database_path("/data/rolesPermisos.csv"),"r");
 
-                    'pqrs.read',
-                    'facturation.read',
-                    'inventory.read',
-                ]
-            ],
-        ];
+        /*
+            Explicacion: Emplenado un ciclo while y la funcion fgetcsv, se realizara un ciclo el cual accedera a cada registro del archivo csv, para luego realizar su respectivo proceso de guardado en la BD
 
-        foreach($roles as $rol){
+            Nota: Este proceso se realizara unicamente si hay registros los cuales guardar, en caso de no haber significa que se llego al final del archivo
+        */
+        while(($registro=fgetcsv($scvTiposDocumento,2000,";"))!=FALSE){
 
-            //Crear el rol
-            $role=Role::findOrCreate($rol['name']);
+            //Buscar y eliminar algun caracterer especial en el valor de la columna sigla
+            $registro[0]=str_replace("﻿","",$registro[0]);
 
-            foreach($rol['permisos'] as $permiso){
+            //Consulta o Creacion rol + Permiso del mismo nombre
+            $rol=Role::findOrCreate($registro[0]);
+            $permiso=Permission::findOrCreate($registro[0]);
 
-                //Crear o encontrar el permiso
-                $permission=Permission::findOrCreate($permiso);
-
-                //Asignar el permiso al rol
-                $role->givePermissionTo($permission);
-            }
+            //Asigancion del permiso al rol
+            $rol->syncPermissions([$permiso]);
         }
     }
 }
