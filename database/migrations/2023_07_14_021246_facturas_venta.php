@@ -19,14 +19,20 @@ return new class extends Migration
             $table->increments('id')->comment("Llave Primaria");
 
             /* Campos Personalizados */
+
+                //Fecha y Hora ejecucion venta
                 $table->datetime("fecha_venta")->unique()->comment("Fecha y Hora ejecucion venta");
 
+                //Foreign Key: Cliente que realiza la compra
                 $table->unsignedInteger('id_cliente')->comment("Id Cliente");
 
+                //Subtotal Factura
                 $table->string("subtotal",10)->comment("Subtotal Factura");
 
+                //IVA Factura
                 $table->string("iva",10)->comment("Valor IVA");
 
+                //Total Factura
                 $table->string("total",10)->comment("Valor Total");
             //
 

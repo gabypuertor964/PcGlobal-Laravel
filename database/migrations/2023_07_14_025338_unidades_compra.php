@@ -19,8 +19,11 @@ return new class extends Migration
             $table->increments('id')->comment("Llave Primaria");
 
             /* Campos Personalizados */
+
+                //Foreign Key: Factura de Venta
                 $table->unsignedInteger('id_factura')->comment("Fk Id factura");
 
+                //Foreign Key: Unidad Vendida
                 $table->unsignedInteger("id_unidad")->unique()->comment("Fk Id Unidad del producto");
             //
 

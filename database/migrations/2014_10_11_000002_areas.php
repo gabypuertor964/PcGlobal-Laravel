@@ -19,6 +19,8 @@ return new class extends Migration
             $table->increments('id')->comment("Llave Primaria");
 
             /* Campos Personalizados*/
+
+                //Nombre del Area
                 $table->string("nombre",20)->unique()->comment("Nombre Area");
             //
         });

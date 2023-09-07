@@ -19,6 +19,8 @@ return new class extends Migration
             $table->increments('id')->comment("Llave Primaria");
 
             /* Campos Personalizados */
+
+                //Nombre Sexo
                 $table->string("nombre",10)->unique()->comment("Nombre del Sexo");
             //
         });

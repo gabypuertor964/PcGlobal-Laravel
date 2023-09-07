@@ -20,8 +20,11 @@ return new class extends Migration
             $table->increments('id')->comment("Llave Primaria");
 
             /* Campos Personalizados */
+
+                //Nombre tipo de documento
                 $table->string("nombre",40)->unique()->comment("Nombre tipo de documento");
 
+                //Siglas del tipo de documento
                 $table->string("siglas",3)->unique()->comment("Abreviatura/Sigla del Tipo Documento");
             //
         });

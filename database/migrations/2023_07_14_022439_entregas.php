@@ -19,14 +19,20 @@ return new class extends Migration
             $table->increments('id')->comment("Llave Primaria");
 
             /* Campos Personalizados */
+
+                //Foreign Key: Factura de venta
                 $table->unsignedInteger('id_factura')->comment("Fk Id Factura");
 
+                //Foreign Key: Trabajador que realiza la entrega
                 $table->unsignedInteger('id_trabajador')->comment("Fk Id Trabajador");
 
+                //Foreign Key: Tipo de entrega
                 $table->unsignedInteger('id_tipo_entrega')->comment("Fk Id tipo de entrega");
 
-                $table->unsignedInteger('id_direccion')->comment("Fk Id Direccion");
+                //Foreign Key: Direccion de entrega (Opcion )
+                $table->unsignedInteger('id_direccion')->comment("Fk Id Direccion")->nullable();
 
+                //Fecha y Hora de entrega
                 $table->datetime('fecha_entrega')->comment("Fecha y Hora entrega");
             //
 

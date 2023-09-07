@@ -19,8 +19,11 @@ return new class extends Migration
             $table->increments('id')->comment("Llave Primaria");
 
             /* Campos Personalizados */
+
+                //Foreign Key: Cliente
                 $table->unsignedInteger("id_cliente")->comment("Fk id Cliente");
 
+                //Direccion de domicilio
                 $table->text("direccion")->comment("Direccion cliente");
             //
 

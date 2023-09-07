@@ -19,8 +19,11 @@ return new class extends Migration
             $table->increments('id')->comment("Llave Primaria");
 
             /* Campos Personalziados */
+
+                //Nombre del Estado
                 $table->string("nombre",20)->unique()->comment("Nombre Estado");
 
+                //Foreign Key: Area
                 $table->unsignedInteger("id_area")->comment("Id Area");
             //
 

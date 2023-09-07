@@ -19,6 +19,8 @@ return new class extends Migration
             $table->increments('id')->comment("Llave Primaria");
 
             /* Campos Personalizados */
+
+                //Nombre tipo de PQRS
                 $table->string('nombre',15)->unique()->comment('Nombre tipo PQRS');
             //
         });

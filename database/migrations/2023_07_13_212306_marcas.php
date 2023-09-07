@@ -17,7 +17,10 @@ return new class extends Migration
                 Tipo: Llave Primaria
             */
             $table->increments('id')->comment("Llave Primaria");
-            $table->string("nombre",50)->unique()->comment("Nombre Marca");
+
+            /* Campos Personalizados */
+                $table->string("nombre",50)->unique()->comment("Nombre Marca");
+            //
         });
     }
 
