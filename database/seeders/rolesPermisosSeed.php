@@ -17,6 +17,15 @@ class rolesPermisosSeed extends Seeder
         //Datos de los roles y permisos
         $roles=[
             [
+                'name'=>'cliente',
+                'permisos'=>[
+                    'cliente.create',
+                    'cliente.read',
+                    'cliente.update',
+                    'cliente.delete',
+                ]
+            ],
+            [
                 'name'=>'atencion_cliente',
                 'permisos'=>[
                     'pqrs.create',

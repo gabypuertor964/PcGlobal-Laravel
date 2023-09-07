@@ -1,5 +1,9 @@
 @extends('adminlte::auth.register')
 
+@section('adminlte_css_pre')
+    @vite(['resources/css/boostrap.css','resources/js/boostrap.js',])
+@stop
+
 @section('auth_body')
     <form action="" method="post">
         @csrf
@@ -24,7 +28,7 @@
                     @enderror
                 </div>
         
-                {{-- Email field --}}
+                {{-- Lastname field --}}
                 <div class="input-group mb-3">
                     <input type="text" name="apellidos" class="form-control @error('apellidos') is-invalid @enderror"
                            value="{{ old('apellidos') }}" placeholder="Apellidos">
@@ -42,90 +46,102 @@
                     @enderror
                 </div>
         
-                {{-- Password field --}}
+                {{-- Gender field --}}
                 <div class="input-group mb-3">
-                    <select class="form-select">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select name="id_sexo" class="form-select @error('apellidos') is-invalid @enderror"
+                            value="{{ old('id_sexo') }}">
+                        <option selected>Selecciona tu género</option>
+                        @foreach ($sexos as $sexo)
+                            <option value="{{$sexo->id}}">{{$sexo->nombre}}</option>
+                        @endforeach
                     </select>
         
-                    @error('password')
+                    @error('id_sexo')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
                 </div>
         
-                {{-- Password field --}}
+                {{-- Document field --}}
                 <div class="input-group mb-3">
-                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
-                           placeholder="{{ __('adminlte::adminlte.password') }}">
+                    <select name="id_tip_doc" class="form-select @error('id_tip_doc') is-invalid @enderror"
+                            value="{{ old('id_tip_doc') }}">
+                        <option selected>Selecciona tu tipo de documento</option>
+                        @foreach ($tipos_documento as $tipo_documento)
+                            <option value="{{$tipo_documento->id}}">{{$tipo_documento->nombre}}</option>
+                        @endforeach
+                    </select>
         
+                    @error('id_tipo_doc')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                {{-- Document number field --}}
+                <div class="input-group mb-3">
+                    <input type="number" name="num_doc" class="form-control @error('num_doc') is-invalid @enderror"
+                           value="{{ old('num_doc') }}" placeholder="Número de documento">
+
                     <div class="input-group-append">
                         <div class="input-group-text">
-                            <span class="fas fa-lock {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                            <span class="fas fa-id-card  {{ config('adminlte.classes_auth_icon', '') }}"></span>
                         </div>
                     </div>
         
-                    @error('password')
+                    @error('num_doc')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
                 </div>
-        
-                {{-- Password field --}}
-                <div class="input-group mb-3">
-                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
-                           placeholder="{{ __('adminlte::adminlte.password') }}">
-        
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-lock {{ config('adminlte.classes_auth_icon', '') }}"></span>
-                        </div>
-                    </div>
-        
-                    @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-        
                </div>
+
                <div class="col">
-                 {{-- Password field --}}
-        <div class="input-group mb-3">
-            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
-                   placeholder="{{ __('adminlte::adminlte.password') }}">
-
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-lock {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                   {{-- Number phone field --}}
+                   <div class="input-group mb-3">
+                       <input type="number" name="num_tel" class="form-control @error('num_tel') is-invalid @enderror"
+                           value="{{ old('num_tel') }}" placeholder="Número de teléfono">
+                           
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                 <span class="fas fa-phone {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                            </div>
+                        </div>
+        
+                    @error('num_tel')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
-            </div>
+                {{-- Birth date field --}}
+            <div class="input-group mb-3">
+            <input type="date" name="fecha_nacimiento" class="form-control @error('fecha_nacimiento') is-invalid @enderror"
+            value="{{ old('fecha_nacimiento') }}">
 
-            @error('password')
+
+            @error('fecha_nacimiento')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
         </div>
 
-        {{-- Password field --}}
+        {{-- Email field --}}
         <div class="input-group mb-3">
-            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
-                   placeholder="{{ __('adminlte::adminlte.password') }}">
+            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
+            value="{{ old('email') }}" placeholder="Email">
 
             <div class="input-group-append">
                 <div class="input-group-text">
-                    <span class="fas fa-lock {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                    <span class="fas fa-envelope {{ config('adminlte.classes_auth_icon', '') }}"></span>
                 </div>
             </div>
 
-            @error('password')
+            @error('email')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
