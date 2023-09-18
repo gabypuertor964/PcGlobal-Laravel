@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\admin\facturacionController;
 use App\Http\Controllers\admin\facturationController;
 use App\Http\Controllers\admin\gerencyController;
 use App\Http\Controllers\admin\inventoryController;
