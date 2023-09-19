@@ -30,11 +30,11 @@ use Illuminate\Support\Facades\Route;
         //Vista: Home
         Route::get('/', 'index')->name('index');
 
-        //Vista: Categorias landing
+        //Seccion: Listado de categorias
         Route::get('/#categorias', 'index')->name('categorias');
 
         // Vista: Categorias productos
-        Route::get('categorias/{categoria}', 'categorias')->name('categoria');
+        Route::get('categorias/{categoria}', 'categoryDetail')->name('categoria');
     });
 //
 

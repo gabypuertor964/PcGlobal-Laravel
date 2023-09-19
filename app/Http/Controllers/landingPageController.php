@@ -7,18 +7,16 @@ use Illuminate\Support\Facades\DB;
 
 class landingPageController extends Controller
 {
-    /* 
-        Nombre Metodo:
-
-        Objetivo:
-    */
+    //Retorno vista principal
     public function index()
     {
         return view('landing_page.home');
     }   
 
-    public function categorias(Categoria $categoria){
+    //Consulta y paginado de los productos asociados a la categoria
+    public function categoryDetail(Categoria $categoria){
         $productos = $categoria->productos()->paginate(9);
+        
         return view('productos.categoria', compact('categoria', 'productos'));
     }
 }
