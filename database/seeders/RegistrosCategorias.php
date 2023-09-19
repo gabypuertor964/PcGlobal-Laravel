@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Categoria;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class RegistrosCategorias extends Seeder
 {
@@ -22,7 +22,7 @@ class RegistrosCategorias extends Seeder
 
             // Realiza una inserción en la tabla "categorias" solo si el nombre no está vacío
             if (!empty($nombre)) {
-                DB::table('categorias')->insert([
+                Categoria::create([
                     'nombre_categoria' => $nombre,
                     'slug' => $slug,
                 ]);

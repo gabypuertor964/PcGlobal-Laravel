@@ -19,4 +19,6 @@ class Categoria extends Model
         //Relación uno a muchos
         return $this->hasMany('App\Models\productos', 'id_categoria');
     }
+
+    public $timestamps = False;
 }

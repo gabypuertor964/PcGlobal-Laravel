@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
             RegistrosCategorias::class,
 
             //Llenado tabla: productos
-            productos::class,
+            productosSeed::class,
 
         ]);
 

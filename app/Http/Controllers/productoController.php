@@ -7,7 +7,7 @@ use App\Models\productos;
 use Illuminate\Support\Facades\File;
 use Parsedown;
 
-class ProductoController extends Controller
+class productoController extends Controller
 {
     public function show(productos $producto){
 

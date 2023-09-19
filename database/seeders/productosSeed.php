@@ -2,13 +2,17 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\productos;
 use Illuminate\Support\Str;
 
-class Productos extends Seeder
+class productosSeed extends Seeder
 {
-    public function run()
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
     {
         // Ruta del archivo CSV. La función (database_path) devuelve la ruta absoluta a la carpeta "database" del proyecto.
         $csvFilePath = database_path('data/productos.csv');
@@ -28,7 +32,7 @@ class Productos extends Seeder
 
             // Realiza una inserción en la tabla "productos" solo si la marca no está vacía
             if (!empty($marca)) {
-                DB::table('productos')->insert([
+                productos::create([
                     'id_marca' => $marca,
                     'id_categoria' => $categoria,
                     'modelo' => $modelo,
