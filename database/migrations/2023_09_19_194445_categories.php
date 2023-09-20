@@ -11,17 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categorias', function (Blueprint $table) {
-            /* 
-                Nombre campo: id
-                Tipo: Llave Primaria
-            */
-            $table->increments('id')->comment("Llave Primaria");
+        Schema::create('categories', function (Blueprint $table) {
+
+            //Llave primaria
+            $table->integerIncrements('id')->comment("Llave Primaria");
 
             /* Campos Personalizados */
-                $table->string("nombre_categoria")->unique()->comment("Nombre de la Categoría");
+                $table->string("name",50)->unique()->comment("Nombre Categoría");
+
                 $table->string("slug")->unique()->comment("Ruta Url");
             //
+
+            //Campos create_at y update_at
+            $table->timestamps();
         });
     }
 
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categorias');
+        Schema::dropIfExists('categories');
     }
 };

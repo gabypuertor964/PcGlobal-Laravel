@@ -11,16 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('marcas', function (Blueprint $table) {
-            /* 
-                Nombre campo: id
-                Tipo: Llave Primaria
-            */
-            $table->increments('id')->comment("Llave Primaria");
+        Schema::create('brands', function (Blueprint $table) {
+
+            //Llave primaria
+            $table->integerIncrements('id')->comment("Llave Primaria");
 
             /* Campos Personalizados */
-                $table->string("nombre",50)->unique()->comment("Nombre Marca");
+                $table->string("name",50)->unique()->comment("Nombre Marca");
             //
+
+            //Campos create_at y update_at
+            $table->timestamps();
         });
     }
 
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('marcas');
+        Schema::dropIfExists('brands');
     }
 };
