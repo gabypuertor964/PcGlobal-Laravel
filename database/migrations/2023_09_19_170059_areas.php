@@ -12,17 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('areas', function (Blueprint $table) {
-            /* 
-                Nombre campo: id
-                Tipo: Llave Primaria
-            */
-            $table->increments('id')->comment("Llave Primaria");
 
-            /* Campos Personalizados*/
+            //Llave primaria
+            $table->integerIncrements('id')->comment("Llave Primaria");
 
-                //Nombre del Area
-                $table->string("nombre",20)->unique()->comment("Nombre Area");
+            /* Campos Personalizados */
+                $table->string("name",50)->unique()->comment("Nombre del Area");
             //
+
+            //Campos create_at y update_at
+            $table->timestamps();
         });
     }
 
