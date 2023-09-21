@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
 
             //Llave primaria
-            $table->bigInteger('id')->primary()->comment("Id Usuario");
+            $table->bigInteger('id',true)->comment("Id Usuario");
 
             /* Campos Personalizados */
                 $table->string("names",30)->comment("Nombres");

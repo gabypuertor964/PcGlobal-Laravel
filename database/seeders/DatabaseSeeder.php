@@ -40,7 +40,10 @@ class DatabaseSeeder extends Seeder
             productsSeed::class,
 
             //Seed: Roles y Permisos
-            rolePermissionSeed::class
+            rolePermissionSeed::class,
+
+            //Seed: Usuarios
+            usersSeed::class,
         ]);
 
     }
