@@ -15,33 +15,26 @@ class DatabaseSeeder extends Seeder
         /* Ejecucion Seeders (Ejecucion en Cascada) */
         $this->call([
 
-            //Llenado tabla: tipos_documento
-            tipos_documentoSeed::class,
+            //Seed: Tipos de documento
+            document_typesSeed::class,
 
-            //Llenado tabla: sexos
-            sexosSeed::class,
+            //Seed: Generos/Sexos
+            gendersSeed::class,
 
-            //Llenado tabla: areas
+            //Seed: Areas
             areasSeed::class,
 
-            //Llenado tabla: estados
-            estadosSeed::class,
+            //Seed: Estados
+            statesSeed::class,
 
-            //Llenado tablas: permisos + roles
-            rolesPermisosSeed::class,
+            //Seed: Categorias
+            categoriesSeed::class,
 
-            //Llenado tabla: users
-            userSeed::class,
+            //Seed: Marcas
+            brandsSeed::class,
 
-            //Llenado tabla: marcas
-            InsercionDatosMarcas::class,
-
-            //Llenado tabla: categorias
-            RegistrosCategorias::class,
-
-            //Llenado tabla: productos
-            productosSeed::class,
-
+            //Seed: Productos
+            //productsSeed::class,
         ]);
 
     }
