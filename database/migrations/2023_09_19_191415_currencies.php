@@ -17,7 +17,9 @@ return new class extends Migration
             $table->integerIncrements('id')->comment("Llave Primaria");
 
             /* Campos Personalizados */
-                $table->string('name', 20)->comment("Nombre Moneda");
+                $table->string('name', 40)->comment("Nombre Moneda");
+
+                $table->string('code', 5)->comment("Codigo Moneda");
 
                 $table->string('symbol', 5)->comment("Simbolo Moneda");
             //

@@ -27,6 +27,9 @@ class DatabaseSeeder extends Seeder
             //Seed: Estados
             statesSeed::class,
 
+            //Seed: Monedas
+            currenciesSeed::class,
+
             //Seed: Categorias
             categoriesSeed::class,
 
@@ -34,7 +37,10 @@ class DatabaseSeeder extends Seeder
             brandsSeed::class,
 
             //Seed: Productos
-            //productsSeed::class,
+            productsSeed::class,
+
+            //Seed: Roles y Permisos
+            rolePermissionSeed::class
         ]);
 
     }
