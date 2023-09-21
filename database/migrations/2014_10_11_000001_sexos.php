@@ -11,17 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('genders', function (Blueprint $table) {
-
-            //Llave primaria
-            $table->integerIncrements('id')->comment("Llave Primaria");
+        Schema::create('sexos', function (Blueprint $table) {
+            /* 
+                Nombre campo: id
+                Tipo: Llave Primaria
+            */
+            $table->increments('id')->comment("Llave Primaria");
 
             /* Campos Personalizados */
-                $table->string("name",10)->unique()->comment("Nombre del Sexo");
-            //
 
-            //Campos create_at y update_at
-            $table->timestamps();
+                //Nombre Sexo
+                $table->string("nombre",10)->unique()->comment("Nombre del Sexo");
+            //
         });
     }
 
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('genders');
+        Schema::dropIfExists('sexos');
     }
 };

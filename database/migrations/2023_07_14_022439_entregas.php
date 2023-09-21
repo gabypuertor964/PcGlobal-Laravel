@@ -1,0 +1,62 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('entregas', function (Blueprint $table) {
+            /* 
+                Nombre campo: id
+                Tipo: Llave Primaria
+            */
+            $table->increments('id')->comment("Llave Primaria");
+
+            /* Campos Personalizados */
+
+                //Foreign Key: Factura de venta
+                $table->unsignedInteger('id_factura')->comment("Fk Id Factura");
+
+                //Foreign Key: Trabajador que realiza la entrega
+                $table->unsignedInteger('id_trabajador')->comment("Fk Id Trabajador");
+
+                //Foreign Key: Tipo de entrega
+                $table->unsignedInteger('id_tipo_entrega')->comment("Fk Id tipo de entrega");
+
+                //Foreign Key: Direccion de entrega (Opcion )
+                $table->unsignedInteger('id_direccion')->comment("Fk Id Direccion")->nullable();
+
+                //Fecha y Hora de entrega
+                $table->datetime('fecha_entrega')->comment("Fecha y Hora entrega");
+            //
+
+            //Campos Update_at y Create_at
+            $table->timestamps();
+
+            /* Llaves Foraneas */
+                $table->foreign('id_factura')->references('id')->on("facturas_venta");
+
+                $table->foreign('id_trabajador')->references('id')->on('users');
+
+                $table->foreign('id_tipo_entrega')->references('id')->on('tipos_entrega');
+
+                $table->foreign('id_direccion')->references('id')->on('direcciones');
+            //
+
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('entregas');
+    }
+};
