@@ -5,10 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class sexos extends Model
+class product_units extends Model
 {
     use HasFactory;
-
-    //Desactivacion Campos update_at y create_at
-    public $timestamps=false;
 }
