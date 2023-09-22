@@ -25,9 +25,9 @@ class productsSeed extends Seeder
             products::create([
                 'id'=>null,
 
-                'id_brand'=>DB::table('brands')->where('name',$registro[0])->value('id'),
+                'brand_id'=>DB::table('brands')->where('name',$registro[0])->value('id'),
 
-                'id_category'=>DB::table('categories')->where('name',$registro[1])->value('id'),
+                'category_id'=>DB::table('categories')->where('name',$registro[1])->value('id'),
 
                 'model'=>$registro[2],
                 'folder_url'=>$registro[3],

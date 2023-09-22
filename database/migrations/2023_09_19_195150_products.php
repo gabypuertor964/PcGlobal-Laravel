@@ -17,9 +17,9 @@ return new class extends Migration
             $table->integerIncrements('id')->comment("Llave Primaria");
 
             /* Campos Personalizados */
-                $table->unsignedInteger("id_brand")->comment("Fk Id Marca");
+                $table->unsignedInteger("brand_id")->comment("Fk Id Marca");
 
-                $table->unsignedInteger("id_category")->comment("Fk Id Categoría");
+                $table->unsignedInteger("category_id")->comment("Fk Id Categoría");
 
                 $table->string("model")->unique()->comment("Modelo del Producto");
 
@@ -36,9 +36,9 @@ return new class extends Migration
             $table->timestamps();
 
             /* Llaves foraneas */
-                $table->foreign("id_brand")->references("id")->on("brands");
+                $table->foreign("brand_id")->references("id")->on("brands");
 
-                $table->foreign("id_category")->references("id")->on("categories");
+                $table->foreign("category_id")->references("id")->on("categories");
 
                 $table->foreign('currency_id')->references('id')->on('currencies');
             //
