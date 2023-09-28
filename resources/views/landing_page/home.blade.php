@@ -53,7 +53,9 @@
 
     <div class="flex flex-col justify-center gap-y-1">
       <img src="{{ asset('img/landing/f-5.jpg')}}" alt="" class="rounded object-contain cursor-pointer hover:rotate-1 transition-all duration-500">
-      <img src="{{ asset('img/landing/f-3.jpg')}}" alt="" class="rounded object-contain cursor-pointer hover:-rotate-1 transition-all duration-500">
+      <a href="productos/logitech-g203-color-negro">
+        <img src="{{ asset('img/landing/f-3.jpg')}}" alt="" class="rounded object-contain cursor-pointer hover:-rotate-1 transition-all duration-500">
+      </a>
     </div>
   </div>
   <section class="mb-0 sm:my-16 mx-auto" id="categorias">
