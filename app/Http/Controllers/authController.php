@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\authValidate;
-use App\Models\estados;
-use App\Models\sexos;
-use App\Models\tipos_documento;
+use App\Models\document_types;
+use App\Models\genders;
+use App\Models\states;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class authController extends Controller
@@ -18,10 +17,10 @@ class authController extends Controller
     public function registerView(){
 
         //Consultar tipos de documento
-        $tipos_documento=tipos_documento::all();
+        $tipos_documento=document_types::all();
 
         //Consultar sexos
-        $sexos=sexos::all();
+        $sexos=genders::all();
 
         //Retornar vista de registro enviando los datos requeridos
         return view("auth.register", compact('tipos_documento','sexos'));
@@ -59,7 +58,7 @@ class authController extends Controller
             'fecha_nacimiento'=>$request->fecha_nacimiento,
             'email'=>$request->email,
             'password'=>Hash::make($request->password),
-            'id_estado'=>estados::where('nombre','Activo')->first()->id
+            'id_estado'=>states::where('nombre','Activo')->first()->id
         ])->assignRole('cliente');
 
         //Redireccion al home

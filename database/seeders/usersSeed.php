@@ -37,7 +37,7 @@ class usersSeed extends Seeder
                 'password'=>Hash::make($registro[8]),
 
                 'state_id'=>DB::table('states')->where('name',$registro[9])->value('id'),
-            ]);
+            ])->assignRole($registro[10]);
         }
     }
 }

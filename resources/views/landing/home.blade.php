@@ -63,55 +63,55 @@
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 bg-gray-100 gap-6 transition-all">
       <div class="flex flex-col justify-center">
-        <a href="{{route('categoria','tarjetas-graficas')}}" class="hover:text-gray-800">
+        <a href="{{route('category.show','tarjetas-graficas')}}" class="hover:text-gray-800">
           <img src="{{ asset('img/categorias/Tarjeta Gráfica.jpg')}}" class="rounded transition-all duration-300 hover:scale-95 hover:shadow-2xl" alt="Img de Tarjeta Gráfica">
           <p class="text-center py-2 font-medium text-lg text-gray-800">Tarjetas Gráficas</p>
         </a>
       </div>
       <div class="flex flex-col justify-center transition-all">
-        <a href="{{route('categoria','procesadores')}}" class="hover:text-gray-800">
+        <a href="{{route('category.show','procesadores')}}" class="hover:text-gray-800">
           <img src="{{ asset('img/categorias/procesador.jpg')}}" class="rounded transition-all duration-300 hover:scale-95 hover:shadow-2xl" alt="Img de Procesador">
           <p class="text-center py-2 font-medium text-lg">Procesadores</p>
         </a>
       </div>
       <div class="flex flex-col justify-center transition-all">
-        <a href="{{route('categoria','perifericos')}}" class="hover:text-gray-800">
+        <a href="{{route('category.show','perifericos')}}" class="hover:text-gray-800">
           <img src="{{ asset('img/categorias/Perifericos.jpg')}}" class="rounded transition-all duration-300 hover:scale-95 hover:shadow-2xl" alt="Img de Periféricos">
           <p class="text-center py-2 font-medium text-lg">Periféricos</p>
         </a>
       </div>
       <div class="flex flex-col justify-center transition-all">
-        <a href="{{route('categoria','tarjetas-madre')}}" class="hover:text-gray-800">
+        <a href="{{route('category.show','tarjetas-madre')}}" class="hover:text-gray-800">
           <img src="{{ asset('img/categorias/mother-board.jpg')}}" class="rounded transition-all duration-300 hover:scale-95 hover:shadow-2xl" alt="Img de Mother-Board">
           <p class="text-center py-2 font-medium text-lg">Tarjetas Madre</p>
         </a>
       </div>
       <div class="flex flex-col justify-center transition-all">
-        <a href="{{route('categoria','fuentes-de-poder')}}" class="hover:text-gray-800">
+        <a href="{{route('category.show','fuentes-de-poder')}}" class="hover:text-gray-800">
           <img src="{{ asset('img/categorias/Fuente de poder.jpg')}}" class="rounded transition-all duration-300 hover:scale-95 hover:shadow-2xl" alt="Img de FdP">
           <p class="text-center py-2 font-medium text-lg">Fuentes de Poder</p>
         </a>
       </div>
       <div class="flex flex-col justify-center transition-all">
-        <a href="{{route('categoria','rams')}}" class="hover:text-gray-800">
+        <a href="{{route('category.show','rams')}}" class="hover:text-gray-800">
           <img src="{{ asset('img/categorias/ram.png')}}" class="rounded transition-all duration-300 hover:scale-95 hover:shadow-2xl" alt="Img de Ram">
           <p class="text-center py-2 font-medium text-lg">Ram's</p>
         </a>
       </div>
       <div class="flex flex-col justify-center transition-all">
-        <a href="{{route('categoria','almacenamientos')}}" class="hover:text-gray-800">
+        <a href="{{route('category.show','almacenamientos')}}" class="hover:text-gray-800">
           <img src="{{ asset('img/categorias/Almacenamiento.jpg')}}" class="rounded transition-all duration-300 hover:scale-95 hover:shadow-2xl" alt="Img de Almcenamiento">
           <p class="text-center py-2 font-medium text-lg">Almacenamiento</p>
         </a>
       </div>
       <div class="flex flex-col justify-center transition-all">
-        <a href="{{route('categoria','cases')}}" class="hover:text-gray-800">
+        <a href="{{route('category.show','cases')}}" class="hover:text-gray-800">
           <img src="{{ asset('img/categorias/cases.jpg')}}" class="rounded transition-all duration-300 hover:scale-95 hover:shadow-2xl" alt="Img de Cases">
           <p class="text-center py-2 font-medium text-lg">Cases</p>
         </a>
       </div>
       <div class="flex flex-col justify-center transition-all">
-        <a href="{{route('categoria','monitores')}}" class="hover:text-gray-800">
+        <a href="{{route('category.show','monitores')}}" class="hover:text-gray-800">
           <img src="{{ asset('img/categorias/Monitores.jpg')}}" class="rounded transition-all duration-300 hover:scale-95 hover:shadow-2xl" alt="Img de Monitores">
           <p class="text-center py-2 font-medium text-lg">Monitores</p>
         </a>
