@@ -19,7 +19,7 @@
         --}}
 
         <!-- Importacion  Framewors: Bootstrap, Trailwind (Estilos Y componentes CSS + Responsividad)-->
-        @vite(['resources/css/boostrap.css','resources/js/boostrap.js',])
+        @vite(['resources/css/bootstrap.scss','resources/js/bootstrap.js',])
         @vite('resources/css/app.css')
 
         <!-- Importacion Manual del Framework Fontwesome (Iconos)-->
