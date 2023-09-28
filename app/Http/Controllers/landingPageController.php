@@ -2,23 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categoria;
+use App\Models\categories;
+use App\Models\products;
 use Illuminate\Support\Facades\DB;
 
 class landingPageController extends Controller
 {
-    /* 
-        Nombre Metodo:
-
-        Objetivo:
-    */
-    public function index()
-    {
-        return view('landing_page.home');
+    //Retorno vista principal
+    public function index(){
+        return view('landing.home');
     }   
 
-    public function categorias(Categoria $categoria){
-        $productos = $categoria->productos()->paginate(9);
-        return view('productos.categoria', compact('categoria', 'productos'));
+    //Consulta y paginado de los productos asociados a la categoria
+    public function categoryDetail(categories $category){
+        return $category;
+
+        /*$products = $category->products()->paginate(9);
+        
+        return view('productos.categoria', compact('category', 'products'));*/  
+    }
+
+    public function productDetail(products $product){
+        return $product;
+
+        //return view('productos.producto', compact('product'));
     }
 }

@@ -6,8 +6,6 @@ use App\Http\Controllers\productoController;
 use Illuminate\Support\Facades\Route;
 
 /*
-    Nombre Archivo: web.php
-
     Manifiesto:
 
         Landing Page:
@@ -30,18 +28,15 @@ use Illuminate\Support\Facades\Route;
         //Vista: Home
         Route::get('/', 'index')->name('index');
 
-        //Vista: Categorias landing
+        //Seccion: Listado de categorias
         Route::get('/#categorias', 'index')->name('categorias');
 
         // Vista: Categorias productos
-        Route::get('categorias/{categoria}', 'categorias')->name('categoria');
+        Route::get('categorias/{category}', 'categoryDetail')->name('category.show');
+
+        Route::get('productos/{product}','productDetail')->name('product.show');
     });
 //
-
-# Ruta del detalle del producto
-Route::controller(productoController::class)->group(function(){
-    Route::get('productos/{producto}','show')->name('categoria.producto');
-});
 
 //Rutas de Autenticacion para usuarios que no hayan iniciado sesion (guest)
     Route::middleware(['guest'])->group(function () {

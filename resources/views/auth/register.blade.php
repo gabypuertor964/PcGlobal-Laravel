@@ -1,7 +1,7 @@
 @extends('adminlte::auth.register')
 
 @section('adminlte_css_pre')
-    @vite(['resources/css/boostrap.css','resources/js/boostrap.js',])
+    @vite(['resources/css/bootstrap.scss','resources/js/bootstrap.js',])
 @stop
 
 @section('auth_body')

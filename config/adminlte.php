@@ -525,6 +525,85 @@ return [
     */
 
     'menu' => [
+        
+        /*
+            [
+            'text'    => 'Texto Principal',
+            'can' => 'permiso',
+            'icon'    => 'icono fontawesome',
+            'submenu' => [
+                [
+                    'text' => 'Enlace',
+                    'icon'    => 'icono fontawesome',
+                    'url'  => 'url/relativa',
+                ],
+                [
+                    'text'    => 'Enlace 2',
+                    'url'     => '#',
+                    'submenu' => [
+                        [
+                            'text' => 'Enlace 3',
+                            'url'  => '#',
+                        ],
+                        [
+                            'text'    => 'Enlace 4',
+                            'url'     => '#',
+                            'submenu' => [
+                                [
+                                    'text' => 'Enlace 5',
+                                    'url'  => '#',
+                                ]
+                            ],
+                        ],
+                    ],
+                ],
+            ],        
+        */
+
+
+        /*
+            Modulo: PQRS
+            Grupo: /client
+        */
+        [
+            'text'    => 'PQRS',
+            'can' => 'cliente.read',
+            'icon'    => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'Index PQRS Cliente',
+                    'icon'    => 'fas fa-fw fa-share',
+                    'url'  => '/client/pqrs',
+                ],
+                [
+                    'text' => 'Create PQRS Cliente',
+                    'icon'    => 'fas fa-fw fa-share',
+                    'url'  => '/client/pqrs/create',
+                ],
+            ],
+        ],
+
+        /*
+            Modulo: Facturation
+            Grupo: /client
+        */
+        [
+            'text'    => 'Mis compras',
+            'can' => 'cliente.read',
+            'icon'    => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'Historial de Compras',
+                    'icon'    => 'fas fa-fw fa-share',
+                    'url'  => '/client/facturation',
+                ],
+                [
+                    'text' => 'Crear una PQRS',
+                    'icon'    => 'fas fa-fw fa-share',
+                    'url'  => '/client/pqrs/create',
+                ]
+            ],
+        ],
 
 
         /*
@@ -536,6 +615,11 @@ return [
             'can' => 'pqrs.read',
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
+                [
+                    'text' => 'Mis PQRS',
+                    'icon'    => 'fas fa-fw fa-share',
+                    'url'  => '/client/pqrs',
+                ],
                 [
                     'text' => 'Listado PQRS',
                     'icon'    => 'fas fa-fw fa-share',
@@ -571,9 +655,52 @@ return [
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
                 [
-                    'text' => '',
+                    'text' => 'Categorias',
                     'icon'    => 'fas fa-fw fa-share',
-                    'url'  => '/pqrs',
+                    'url'  => '',
+                    'submenu'=>[
+                        [
+                            'text' => 'Listado Categorias',
+                            'icon'    => 'fas fa-fw fa-share',
+                            'url'  => '/admin/inventory',
+                        ],                        [
+                            'text' => 'Crear Categoria',
+                            'icon'    => 'fas fa-fw fa-share',
+                            'url'  => '/admin/inventory/create',
+                        ]
+                    ]
+                ],
+                [
+                    'text' => 'Marcas',
+                    'icon'    => 'fas fa-fw fa-share',
+                    'url'  => '',
+                    'submenu'=>[
+                        [
+                            'text' => 'Listado Marcas',
+                            'icon'    => 'fas fa-fw fa-share',
+                            'url'  => '/admin/inventory',
+                        ],                        [
+                            'text' => 'Crear Marca',
+                            'icon'    => 'fas fa-fw fa-share',
+                            'url'  => '/admin/inventory/create',
+                        ]
+                    ]
+                ],
+                [
+                    'text' => 'Productos',
+                    'icon'    => 'fas fa-fw fa-share',
+                    'url'  => '',
+                    'submenu'=>[
+                        [
+                            'text' => 'Listado Productos',
+                            'icon'    => 'fas fa-fw fa-share',
+                            'url'  => '/admin/inventory',
+                        ],                        [
+                            'text' => 'Crear Producto',
+                            'icon'    => 'fas fa-fw fa-share',
+                            'url'  => '/admin/inventory/create',
+                        ]
+                    ]
                 ]
             ],
         ],
