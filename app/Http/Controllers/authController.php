@@ -35,13 +35,37 @@ class authController extends Controller
         //Obtener todos los roles que tenga el usuario y seleccionar el primero
         $rol=$info_usuario->getRoleNames()[0];
 
-        if($rol=="cliente"){
-            return redirect()->route("clients.dashboard");
+        //Redireccion segun rol
+        switch($rol){
 
-        }else{
-            return redirect()->route("admin.dashboard");
+            /* Redireccion Dashboard Cliente */
+                case "cliente":
+                    return redirect()->route("clients.dashboard");
+                break;
+            //
+
+            /* Redirecciones panel Administrativo */
+                case "gestor_pqrs":
+                    return redirect()->route("admin.pqrs.index");
+                break;
+
+                case "almacenista":
+                    return redirect()->route("admin.inventory.index");
+                break;
+
+                case "vendedor":
+                    return redirect()->route("admin.facturation.index");
+                break;
+
+                case "repartidor":
+                    return redirect()->route("admin.delivery.index");
+                break;
+
+                case "gerente":
+                    return redirect()->route("admin.gerency.index");
+                break;
+            //
         }
-
     }
 
     # Ejecucion del registro del cliente

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\deliveryController;
 use App\Http\Controllers\admin\facturationController;
 use App\Http\Controllers\admin\gerencyController;
 use App\Http\Controllers\admin\inventoryController;
@@ -43,6 +44,16 @@ Route::middleware(['auth'])->group(function () {
         --
     */
     Route::resource('/inventory', inventoryController::class)->names('admin.inventory')->middleware('can:inventory.read');
+
+    /*
+        Modulo: Delivery
+        Roles Autorizados:
+
+            1. Repartidor (Todos los Permisos)
+            2. Gerente (Solo Lectura)
+        --
+    */
+    Route::resource('/delivery', deliveryController::class)->names('admin.delivery')->middleware('can:delivery.read');
 
     /*
         Modulo: Admin
