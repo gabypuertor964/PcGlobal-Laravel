@@ -62,7 +62,7 @@ class authController extends Controller
                 break;
 
                 case "gerente":
-                    return redirect()->route("admin.gerency.index");
+                    return redirect()->route("admin.dashboard");
                 break;
             //
         }

@@ -560,150 +560,223 @@ return [
             ],        
         */
 
+        /* Opciones Panel Cliente */
 
-        /*
-            Modulo: PQRS
-            Grupo: /client
-        */
-        [
-            'text'    => 'PQRS',
-            'can' => 'cliente.read',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'Index PQRS Cliente',
-                    'icon'    => 'fas fa-fw fa-share',
-                    'url'  => '/client/pqrs',
-                ],
-                [
-                    'text' => 'Create PQRS Cliente',
-                    'icon'    => 'fas fa-fw fa-share',
-                    'url'  => '/client/pqrs/create',
+            //Modulo PQRS
+            [
+                'text'    => 'PQRS',
+                'can' => 'cliente.read',
+                'icon'    => 'nav-icon fas fa-flag',
+                'submenu' => [
+                    [
+                        'text' => 'Mis Reportes',
+                        'icon'    => 'nav-icon far fa-fw fa-clipboard',
+                        'url'  => '/client/pqrs',
+                    ],
+                    [
+                        'text' => 'Crear una PQRS',
+                        'icon'    => 'nav-icon fa-fw fas fa-plus',
+                        'url'  => '/client/pqrs/create',
+                    ],
+                    [
+                        'text' => 'Respuestas',
+                        'icon'    => 'nav-icon fa-fw fas fa-share',
+                        'url'  => '/client/pqrs/responses',
+                    ],
                 ],
             ],
-        ],
 
-        /*
-            Modulo: Facturation
-            Grupo: /client
-        */
-        [
-            'text'    => 'Mis compras',
-            'can' => 'cliente.read',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'Historial de Compras',
-                    'icon'    => 'fas fa-fw fa-share',
-                    'url'  => '/client/facturation',
+            //Modulo Facturacion
+            [
+                'text'    => 'Mis compras',
+                'can' => 'cliente.read',
+                'icon'    => 'nav-icon fas fa-shopping-bag',
+                'submenu' => [
+                    [
+                        'text' => 'Compras Activas',
+                        'icon'    => 'nav-icon fas fa-fw fa-tag',
+                        'url'  => '/client/facturation/active',
+                    ],
+                    [
+                        'text' => 'Historial de Compras',
+                        'icon'    => 'nav-icon far fa-fw fa-clock',
+                        'url'  => '/client/facturation',
+                    ]
                 ],
-                [
-                    'text' => 'Crear una PQRS',
-                    'icon'    => 'fas fa-fw fa-share',
-                    'url'  => '/client/pqrs/create',
-                ]
             ],
-        ],
 
-
-        /*
-            Modulo: PQRS
-            Grupo: /admin
-        */
-        [
-            'text'    => 'PQRS',
-            'can' => 'pqrs.read',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'Mis PQRS',
-                    'icon'    => 'fas fa-fw fa-share',
-                    'url'  => '/client/pqrs',
+            //Modulo Entregas
+            [
+                'text'    => 'Mis entregas',
+                'can' => 'cliente.read',
+                'icon'    => 'nav-icon fas fa-truck',
+                'submenu' => [
+                    [
+                        'text' => 'Entregas Activas',
+                        'icon'    => 'nav-icon fas fa-fw fa-tag',
+                        'url'  => '/client/delivery/active',
+                    ],
+                    [
+                        'text' => 'Historial de Entregas',
+                        'icon'    => 'nav-icon far fa-fw fa-clock',
+                        'url'  => '/client/delivery',
+                    ]
                 ],
-                [
-                    'text' => 'Listado PQRS',
-                    'icon'    => 'fas fa-fw fa-share',
-                    'url'  => '/admin/pqrs',
-                ]
             ],
-        ],
+        //
 
-        /*
-            Modulo: Facturation
-            Grupo: /admin
-        */
-        [
-            'text'    => 'Factuacion',
-            'can' => 'facturation.read',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => '',
-                    'icon'    => 'fas fa-fw fa-share',
-                    'url'  => '/pqrs',
-                ]
+        /* Opciones Panel Administrativo */
+
+            //Modulo PQRS
+            [
+                'text'    => 'PQRS',
+                'can' => 'pqrs.read',
+                'icon'    => 'nav-icon fa-fw fas fa-flag',
+                'submenu' => [
+                    [
+                        'text' => 'Historico',
+                        'icon' => 'nav-icon far fa-fw fa-clock',
+                        'url'  => '/admin/pqrs',
+                    ],
+                    [
+                        'text' => 'Mis respuestas',
+                        'icon'    => 'nav-icon fas fa-fw fa-share',
+                        'can' => 'pqrs.create',
+                        'url'  => '/admin/pqrs/responses',
+                    ]
+                ],
             ],
-        ],
 
-        /*
-            Modulo: Inventory
-            Grupo: /admin
-        */
-        [
-            'text'    => 'Inventario',
-            'can' => 'inventory.read',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'Categorias',
-                    'icon'    => 'fas fa-fw fa-share',
-                    'url'  => '',
-                    'submenu'=>[
-                        [
-                            'text' => 'Listado Categorias',
-                            'icon'    => 'fas fa-fw fa-share',
-                            'url'  => '/admin/inventory',
-                        ],                        [
-                            'text' => 'Crear Categoria',
-                            'icon'    => 'fas fa-fw fa-share',
-                            'url'  => '/admin/inventory/create',
+            //Modulo Facturacion
+            [
+                'text'    => 'Facturacion',
+                'can' => 'facturation.read',
+                'icon'    => 'nav-icon fa-fw fas fa-shopping-cart',
+                'submenu' => [
+                    [
+                        'text' => 'Compras',
+                        'icon'    => 'nav-icon fa-fw fas fa-shopping-basket',
+                        'submenu' => [
+                            [
+                                'text' => 'Historico',
+                                'icon'    => 'nav-icon far fa-fw fa-clock',
+                                'url'  => '/admin/facturation/shopping/',
+                            ],
+                            [
+                                'text' => 'Registrar Compra',
+                                'icon' => 'nav-icon fa-fw fas fa-plus',
+                                'url'  => '/admin/facturation/shopping/create',
+                                'can' => 'facturation.create',
+                            ],
+                            [
+                                'text' => 'Compras Activas',
+                                'icon' => 'nav-icon fas fa-fw fa-tag',
+                                'url'  => '/admin/facturation/shopping/active',
+                            ],
+                        ]
+                    ],
+                    [
+                        'text' => 'Ventas',
+                        'icon'    => 'nav-icon fa-fw fas fa-receipt',
+                        'submenu' => [
+                            [
+                                'text' => 'Historico',
+                                'icon'    => 'nav-icon far fa-fw fa-clock',
+                                'url'  => '/admin/facturation/sales',
+                            ],
+                            [
+                                'text' => 'Registrar Venta',
+                                'icon' => 'nav-icon fa-fw fas fa-plus',
+                                'url'  => '/admin/facturation/sales/create',
+                                'can' => 'facturation.create',
+                            ]
+                        ]
+                    ],
+                ],
+            ],
+
+            //Modulo Inventario
+            [
+                'text'    => 'Inventario',
+                'can' => 'inventory.read',
+                'icon'    => 'nav-icon fa-fw fas fa-dolly-flatbed',
+                'submenu' => [
+                    [
+                        'text' => 'Categorias',
+                        'icon'    => 'nav-icon fa-fw far fa-copyright',
+                        'submenu'=>[
+                            [
+                                'text' => 'Listado Categorias',
+                                'icon'    => 'nav-icon fa-fw fas fa-list',
+                                'url'  => '/admin/inventory',
+                            ],                        [
+                                'text' => 'Crear Categoria',
+                                'icon'    => 'nav-icon fa-fw far fa-plus-square',
+                                'url'  => '/admin/inventory/create',
+                                'can' => 'inventory.create',
+                            ]
+                        ]
+                    ],
+                    [
+                        'text' => 'Marcas',
+                        'icon'    => 'nav-icon fa-fw far fa-registered',
+                        'url'  => '',
+                        'submenu'=>[
+                            [
+                                'text' => 'Listado Marcas',
+                                'icon'    => 'nav-icon fa-fw fas fa-list',
+                                'url'  => '/admin/inventory',
+                            ],                        [
+                                'text' => 'Crear Marca',
+                                'icon'    => 'nav-icon fa-fw far fa-plus-square',
+                                'url'  => '/admin/inventory/create',
+                            ]
+                        ]
+                    ],
+                    [
+                        'text' => 'Productos',
+                        'icon'    => 'nav-icon fa-fw fas fa-laptop',
+                        'url'  => '',
+                        'submenu'=>[
+                            [
+                                'text' => 'Listado Productos',
+                                'icon'    => 'nav-icon fa-fw fas fa-list',
+                                'url'  => '/admin/inventory',
+                            ],                        [
+                                'text' => 'Crear Producto',
+                                'icon'    => 'nav-icon fa-fw far fa-plus-square',
+                                'url'  => '/admin/inventory/create',
+                            ]
                         ]
                     ]
                 ],
-                [
-                    'text' => 'Marcas',
-                    'icon'    => 'fas fa-fw fa-share',
-                    'url'  => '',
-                    'submenu'=>[
-                        [
-                            'text' => 'Listado Marcas',
-                            'icon'    => 'fas fa-fw fa-share',
-                            'url'  => '/admin/inventory',
-                        ],                        [
-                            'text' => 'Crear Marca',
-                            'icon'    => 'fas fa-fw fa-share',
-                            'url'  => '/admin/inventory/create',
-                        ]
-                    ]
-                ],
-                [
-                    'text' => 'Productos',
-                    'icon'    => 'fas fa-fw fa-share',
-                    'url'  => '',
-                    'submenu'=>[
-                        [
-                            'text' => 'Listado Productos',
-                            'icon'    => 'fas fa-fw fa-share',
-                            'url'  => '/admin/inventory',
-                        ],                        [
-                            'text' => 'Crear Producto',
-                            'icon'    => 'fas fa-fw fa-share',
-                            'url'  => '/admin/inventory/create',
-                        ]
-                    ]
+            ],
+
+            //Modulo Entregas
+            [
+                'text'    => 'Entregas',
+                'can' => 'delivery.read',
+                'icon'    => 'nav-icon fa-fw fas fa-truck',
+                'submenu' => [
+                    [
+                        'text' => 'Historico',
+                        'icon'    => 'nav-icon far fa-fw fa-clock',
+                        'url'  => '/admin/delivery',
+                    ],
+                    [
+                        'text' => 'Registrar Entrega',
+                        'icon'    => 'nav-icon fa-fw fas fa-plus',
+                        'url'  => '/admin/delivery/create',
+                        'can' => 'delivery.create',
+                    ],
+                    [
+                        'text' => 'Entregas Activas',
+                        'icon'    => 'nav-icon fas fa-fw fa-tag',
+                        'url'  => '/admin/delivery/active',
+                    ],
                 ]
             ],
-        ],
+        //
     ],
 
     /*

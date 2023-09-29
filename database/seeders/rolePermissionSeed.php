@@ -72,6 +72,7 @@ class rolePermissionSeed extends Seeder
                     'pqrs.read',
                     'facturation.read',
                     'inventory.read',
+                    'delivery.read',
                 ]
             ],
         ];
