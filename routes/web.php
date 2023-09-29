@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\authController;
 use App\Http\Controllers\landingPageController;
-use App\Http\Controllers\productoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,12 +28,12 @@ use Illuminate\Support\Facades\Route;
         Route::get('/', 'index')->name('index');
 
         //Seccion: Listado de categorias
-        Route::get('/#categorias', 'index')->name('categorias');
+        Route::get('/#categories', 'index')->name('categorias');
 
         // Vista: Categorias productos
-        Route::get('categorias/{category}', 'categoryDetail')->name('category.show');
+        Route::get('categories/{category}', 'categoryDetail')->name('category.show');
 
-        Route::get('productos/{product}','productDetail')->name('product.show');
+        Route::get('products/{product}','productDetail')->name('product.show');
     });
 //
 
