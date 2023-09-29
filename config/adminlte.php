@@ -557,7 +557,7 @@ return [
                         ],
                     ],
                 ],
-            ],        
+            ],         
         */
 
         /* Opciones Panel Cliente */
@@ -721,7 +721,7 @@ return [
                         'text' => 'Marcas',
                         'icon'    => 'nav-icon fa-fw far fa-registered',
                         'url'  => '',
-                        'submenu'=>[
+                        'submenu'=>[ 
                             [
                                 'text' => 'Listado Marcas',
                                 'icon'    => 'nav-icon fa-fw fas fa-list',
@@ -730,6 +730,7 @@ return [
                                 'text' => 'Crear Marca',
                                 'icon'    => 'nav-icon fa-fw far fa-plus-square',
                                 'url'  => '/admin/inventory/create',
+                                'can' => 'facturation.create',
                             ]
                         ]
                     ],
@@ -746,6 +747,7 @@ return [
                                 'text' => 'Crear Producto',
                                 'icon'    => 'nav-icon fa-fw far fa-plus-square',
                                 'url'  => '/admin/inventory/create',
+                                'can' => 'facturation.create',
                             ]
                         ]
                     ]
@@ -775,6 +777,32 @@ return [
                         'url'  => '/admin/delivery/active',
                     ],
                 ]
+            ],
+
+            //Modulo Gerencia
+            [
+                'text'    => 'Gerencia',
+                'can' => 'gerency.read',
+                'icon'    => 'nav-icon fa-fw fas fa-chart-line',
+                'submenu' => [
+                    [
+                        'text' => 'Trabajadores',
+                        'icon'    => 'nav-icon fa-fw fas fa-users',
+                        'url'  => '/admin/management/users',
+                        'submenu' => [
+                            [
+                                'text' => 'Listado Trabajadores',
+                                'icon'    => 'nav-icon fa-fw fas fa-list',
+                                'url'  => '/admin/management/users',
+                            ],
+                            [
+                                'text' => 'Registrar Trabajador',
+                                'icon'    => 'nav-icon fa-fw far fa-plus-square',
+                                'url'  => '/admin/management/users/create',
+                            ]
+                        ]
+                    ]
+                ],
             ],
         //
     ],
