@@ -13,4 +13,14 @@ class products extends Model
     public function getRouteKeyName(){
         return 'slug';
     }
+
+    //Relación uno a muchos a categoría (inversa)
+    public function category(){
+        return $this->belongsTo(categories::class, 'category_id');
+    }
+
+    //Relación uno a muchos a marca (inversa)
+    public function brand(){
+        return $this->belongsTo(brands::class, 'brand_id');
+    }
 }
