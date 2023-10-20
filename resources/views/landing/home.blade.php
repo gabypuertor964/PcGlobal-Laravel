@@ -58,7 +58,7 @@
       </a>
     </div>
   </div>
-  <section class="mb-0 sm:my-16 mx-auto" id="categorias">
+  <section class="mb-0 sm:my-16 mx-auto" id="categories">
     <div class="flex flex-col gap-y-1">
       <h1 class="text-center text-2xl font-medium">Categorías de Productos</h1>
       <h2 class="text-center mb-10 ">Encuentra los mejores componentes al mejor precio</h2>

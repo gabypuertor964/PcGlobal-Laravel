@@ -15,6 +15,10 @@ Route::middleware(['auth'])->group(function () {
         return view("admin.dashboard");
     })->name("admin.dashboard");
 
+    Route::get('/pqrs', function () {
+        return "a";
+    });
+
     /*
         Modulo: PQRS
         Roles Autorizados:

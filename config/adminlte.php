@@ -20,7 +20,7 @@ return [
         'title' => 'PcGlobal',
 
         # Prefijo: Pcglobal + Title
-        'title_prefix' => 'PcGlobal | ',
+        'title_prefix' => 'PcGlobal - ',
 
         # Sufijo: Title + PcGlobal
         'title_postfix' => '',
