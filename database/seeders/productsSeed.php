@@ -29,9 +29,17 @@ class productsSeed extends Seeder
                 File::makeDirectory(storage_path("app/products"));
             }
             
+            $product_directory = strtoupper($registro[5]);
+
             //Directorio producto especifico/individual
-            if(!File::exists(storage_path("app/products/".strtoupper($registro[5])))){   
-                File::makeDirectory(storage_path("app/products/".strtoupper($registro[5])));
+            if(!File::exists(storage_path("app/products/$product_directory"))){  
+
+                File::makeDirectory(storage_path("app/products/$product_directory"));
+
+                File::put(
+                    storage_path("app/products/$product_directory/description.md"),
+                    ""
+                );
             }
 
             //Guardado del registro en la BD
