@@ -23,8 +23,6 @@ return new class extends Migration
 
                 $table->string("model")->unique()->comment("Modelo del Producto");
 
-                $table->text("folder_url")->unique()->comment("URL de la carpeta del producto");
-
                 $table->unsignedInteger('currency_id')->comment("Id Moneda");
 
                 $table->decimal("price",10,2)->comment("Precio unitario del producto");

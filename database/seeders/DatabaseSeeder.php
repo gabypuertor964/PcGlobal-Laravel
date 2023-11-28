@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        /* Ejecucion Seeders (Ejecucion en Cascada) */
+        /* Ejecucion Seeders globales (Ejecucion en Cascada) */
         $this->call([
 
             //Seed: Tipos de documento
@@ -41,10 +41,19 @@ class DatabaseSeeder extends Seeder
 
             //Seed: Roles y Permisos
             rolePermissionSeed::class,
-
-            //Seed: Usuarios
-            usersSeed::class,
         ]);
+
+        /**
+         * Ejecucion de seeders locales
+         * 
+        */
+        if(env('APP_ENV')=='local'){
+            
+            //Seed: Usuarios
+            $this->call([
+                usersSeed::class,
+            ]);
+        }
 
     }
 }
