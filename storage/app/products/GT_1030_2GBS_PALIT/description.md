@@ -1,0 +1,1 @@
+Descripcion del producto GT 1030 2GBS PALIT

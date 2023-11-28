@@ -1,0 +1,1 @@
+Descripcion del producto GTX 1650 VENTUS XS D6 MSI

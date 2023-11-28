@@ -1,0 +1,1 @@
+Descripcion del producto DISCO 4 TERAS PC 64MB 7200RPM SEAGATE

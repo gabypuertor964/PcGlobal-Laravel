@@ -1,0 +1,1 @@
+Descripcion del producto INTEL CORE i5 12600KF

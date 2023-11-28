@@ -1,0 +1,1 @@
+Descripcion del producto GTX 1660 TI WINDFORCE

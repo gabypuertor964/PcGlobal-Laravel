@@ -36,9 +36,11 @@ class productsSeed extends Seeder
 
                 File::makeDirectory(storage_path("app/products/$product_directory"));
 
+                File::makeDirectory(storage_path("app/products/$product_directory/images"));
+
                 File::put(
                     storage_path("app/products/$product_directory/description.md"),
-                    ""
+                    "Descripcion del producto $registro[2]"
                 );
             }
 

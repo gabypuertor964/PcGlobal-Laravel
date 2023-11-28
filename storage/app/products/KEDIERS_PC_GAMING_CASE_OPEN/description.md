@@ -1,0 +1,1 @@
+Descripcion del producto KEDIERS PC Gaming Case Open

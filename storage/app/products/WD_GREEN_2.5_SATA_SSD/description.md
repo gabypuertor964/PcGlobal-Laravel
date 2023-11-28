@@ -1,0 +1,1 @@
+Descripcion del producto WD Green 2.5 SATA SSD

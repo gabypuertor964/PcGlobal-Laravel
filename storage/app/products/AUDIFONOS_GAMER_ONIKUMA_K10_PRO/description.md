@@ -1,0 +1,1 @@
+Descripcion del producto Audifonos gamer Onikuma K10 PRO

@@ -1,0 +1,1 @@
+Descripcion del producto SUPER GTX 1660 VENTUS XS 6GB MSI

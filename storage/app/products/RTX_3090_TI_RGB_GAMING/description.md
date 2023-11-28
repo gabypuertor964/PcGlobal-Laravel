@@ -1,0 +1,1 @@
+Descripcion del producto RTX 3090 TI RGB GAMING

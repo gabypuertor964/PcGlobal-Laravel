@@ -1,0 +1,1 @@
+Descripcion del producto GTX 1650 OC PHOENIX D5 ASUS

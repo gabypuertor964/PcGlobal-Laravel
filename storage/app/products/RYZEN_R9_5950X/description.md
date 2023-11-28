@@ -1,0 +1,1 @@
+Descripcion del producto RYZEN R9 5950X

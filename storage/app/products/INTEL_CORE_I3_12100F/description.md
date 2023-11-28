@@ -1,0 +1,1 @@
+Descripcion del producto INTEL CORE i3 12100F

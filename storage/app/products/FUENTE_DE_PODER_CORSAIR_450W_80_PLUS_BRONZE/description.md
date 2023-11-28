@@ -1,0 +1,1 @@
+Descripcion del producto Fuente de poder corsair 450w 80 plus bronze

@@ -1,0 +1,1 @@
+Descripcion del producto RYZEN 7 5700G

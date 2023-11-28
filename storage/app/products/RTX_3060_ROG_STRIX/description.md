@@ -1,0 +1,1 @@
+Descripcion del producto RTX 3060 ROG STRIX

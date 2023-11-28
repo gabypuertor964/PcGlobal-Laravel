@@ -1,0 +1,1 @@
+Descripcion del producto EVGA Supernova 1200 P2 80+ Platinum

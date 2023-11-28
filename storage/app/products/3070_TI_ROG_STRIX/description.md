@@ -1,0 +1,1 @@
+Descripcion del producto 3070 TI ROG STRIX

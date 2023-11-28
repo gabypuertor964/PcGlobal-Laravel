@@ -1,0 +1,1 @@
+Descripcion del producto Logitech G203 Color Negro

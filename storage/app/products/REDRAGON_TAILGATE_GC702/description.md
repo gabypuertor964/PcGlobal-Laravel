@@ -1,0 +1,1 @@
+Descripcion del producto Redragon TAILGATE GC702

@@ -1,0 +1,1 @@
+Descripcion del producto Fuente de poder xpg pylon 550w 80 plus bronze

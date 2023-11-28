@@ -1,0 +1,1 @@
+Descripcion del producto RYZEN 5 5600X

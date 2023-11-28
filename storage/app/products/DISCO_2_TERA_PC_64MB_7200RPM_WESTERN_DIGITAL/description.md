@@ -1,0 +1,1 @@
+Descripcion del producto DISCO 2 TERA PC 64MB 7200RPM WESTERN DIGITAL

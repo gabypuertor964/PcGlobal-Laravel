@@ -1,0 +1,1 @@
+Descripcion del producto SOLIDO M2 500GB BLUE SN570 Western Digital

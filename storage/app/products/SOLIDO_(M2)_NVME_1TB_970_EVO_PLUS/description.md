@@ -1,0 +1,1 @@
+Descripcion del producto SOLIDO (M2) NVMe 1TB 970 EVO PLUS

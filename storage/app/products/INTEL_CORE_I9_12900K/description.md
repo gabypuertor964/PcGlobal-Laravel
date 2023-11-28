@@ -1,0 +1,1 @@
+Descripcion del producto INTEL CORE i9 12900K

@@ -1,0 +1,1 @@
+Descripcion del producto SUPER GTX 1660 GAMING X

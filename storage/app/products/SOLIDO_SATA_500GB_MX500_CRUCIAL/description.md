@@ -1,0 +1,1 @@
+Descripcion del producto SOLIDO SATA 500GB MX500 CRUCIAL

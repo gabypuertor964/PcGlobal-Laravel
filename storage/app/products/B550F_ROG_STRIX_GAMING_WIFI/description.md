@@ -1,0 +1,1 @@
+Descripcion del producto B550F ROG STRIX GAMING WIFI

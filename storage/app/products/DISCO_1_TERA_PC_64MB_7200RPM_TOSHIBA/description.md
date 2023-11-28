@@ -1,0 +1,1 @@
+Descripcion del producto DISCO 1 TERA PC 64MB 7200RPM TOSHIBA

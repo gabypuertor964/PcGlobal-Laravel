@@ -1,0 +1,1 @@
+Descripcion del producto RYZEN 5 3400G

@@ -1,0 +1,1 @@
+Descripcion del producto GeForce RTX 3060 Ti VENTUS

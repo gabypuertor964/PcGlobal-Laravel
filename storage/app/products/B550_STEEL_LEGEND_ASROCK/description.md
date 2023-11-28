@@ -1,0 +1,1 @@
+Descripcion del producto B550 STEEL LEGEND ASROCK

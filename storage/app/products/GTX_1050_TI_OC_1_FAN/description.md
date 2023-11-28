@@ -1,0 +1,1 @@
+Descripcion del producto GTX 1050 TI OC 1 FAN

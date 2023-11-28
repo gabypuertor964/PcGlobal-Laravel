@@ -1,0 +1,1 @@
+Descripcion del producto CORSAIR CRYSTAL SERIES 570X RGB

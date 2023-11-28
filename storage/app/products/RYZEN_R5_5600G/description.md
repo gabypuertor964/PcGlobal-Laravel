@@ -1,0 +1,1 @@
+Descripcion del producto RYZEN R5 5600G
