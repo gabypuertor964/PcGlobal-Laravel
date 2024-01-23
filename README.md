@@ -22,6 +22,7 @@ Developed with adaptability and growth in mind, PCGlobal stands as the ideal sol
 - **Laravel 10**: PHP web development framework.
 - **Fortify**: Laravel's authentication library.
 - **Carbon**: PHP library for date manipulation.
+- **Intervention image**: PHP library for image manipulation.
 
 #### Frontend:
 - **Tailwind**: CSS framework for rapid and responsive design.
@@ -30,7 +31,7 @@ Developed with adaptability and growth in mind, PCGlobal stands as the ideal sol
 
 * **Work Group**: 2686374-2
 
-* **Subgroup**: GAES 8
+* **Subgroup**: GAES 3
 
 ### Developers' Full Names
 
@@ -39,3 +40,19 @@ Developed with adaptability and growth in mind, PCGlobal stands as the ideal sol
 * **Damián Felipe Rengifo Rincon**: [Perfil](https://github.com/DamianRengifo)
 
 * **Gaby Puerto**: [Perfil](https://github.com/gabypuertor964)
+
+
+## Installation
+
+* **Composer Dependences**: `composer install`
+* **NPM Dependences**: `npm install`
+* **Create enviroment file**: `cp .env.example .env`
+* **Generate APP_KEY**: `php artisan key:generate`
+* **Execute migrations**: `php artisan migrate`
+* **Execute Seed**: `php artisan db:seed`
+* **Execute Resource Compilation**: `npm run build`
+
+## Extensions and Libraries
+
+* **Zip**: Enables ZIP file manipulation for efficient compression and decompression in web applications.
+* **GD**: Provides image manipulation functions, essential for dynamic graphic generation in web development.
