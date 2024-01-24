@@ -1,1 +1,0 @@
-Descripcion del producto B550E ROG STRIX GAMING WIFI

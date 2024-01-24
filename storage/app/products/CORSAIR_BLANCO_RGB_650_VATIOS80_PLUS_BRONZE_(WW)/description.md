@@ -1,1 +1,0 @@
-Descripcion del producto Corsair blanco RGB 650 vatios80 PLUS Bronze (WW)

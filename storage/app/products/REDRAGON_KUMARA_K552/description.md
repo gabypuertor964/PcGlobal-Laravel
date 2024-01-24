@@ -1,1 +1,0 @@
-Descripcion del producto Redragon Kumara K552

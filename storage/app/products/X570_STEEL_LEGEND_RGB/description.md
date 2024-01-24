@@ -1,1 +1,0 @@
-Descripcion del producto X570 STEEL LEGEND RGB

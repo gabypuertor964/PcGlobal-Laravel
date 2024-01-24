@@ -1,5 +1,5 @@
 {{-- Declaracion e importacion componente principal --}}
-@extends('layouts.landing_page')
+@extends('layouts.landing')
 
 {{-- Declaracion complemtento etiqueta title del Header, la variable $categoria se pasa mediante el controlador y se detecta con el switch --}}
 @section('title', $category->name)

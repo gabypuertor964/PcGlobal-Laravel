@@ -1,1 +1,0 @@
-Descripcion del producto B450 TUF PLUS GAMING II

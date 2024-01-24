@@ -1,1 +1,0 @@
-Descripcion del producto SOLIDO (M2) NVMe 1TB RGB XPG S40G

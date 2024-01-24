@@ -1,1 +1,0 @@
-Descripcion del producto B550M DS3H GIGABYTE

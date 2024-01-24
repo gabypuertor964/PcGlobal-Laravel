@@ -1,1 +1,0 @@
-Descripcion del producto B450M STEEL LEGEND RGB

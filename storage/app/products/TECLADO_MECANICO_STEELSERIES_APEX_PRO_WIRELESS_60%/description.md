@@ -1,1 +1,0 @@
-Descripcion del producto Teclado mecanico steelseries apex pro wireless 60%

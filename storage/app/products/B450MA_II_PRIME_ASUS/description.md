@@ -1,1 +1,0 @@
-Descripcion del producto B450MA II PRIME ASUS

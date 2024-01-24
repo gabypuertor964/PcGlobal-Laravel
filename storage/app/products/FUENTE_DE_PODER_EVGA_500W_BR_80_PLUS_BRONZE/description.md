@@ -1,1 +1,0 @@
-Descripcion del producto Fuente de poder evga 500w br 80 plus bronze

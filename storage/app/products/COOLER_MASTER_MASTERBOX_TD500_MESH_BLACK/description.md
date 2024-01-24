@@ -1,1 +1,0 @@
-Descripcion del producto Cooler master masterbox td500 mesh black

@@ -1,1 +1,0 @@
-Descripcion del producto INTEL CORE i3 10105

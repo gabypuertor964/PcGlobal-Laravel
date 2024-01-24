@@ -1,1 +1,0 @@
-Descripcion del producto B550M TUF PLUS GAMING WIFI

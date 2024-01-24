@@ -1,1 +1,0 @@
-Descripcion del producto INTEL CORE i7 12700K

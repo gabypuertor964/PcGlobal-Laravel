@@ -1,1 +1,0 @@
-Descripcion del producto RTX 3070 ROG STRIX WHITE

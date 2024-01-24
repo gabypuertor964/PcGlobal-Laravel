@@ -1,1 +1,0 @@
-Descripcion del producto Fuente de poder corsair full modular RM1000w

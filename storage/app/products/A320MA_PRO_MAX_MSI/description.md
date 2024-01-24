@@ -1,1 +1,0 @@
-Descripcion del producto A320MA PRO MAX MSI

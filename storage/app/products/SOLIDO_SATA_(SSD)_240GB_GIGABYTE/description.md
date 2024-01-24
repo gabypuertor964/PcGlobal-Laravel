@@ -1,1 +1,0 @@
-Descripcion del producto SOLIDO SATA (SSD) 240GB GIGABYTE

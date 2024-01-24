@@ -1,2 +1,8 @@
 *
+!carrousel/
+!carrousel/*
+
+!categories/
+!categories/*
+
 !.gitignore

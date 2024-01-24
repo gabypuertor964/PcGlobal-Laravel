@@ -1,1 +1,0 @@
-Descripcion del producto GTX 1050 TI 4GBS PHOENIX ASUS

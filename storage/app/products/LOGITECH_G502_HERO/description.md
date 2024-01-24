@@ -1,1 +1,0 @@
-Descripcion del producto Logitech G502 HERO

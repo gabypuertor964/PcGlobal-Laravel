@@ -1,1 +1,0 @@
-Descripcion del producto Case Gamer Negro Pc Atx Micro Atx Vidrio Rxe 04

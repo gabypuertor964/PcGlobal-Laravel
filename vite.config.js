@@ -4,17 +4,28 @@ import laravel from 'laravel-vite-plugin';
 export default defineConfig({
     plugins: [
         laravel({
+            /**
+             * Recursos a procesar/compilar
+            */
             input: [
-
-                //Compilacion Recursos Bootstrap
+                //Bootstrap
                 'resources/css/bootstrap.scss',
                 'resources/js/bootstrap.js',
 
-                //Compilacion Recursos App/Nativos
-                'resources/css/app.css', 
-                'public/js/app.js',
+                //Tailwind
+                'resources/css/tailwind.css',
+
+                //Font-Awesome
+                'resources/js/font-awesome.js',
+
+                //Recursos App/Nativos
+                'public/resources/css/app.css', 
+                'public/resources/js/app.js',
             ],
             refresh: true,
         }),
     ],
+    build: {
+        chunkSizeWarningLimit: 1600
+    }
 });

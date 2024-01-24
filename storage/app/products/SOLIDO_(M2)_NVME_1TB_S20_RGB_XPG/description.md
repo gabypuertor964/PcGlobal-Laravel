@@ -1,1 +1,0 @@
-Descripcion del producto SOLIDO (M2) NVMe 1TB S20 RGB XPG

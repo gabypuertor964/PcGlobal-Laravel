@@ -1,1 +1,0 @@
-Descripcion del producto B450 AORUS PRO WIFI GIGABYTE

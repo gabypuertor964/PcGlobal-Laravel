@@ -1,1 +1,0 @@
-Descripcion del producto INTEL CORE i5 11600K

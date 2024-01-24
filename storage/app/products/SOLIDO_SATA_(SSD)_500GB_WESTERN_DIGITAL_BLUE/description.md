@@ -1,1 +1,0 @@
-Descripcion del producto SOLIDO SATA (SSD) 500GB WESTERN DIGITAL BLUE

@@ -1,1 +1,0 @@
-Descripcion del producto Thermaltake tower 900 E atx Vertical

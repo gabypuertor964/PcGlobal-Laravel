@@ -1,1 +1,0 @@
-Descripcion del producto B550MK PRIME ASUS

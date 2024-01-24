@@ -1,1 +1,0 @@
-Descripcion del producto Crucial BX500 SSD

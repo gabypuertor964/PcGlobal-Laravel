@@ -1,1 +1,0 @@
-Descripcion del producto INTEL i5 12400

@@ -1,1 +1,0 @@
-Descripcion del producto RTX 3080 GAMING X TRIO

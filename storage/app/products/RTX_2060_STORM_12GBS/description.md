@@ -1,1 +1,0 @@
-Descripcion del producto RTX 2060 STORM 12GBS

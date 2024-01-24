@@ -1,1 +1,0 @@
-Descripcion del producto GTX 1650 GAMING X MSI

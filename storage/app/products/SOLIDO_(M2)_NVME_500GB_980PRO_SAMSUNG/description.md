@@ -1,1 +1,0 @@
-Descripcion del producto SOLIDO (M2) NVMe 500GB 980PRO SAMSUNG

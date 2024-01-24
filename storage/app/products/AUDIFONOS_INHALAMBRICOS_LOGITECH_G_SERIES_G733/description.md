@@ -1,1 +1,0 @@
-Descripcion del producto Audifonos inhalambricos Logitech G Series G733

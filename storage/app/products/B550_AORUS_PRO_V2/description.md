@@ -1,1 +1,0 @@
-Descripcion del producto B550 AORUS PRO V2

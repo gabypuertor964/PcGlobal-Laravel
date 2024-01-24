@@ -1,18 +1,17 @@
 {{-- Declaracion e importacion componente principal --}}
-@extends('layouts.landing_page')
+@extends('layouts.landing')
 
 {{-- Declaracion complemtento etiqueta litle del Header --}}
 @section('title','Home')
 
+{{-- Declaracion clases css adicionales al contenedor body --}}
+@section('body_class','flex flex-col min-h-screen bg-gray-100')
+
+{{-- Declaracion clases css adicionales al contenedor main --}}
+@section('main_class','container my-10 text-justify mx-auto flex-grow  mx-2')
+
 {{-- Declaracion contenido principal de la pagina web --}}
 @section('content')
-
-  {{-- Declaracion y envio de clases personalidas a la etiqueta body presente en el componente principal--}}
-  @section('body_class','flex flex-col min-h-screen bg-gray-100')
-
-  {{-- Envio de clases personalizadas a la etiqueta main, la cual se encuentra en el componente principal--}}
-  @section('main_class','container my-10 text-justify mx-auto flex-grow  mx-2')
-
   <div class="hidden md:grid grid-cols-3 gap-y-2 sm:gap-1 imgs-landing">
   
     <div class="sm:col-span-2">
@@ -28,13 +27,13 @@
 
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="{{asset('img/landing/f-1.jpg')}}" class="d-block w-100" alt="...">
+            <img src="{{asset('storage/carrousel/f-1.jpg')}}" class="d-block w-100" alt="...">
           </div>
           <div class="carousel-item">
-            <img src="{{asset('img/landing/f-2.jpg')}}" class="d-block w-100" alt="...">
+            <img src="{{asset('storage/carrousel/f-2.jpg')}}" class="d-block w-100" alt="...">
           </div>
           <div class="carousel-item">
-            <img src="{{asset('img/landing/f-4.jpg')}}" class="d-block w-100" alt="...">
+            <img src="{{asset('storage/carrousel/f-4.jpg')}}" class="d-block w-100" alt="...">
           </div>
         </div>
 
@@ -52,72 +51,97 @@
     </div>
 
     <div class="flex flex-col justify-center gap-y-1">
-      <img src="{{ asset('img/landing/f-5.jpg')}}" alt="" class="rounded object-contain cursor-pointer hover:rotate-1 transition-all duration-500">
+      <img src="{{ asset('storage/carrousel/f-5.jpg')}}" alt="" class="rounded object-contain cursor-pointer hover:rotate-1 transition-all duration-500">
       <a href="productos/logitech-g203-color-negro">
-        <img src="{{ asset('img/landing/f-3.jpg')}}" alt="" class="rounded object-contain cursor-pointer hover:-rotate-1 transition-all duration-500">
+        <img src="{{ asset('storage/carrousel/f-3.jpg')}}" alt="" class="rounded object-contain cursor-pointer hover:-rotate-1 transition-all duration-500">
       </a>
     </div>
   </div>
+
+  {{-- Enlaces de categorias --}}
   <section class="mb-0 sm:my-16 mx-auto" id="categories">
+
+    {{-- Titulo sección --}}
     <div class="flex flex-col gap-y-1">
       <h1 class="text-center text-2xl font-medium">Categorías de Productos</h1>
       <h2 class="text-center mb-10 ">Encuentra los mejores componentes al mejor precio</h2>
     </div>
+
+    {{-- Imagenes enlace --}}
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 bg-gray-100 gap-6 transition-all">
-      <div class="flex flex-col justify-center">
+
+      {{-- Seccion: Tarjetas graficas --}}
+      <div class="flex flex-col justify-center transition-all">
         <a href="{{route('category.show','tarjetas-graficas')}}" class="hover:text-gray-800">
-          <img src="{{ asset('img/categorias/Tarjeta Gráfica.jpg')}}" class="rounded transition-all duration-300 hover:scale-95 hover:shadow-2xl" alt="Img de Tarjeta Gráfica">
+          <img src="{{ asset('storage/categories/graphic_card.jpg')}}" class="rounded transition-all duration-300 hover:scale-95 hover:shadow-2xl" alt="Img de Tarjeta Gráfica">
           <p class="text-center py-2 font-medium text-lg text-gray-800">Tarjetas Gráficas</p>
         </a>
       </div>
+
+      {{-- Seccion: Procesadores --}}
       <div class="flex flex-col justify-center transition-all">
         <a href="{{route('category.show','procesadores')}}" class="hover:text-gray-800">
-          <img src="{{ asset('img/categorias/procesador.jpg')}}" class="rounded transition-all duration-300 hover:scale-95 hover:shadow-2xl" alt="Img de Procesador">
+          <img src="{{ asset('storage/categories/processor.jpg')}}" class="rounded transition-all duration-300 hover:scale-95 hover:shadow-2xl" alt="Img de Procesador">
           <p class="text-center py-2 font-medium text-lg">Procesadores</p>
         </a>
       </div>
+
+      {{-- Seccion: Perifericos --}}
       <div class="flex flex-col justify-center transition-all">
         <a href="{{route('category.show','perifericos')}}" class="hover:text-gray-800">
-          <img src="{{ asset('img/categorias/Perifericos.jpg')}}" class="rounded transition-all duration-300 hover:scale-95 hover:shadow-2xl" alt="Img de Periféricos">
+          <img src="{{ asset('storage/categories/peripherals.jpg')}}" class="rounded transition-all duration-300 hover:scale-95 hover:shadow-2xl" alt="Img de Periféricos">
           <p class="text-center py-2 font-medium text-lg">Periféricos</p>
         </a>
       </div>
+
+      {{-- Seccion: Tarjetas Madre --}}
       <div class="flex flex-col justify-center transition-all">
         <a href="{{route('category.show','tarjetas-madre')}}" class="hover:text-gray-800">
-          <img src="{{ asset('img/categorias/mother-board.jpg')}}" class="rounded transition-all duration-300 hover:scale-95 hover:shadow-2xl" alt="Img de Mother-Board">
+          <img src="{{ asset('storage/categories/mother_board.jpg')}}" class="rounded transition-all duration-300 hover:scale-95 hover:shadow-2xl" alt="Img de Mother-Board">
           <p class="text-center py-2 font-medium text-lg">Tarjetas Madre</p>
         </a>
       </div>
+
+      {{-- Seccion: Fuentes de Poder --}}
       <div class="flex flex-col justify-center transition-all">
         <a href="{{route('category.show','fuentes-de-poder')}}" class="hover:text-gray-800">
-          <img src="{{ asset('img/categorias/Fuente de poder.jpg')}}" class="rounded transition-all duration-300 hover:scale-95 hover:shadow-2xl" alt="Img de FdP">
+          <img src="{{ asset('storage/categories/power_supply.jpg')}}" class="rounded transition-all duration-300 hover:scale-95 hover:shadow-2xl" alt="Img de FdP">
           <p class="text-center py-2 font-medium text-lg">Fuentes de Poder</p>
         </a>
       </div>
+
+      {{-- Seccion: Memorias Ram --}}
       <div class="flex flex-col justify-center transition-all">
         <a href="{{route('category.show','rams')}}" class="hover:text-gray-800">
-          <img src="{{ asset('img/categorias/ram.png')}}" class="rounded transition-all duration-300 hover:scale-95 hover:shadow-2xl" alt="Img de Ram">
+          <img src="{{ asset('storage/categories/ram.png')}}" class="rounded transition-all duration-300 hover:scale-95 hover:shadow-2xl" alt="Img de Ram">
           <p class="text-center py-2 font-medium text-lg">Ram's</p>
         </a>
       </div>
+
+      {{-- Seccion: Almacenamiento --}}
       <div class="flex flex-col justify-center transition-all">
         <a href="{{route('category.show','almacenamientos')}}" class="hover:text-gray-800">
-          <img src="{{ asset('img/categorias/Almacenamiento.jpg')}}" class="rounded transition-all duration-300 hover:scale-95 hover:shadow-2xl" alt="Img de Almcenamiento">
+          <img src="{{ asset('storage/categories/storage.jpg')}}" class="rounded transition-all duration-300 hover:scale-95 hover:shadow-2xl" alt="Img de Almcenamiento">
           <p class="text-center py-2 font-medium text-lg">Almacenamiento</p>
         </a>
       </div>
+
+      {{-- Seccion: Gabinetes --}}
       <div class="flex flex-col justify-center transition-all">
         <a href="{{route('category.show','cases')}}" class="hover:text-gray-800">
-          <img src="{{ asset('img/categorias/cases.jpg')}}" class="rounded transition-all duration-300 hover:scale-95 hover:shadow-2xl" alt="Img de Cases">
+          <img src="{{ asset('storage/categories/cases.jpg')}}" class="rounded transition-all duration-300 hover:scale-95 hover:shadow-2xl" alt="Img de Almcenamiento">
           <p class="text-center py-2 font-medium text-lg">Cases</p>
         </a>
       </div>
+
+      {{-- Seccion: Monitores --}}
       <div class="flex flex-col justify-center transition-all">
         <a href="{{route('category.show','monitores')}}" class="hover:text-gray-800">
-          <img src="{{ asset('img/categorias/Monitores.jpg')}}" class="rounded transition-all duration-300 hover:scale-95 hover:shadow-2xl" alt="Img de Monitores">
+          <img src="{{ asset('storage/categories/monitors.jpg')}}" class="rounded transition-all duration-300 hover:scale-95 hover:shadow-2xl" alt="Img de Monitores">
           <p class="text-center py-2 font-medium text-lg">Monitores</p>
         </a>
       </div>
     </div>
+    
   </section>
 @endsection

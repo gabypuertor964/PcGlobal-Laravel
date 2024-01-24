@@ -1,1 +1,0 @@
-Descripcion del producto RYZEN 7 5800X
