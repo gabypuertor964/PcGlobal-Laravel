@@ -42,7 +42,7 @@
             <p class="">Logo</p>
           </a>
           {{-- Ícono del menú --}}
-          <button><i class="fa-solid fa-bars text-md bg-indigo-700 p-2 rounded-md" id="boton-menu-responsive"></i></button>
+          <button id="boton-menu-responsive"><i class="fa-solid fa-bars text-md bg-indigo-700 p-2 rounded-md"></i></button>
         </div>
         
       </div>

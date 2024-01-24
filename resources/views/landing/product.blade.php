@@ -31,35 +31,37 @@
   </div>
 
   <div class="contenedor grid grid-cols-1 md:grid-cols-3 my-6 gap-4 py-3 bg-white px-3 mx-8 rounded-lg"> 
-    
-    <div id="carouselExampleAutoplaying" class="carousel slide flex" data-bs-ride="carousel">
 
-      {{-- Enlaces inferiores --}}
-      <div class="carousel-indicators">
-        @for ($indice = 0; $indice < count($directory); $indice++)
-          <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="{{$indice}}" class="active" aria-current="true" aria-label="Slide 1"></button>    
-        @endfor
-      </div>
+    <div class="flex flex-col text-center font-medium col-span-2">
+      <div id="carouselExampleAutoplaying" class="carousel slide flex" data-bs-ride="carousel">
 
-      <div class="carousel-inner">
+        {{-- Enlaces inferiores --}}
+        <div class="carousel-indicators">
+          @for ($indice = 0; $indice < count($directory); $indice++)
+            <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="{{$indice}}" class="active" aria-current="true" aria-label="Slide 1"></button>    
+          @endfor
+        </div>
 
-        @foreach ($directory as $key => $vaue)
+        <div class="carousel-inner">
 
-          <div class="carousel-item active">
-            <img src="{{asset('storage/products/'.strtoupper($product->slug)."/images/$directory[$key]")}}" class="d-block w-100" alt="...">
-          </div>
-        @endforeach
-      </div>
+          @foreach ($directory as $key => $vaue)
 
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
+            <div class="carousel-item active">
+              <img src="{{asset('storage/products/'.strtoupper($product->slug)."/images/$directory[$key]")}}" class="d-block w-100" alt="...">
+            </div>
+          @endforeach
+        </div>
 
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>  
     </div>
 
     <aside class="flex flex-col p-2 sm:p-3 desc-producto gap-y-2 text-start ms-3 sm:ms-0 ">

@@ -50,6 +50,7 @@ Developed with adaptability and growth in mind, PCGlobal stands as the ideal sol
 * **Generate APP_KEY**: `php artisan key:generate`
 * **Execute migrations**: `php artisan migrate`
 * **Execute Seed**: `php artisan db:seed`
+* **Generate storage link**: `php artisan storage:link`
 * **Execute Resource Compilation**: `npm run build`
 
 ## Extensions and Libraries
