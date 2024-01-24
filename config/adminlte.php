@@ -471,7 +471,7 @@ return [
         'login_url' => 'login',
 
         // Nombre de Ruta/URL de acceso a la vista de registro (Clientes)
-        'register_url' => 'clientRegister',
+        'register_url' => 'register',
 
         // Nombre de Ruta/URL de acceso a la vista "olvide mi contraseña"
         'password_reset_url' => 'password.request',

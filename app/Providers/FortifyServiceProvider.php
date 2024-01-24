@@ -34,7 +34,7 @@ class FortifyServiceProvider extends ServiceProvider
 
         # Redireccion a controlador personalizado
         Fortify::registerView(function(){
-            return redirect()->route('registerView');
+            return redirect()->route('register');
         });
 
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);

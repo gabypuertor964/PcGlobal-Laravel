@@ -4,54 +4,35 @@ use App\Http\Controllers\authController;
 use App\Http\Controllers\landingPageController;
 use Illuminate\Support\Facades\Route;
 
-/*
-    Manifiesto:
-
-        Landing Page:
-            1. Home
-            2. Categorias
-        --
-
-        Auth:
-            1. Registro
-            2. Ruta de redireccion
-            3. Login (Ruta proporcionada por Fortify)
-        --
-    --
+/**
+ * Rutas landing page
 */
+Route::controller(landingPageController::class)->group(function(){
 
-/*
-    Nota: A causa de que la Landing Page requiere informacion actualizada de la BD para su funcionamiento se empleara un controlador dedicado a la misma
+    // Vista: Index/Principal
+    Route::get('/', 'index')->name('index');
+
+    // Vista: Listado de productos x categoria
+    Route::get('categories/{category}', 'categoryDetail')->name('category.show');
+
+    // Vista: Detallado de productos
+    Route::get('products/{product}','productDetail')->name('product.show');
+});
+
+/**
+ * Rutas de autenticacion (Unicamente para usuarios no autenticados)
 */
-    Route::controller(landingPageController::class)->group(function(){
-        //Vista: Home
-        Route::get('/', 'index')->name('index');
+Route::middleware(['guest'])->group(function () {
 
-        //Seccion: Listado de categorias
-        Route::get('/#categories', 'index')->name('categorias');
+    // Vista: Registro de clientes
+    Route::get('/register', [authController::class,'registerView'])->name('register');
+});
 
-        // Vista: Categorias productos
-        Route::get('categories/{category}', 'categoryDetail')->name('category.show');
+/**
+ * Rutas de autenticacion (Unicamente para usuarios autenticados)
+*/
+Route::middleware(['auth'])->group(function () {
 
-        Route::get('products/{product}','productDetail')->name('product.show');
-    });
-//
-
-//Rutas de Autenticacion para usuarios que no hayan iniciado sesion (guest)
-    Route::middleware(['guest'])->group(function () {
-
-        //Consultar/Solicitar vista de registro de clientes
-        Route::get('/register', [authController::class,'registerView'])->name('registerView');
-
-        //Enviar datos del formulario de registro al controlador correspondiente
-        Route::post('/register', [authController::class,'clientRegister'])->name("clientRegister");
-    });
-//
-
-//Rutas accesibles unicamente por usuarios logueados (auth)
-    Route::middleware(['auth'])->group(function () {
-
-        //Ruta encaqrgada de realizar la redireccion al dashboard correspondiente segun el rol del usuario
-        Route::get('/redirect',[authController::class,'redirect'])->name('redirect');
-    });
-//
+    // Redireccionamiento al dashboard correspondiente segun el rol
+    Route::get('/redirect',[authController::class,'redirect'])->name('redirect');
+});

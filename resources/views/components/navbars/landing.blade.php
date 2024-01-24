@@ -23,7 +23,7 @@
       <div class="nav-right flex gap-12 w-full sm:w-fit">
         <!-- Enlaces de productos -->
         <div class="nav-productos justify-evenly hidden lg:flex gap-4 ps-3">
-          <p><a class="hover:text-gray-200" href="{{route('categorias')}}">Categorías</a></p>
+          <p><a class="hover:text-gray-200" href="{{route('index',"#categories")}}">Categorías</a></p>
           <p><a class="hover:text-gray-200" href="#">PQRS</a></p>
         </div>
 
@@ -55,7 +55,7 @@
     <x-responsive-nav-links href="{{route('index')}}" :active="request()->routeIs('index')">
       Inicio
     </x-responsive-nav-links>
-    <x-responsive-nav-links href="{{route('categorias')}}" :active="request()->routeIs('categoria')">
+    <x-responsive-nav-links href="{{route('index','#categories')}}" :active="request()->routeIs('categoria')">
       Categorías
     </x-responsive-nav-links>
 
@@ -68,7 +68,7 @@
     <x-responsive-nav-links href="{{route('login')}}" :active="request()->routeIs('login')">
       Inicia sesión
     </x-responsive-nav-links>
-    <x-responsive-nav-links href="{{route('registerView')}}" :active="request()->routeIs('registerView')">
+    <x-responsive-nav-links href="{{route('register')}}" :active="request()->routeIs('registerView')">
       Crea una cuenta
     </x-responsive-nav-links>
   </div>
