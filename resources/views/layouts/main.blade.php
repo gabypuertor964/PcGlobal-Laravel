@@ -7,8 +7,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-        {{-- Importacion de dependencias --}}
+        {{-- Seccion de importacion de dependencias adicionales --}}
         @yield('dependences')
+
+        {{-- Importacion de dependencias peramentes --}}
+        @vite([
+            //Estilos personalizados
+            'public/resources/css/app.css',
+
+            //Font-Awesome
+            'resources/js/font-awesome.js',
+
+            //Tailwind
+            'resources/css/tailwind.css',
+        ])
 
         {{-- Titulo Principal Pagina web (Nombre empresa + Titulo Personalizado) --}}
         <title>@yield('title','Home') - PcGlobal</title>
@@ -34,7 +46,7 @@
         @yield('scripts')
             @vite([
                 'public/resources/js/app.js'
-            ]);
+            ])
         @show
         
     </body>        

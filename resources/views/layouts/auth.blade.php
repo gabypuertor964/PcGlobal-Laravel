@@ -1,20 +1,6 @@
-{{-- Extender desde la platnilla principal --}}
-@extends('layouts.main')
+{{-- Extender desde la plantilla principal --}}
+@extends('layouts.landing')
 
-{{-- Declaracion de dependencias --}}
-@section('dependences')
-    @vite([
-        //Bootstrap
-        'resources/css/bootstrap.scss',
-        'resources/js/bootstrap.js',
-    
-        //Fontwesome
-        'resources/js/font_awesome.js',
-
-        //Tailwind
-        'resources/css/tailwind.css',
-
-        //Estilos personalizados
-        'public/resources/css/app.css'
-    ])
+{{-- Sobreescritura/Eliminacion del la declaracion del navbar del layout de donde se extiende --}}
+@section('navbar')
 @endsection

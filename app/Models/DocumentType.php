@@ -5,7 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class areas extends Model
+class DocumentType extends Model
 {
     use HasFactory;
+
+    //Desactivacion de campos timestamps
+    public $timestamps = false;
 }

@@ -16,31 +16,31 @@ class DatabaseSeeder extends Seeder
         $this->call([
 
             //Seed: Tipos de documento
-            document_typesSeed::class,
+            DocumentTypeSeed::class,
 
             //Seed: Generos/Sexos
-            gendersSeed::class,
+            GenderSeed::class,
 
             //Seed: Areas
-            areasSeed::class,
+            AreaSeed::class,
 
             //Seed: Estados
-            statesSeed::class,
+            StateSeed::class,
 
             //Seed: Monedas
-            currenciesSeed::class,
+            CurrencySeed::class,
 
             //Seed: Categorias
-            categoriesSeed::class,
+            CategorySeed::class,
 
             //Seed: Marcas
-            brandsSeed::class,
+            BrandSeed::class,
 
             //Seed: Productos
-            productsSeed::class,
+            ProductSeed::class,
 
             //Seed: Roles y Permisos
-            rolePermissionSeed::class,
+            RolePermissionSeed::class,
         ]);
 
         /**

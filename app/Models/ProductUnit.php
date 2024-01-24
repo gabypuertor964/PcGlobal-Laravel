@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class pqrs_types extends Model
+class ProductUnit extends Model
 {
     use HasFactory;
 }

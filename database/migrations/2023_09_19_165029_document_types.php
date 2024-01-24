@@ -21,9 +21,6 @@ return new class extends Migration
 
                 $table->string("abbreviation",10)->unique()->comment("abreviatura del tipo de documento");
             //
-
-            //Campos create_at y update_at
-            $table->timestamps();
         });
     }
 

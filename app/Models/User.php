@@ -50,4 +50,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * @abstract Obtener los campos autorizados para ser llenados a través de asignación masiva
+     * 
+     * @return array
+    */
+    public static function inputs()
+    {
+        return (new self())->getFillable();
+    }
+
+    /**
+     * @abstract Declarar la relacion 1:N con el modelo Adress (Direcciones)
+    */
+    public function address()
+    {
+        return $this->hasMany(Adress::class,'client_id');
+    }
 }

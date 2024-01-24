@@ -13,16 +13,16 @@
 {{-- Declaracion contenido principal de la pagina web --}}
 @section('content')
   <div class="hidden md:grid grid-cols-3 gap-y-2 sm:gap-1 imgs-landing">
-  
+
     <div class="sm:col-span-2">
       <div id="carouselExampleAutoplaying" class="carousel slide flex" data-bs-ride="carousel">
 
         <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
 
-          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="1" aria-label="Slide 2"></button>
 
-          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
 
         <div class="carousel-inner">
@@ -52,6 +52,7 @@
 
     <div class="flex flex-col justify-center gap-y-1">
       <img src="{{ asset('storage/carrousel/f-5.jpg')}}" alt="" class="rounded object-contain cursor-pointer hover:rotate-1 transition-all duration-500">
+
       <a href="productos/logitech-g203-color-negro">
         <img src="{{ asset('storage/carrousel/f-3.jpg')}}" alt="" class="rounded object-contain cursor-pointer hover:-rotate-1 transition-all duration-500">
       </a>

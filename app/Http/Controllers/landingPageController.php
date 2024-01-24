@@ -2,55 +2,52 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\categories;
-use App\Models\products;
+
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Support\Facades\File;
 use Parsedown;
 
 class landingPageController extends Controller
 {
-    //Retorno vista principal
+    /**
+     * @abstract Retorna la vista de la página principal
+    */
     public function index(){
-        return view('landing.home');
+        return view('landing.index');
     }   
 
-    //Consulta y paginado de los productos asociados a la categoria
-    public function categoryDetail(categories $category){
+    /**
+     * @abstract Consultar y retornar los productos asociados a una categoria
+    */
+    public function categoryDetail(Category $category){
+
+        //Consultar y paginar los productos asociados
         $products = $category->products()->paginate(9);
         
-        return view('landing.category', compact('category', 'products'));  
+        //Retornar la vista con los datos consultados
+        return view('landing.category', compact('category', 'products'));
     }
 
-    public function productDetail(products $product){
-        
+    /**
+     * @abstract Consultar y retornar la informacion detallada del producto
+    */
+    public function productDetail(Product $product){
 
-        $category = $product->category;
-        $brand = $product->brand;
+        //Contar el numero de imagenes asociadas al producto
+        $directory = array_diff(
+            scandir(storage_path('app/public/products/'. strtoupper($product->slug).'/images')),
+            ['..', '.']
+        );
 
-        if (file_exists(public_path('storage/'. $product->descripcion_1))){
-            $contenidoMd = File::get(public_path('storage/'.$product->descripcion_1));
-            $parsedown = new Parsedown();
-            $descripcion_1 = $parsedown->text($contenidoMd);
-        }else{
-            $descripcion_1 = $product->descripcion_1;
-        }
+        $specs_file = File::get(storage_path('app/public/products/'. strtoupper($product->slug).'/specs.md'));
 
-        // La segunda descripción es opcional, la primera no
+        $parsedown = new Parsedown();
+        $product->specs = $parsedown->text($specs_file);
 
-        if($product->descripcion_2){
-            if(file_exists(public_path('storage/'. $product->descripcion_2))){
-                $contenidoMd = File::get(public_path('storage/'.$product->descripcion_2));
-                $parsedown = new Parsedown();
-                $descripcion_2 = $parsedown->text($contenidoMd);
-            }else{
-                $descripcion_2 = $product->descripcion_2;
-            }
-        }else{
-            $descripcion_2 = null;
-        }
-
-        $descriptions = compact('descripcion_1', 'descripcion_2');
-
-        return view('landing.product', compact('category','brand','product','descriptions'));
+        /**
+         * Consultar y retornar la informacion del producto
+        */
+        return view('landing.product', compact('product','directory'));
     }
 }
