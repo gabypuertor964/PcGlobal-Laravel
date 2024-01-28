@@ -1,6 +1,6 @@
 <!-- Pie de Pagina -->
-<footer class="font-thin border-double border-t-4 border-black mx-12 p-3">
-    <div class="flex justify-center gap-x-3 p-3 text-lg drop-shadow-xl icons">
+<footer class="font-thin border-t border-black mx-12 p-2">
+    <div class="flex justify-center gap-x-3 text-lg drop-shadow-xl icons py-1">
         <i class="fa-brands fa-facebook"></i>
         <i class="fa-brands fa-twitter"></i>
         <i class="fa-brands fa-instagram"></i>

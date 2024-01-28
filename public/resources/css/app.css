@@ -1,30 +1,31 @@
 /* Estilos de la barra de desplazamiento */
 body {
-    /* Ocultar la barra de desplazamiento por defecto */
-    overflow: auto;
-    scrollbar-width: thin;
-    scrollbar-color: transparent;
-  }
+  /* Ocultar la barra de desplazamiento por defecto */
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: transparent;
+  scrollbar-gutter: stable both-edges;
+}
   
-  /* Estilos de la barra de desplazamiento */
-  body::-webkit-scrollbar {
-    width: 8px; /* Define el ancho de la barra*/
-  }
-  
-  body::-webkit-scrollbar-thumb {
-    background-color: rgb(97, 90, 240);
-    border-radius: 4px; /* Redondeado de la barra */
-  }
-  
-  body::-webkit-scrollbar-track {
-    background-color: rgb(243 244 246); /* Color del fondo de la barra */
-  }
+/* Estilos de la barra de desplazamiento */
+body::-webkit-scrollbar {
+  width: 8px; /* Define el ancho de la barra*/
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rgb(97, 90, 240);
+  border-radius: 4px; /* Redondeado de la barra */
+}
+
+body::-webkit-scrollbar-track {
+  background-color: rgb(243 244 246); /* Color del fondo de la barra */
+}
 
 /* Estilos de la barra de navegación */
-nav{
+nav {
     padding: 8px 10px 12px 10px;
 }
-.nav-busqueda input{
+.nav-busqueda input {
     padding: 10px 60px 10px 15px;
 }
 
@@ -35,22 +36,80 @@ nav{
 }
 
 .nav-search {
-    column-gap: 0.10rem;
+    column-gap: 0.1rem;
+}
+
+/* Estilos para el menú responsive de la navbar */
+#menu-responsive {
+  max-height: 0;
+  transform: translateY(-270px);
+  position: relative;
+}
+
+#menu-responsive.active {
+  max-height: 1000px;
+  transform: translateY(0);
+  transition: transform 150ms ease;
+}
+
+@media (min-width: 1024px) {
+  #menu-responsive {
+    max-height: 0;
+    transform: translateY(-270px);
+    position: relative;
+  }
 }
 
 /* Estilos de las imágenes de las categorías de la landing */
 
-#categories img{
+#categories img {
   aspect-ratio: 4/3;
   object-fit: cover;
 }
 
-.productos img{
+.productos img {
   aspect-ratio: 4/3;
   object-fit: contain;
 }
 
-.desc-producto{
-  border: 0.5px solid #9B9E9C;
+.desc-producto {
+  border: 1px solid rgba(0,0,0,.1);
   border-radius: 8px;
+}
+
+.product-title {
+  transition: color 150ms ease-in ;
+}
+
+.product-img {
+  transition: transform 100ms ease-in-out;
+}
+
+.product-card:hover .product-title {
+  color: #3483fa;
+}
+
+.product-card:hover .product-img {
+ transform: scale(.95);
+}
+
+/* Estilos para el contenedor de la(s) imagen(es) de los productos */
+
+.image-container-carousel {
+  width: 264px;
+  height: 200px;
+}
+
+@media (min-width: 768px) {
+  .image-container-carousel {
+    width: 450px;
+    height: 350px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .image-container-carousel {
+    width: 550px;
+    height: 450px;
+  }
 }

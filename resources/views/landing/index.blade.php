@@ -8,7 +8,7 @@
 @section('body_class','flex flex-col min-h-screen bg-gray-100')
 
 {{-- Declaracion clases css adicionales al contenedor main --}}
-@section('main_class','container my-10 text-justify mx-auto flex-grow  mx-2')
+@section('main_class','container my-8 text-justify mx-auto flex-grow  mx-2')
 
 {{-- Declaracion contenido principal de la pagina web --}}
 @section('content')
@@ -53,9 +53,7 @@
     <div class="flex flex-col justify-center gap-y-1">
       <img src="{{ asset('storage/carrousel/f-5.jpg')}}" alt="" class="rounded object-contain cursor-pointer hover:-rotate-1 transition-all duration-200">
 
-      <a href="productos/logitech-g203-color-negro">
-        <img src="{{ asset('storage/carrousel/f-3.jpg')}}" alt="" class="rounded object-contain cursor-pointer hover:-rotate-1 transition-all duration-200">
-      </a>
+      <img src="{{ asset('storage/carrousel/f-3.jpg')}}" alt="" class="rounded object-contain cursor-pointer hover:-rotate-1 transition-all duration-200">
     </div>
   </div>
 

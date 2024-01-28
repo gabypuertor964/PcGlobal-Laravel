@@ -23,7 +23,7 @@ class landingPageController extends Controller
     public function categoryDetail(Category $category){
 
         //Consultar y paginar los productos asociados
-        $products = $category->products()->paginate(9);
+        $products = $category->products()->paginate(12);
         
         //Retornar la vista con los datos consultados
         return view('landing.category', compact('category', 'products'));

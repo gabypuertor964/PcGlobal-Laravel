@@ -10,7 +10,7 @@
         {{-- Seccion de importacion de dependencias adicionales --}}
         @yield('dependences')
 
-        {{-- Importacion de dependencias peramentes --}}
+        {{-- Importacion de dependencias permanentes --}}
         @vite([
             //Estilos personalizados
             'public/resources/css/app.css',
