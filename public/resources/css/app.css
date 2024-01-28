@@ -43,13 +43,13 @@ nav {
 #menu-responsive {
   max-height: 0;
   transform: translateY(-270px);
-  position: relative;
+  z-index: 2;
+  transition: all 200ms ease;
 }
 
 #menu-responsive.active {
   max-height: 1000px;
   transform: translateY(0);
-  transition: transform 150ms ease;
 }
 
 @media (min-width: 1024px) {

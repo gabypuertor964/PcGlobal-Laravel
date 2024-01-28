@@ -49,7 +49,7 @@
   </nav>
 </header>
 {{-- Links a diferentes sitios de la página usando los coponentes de blade--}}
-<div class="pt-2 pb-3 bg-indigo-600 text-white" id="menu-responsive">
+<div class="py-2 bg-indigo-600 text-white" id="menu-responsive">
   <div class="flex flex-col gap-y-1 w-4/5 mx-auto">
     <x-responsive-nav-links href="{{route('index')}}" :active="request()->routeIs('index')">
       Inicio

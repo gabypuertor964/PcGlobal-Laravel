@@ -12,7 +12,7 @@
 
 {{-- Declaracion contenido principal de la pagina web --}}
 @section('content')
-  <div class="hidden md:grid grid-cols-3 gap-y-2 sm:gap-1 imgs-landing">
+  <div class="hidden md:grid grid-cols-3 gap-y-2 sm:gap-1 imgs-landing -mt-3">
 
     <div class="sm:col-span-2">
       <div id="carouselExampleAutoplaying" class="carousel slide flex" data-bs-ride="carousel">
@@ -58,7 +58,7 @@
   </div>
 
   {{-- Enlaces de categorias --}}
-  <section class="mb-0 sm:my-16 mx-auto" id="categories">
+  <section class="mb-0 sm:my-12 mx-auto" id="categories">
 
     {{-- Titulo sección --}}
     <div class="flex flex-col gap-y-1">
