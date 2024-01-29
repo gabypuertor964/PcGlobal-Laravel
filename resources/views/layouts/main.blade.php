@@ -24,6 +24,7 @@
 
         {{-- Titulo Principal Pagina web (Nombre empresa + Titulo Personalizado) --}}
         <title>@yield('title','Home') - PcGlobal</title>
+        <link rel="icon" type="image/x-icon" href="{{asset('favicons/favicon.ico')}}">
     </head>
 
     <body class="@yield('body_class','')">
