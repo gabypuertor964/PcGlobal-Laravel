@@ -51,8 +51,8 @@
                     <select name="id_sexo" class="form-select @error('apellidos') is-invalid @enderror"
                             value="{{ old('id_sexo') }}">
                         <option selected>Selecciona tu género</option>
-                        @foreach ($sexos as $sexo)
-                            <option value="{{$sexo->id}}">{{$sexo->nombre}}</option>
+                        @foreach ($sexes as $sex)
+                            <option value="{{$sex->id}}">{{$sex->name}}</option>
                         @endforeach
                     </select>
         
@@ -68,8 +68,8 @@
                     <select name="id_tip_doc" class="form-select @error('id_tip_doc') is-invalid @enderror"
                             value="{{ old('id_tip_doc') }}">
                         <option selected>Selecciona tu tipo de documento</option>
-                        @foreach ($tipos_documento as $tipo_documento)
-                            <option value="{{$tipo_documento->id}}">{{$tipo_documento->nombre}}</option>
+                        @foreach ($document_types as $document_type)
+                            <option value="{{$document_type->id}}">{{$document_type->name}}</option>
                         @endforeach
                     </select>
         

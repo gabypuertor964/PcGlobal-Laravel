@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\authValidate;
-use App\Models\document_types;
-use App\Models\genders;
-use App\Models\states;
+use App\Models\DocumentType;
+use App\Models\Gender;
+use App\Models\State;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -17,13 +17,13 @@ class authController extends Controller
     public function registerView(){
 
         //Consultar tipos de documento
-        $tipos_documento=document_types::all();
+        $document_types = DocumentType::all();
 
         //Consultar sexos
-        $sexos=genders::all();
+        $sexes = Gender::all();
 
         //Retornar vista de registro enviando los datos requeridos
-        return view("auth.register", compact('tipos_documento','sexos'));
+        return view("auth.register", compact('document_types','sexes'));
     }
 
     # Redireccion a dashboard segun rol del usuario
@@ -82,7 +82,7 @@ class authController extends Controller
             'fecha_nacimiento'=>$request->fecha_nacimiento,
             'email'=>$request->email,
             'password'=>Hash::make($request->password),
-            'id_estado'=>states::where('nombre','Activo')->first()->id
+            'id_estado'=>State::where('nombre','Activo')->first()->id
         ])->assignRole('cliente');
 
         //Redireccion al home
