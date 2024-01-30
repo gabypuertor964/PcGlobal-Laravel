@@ -40,13 +40,11 @@
         
         {{-- Pie de pagina --}}
         @yield('footer')
-            @include('components.footer')
-        @show
 
         {{-- Imporacion scripts --}}
         @yield('scripts')
             @vite([
-                'public/resources/js/app.js'
+                'public/resources/js/main.js'
             ])
         @show
         

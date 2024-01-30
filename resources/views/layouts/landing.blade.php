@@ -14,3 +14,8 @@
 @section('navbar')
     @include('components.navbars.landing')
 @endsection
+
+{{-- Importacion componente footer --}}
+@section('footer')
+    @include('components.footer')
+@endsection

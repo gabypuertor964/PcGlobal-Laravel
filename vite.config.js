@@ -20,7 +20,7 @@ export default defineConfig({
 
                 //Recursos App/Nativos
                 'public/resources/css/app.css', 
-                'public/resources/js/app.js',
+                'public/resources/js/main.js',
             ],
             refresh: true,
         }),
