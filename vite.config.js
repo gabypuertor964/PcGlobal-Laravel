@@ -19,7 +19,7 @@ export default defineConfig({
                 'resources/js/font-awesome.js',
 
                 //Recursos App/Resources
-                'resources/js/app.js',
+                'resources/js/main.js',
 
                 //Recursos App/Public
                 'public/resources/css/app.css',
