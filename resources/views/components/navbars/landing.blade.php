@@ -6,7 +6,7 @@
       <!-- Logo #1 (Para pantallas más grandes que las de celular) -->
       <div class="nav-logo-pag pe-10 py-2 hidden sm:flex">
         <a href="{{route('index')}}" class="text-white hover:text-gray-400">
-          <img src="{{ asset('storage/logo/logo.webp') }}" class="w-24" alt="Logo PcGlobal">
+          <img src="{{ asset('storage/others/logotype.webp') }}" class="w-24" alt="Logo PcGlobal">
         </a>
       </div>
 
@@ -41,7 +41,7 @@
         <!-- Logo #2 (Este es para el responsive) -->
         <div class="nav-logo-pag py-2 flex lg:hidden gap-3 w-full justify-between mt-1 items-center">
           <a href="{{route('index')}}" class="text-white flex sm:hidden hover:text-gray-400">
-            <img src="{{ asset('storage/logo/logo.webp') }}" class="w-16" alt="Logo PcGlobal">
+            <img src="{{ asset('storage/others/logotype.webp') }}" class="w-16" alt="Logo PcGlobal">
           </a>
           {{-- Ícono del menú --}}
           <button id="menu-responsive" aria-label="Deploy menu"><i class="fa-solid fa-bars text-md bg-indigo-700 p-2 rounded-md"></i></button>

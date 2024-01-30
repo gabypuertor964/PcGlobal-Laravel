@@ -1,4 +1,9 @@
-// Code for navbar menu deploying
+/**
+ * @abstract Funcionalidad responsive del navbar
+ * 
+ * @param {string} $btnMenu ID del botón que activa el menú
+ * @param {string} $menu ID del menú
+ */
 export function initNavbar({$btnMenu, $menu}) {
     const $btnMenuResponsive = document.getElementById($btnMenu);
     const $menuResponsive = document.getElementById($menu);

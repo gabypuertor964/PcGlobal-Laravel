@@ -18,9 +18,11 @@ export default defineConfig({
                 //Font-Awesome
                 'resources/js/font-awesome.js',
 
-                //Recursos App/Nativos
-                'public/resources/css/app.css', 
-                'public/resources/js/main.js',
+                //Recursos App/Resources
+                'resources/js/main.js',
+
+                //Recursos App/Public
+                'public/resources/css/app.css',
             ],
             refresh: true,
         }),
@@ -29,3 +31,4 @@ export default defineConfig({
         chunkSizeWarningLimit: 1600
     }
 });
+
