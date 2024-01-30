@@ -1,4 +1,8 @@
 /* Estilos de la barra de desplazamiento */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   /* Ocultar la barra de desplazamiento por defecto */
   overflow: auto;
@@ -40,20 +44,20 @@ nav {
 }
 
 /* Estilos para el menú responsive de la navbar */
-#menu-responsive {
+#menu {
   max-height: 0;
   transform: translateY(-270px);
   z-index: 2;
   transition: all 200ms ease;
 }
 
-#menu-responsive.active {
+#menu.active {
   max-height: 1000px;
   transform: translateY(0);
 }
 
 @media (min-width: 1024px) {
-  #menu-responsive {
+  #menu {
     max-height: 0;
     transform: translateY(-270px);
     position: relative;

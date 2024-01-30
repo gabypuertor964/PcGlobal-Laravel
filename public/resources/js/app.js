@@ -6,4 +6,4 @@ document.addEventListener("DOMContentLoaded", () => {
     initScroll();
 });
 
-initNavbar({$btnMenu: 'boton-menu-responsive', $menu: 'menu-responsive'});
+initNavbar({$btnMenu: 'menu-responsive', $menu: 'menu'});

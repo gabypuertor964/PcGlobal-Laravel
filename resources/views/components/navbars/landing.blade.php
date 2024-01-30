@@ -6,7 +6,7 @@
       <!-- Logo #1 (Para pantallas más grandes que las de celular) -->
       <div class="nav-logo-pag pe-10 py-2 hidden sm:flex">
         <a href="{{route('index')}}" class="text-white hover:text-gray-400">
-          <img src="{{ asset('storage/logo/logo.png') }}" class="w-24" alt="Logo PcGlobal">
+          <img src="{{ asset('storage/logo/logo.webp') }}" class="w-24" alt="Logo PcGlobal">
         </a>
       </div>
 
@@ -14,7 +14,7 @@
       <div class="flex flex-grow px-2 sm:px-4 justify-center">
         <form action="#" class="flex nav-search">
           <input type="text" class="w-full sm:w-96 rounded-l-lg px-3 py-2 focus:ring-2 focus:ring-sky-500 text-gray-800" placeholder="¿Qué estás buscando?">
-          <button class="w-16 bg-white py-2 px-4 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-sky-500">
+          <button class="w-16 bg-white py-2 px-4 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-sky-500" id="search-button" aria-label="Search Products">
             <i class="fas fa-search text-gray-700 text-lg"></i>
           </button>
         </form>
@@ -29,27 +29,29 @@
 
         <!-- Enlaces de login y carrito -->
         <div class="nav-login hidden lg:flex gap-4">
-          <a href="{{route("login")}}" class="hover:text-gray-200">
+          <a href="{{route("login")}}" role="button" class="hover:text-gray-200" aria-label="Link for login or registration">
             <i class="fa-regular fa-user"></i>
           </a>
           <div class="border"></div>
-          <p><a href="" class="hover:text-gray-200"><i class="fa-solid fa-cart-shopping"></i></a></p>
+            <a href="" role="button" aria-label="Link for shopping cart" class="hover:text-gray-200">
+              <i class="fa-solid fa-cart-shopping"></i>
+            </a>
         </div>
         
         <!-- Logo #2 (Este es para el responsive) -->
         <div class="nav-logo-pag py-2 flex lg:hidden gap-3 w-full justify-between mt-1 items-center">
           <a href="{{route('index')}}" class="text-white flex sm:hidden hover:text-gray-400">
-            <img src="{{ asset('storage/logo/logo.png') }}" class="w-16" alt="Logo PcGlobal">
+            <img src="{{ asset('storage/logo/logo.webp') }}" class="w-16" alt="Logo PcGlobal">
           </a>
           {{-- Ícono del menú --}}
-          <button id="boton-menu-responsive"><i class="fa-solid fa-bars text-md bg-indigo-700 p-2 rounded-md"></i></button>
+          <button id="menu-responsive" aria-label="Deploy menu"><i class="fa-solid fa-bars text-md bg-indigo-700 p-2 rounded-md"></i></button>
         </div>
       </div>
     </div>
   </nav>
 </header>
 {{-- Links a diferentes sitios de la página usando los coponentes de blade--}}
-<div class="py-2 bg-indigo-600 text-white" id="menu-responsive">
+<div class="py-2 bg-indigo-600 text-white" id="menu">
   <div class="flex flex-col gap-y-1 w-4/5 mx-auto">
     <x-responsive-nav-links href="{{route('index')}}" :active="request()->routeIs('index')">
       Inicio
