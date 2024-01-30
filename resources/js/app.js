@@ -1,4 +1,6 @@
-// Imports for functions
+/**
+ * @abstract Importacion de dependencias y ejecucion por defecto
+*/
 import { initScroll } from "./scroll";
 import { initNavbar} from "./navbar";
 

@@ -18,9 +18,11 @@ export default defineConfig({
                 //Font-Awesome
                 'resources/js/font-awesome.js',
 
-                //Recursos App/Nativos
-                'public/resources/css/app.css', 
-                'public/resources/js/app.js',
+                //Recursos App/Resources
+                'resources/js/app.js',
+
+                //Recursos App/Public
+                'public/resources/css/app.css',
             ],
             refresh: true,
         }),

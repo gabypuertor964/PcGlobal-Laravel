@@ -1,3 +1,6 @@
+/**
+ * @abstract Funcionalidad de scroll suave en link de categirias
+*/
 export function initScroll() {
     let isScrolling = false;
 

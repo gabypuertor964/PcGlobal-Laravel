@@ -24,6 +24,8 @@
 
         {{-- Titulo Principal Pagina web (Nombre empresa + Titulo Personalizado) --}}
         <title>@yield('title','Home') - PcGlobal</title>
+
+        {{-- Icono de la pagina web --}}
         <link rel="icon" type="image/x-icon" href="{{asset('favicons/favicon.ico')}}">
     </head>
 
@@ -46,7 +48,7 @@
         {{-- Imporacion scripts --}}
         @yield('scripts')
             @vite([
-                'public/resources/js/app.js'
+                'resources/js/app.js'
             ])
         @show
         
