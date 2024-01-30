@@ -46,7 +46,7 @@
         {{-- Imporacion scripts --}}
         @yield('scripts')
             @vite([
-                'public/resources/js/main.js'
+                'resources/js/main.js'
             ])
         @show
         

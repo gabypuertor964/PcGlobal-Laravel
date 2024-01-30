@@ -16,7 +16,7 @@
     </div>
     <div class="login-card">
         <a href="{{ route('index') }}" rel="preload" aria-label="Link for index" class="login-header-logo">
-            <img src="{{ asset('storage/logo/logo.webp') }}" alt="logo">
+            <img src="{{ asset('storage/others/logotype.webp') }}" alt="logo">
         </a>
         <form action="" method="post" class="login-form">
             @csrf
