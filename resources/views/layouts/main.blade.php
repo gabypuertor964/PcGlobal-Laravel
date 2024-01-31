@@ -13,7 +13,7 @@
         {{-- Importacion de dependencias permanentes --}}
         @vite([
             //Estilos personalizados
-            'public/resources/css/app.css',
+            'resources/css/app.css',
 
             //Font-Awesome
             'resources/js/font-awesome.js',

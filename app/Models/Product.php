@@ -34,4 +34,23 @@ class Product extends Model
     {
         return $this->belongsTo(Brand::class,"brand_id");
     }
+
+    /**
+     * @abstract Obtener el numero unidades registradas
+    */
+    public function units()
+    {
+        
+    }
+
+    /**
+     * @abstract Obtener el numero de unidades disponibles del producto
+     * 
+     * @return int
+    */
+    public function unitsAvailable()
+    {
+        //return $this->hasMany(UnitsAvailable::class);
+    }
+
 }

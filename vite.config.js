@@ -18,15 +18,17 @@ export default defineConfig({
                 //Font-Awesome
                 'resources/js/font-awesome.js',
 
-                //Recursos App/Resources
+                //Recursos Nativos de la App
                 'resources/js/main.js',
-
-                //Recursos App/Public
-                'public/resources/css/app.css',
+                'resources/css/app.css',
             ],
             refresh: true,
         }),
     ],
+
+    /**
+     * Aumentar el limite de tamaño de los archivos compilados
+     */
     build: {
         chunkSizeWarningLimit: 1600
     }
