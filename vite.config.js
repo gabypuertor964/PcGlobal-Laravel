@@ -19,10 +19,9 @@ export default defineConfig({
                 'resources/js/font-awesome.js',
 
                 //Recursos Nativos de la App
-                //'resources/js/main.js',
+                'resources/js/main.js',
                 'resources/js/navbar.js',
                 'resources/js/scroll.js',
-                'resources/js/example.js',
                 'resources/css/app.css',
             ],
             refresh: true,

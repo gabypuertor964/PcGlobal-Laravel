@@ -4,7 +4,7 @@
  * @param {string} $btnMenu ID del botón que activa el menú
  * @param {string} $menu ID del menú
  */
-export function initNavbar({$btnMenu, $menu}) {
+function initNavbar({$btnMenu, $menu}) {
     const $btnMenuResponsive = document.getElementById($btnMenu);
     const $menuResponsive = document.getElementById($menu);
     
@@ -21,3 +21,5 @@ export function initNavbar({$btnMenu, $menu}) {
     $btnMenuResponsive.addEventListener('click', toggleNavMenu);
     window.addEventListener('resize', hideNavMenuOnResize);
 }
+
+initNavbar({$btnMenu: 'menu-responsive', $menu: 'menu'});

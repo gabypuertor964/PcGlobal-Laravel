@@ -184,7 +184,7 @@ nav {
   border: 1px solid #3483fa;
 }
 
-.email-label, .password-label {
+.input-label {
   font-size: 14px;
   position: absolute;
   top: 50%;
@@ -196,10 +196,8 @@ nav {
   transition: transform 200ms ease, color 200ms ease;
 }
 
-.login-input:focus + .password-label,
-.login-input:not(:placeholder-shown) + .password-label,
-.login-input:focus + .email-label,
-.login-input:not(:placeholder-shown) + .email-label {
+.login-input:focus + .input-label,
+.login-input:not(:placeholder-shown) + .input-label {
   transform: translateY(-185%) scale(0.85);
   color: #3483fa;
 }

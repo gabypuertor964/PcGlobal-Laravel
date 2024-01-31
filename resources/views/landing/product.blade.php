@@ -10,16 +10,6 @@
 {{-- Envio de clases personalizadas a la etiqueta main, la cual se encuentra en el componente principal--}}
 @section('main_class','container mt-3 mb-10 text-justify mx-auto flex-grow mx-2')
 
-{{-- Declaracion de dependencias adicionales --}}
-@section('dependences')
-  @vite([
-    //Bootstrap
-    'resources/css/bootstrap.scss',
-    'resources/js/bootstrap.js',
-  ])
-@endsection
-
-
 {{-- Declaracion contenido principal de la pagina web --}}
 @section('content')
 

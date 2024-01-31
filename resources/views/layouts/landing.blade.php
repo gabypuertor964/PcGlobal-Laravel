@@ -8,6 +8,9 @@
         //Bootstrap
         'resources/css/bootstrap.scss',
         'resources/js/bootstrap.js',
+        'resources/css/app.css',
+        'resources/js/font-awesome.js',
+        'resources/css/tailwind.css',
     ])
 @endsection
 
@@ -24,6 +27,7 @@
 {{-- Importacion de scripts --}}
 @section('scripts')
     @vite([
-
+        'resources/js/navbar.js',
+        'resources/js/scroll.js',
     ])
 @endsection

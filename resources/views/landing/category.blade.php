@@ -10,6 +10,18 @@
 {{-- Clases Css adicionales para el contenedor principal --}}
 @section('main_class','container mt-3 mb-10 text-justify mx-auto flex-grow mx-2')
 
+{{-- Declaracion de dependencias adicionales --}}
+@section('dependences')
+    @vite([
+        
+        //Bootstrap
+        'resources/css/bootstrap.scss',
+        'resources/css/app.css',
+        'resources/js/font-awesome.js',
+        'resources/css/tailwind.css',
+    ])
+@endsection
+
 {{-- Contenido Principal --}}
 @section('content')
   

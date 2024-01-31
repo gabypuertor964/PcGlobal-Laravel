@@ -1,7 +1,7 @@
 /**
  * @abstract Funcionalidad de scroll suave en link de categorias
 */
-export default function initScroll() {
+function initScroll() {
     let isScrolling = false;
 
     function scrollToTarget(target) {
@@ -35,3 +35,7 @@ export default function initScroll() {
         });
     });
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    initScroll();
+});

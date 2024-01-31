@@ -17,6 +17,17 @@
 {{-- Declaracion clases css adicionales al contenedor main --}}
 @section('main_class','container my-8 text-justify mx-auto flex-grow')
 
+{{-- Declaracion de dependencias adicionales --}}
+@section('dependences')
+    @vite([
+        
+        //Bootstrap
+        'resources/css/bootstrap.scss',
+        'resources/css/app.css',
+        'resources/css/tailwind.css',
+    ])
+@endsection
+
 {{-- Estructura basica de los formularios --}}
 @section('content')
 
@@ -72,3 +83,7 @@
 
 {{-- Sobreescritura/Eliminacion del la declaracion del footer del layout de donde se extiende --}}
 @section('footer','')
+
+{{-- Sobreescritura/Eliminacion de los JS del layout de donde se extiende --}}
+@section('scripts')
+@endsection
