@@ -22,7 +22,7 @@
     @vite([
         
         //Bootstrap
-        'resources/css/bootstrap.scss',
+        // 'resources/css/bootstrap.scss',
         'resources/css/app.css',
         'resources/css/tailwind.css',
     ])
@@ -63,10 +63,10 @@
             {{-- Enlaces segun ruta actual --}}
             <div class="login-action-links">
                 @if (request()->routeIs('login'))
-                    <a href="{{route('password.request')}}" aria-label="Change your password">¿Olvidaste tu contraseña?</a>
-                    <a href="{{route('register')}}" aria-label="Create an account">¿No tienes cuenta? Regístrate.</a>
+                    <a href="{{route('password.request')}}" role="link" aria-label="¿Olvidaste tu contraseña?">¿Olvidaste tu contraseña?</a>
+                    <a href="{{route('register')}}" role="link" aria-label="Registrate">¿No tienes cuenta? Regístrate.</a>
                 @else
-                    <a href="{{ route('login') }}" aria-label="Login">¿Ya tienes cuenta? Inicia sesión.</a>
+                    <a href="{{ route('login') }}" role="link" aria-label="Inicia sesión">¿Ya tienes cuenta? Inicia sesión.</a>
                 @endif
             </div>
         </form>

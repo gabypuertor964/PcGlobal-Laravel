@@ -143,7 +143,7 @@ nav {
   position: absolute;
   width: 312px;
   height: 290px;
-  background-color: #E7E7E7;
+  background-color: rgb(35 35 37);
   border: 1px solid rgb(0, 0, 0, 0.1);
   border-top-left-radius: 25px;
   border-bottom-right-radius: 25px;
@@ -192,14 +192,14 @@ nav {
   transform: translateY(-50%);
   font-weight: 500;
   pointer-events: none;
-  color: #888;
+  color: #2A2A2A;
   transition: transform 200ms ease, color 200ms ease;
 }
 
 .login-input:focus + .input-label,
 .login-input:not(:placeholder-shown) + .input-label {
   transform: translateY(-185%) scale(0.85);
-  color: #3483fa;
+  color: #FFF;
 }
 
 .login-form .login-submit {
@@ -217,7 +217,7 @@ nav {
 
 .login-form .login-remember {
   font-size: 14px;
-  color: #414141;
+  color: #FFF;
 }
 
 .login-form .login-action-links {
@@ -225,7 +225,7 @@ nav {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  color: #3483fa;
+  color: #FFF;
   font-size: 14px;
 }
 

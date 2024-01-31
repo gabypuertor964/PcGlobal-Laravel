@@ -4,11 +4,11 @@
 {{-- Declaracion de los campos del formulario --}}
 @section('inputs')
     <div class="login-email-container">
-        <input type="text" class="login-input" name="email" placeholder="">
-        <span class="input-label">Correo</span>
+        <input id="email" type="text" class="login-input" name="email" placeholder="">
+        <label for="email" class="input-label">Correo</label>
     </div>
     <div class="login-password-container">
-        <input type="password" class="login-input" name="password" placeholder="">
-        <span class="input-label">Contraseña</span>
+        <input id="password" type="password" class="login-input" name="password" placeholder="">
+        <label for="password" class="input-label">Contraseña</label>
     </div>
 @endsection
