@@ -19,18 +19,19 @@ export default defineConfig({
                 'resources/js/font-awesome.js',
 
                 //Recursos Nativos de la App
-                'resources/js/main.js',
+                //'resources/js/main.js',
+                'resources/js/navbar.js',
+                'resources/js/scroll.js',
+                'resources/js/example.js',
                 'resources/css/app.css',
             ],
             refresh: true,
         }),
     ],
-
-    /**
-     * Aumentar el limite de tamaño de los archivos compilados
-     */
     build: {
-        chunkSizeWarningLimit: 1600
-    }
+
+        //Aumentar el limite de tamaño de los archivos
+        chunkSizeWarningLimit: 1600,
+    },
 });
 

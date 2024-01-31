@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\authController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\landingPageController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,12 +20,20 @@ Route::controller(landingPageController::class)->group(function(){
 });
 
 /**
- * Rutas de autenticacion (Unicamente para usuarios no autenticados)
+ * Rutas de acceso para usuarios no autorizados
 */
 Route::middleware(['guest'])->group(function () {
 
-    // Vista: Registro de clientes
-    Route::get('/register', [authController::class,'registerView'])->name('register');
+    /* Rutas de registro de clientes */
+    Route::controller(AuthController::class)->group(function(){
+
+        // Vista: Registro de clientes
+        Route::get('/register', 'registerView')->name('register');
+
+        // Procesar: Registro de clientes
+        Route::post('/register', 'clientRegister')->name('client.register');
+    });
+    
 });
 
 /**

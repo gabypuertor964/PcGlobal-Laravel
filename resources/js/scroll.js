@@ -1,7 +1,7 @@
 /**
- * @abstract Funcionalidad de scroll suave en link de categirias
+ * @abstract Funcionalidad de scroll suave en link de categorias
 */
-export function initScroll() {
+export default function initScroll() {
     let isScrolling = false;
 
     function scrollToTarget(target) {
