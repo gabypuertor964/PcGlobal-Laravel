@@ -194,7 +194,7 @@ nav {
 
 .login-card {
   position: absolute;
-  width: 412px;
+  width: 342px;
   min-height: max-content;
   background-color: rgb(35 35 37);
   border: 1px solid rgb(0, 0, 0, 0.1);
@@ -207,7 +207,7 @@ nav {
 }
 
 .login-card.register {
-  width: 362px;
+  width: 342px;
 }
 
 .login-form {
@@ -363,8 +363,13 @@ nav {
   .login-crystals .login-crystal, .login-crystals .login-crystal-2, .login-crystals .login-crystal-3 {
     display: block;
   }
+  .login-card {
+    width: 412px;
+    min-height: max-content;
+  }
   .login-card.register {
     width: 612px;
+    height: max-content;
   }
 }
 
@@ -372,6 +377,12 @@ nav {
 @media only screen and (max-width: 815px) and (orientation: landscape) {
   .login-header {
     height: 50%
+  }
+  .login-card {
+    top: 95%;
+  }
+  .login-card.register {
+    top: 115%;
   }
 }
 
