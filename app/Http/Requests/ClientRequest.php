@@ -84,7 +84,14 @@ class ClientRequest extends FormRequest
             'document_type_id' => 'required|int|exists:document_types,id',
             'document_number' => 'required|int|min:1|max:9999999999|unique:users,document_number,'.$id,
             'phone_number' => 'required|int||min:1|max:9999999999|unique:users,phone_number,'.$id,
-            'date_birth' => 'required|date',
+
+            'date_birth' => [
+                'required',
+                'date',
+                'before:'.now()->subYear(18)->format('Y-m-d'),
+                'after:'. now()->subYear(100)->format('Y-m-d')
+            ],
+
             'email' => 'required|string|email|unique:users,email,'.$id,
             'password' => 'required|string|min:8|confirmed',
         ];
