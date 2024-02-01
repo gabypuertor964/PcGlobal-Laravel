@@ -8,11 +8,11 @@
 @if (request()->routeIs('login'))
     @section('title','Inicia sesión')
 @else
-    @section('title','Registrate')
+    @section('title','Regístrate')
 @endif
 
 {{-- Declaracion clases css adicionales al contenedor body --}}
-@section('body_class','flex flex-col min-h-screen bg-gray-100 overflow-x-hidden')
+@section('body_class','flex flex-col min-h-screen bg-gray-100')
 
 {{-- Declaracion clases css adicionales al contenedor main --}}
 @section('main_class','container my-8 text-justify mx-auto flex-grow')
@@ -22,7 +22,7 @@
     @vite([
         
         //Bootstrap
-        // 'resources/css/bootstrap.scss',
+        'resources/css/bootstrap.scss',
         'resources/css/app.css',
         'resources/css/tailwind.css',
     ])
@@ -32,21 +32,22 @@
 @section('content')
 
     <div class="login-header"></div>
-    <div class="login-card">
+    <div class="login-card {{ request()->routeIs('login') ? '' : 'register' }}">
         <a href="{{ route('index') }}" rel="preload" aria-label="Link for index" class="login-header-logo">
             <img src="{{ asset('storage/others/logotype.png') }}" alt="logo">
         </a>
-        <form action="{{request()->routeIs('login') ? route('login') : route('register')}}" method="post" class="login-form">
+        <h1 class="text-center mt-2 font-medium text-lg text-white">
+            {{ request()->routeIs('login') ? 'Inicia sesión' : 'Crea una nueva cuenta' }}
+        </h1>
+
+        <form action="{{ request()->routeIs('login') ? route('login') : route('register') }}" method="post" class="login-form {{ request()->routeIs('login') ? 'flex' : 'grid grid-cols-2 gap-x-2'}}">
 
             {{-- Token CSRF--}}
             @csrf
 
-            <div class="input-container">
-
-                {{-- Campos del formulario --}}
-                @yield('inputs')
-
-            </div>
+            {{-- Campos del formulario --}}
+            @yield('inputs')
+    
 
             {{-- Botones segun ruta actual --}}
             @if (request()->routeIs('login'))
@@ -57,14 +58,14 @@
                     <label for="rememberme" class="remember-label">Recuérdame</label>
                 </div>
             @else
-                <input type="submit" class="login-submit" value="Registrate">
+                <input type="submit" class="login-submit col-span-2" value="Regístrate">
             @endif
 
             {{-- Enlaces segun ruta actual --}}
-            <div class="login-action-links">
+            <div class="login-action-links col-span-2">
                 @if (request()->routeIs('login'))
-                    <a href="{{route('password.request')}}" role="link" aria-label="¿Olvidaste tu contraseña?">¿Olvidaste tu contraseña?</a>
                     <a href="{{route('register')}}" role="link" aria-label="Registrate">¿No tienes cuenta? Regístrate.</a>
+                    <a href="{{route('password.request')}}" role="link" aria-label="¿Olvidaste tu contraseña?">¿Olvidaste tu    contraseña?</a>
                 @else
                     <a href="{{ route('login') }}" role="link" aria-label="Inicia sesión">¿Ya tienes cuenta? Inicia sesión.</a>
                 @endif
@@ -79,6 +80,9 @@
         <div class="login-crystal-3"></div>
         <div class="login-crystal-3"></div>
     </div>
+    {{-- <div class="alert alert-danger text-center w-1/3 mx-auto absolute bottom-5 left-1/2 transform -translate-x-1/2" role="alert">
+        <strong>El usuario o la clave no coinciden</strong>
+    </div>     --}}
 @endsection
 
 {{-- Sobreescritura/Eliminacion del la declaracion del footer del layout de donde se extiende --}}

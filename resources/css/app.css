@@ -45,11 +45,11 @@ nav {
 }
 
 /* Estilos para el menú responsive de la navbar */
+
 #menu {
   max-height: 0;
   transform: translateY(-270px);
   z-index: 2;
-  transition: all 200ms ease;
 }
 
 #menu.active {
@@ -63,6 +63,58 @@ nav {
     transform: translateY(-270px);
     position: relative;
   }
+}
+
+/* Estilos para el dropdown */
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu-l {
+  display: flex;
+  opacity: 0;
+  visibility: hidden;
+  flex-direction: column;
+  min-width: max-content;
+  z-index: 2;
+  background-color: #FFF;
+  position: absolute;
+  bottom: -100px;
+  right: -5px;
+  border-radius: .28571429rem;
+  border: 1px solid rgb(34, 36, 38, .15);
+  transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out;
+}
+
+.dropdown-menu-l.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.dropdown-menu-l::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  right: 5px;
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  clip-path: polygon(50% 50%, 0% 100%, 100% 100%);
+}
+
+.dropdown .dropdown-menu-l > .item {
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.95);
+  text-transform: none;
+  padding: .58rem 1.14285714rem;
+  border-radius: 5px;
+} 
+
+.dropdown .dropdown-menu-l > .item:hover {
+  background: rgba(0, 0, 0, 0.178);
+  z-index: 3;
 }
 
 /* Estilos de las imágenes de las categorías de la landing */
@@ -120,6 +172,7 @@ nav {
 }
 
 /* Estilos para el login */
+
 .login-header {
   position: absolute;
   top: 0;
@@ -141,8 +194,8 @@ nav {
 
 .login-card {
   position: absolute;
-  width: 312px;
-  height: 290px;
+  width: 412px;
+  min-height: max-content;
   background-color: rgb(35 35 37);
   border: 1px solid rgb(0, 0, 0, 0.1);
   border-top-left-radius: 25px;
@@ -150,13 +203,11 @@ nav {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 3;
 }
 
-
-.login-form .input-container {
-  display:flex;
-  flex-direction:column;
-  row-gap: 17px;
+.login-card.register {
+  width: 362px;
 }
 
 .login-form {
@@ -167,7 +218,7 @@ nav {
   margin: 25px 25px;
 }
 
-.login-password-container, .login-email-container {
+.login-container {
   position: relative;
 }
 
@@ -185,6 +236,7 @@ nav {
 }
 
 .input-label {
+  white-space: nowrap;
   font-size: 14px;
   position: absolute;
   top: 50%;
@@ -218,6 +270,7 @@ nav {
 .login-form .login-remember {
   font-size: 14px;
   color: #FFF;
+  margin-bottom: 12px;
 }
 
 .login-form .login-action-links {
@@ -231,13 +284,12 @@ nav {
 
 .login-form .login-action-links > a {
   position: absolute;
-  bottom: 20px;
-  margin-bottom: 15px;
+  bottom: 10px;
 }
 
 .login-form .login-action-links > a:nth-child(2) {
   position: absolute;
-  bottom: 0;
+  bottom: 28px;
 }
 
 .login-form .login-action-links > a:hover {
@@ -311,15 +363,15 @@ nav {
   .login-crystals .login-crystal, .login-crystals .login-crystal-2, .login-crystals .login-crystal-3 {
     display: block;
   }
+  .login-card.register {
+    width: 612px;
+  }
 }
 
 
 @media only screen and (max-width: 815px) and (orientation: landscape) {
   .login-header {
     height: 50%
-  }
-  .login-card {
-    margin-top: 100px;
   }
 }
 

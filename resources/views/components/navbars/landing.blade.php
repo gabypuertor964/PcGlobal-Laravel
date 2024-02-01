@@ -1,5 +1,5 @@
 <!-- Barra de Navegación -->
-<header class="h-24 bg-indigo-600 overflow-hidden">
+<header class="h-24 bg-indigo-600">
   <nav class="mx-4 sm:mx-12 flex font-medium text-white h-full items-center text-sm gap-x-6 gap-y-3">
     <div class="nav-1 flex flex-col sm:flex-row items-center justify-between w-full h-full">
 
@@ -29,13 +29,19 @@
 
         <!-- Enlaces de login y carrito -->
         <div class="nav-login hidden lg:flex gap-4">
-          <a href="{{route("login")}}" role="button" class="hover:text-gray-200" aria-label="Link for login or registration">
-            <i class="fa-regular fa-user"></i>
-          </a>
+          <div class="dropdown" tabindex="0">
+            <button class="hover:text-gray-200" id="dropdownButton">
+              <i class="fa-regular fa-user"></i>
+            </button>
+            <div class="dropdown-menu-l" id="dropdownMenu" tabindex="-1">
+              <a href="{{route("login")}}" aria-label="Link for login" class="item">Inicia Sesión</a>
+              <a href="{{route("register")}}" aria-label="Link for registration" class="item">Regístrate</a>
+            </div>
+          </div>
           <div class="border"></div>
-            <a href="" role="button" aria-label="Link for shopping cart" class="hover:text-gray-200">
-              <i class="fa-solid fa-cart-shopping"></i>
-            </a>
+          <a href="#" role="button" aria-label="Link for shopping cart" class="hover:text-gray-200">
+            <i class="fa-solid fa-cart-shopping"></i>
+          </a>
         </div>
         
         <!-- Logo #2 (Este es para el responsive) -->
@@ -44,7 +50,9 @@
             <img src="{{ asset('storage/others/logotype.png') }}" class="w-16" alt="Logo PcGlobal">
           </a>
           {{-- Ícono del menú --}}
-          <button id="menu-responsive" aria-label="Deploy menu"><i class="fa-solid fa-bars text-md bg-indigo-700 p-2 rounded-md"></i></button>
+          <button id="menu-responsive" aria-label="Deploy menu">
+            <i class="fa-solid fa-bars text-md bg-indigo-700 p-2 rounded-md"></i>
+          </button>
         </div>
       </div>
     </div>
