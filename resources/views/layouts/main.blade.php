@@ -9,6 +9,14 @@
 
         {{-- Seccion de importacion de dependencias --}}
         @yield('dependences')
+            @vite([
+                //Hoja Personalizada
+                'resources/css/app.css',
+
+                //Tailwind CSS
+                'resources/css/tailwind.css',
+            ])
+        @show
 
         {{-- Titulo Principal Pagina web (Nombre empresa + Titulo Personalizado) --}}
         <title>@yield('title','Home') - PcGlobal</title>

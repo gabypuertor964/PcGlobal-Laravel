@@ -1,5 +1,5 @@
 {{-- Declaracion e importacion componente principal --}}
-@extends('layouts.product')
+@extends('layouts.landing')
 
 {{-- Declaracion complemtento etiqueta title del Header --}}
 @section('title', $product->model . " - " . $product->category->name)

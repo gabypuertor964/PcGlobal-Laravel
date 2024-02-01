@@ -11,6 +11,16 @@
     @section('title','Regístrate')
 @endif
 
+@section('dependences')
+    @vite([
+        //Hoja Personalizada
+        'resources/css/app.css',
+
+        //Tailwind CSS
+        'resources/css/tailwind.css',
+    ])
+@endsection
+
 {{-- Declaracion clases css adicionales al contenedor body --}}
 @section('body_class','flex flex-col min-h-screen bg-gray-100')
 
@@ -22,7 +32,7 @@
     @vite([
         
         //Bootstrap
-        'resources/css/bootstrap.scss',
+        // 'resources/css/bootstrap.scss',
         'resources/css/app.css',
         'resources/css/tailwind.css',
     ])
@@ -88,6 +98,6 @@
 {{-- Sobreescritura/Eliminacion del la declaracion del footer del layout de donde se extiende --}}
 @section('footer','')
 
-{{-- Sobreescritura/Eliminacion de los JS del layout de donde se extiende --}}
+{{-- Declaracion de dependencias adicionales --}}
 @section('scripts')
 @endsection
