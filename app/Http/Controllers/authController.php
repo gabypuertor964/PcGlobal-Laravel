@@ -4,19 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Helpers\CleanInputs;
 use App\Helpers\Validator;
-use App\Http\Requests\authValidate;
 use App\Http\Requests\ClientRequest;
 use App\Models\DocumentType;
 use App\Models\Gender;
 use App\Models\State;
 use App\Models\User;
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class authController extends Controller
+class AuthController extends Controller
 {
 
     /**
