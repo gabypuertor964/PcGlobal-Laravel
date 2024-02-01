@@ -104,63 +104,37 @@ class CleanInputs{
     */
     public static function capitalizeInData(mixed $data): String
     {
+        //Inicializacion de la cadena
+        $string = "";
+
         /**
          * Ejecucion en caso de que la entrada sea un array (Lista de palabras)
         */
-        if(is_array($data)){
-            $string = "";
-
+        if(is_array($data))
+        {
             foreach($data as $word){
-                $string .= self::capitalize($word)." ";
+
+                if(end($data) == $word){
+                    $string .= self::capitalize($word);
+                }else{
+                    $string .= self::capitalize($word)." ";
+                }
             }
 
             return $string;
         }
 
         /**
-         * Ejecucion en caso de que la entrada sea un objeto (Modelo autorizado)
+         * Ejecucion en caso de que la entrada sea un objeto (Modelo)
         */
         if($data instanceof User)
         {
-            //Concatenacion primer nombre
-            $fullname = self::capitalize($data->first_name);
-
-            /* Validar si se debe o no concatenar el campo segundo nombre */
-            if($data->second_name != null){
-                $fullname .= " " . self::capitalize($data->second_name);
-            }
-
-            //Concatenacion apellidos
-            $fullname .= " " . self::capitalize($data->first_surname) . " " . self::capitalize($data->second_surname);
-
-            return $fullname;
+            $string .= self::capitalize($data->names) . " " . self::capitalize($data->surnames);
         }
 
         /**
          * Retorno null en caso de que la entrada no sea un array o un objeto
         */
         return null;
-    }
-
-    /**
-     * @abstract Convertir una lista de palabras en una cadena con la primera letra de cada palabra en mayuscula
-     * 
-     * @param mixed $model
-     * @return String
-    */
-    public static function buildFullName(mixed $model){
-
-        //Concatenacion primer nombre
-        $fullname = $model->first_name;
-
-        /* Validar si se debe o no concatenar el campo segundo nombre */
-        if($model->second_name != null){
-            $fullname .= " " . $model->second_name;
-        }
-
-        //Concatenacion apellidos
-        $fullname .= " " . $model->first_surname . " " . $model->second_surname;
-
-        return $fullname;
     }
 }

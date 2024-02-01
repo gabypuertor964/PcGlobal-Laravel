@@ -27,7 +27,10 @@
     "autoload": {
         "files":[
             "app/Helpers/CleanInputs.php",
-            "app/Helpers/Validator.php"
+            "app/Helpers/Validator.php",
+            "app/Helpers/RolesManager.php",
+            "app/Helpers/SlugManager.php",
+            "app/Helpers/GetRegister.php"
         ],
         "psr-4": {
             "App\\": "app/",

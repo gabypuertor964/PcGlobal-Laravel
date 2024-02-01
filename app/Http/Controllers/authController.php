@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Helpers\CleanInputs;
 use App\Helpers\Validator;
 use App\Http\Requests\authValidate;
+use App\Http\Requests\ClientRequest;
 use App\Models\DocumentType;
 use App\Models\Gender;
 use App\Models\State;
 use App\Models\User;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -85,11 +87,11 @@ class authController extends Controller
     /**
      * @abstract Registro de cliente
      * 
-     * @param \App\Http\Requests\authValidate $request
+     * @param \App\Http\Requests\ClientRequest $request
      * 
      * @return \Illuminate\Http\RedirectResponse
     */
-    public function clientRegister(authValidate $request)
+    public function clientRegister(ClientRequest $request)
     {
         try{
 
@@ -97,7 +99,7 @@ class authController extends Controller
             $search = array_merge(User::inputs());
 
             //Listado de campos exonerados de la validacion
-            $except = ['state_id','password_confirmation'];
+            $except = ['state_id'];
 
             /* Ejecutar las validaciones secundarias */
             if(!Validator::runInRequest($request,$search,$except)){
@@ -124,12 +126,12 @@ class authController extends Controller
                     'date_birth'=>$request->date_birth,
                     'email'=>CleanInputs::runLower($request->email),
                     'password'=>Hash::make($request->password),
-                    'state_id'=>State::where('nombre','Activo')->first()->id
+                    'state_id'=>State::where('name','Activo')->first()->id
                 ])->assignRole('cliente');
             });
 
             //Redireccion al login con mensaje de exito
-            return redirect()->route("index")->with('message',[
+            return redirect()->route("login")->with('message',[
                 'status'=>'success',
                 'text'=>'¡Registro exitoso!, por favor inicia sesión.'
             ]);
