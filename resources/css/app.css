@@ -274,10 +274,65 @@ nav {
 }
 
 .login-form .login-remember {
-  font-size: 14px;
-  color: #FFF;
-  margin-bottom: 12px;
+  display:flex;
+  margin-bottom: 14px;
+  justify-content: space-evenly;
+  align-items: center;
+  color: #fff;
 }
+
+.login-form .login-remember .switch {
+  height: 40px;
+  background-image: linear-gradient(to top, #8a89e3 0%, #8ab3f9 100%);
+  padding: 0 1.5rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.login-form .login-remember .switch .input {
+  display: none;
+}
+
+.login-form .login-remember .switch .rail {
+  position: relative;
+  width: 88px;
+  height: 28px;
+  background-color: #FFF;
+  border-radius: 3rem;
+}
+
+.login-form .login-remember .switch .rail .circle {
+  display: block;
+  width: 26px;
+  height: 26px;
+  background-image: linear-gradient(to right, #8a89e3 0%, #8ab3f9 0%, #8ab3f9 0%, #7c79d4 33%, #6965da 66%, #6965da 100%);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 5px;
+  transition: transform .2s;
+}
+
+.switch .indicator {
+  width: 15px;
+  height: 15px;
+  background-color: #FFF;
+  border-radius: 50%;
+  margin-left: 1.5rem;
+  transition: .2s;
+}
+
+.login-form .login-remember .switch .input:checked ~ .rail .circle {
+  transform: translate(50px, -50%);
+}
+
+.login-form .login-remember .switch .input:checked ~ .indicator {
+  background-color: rgb(67, 233, 123);
+}
+
 
 .login-form .login-action-links {
   display: flex;
@@ -395,6 +450,6 @@ nav {
 @media only screen and (min-width: 1536px) {
   .login-card {
     width: 450px;
-    height: 310px;
+    min-height: max-content;
   }
 }

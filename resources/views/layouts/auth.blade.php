@@ -66,8 +66,14 @@
                 <input type="submit" class="login-submit" value="Inicia sesión">
 
                 <div class="login-remember">
-                    <input type="checkbox" name="Recuérdame" id="rememberme">
-                    <label for="rememberme" class="remember-label">Recuérdame</label>
+                    <span>Recuérdame</span>
+                    <label class="switch">
+                        <input type="checkbox" class="input">
+                            <div class="rail">
+                                <span class="circle"></span>
+                            </div>
+                        <span class="indicator"></span>
+                    </label>
                 </div>
             @else
                 <input type="submit" class="login-submit col-span-2" value="Regístrate">
