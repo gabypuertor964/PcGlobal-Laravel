@@ -283,7 +283,7 @@ nav {
 
 .login-form .login-remember .switch {
   height: 40px;
-  background-image: linear-gradient(to top, #8a89e3 0%, #8ab3f9 100%);
+  /* background-image: linear-gradient(to top, #8a89e3 0%, #8ab3f9 100%); */
   padding: 0 1.5rem;
   border-radius: 0.75rem;
   display: flex;
@@ -297,7 +297,7 @@ nav {
 
 .login-form .login-remember .switch .rail {
   position: relative;
-  width: 88px;
+  width: 70px;
   height: 28px;
   background-color: #FFF;
   border-radius: 3rem;
@@ -326,7 +326,7 @@ nav {
 }
 
 .login-form .login-remember .switch .input:checked ~ .rail .circle {
-  transform: translate(50px, -50%);
+  transform: translate(32px, -50%);
 }
 
 .login-form .login-remember .switch .input:checked ~ .indicator {
