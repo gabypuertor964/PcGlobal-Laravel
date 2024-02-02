@@ -24,16 +24,8 @@ Route::controller(landingPageController::class)->group(function(){
 */
 Route::middleware(['guest'])->group(function () {
 
-    /* Rutas de registro de clientes */
-    Route::controller(AuthController::class)->group(function(){
-
-        // Vista: Registro de clientes
-        Route::get('/register', 'registerView')->name('register');
-
-        // Procesar: Registro de clientes
-        Route::post('/register', 'clientRegister')->name('client.register');
-    });
-    
+    // Registro de clientes
+    Route::post('/register', [AuthController::class, 'clientRegister'])->name('client.register');
 });
 
 /**

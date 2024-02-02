@@ -135,6 +135,8 @@ class ClientRequest extends FormRequest
 
             'date_birth.required' => 'El campo de fecha de nacimiento es obligatorio.',
             'date_birth.date' => 'El campo de fecha de nacimiento debe ser una fecha válida.',
+            'date_birth.before' => 'El cliente debe haber nacido antes de :date.',
+            'date_birth.after' => 'El cliente debe haber nacido después de :date.',
 
             'email.required' => 'El campo de correo electrónico es obligatorio.',
             'email.string' => 'El campo de correo electrónico debe ser una cadena de texto.',

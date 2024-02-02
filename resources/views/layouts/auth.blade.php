@@ -18,6 +18,9 @@
 
         //Tailwind CSS
         'resources/css/tailwind.css',
+
+        //Bootstrap
+        'resources/css/bootstrap.scss',
     ])
 @endsection
 
@@ -57,7 +60,6 @@
 
             {{-- Campos del formulario --}}
             @yield('inputs')
-    
 
             {{-- Botones segun ruta actual --}}
             @if (request()->routeIs('login'))
@@ -90,9 +92,9 @@
         <div class="login-crystal-3"></div>
         <div class="login-crystal-3"></div>
     </div>
-    {{-- <div class="alert alert-danger text-center w-1/3 mx-auto absolute bottom-5 left-1/2 transform -translate-x-1/2" role="alert">
-        <strong>El usuario o la clave no coinciden</strong>
-    </div>     --}}
+    
+    {{-- Visualizar mensajes de alerta recibidos desde el controlador --}}
+    @include('components.alert')
 @endsection
 
 {{-- Sobreescritura/Eliminacion del la declaracion del footer del layout de donde se extiende --}}
