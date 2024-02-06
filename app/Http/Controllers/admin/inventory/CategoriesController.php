@@ -49,10 +49,10 @@ class CategoriesController extends Controller
         try{
 
             // Ejecutar las validaciones adicionales
-            if(!Validator::runInRequest($request, Category::inputs(), ['photo'])){
+            if(!Validator::runInRequest($request, Category::inputs(), ['photo','slug'])){
                 return redirect()->back()->withInput()->with('message',[
-                    'class' => 'warning',
-                    'message' => '¡Verifica los campos y realiza las correcciones necesarias!'
+                    'status' => 'warning',
+                    'text' => '¡Verifica los campos y realiza las correcciones necesarias!'
                 ]);
             }
 
@@ -90,14 +90,17 @@ class CategoriesController extends Controller
             });
 
             return redirect()->route('inventory.categories.index')->with('message',[
-                'class' => 'success',
-                'message' => '¡Categoria creada con exito!'
+                'status' => 'success',
+                'text' => '¡Categoria creada con exito!'
             ]);
             
-        }catch(Exception){
+        }catch(Exception $e){
+
+            return dd($e);
+
             return redirect()->back()->withInput()->with('message',[
-               'class' => 'danger',
-                'message' => '¡Ha ocurrido un error al intentar crear la categoria!'
+                'status' => 'danger',
+                'text' => '¡Ha ocurrido un error al intentar crear la categoria!'
             ]);
         }
     }
