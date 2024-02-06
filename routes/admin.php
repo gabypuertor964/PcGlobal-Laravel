@@ -3,6 +3,9 @@
 use App\Http\Controllers\admin\deliveryController;
 use App\Http\Controllers\admin\facturationController;
 use App\Http\Controllers\admin\gerencyController;
+use App\Http\Controllers\admin\inventory\BrandsController;
+use App\Http\Controllers\admin\inventory\CategoriesController;
+use App\Http\Controllers\admin\inventory\ProductsController;
 use App\Http\Controllers\admin\inventoryController;
 use App\Http\Controllers\admin\pqrsController;
 use Illuminate\Support\Facades\Route;
@@ -11,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth'])->group(function () {
 
     //Vista: Dashboard 
-    Route::get('/', function () {
+    Route::get('/dashboard', function () {
         return view("admin.dashboard");
     })->name("admin.dashboard");
 
@@ -36,14 +39,25 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/facturation', facturationController::class)->names('admin.facturation')->middleware('can:facturation.read');
 
     /*
-        Modulo: Inventory
+        Modulo: Inventory/Inventario
         Roles Autorizados:
 
             1. Almacenista (Todos los Permisos)
             2. Gerente (Solo Lectura)
         --
     */
-    Route::resource('/inventory', inventoryController::class)->names('admin.inventory')->middleware('can:inventory.read');
+    Route::middleware('can:inventory.read')->group(function () {
+        
+        //CRUD Marcas
+        Route::resource('/brands', BrandsController::class)->names('inventory.brands')->except('show');
+
+        //CRUD Categorias
+        Route::resource('/categories', CategoriesController::class)->names('inventory.categories');
+
+        //CRUD Productos
+        Route::resource('/products', ProductsController::class)->names('inventory.products');
+
+    })->prefix('inventory');
 
     /*
         Modulo: Delivery

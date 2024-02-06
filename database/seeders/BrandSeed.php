@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Helpers\SlugManager;
 use App\Models\Brand;
 use Illuminate\Database\Seeder;
 
@@ -23,6 +24,7 @@ class BrandSeed extends Seeder
             Brand::create([
                 'id'=>null,
                 'name'=>$registro[0],
+                'slug'=>SlugManager::generate(explode(" ",$registro[0]))
             ]);
         }
     }

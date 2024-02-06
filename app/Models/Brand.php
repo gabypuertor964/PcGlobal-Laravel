@@ -16,4 +16,19 @@ class Brand extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    protected $fillable = [
+        'name',
+        'slug',
+    ];
+
+    /**
+     * @abstract Obtener los campos autorizados para ser llenados a través de asignación masiva
+     * 
+     * @return array
+    */
+    public static function inputs()
+    {
+        return (new self())->getFillable();
+    }
 }

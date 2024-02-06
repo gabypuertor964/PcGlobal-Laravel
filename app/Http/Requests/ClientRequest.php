@@ -26,7 +26,7 @@ class ClientRequest extends FormRequest
         /**
          * Usuarios autorizados: gestor_pqrs, cliente
         */
-        if(RolesManager::get() == "gestor_pqrs" || RolesManager::get() == "cliente")
+        if(RolesManager::getRoles() == "gestor_pqrs" || RolesManager::getRoles() == "cliente")
         {
             return true;
         }
@@ -55,15 +55,15 @@ class ClientRequest extends FormRequest
          * - Si el usuario es gestor_pqrs, se obtiene el id del cliente a traves del slug proveniende de la url
          * - Si el usuario es cliente, se obtiene el id del cliente a traves de la sesion
         */
-        if(RolesManager::get() == "gestor_pqrs"){
+        if(RolesManager::getRoles() == "gestor_pqrs"){
 
             try{
-                $id = GetRegister::Get("cliente", $this->slug);
+                $id = GetRegister::Get($this->slug);
             }catch(Exception){
                 return abort(404, "El cliente no existe");
             }      
 
-        }elseif(RolesManager::get() == "cliente"){
+        }elseif(RolesManager::getRoles() == "cliente"){
             $id = auth()->user()->id;
         }
 

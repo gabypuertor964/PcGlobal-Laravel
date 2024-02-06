@@ -18,6 +18,8 @@ return new class extends Migration
 
             /* Campos Personalizados */
                 $table->string("name",50)->unique()->comment("Nombre Marca");
+
+                $table->string("slug",50)->unique()->comment("Slug Marca");
             //
 
             //Campos create_at y update_at

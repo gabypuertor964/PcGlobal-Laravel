@@ -704,15 +704,17 @@ return [
                     [
                         'text' => 'Categorias',
                         'icon'    => 'nav-icon fa-fw far fa-copyright',
+                        'can' => 'inventory.read',
                         'submenu'=>[
                             [
                                 'text' => 'Listado Categorias',
                                 'icon'    => 'nav-icon fa-fw fas fa-list',
-                                'url'  => '/admin/inventory',
-                            ],                        [
+                                'url'  => '/admin/categories',
+                            ],
+                            [
                                 'text' => 'Crear Categoria',
                                 'icon'    => 'nav-icon fa-fw far fa-plus-square',
-                                'url'  => '/admin/inventory/create',
+                                'url'  => '/admin/categories/create',
                                 'can' => 'inventory.create',
                             ]
                         ]
@@ -720,34 +722,36 @@ return [
                     [
                         'text' => 'Marcas',
                         'icon'    => 'nav-icon fa-fw far fa-registered',
-                        'url'  => '',
+                        'can' => 'inventory.read',
                         'submenu'=>[ 
                             [
                                 'text' => 'Listado Marcas',
                                 'icon'    => 'nav-icon fa-fw fas fa-list',
-                                'url'  => '/admin/inventory',
-                            ],                        [
+                                'url'  => '/admin/brands',
+                            ],
+                            [
                                 'text' => 'Crear Marca',
                                 'icon'    => 'nav-icon fa-fw far fa-plus-square',
-                                'url'  => '/admin/inventory/create',
-                                'can' => 'facturation.create',
+                                'url'  => '/admin/brands/create',
+                                'can' => 'inventory.create',
                             ]
                         ]
                     ],
                     [
                         'text' => 'Productos',
                         'icon'    => 'nav-icon fa-fw fas fa-laptop',
-                        'url'  => '',
+                        'can' => 'inventory.read',
                         'submenu'=>[
                             [
                                 'text' => 'Listado Productos',
                                 'icon'    => 'nav-icon fa-fw fas fa-list',
-                                'url'  => '/admin/inventory',
-                            ],                        [
+                                'url'  => '/admin/products',
+                            ],
+                            [
                                 'text' => 'Crear Producto',
                                 'icon'    => 'nav-icon fa-fw far fa-plus-square',
-                                'url'  => '/admin/inventory/create',
-                                'can' => 'facturation.create',
+                                'url'  => '/admin/products/create',
+                                'can' => 'inventory.create',
                             ]
                         ]
                     ]

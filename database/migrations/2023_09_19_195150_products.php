@@ -34,11 +34,11 @@ return new class extends Migration
             $table->timestamps();
 
             /* Llaves foraneas */
-                $table->foreign("brand_id")->references("id")->on("brands");
+                $table->foreign("brand_id")->references("id")->on("brands")->onDelete('cascade')->onUpdate('cascade');
 
-                $table->foreign("category_id")->references("id")->on("categories");
+                $table->foreign("category_id")->references("id")->on("categories")->onDelete('cascade')->onUpdate('cascade');
 
-                $table->foreign('currency_id')->references('id')->on('currencies');
+                $table->foreign('currency_id')->references('id')->on('currencies')->onDelete('cascade')->onUpdate('cascade');
             //
         });
     }

@@ -58,24 +58,8 @@ class AuthController extends Controller
                 break;
             //
 
-            /* Redirecciones panel Administrativo */
-                case "gestor_pqrs":
-                    return redirect()->route("admin.pqrs.index");
-                break;
-
-                case "almacenista":
-                    return redirect()->route("admin.inventory.index");
-                break;
-
-                case "vendedor":
-                    return redirect()->route("admin.facturation.index");
-                break;
-
-                case "repartidor":
-                    return redirect()->route("admin.delivery.index");
-                break;
-
-                case "gerente":
+            /* Redireccion panel Administrativo */
+                default:
                     return redirect()->route("admin.dashboard");
                 break;
             //
