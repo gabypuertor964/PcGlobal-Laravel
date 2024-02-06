@@ -85,10 +85,10 @@ return [
         'logo' => '<b>PcGlobal</b>',
 
         # Icono Logotipo (Version Pequeña)
-        'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+        'logo_img' => 'storage/others/logotype_min.png',
 
         # Clases CSS para el Logo (Version Pequeña)
-        'logo_img_class' => 'brand-image img-circle elevation-3',
+        'logo_img_class' => 'brand-image',
 
         # Icono Logotipo (Version Grande)
         'logo_img_xl' => null,
@@ -310,7 +310,7 @@ return [
         'classes_content' => '',
 
         //Clases CSS Adicionales aplicadas a la barra de lateral
-        'classes_sidebar' => 'sidebar-light-primary elevation-4',
+        'classes_sidebar' => 'sidebar-dark-primary elevation-4',
 
         //Clases CSS Adicionales aplicadas a la barra de busqueda del sidebar
         'classes_sidebar_nav' => '',
