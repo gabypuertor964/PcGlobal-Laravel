@@ -58,11 +58,11 @@ class BrandsController extends Controller
         try{
 
             // Ejecutar las validaciones adicionales
-            if(!Validator::runInRequest($request,Brand::inputs())){
+            if(!Validator::runInRequest($request,Brand::inputs(),['slug'])){
 
                 //Redireccion con mensaje de error de advertencia
                 return redirect()->back()->withInput()->with('message', [
-                    'status' => 'danger',
+                    'status' => 'warning',
                     'text' => '¡Verifica los campos y realiza las correcciones necesarias!'
                 ]);
             }
@@ -72,7 +72,8 @@ class BrandsController extends Controller
             */
             DB::transaction(function() use($request){
                 Brand::create([
-                    'name' => CleanInputs::runUpper($request->name)
+                    'name' => CleanInputs::runUpper($request->name),
+                    'slug' => SlugManager::generate(explode(" ",CleanInputs::runLower($request->name)))
                 ]);
             });
 
@@ -82,7 +83,7 @@ class BrandsController extends Controller
                 'text' => '¡Marca registrada correctamente!'
             ]);
 
-        }catch(Exception $e){
+        }catch(Exception){
 
             //Redireccion con mensaje de error critico
             return redirect()->back()->withInput()->with('message', [

@@ -23,7 +23,7 @@
     @include('components.alert')
 
     {{-- Formulario --}}
-    <form action="{{route("inventory.categories.store")}}" method="post">
+    <form action="{{route("inventory.categories.store")}}" method="post" enctype="multipart/form-data">
 
         {{-- Token de seguridad --}}
         @csrf

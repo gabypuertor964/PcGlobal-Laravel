@@ -30,7 +30,7 @@ class BrandRequest extends FormRequest
     public function rules(): array
     {
         //Obtener el id de la marca (si existe)
-        if($this->routeIs('inventory.brands.create')){
+        if($this->isMethod('POST')){
             $id = null;
         }else{
             $id = GetRegister::Get($this->route('brand'), 'brand')->id;

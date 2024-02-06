@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers\admin\inventory;
 
+use App\Helpers\CleanInputs;
 use App\Helpers\SlugManager;
+use App\Helpers\Validator;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\admin\inventory\CategoriesRequest;
 use App\Models\Category;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class CategoriesController extends Controller
 {
@@ -37,9 +44,62 @@ class CategoriesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoriesRequest $request)
     {
-        //
+        try{
+
+            // Ejecutar las validaciones adicionales
+            if(!Validator::runInRequest($request, Category::inputs(), ['photo'])){
+                return redirect()->back()->withInput()->with('message',[
+                    'class' => 'warning',
+                    'message' => '¡Verifica los campos y realiza las correcciones necesarias!'
+                ]);
+            }
+
+            /**
+             * Ejecutar la transaccion de la creacion de la categoria
+            */
+            DB::transaction(function() use($request){
+
+                //Crear la categoria
+                $category = Category::create([
+                    'name' => $request->name,
+                    'slug' => SlugManager::generate(
+                        explode(" ",
+                            CleanInputs::clean($request->name)
+                        )
+                    )
+                ]);
+
+                /**
+                 * Instanciamiento de la imagen de la categoria
+                */
+                $photo = Image::make($request->file('photo'));
+
+                //Redimensionar imagen y establecer la resolucion DPI
+                $photo->resizeCanvas(1280, 720);
+
+                //Codificacion de la imagen a png
+                $photo->encode('png',100);
+
+                //Generar el nombre del archivo
+                $name = $category->slug.'.png';
+
+                //Guardar la imagen
+                Storage::put('public/categories/'.$name, $photo->stream());
+            });
+
+            return redirect()->route('inventory.categories.index')->with('message',[
+                'class' => 'success',
+                'message' => '¡Categoria creada con exito!'
+            ]);
+            
+        }catch(Exception){
+            return redirect()->back()->withInput()->with('message',[
+               'class' => 'danger',
+                'message' => '¡Ha ocurrido un error al intentar crear la categoria!'
+            ]);
+        }
     }
 
     /**

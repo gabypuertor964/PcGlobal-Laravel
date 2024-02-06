@@ -22,10 +22,10 @@
 {{-- Contenido principal --}}
 @section('content')
 
-    {{-- Visualizacion de mensajes --}}
-    @include('components.alert')
-
     <div class="text-center">
+
+        {{-- Visualizacion de mensajes --}}
+        @include('components.alert')
 
         {{-- Tabla de datos --}}
         <table class="table table-striped table-bordered">
@@ -71,6 +71,5 @@
 
         {{-- Paginacion --}}
         <div class="hidden sm:flex sm:justify-center mb-3">{{ $brands->links('pagination::tailwind') }}</div>
-
     </div>
 @endsection
