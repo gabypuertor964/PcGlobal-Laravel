@@ -408,6 +408,10 @@ nav {
   bottom: 125px;
 }
 
+.size-image-form{
+  width: 300px;
+}
+
 @keyframes levitating {
   0% {
     transform: translate(0, 0);
