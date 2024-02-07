@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin\inventory;
 
 use App\Helpers\CleanInputs;
+use App\Helpers\GetRegister;
 use App\Helpers\SlugManager;
 use App\Helpers\Validator;
 use App\Http\Controllers\Controller;
@@ -94,28 +95,26 @@ class CategoriesController extends Controller
                 'text' => '¡Categoria creada con exito!'
             ]);
             
-        }catch(Exception){
+        }catch(Exception $e){
             return redirect()->back()->withInput()->with('message',[
                 'status' => 'danger',
-                'text' => '¡Ha ocurrido un error al intentar crear la categoria!'
+                'text' => $e->getMessage()
             ]);
         }
     }
 
     /**
-     * Display the specified resource.
+     * @abstract Mostrar la categoria especificada
+     * 
+     * @param string $slug Slug de la categoria
      */
-    public function show(string $id)
+    public function edit(string $slug)
     {
-        //
-    }
+        //Desencriptar el slug
+        $category = GetRegister::Get($slug, 'category');
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        //Retornar la vista con la informacion solicitada
+        return view('admin.inventory.categories.edit', compact('category'));
     }
 
     /**

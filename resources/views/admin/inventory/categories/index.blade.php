@@ -7,9 +7,9 @@
 {{-- Titulo principal --}}
 @section('content_header')
     <div class="flex flex-col md:flex-row gap-y-2 justify-content-between align-items-center text-center">
-        <h1 class="font-weight-bold font-italic">Lista de Marcas</h1>
+        <h1 class="font-weight-bold font-italic">Lista de Categorias</h1>
 
-        <a class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-3 rounded w-full md:w-auto" href="{{route("inventory.brands.create")}}" role="button">
+        <a class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-3 rounded w-full md:w-auto" href="{{route("inventory.categories.create")}}" role="button">
             <i class="fa-solid fa-plus"></i>
             Crear
         </a>
@@ -53,14 +53,24 @@
                         <td class="align-middle">{{$category->products->count()}}</td>
                         <td>
                             <div class="flex justify-center gap-2 w-full">
+
+                                {{-- Boton: Actualizar --}}
                                 <div class="button-tooltip" data-tooltip="Editar categoría">
-                                    <a class="btn btn-warning" href="{{route('inventory.brands.edit', $category->slug)}}" role="button">
+                                    <a class="btn btn-warning" href="{{route('inventory.categories.edit', $category->slug)}}" role="button">
                                         <i class="fa-solid fa-pen"></i>
                                     </a>
                                 </div>
+
+                                {{-- Formulario: Eliminar --}}
                                 <form action="{{route('inventory.categories.destroy', $category->slug)}}" method="POST">
+
+                                    {{-- Token CSRF --}}
                                     @csrf
+
+                                    {{-- Metodo de comunicacion --}}
                                     @method('delete')
+
+                                    {{-- Boton: Eliminar --}}
                                     <div class="button-tooltip" data-tooltip="Eliminar categoría">
                                         <button type="submit" class="btn btn-danger w-full">
                                             <i class="fa-solid fa-trash"></i>

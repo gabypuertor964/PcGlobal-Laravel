@@ -2,11 +2,11 @@
 @extends('adminlte::page')
 
 {{-- Complemento titulo --}}
-@section('title', 'Crear Categoria')
+@section('title', 'Editar Categoria')
 
 {{-- Titulo principal --}}
 @section('content_header')
-    <h1 class="text-center font-weight-bold font-italic">Crear Categoria</h1>
+    <h1 class="text-center font-weight-bold font-italic">Editar Categoria</h1>
 @stop
 
 {{-- Contenido principal --}}
@@ -16,7 +16,7 @@
     @include('components.alert')
 
     {{-- Formulario --}}
-    <form action="{{route("inventory.categories.store")}}" method="post" enctype="multipart/form-data">
+    <form action="{{route("inventory.categories.update",$category->slug)}}" method="post" enctype="multipart/form-data">
 
         {{-- Token de seguridad --}}
         @csrf
@@ -32,7 +32,7 @@
                         <div class="col">
                             <div>
                                 <label for="name" class="form-label">Nombre</label>
-                                <input type="text" class="form-control text-center col-12" name="name" id="name" value="{{old('name')}}" min="1" max="255"/>
+                                <input type="text" class="form-control text-center col-12" name="name" id="name" value="{{$category->name}}" min="1" max="255"/>
                             </div>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                         <div class="card-body p-3">
                             <input type="file" name="photo" id="photo" accept=".jpeg, .png, .jpg, .svg" class="d-none" required>
 
-                            <img src="https://cdn-icons-png.flaticon.com/512/3843/3843517.png" style="width: 60%; height: 60%" id="photo_preview">
+                            <img src='{{asset("storage/categories/$category->slug.png")}}' style="width: 60%; height: 60%" id="photo_preview">
                         </div>
 
                         {{-- Boton de carga --}}
