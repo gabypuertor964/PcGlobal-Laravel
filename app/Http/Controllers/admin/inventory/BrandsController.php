@@ -31,7 +31,7 @@ class BrandsController extends Controller
     public function index()
     {
         //Consultar la informacion solicitada
-        $brands = Brand::paginate(11);
+        $brands = Brand::paginate(10);
 
         //Encriptar los slugs de forma temporal
         foreach($brands as $brand){

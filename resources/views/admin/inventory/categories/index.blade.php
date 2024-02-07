@@ -6,17 +6,23 @@
 
 {{-- Titulo principal --}}
 @section('content_header')
-    <div class="d-flex justify-content-between align-items-center text-center">
-        <h1 class="font-weight-bold font-italic">Lista de Categorias</h1>
+    <div class="flex flex-col md:flex-row gap-y-2 justify-content-between align-items-center text-center">
+        <h1 class="font-weight-bold font-italic">Lista de Marcas</h1>
 
-        <a class="btn btn-primary col-3" href="{{route("inventory.categories.create")}}" role="button">Crear</a>
+        <a class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-3 rounded w-full md:w-auto" href="{{route("inventory.brands.create")}}" role="button">
+            <i class="fa-solid fa-plus"></i>
+            Crear
+        </a>
     </div>
 @stop
 
+{{-- Declaración de dependencias adicionales --}}
 @section('adminlte_css_pre')
     @vite([
         'resources/css/tailwind.css',
-    ])
+        'resources/js/font-awesome.js',
+        'resources/css/admin.css'
+    ])  
 @endsection
 
 {{-- Contenido principal --}}
@@ -46,17 +52,21 @@
                         <td class="align-middle">{{$category->name}}</td>
                         <td class="align-middle">{{$category->products->count()}}</td>
                         <td>
-                            <div class="row">
-                                <div class="col">
-                                    <a class="btn btn-warning col-12" href="{{route('inventory.categories.edit', $category->slug)}}" role="button">Editar</a>
+                            <div class="flex justify-center gap-2 w-full">
+                                <div class="button-tooltip" data-tooltip="Editar categoría">
+                                    <a class="btn btn-warning" href="{{route('inventory.brands.edit', $category->slug)}}" role="button">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </a>
                                 </div>
-                                <div class="col">
-                                    <form action="{{route('inventory.categories.destroy', $category->slug)}}" method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="btn btn-danger col-12">Eliminar</button>
-                                    </form>
-                                </div>
+                                <form action="{{route('inventory.categories.destroy', $category->slug)}}" method="POST">
+                                    @csrf
+                                    @method('delete')
+                                    <div class="button-tooltip" data-tooltip="Eliminar categoría">
+                                        <button type="submit" class="btn btn-danger w-full">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </td>
                     </tr>
