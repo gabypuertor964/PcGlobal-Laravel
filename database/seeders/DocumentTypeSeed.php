@@ -23,7 +23,6 @@ class DocumentTypeSeed extends Seeder
 
             //Guardado del registro en la BD
             DocumentType::create([
-                'id'=>null,
                 'name'=>$registro[1],
                 'abbreviation'=>$registro[0]
             ]);

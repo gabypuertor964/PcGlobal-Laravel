@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Support\Str;
 
 /**
  * @abstract Administrador y manejador de slugs
@@ -16,7 +17,7 @@ class SlugManager{
      * @param Array $data
      * @return String
     */
-    public static function generate(Array $data): String
+    public static function generateInList(Array $data): String
     {
         $slug = "";
 
@@ -38,6 +39,17 @@ class SlugManager{
     }
 
     /**
+     * @abstract Generar un slug basado en una cadena
+     * 
+     * @param String $text Cadena de texto
+     * @return String
+    */
+    public static function generateInString(String $text): String
+    {
+        return Str::slug(CleanInputs::runLower($text),"-", "es");
+    }
+
+    /**
      * @abstract Encriptar un slug ya construido
      * 
      * @param string $slug
@@ -56,7 +68,7 @@ class SlugManager{
      */
     public static function encryptFromData(array $data)
     {
-        return urlencode(self::encrypt(self::generate($data)));
+        return urlencode(self::encrypt(self::generateInList($data)));
     }
 
     /**

@@ -65,11 +65,7 @@ class CategoriesController extends Controller
                 //Crear la categoria
                 $category = Category::create([
                     'name' => $request->name,
-                    'slug' => SlugManager::generate(
-                        explode(" ",
-                            CleanInputs::clean($request->name)
-                        )
-                    )
+                    'slug' => SlugManager::generateInString($request->name),
                 ]);
 
                 /**

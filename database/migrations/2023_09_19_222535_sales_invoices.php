@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('sales_invoices', function (Blueprint $table) {
             
             //Llave primaria
-            $table->integerIncrements('id')->comment("Llave Primaria");
+            $table->unsignedInteger('id',true)->comment("Llave Primaria");
 
             /* Campos personalizados */
                 $table->datetime("date_sale")->unique()->comment("Fecha y Hora ejecucion venta");

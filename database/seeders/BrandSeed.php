@@ -24,7 +24,7 @@ class BrandSeed extends Seeder
             Brand::create([
                 'id'=>null,
                 'name'=>$registro[0],
-                'slug'=>SlugManager::generate(explode(" ",$registro[0]))
+                'slug'=> SlugManager::generateInString($registro[0])
             ]);
         }
     }

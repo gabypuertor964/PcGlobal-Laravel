@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Helpers\SlugManager;
 use App\Models\Product;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +30,7 @@ class ProductSeed extends Seeder
                 File::makeDirectory(storage_path("app/public/products"));
             }
             
-            $product_directory = strtoupper($registro[5]);
+            $product_directory = strtoupper(SlugManager::generateInString($registro[2]));
 
             //Directorio producto especifico/individual
             if(!File::exists(storage_path("app/public/products/$product_directory"))){  
@@ -46,18 +47,14 @@ class ProductSeed extends Seeder
 
             //Guardado del registro en la BD
             Product::create([
-                'id'=>null,
-
                 'brand_id'=>DB::table('brands')->where('name',$registro[0])->value('id'),
 
                 'category_id'=>DB::table('categories')->where('name',$registro[1])->value('id'),
 
                 'model'=>$registro[2],
 
-                'currency_id'=>DB::table('currencies')->where('code',$registro[3])->value('id'),
-
-                'price'=>$registro[4],
-                'slug'=>$registro[5],
+                'price'=>$registro[3],
+                'slug'=> strtolower($product_directory),
             ]);
         }
     }

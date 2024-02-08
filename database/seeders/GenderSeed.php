@@ -23,7 +23,6 @@ class GenderSeed extends Seeder
 
             //Guardado del registro en la BD
             Gender::create([
-                'id'=>null,
                 'name'=>$registro[0],
             ]);
         }

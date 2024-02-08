@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pqrs_types', function (Blueprint $table) {
 
             //Llave primaria
-            $table->integerIncrements('id')->comment("Llave Primaria");
+            $table->unsignedInteger('id',true)->comment("Llave Primaria");
 
             /* Campos personalizados */
                 $table->string("name",30)->unique()->comment("Nombre del tipo de PQRS");

@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('purchase_units', function (Blueprint $table) {
 
             //Llave primaria
-            $table->bigInteger('id')->primary()->comment('Llave primaria');
+            $table->bigInteger('id',true)->comment('Llave primaria');
 
             /* Campos Personalizados */
                 $table->unsignedInteger('id_invoice')->comment('Fk Id Factura de compra');
 
-                $table->bigInteger('id_product')->comment('Fk Id del producto');
+                $table->unsignedBigInteger('id_product')->comment('Fk Id del producto');
 
-                $table->int('quantity')->comment('Cantidad de productos');
+                $table->unsignedInteger('quantity')->comment('Cantidad de productos');
             //
 
             //Campos create_at y update_at

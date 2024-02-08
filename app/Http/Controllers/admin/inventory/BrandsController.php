@@ -73,7 +73,7 @@ class BrandsController extends Controller
             DB::transaction(function() use($request){
                 Brand::create([
                     'name' => CleanInputs::runUpper($request->name),
-                    'slug' => SlugManager::generate(explode(" ",CleanInputs::runLower($request->name)))
+                    'slug' => SlugManager::generateInString($request->name)
                 ]);
             });
 
@@ -99,11 +99,8 @@ class BrandsController extends Controller
     public function edit(string $slug)
     {
         try{
-            //Desencriptar el slug
-            $slug = SlugManager::decrypt($slug);
-
             //Consultar la informacion solicitada
-            $brand = Brand::where('slug',$slug)->first();
+            $brand = GetRegister::Get($slug, 'brand');
 
             //Validar si la marca existe
             if($brand == null){
@@ -157,7 +154,7 @@ class BrandsController extends Controller
 
                 //Actualizar la informacion
                 $brand->name = CleanInputs::runUpper($request->name);
-                $brand->slug = SlugManager::generate(explode(" ",CleanInputs::runLower($request->name)));
+                $brand->slug = SlugManager::generateInString($request->name);
                 $brand->save();
             });
 

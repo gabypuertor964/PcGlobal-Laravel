@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             
             //Llave primaria
-            $table->integerIncrements('id')->comment("Llave Primaria");
+            $table->unsignedBigInteger('id',true)->comment("Llave Primaria");
 
             /* Campos Personalizados */
                 $table->unsignedInteger("brand_id")->comment("Fk Id Marca");
@@ -25,7 +25,7 @@ return new class extends Migration
 
                 $table->decimal("price",10,2)->comment("Precio unitario del producto");
 
-                $table->integer("stock")->comment("Stock del producto");
+                $table->unsignedBigInteger("stock")->comment("Stock del producto")->default(0);
 
                 $table->string("slug")->unique()->comment("Ruta Url");
             //

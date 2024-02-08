@@ -34,8 +34,8 @@ class CleanInputs{
     /**
      * @abstract Ejecutar las operaciones de limpieza y conversion a minusculas
      * 
-     * @param ?String $text
-     * @return String
+     * @param ?string $text
+     * @return string
     */
     public static function runLower(?String $text): String
     {
@@ -51,6 +51,35 @@ class CleanInputs{
     }
 
     /**
+     * @abstract Ejecutar las operaciones de limpieza y conversion a minusculas en una lista de palabras
+     * 
+     * @param array $data
+     * @return string
+    */
+    public static function runLowerInList(Array $data): array
+    {
+        //Inicializacion del listado
+        $array = [];
+
+        //Acceso al listado
+        foreach($data as $register){
+            if(Validator::run($register)){
+
+                // Reemplazo del registro por la cadena limpiada
+                $register = self::lower(self::clean($register));
+
+                // Adicionar del registro al listado
+                if($register != "" || $register != null)
+                {
+                    array_push($array, $register);
+                }
+            }
+        }
+
+        return $array;
+    }
+
+    /**
      * @abstract Eliminar los espacios en blanco innecesarios de una cadena
      * 
      * @param String $text
@@ -58,7 +87,7 @@ class CleanInputs{
     */
     public static function clean(String $text): String
     {
-        return trim(preg_replace('/\s+/', ' ', $text));
+        return trim(preg_replace('/\s+/', ' ', $text));       
     }
     
     /**

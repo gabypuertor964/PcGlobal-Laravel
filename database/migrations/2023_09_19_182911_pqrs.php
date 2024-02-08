@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pqrs', function (Blueprint $table) {
 
             //Llave primaria
-            $table->integerIncrements('id')->comment("Llave Primaria");
+            $table->unsignedInteger('id',true)->comment("Llave Primaria");
 
             /* Campos Personalizados  */
                 $table->bigInteger("client_id")->comment("Id Cliente");

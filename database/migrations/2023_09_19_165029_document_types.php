@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('document_types', function (Blueprint $table) {
 
             //Llave primaria
-            $table->integerIncrements('id')->comment("Llave Primaria");
+            $table->unsignedInteger('id',true)->comment("Llave Primaria");
 
             /* Campos Personalizados */
                 $table->string("name",50)->unique()->comment("nombre del tipo de documento");

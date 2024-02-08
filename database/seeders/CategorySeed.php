@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Helpers\SlugManager;
 use App\Models\Category;
 use Illuminate\Database\Seeder;
 
@@ -21,9 +22,8 @@ class CategorySeed extends Seeder
 
             //Guardado del registro en la BD
             Category::create([
-                'id'=>null,
-                'name'=>$registro[0],
-                'slug'=>$registro[1]
+                'name'=> $registro[0],
+                'slug'=> SlugManager::generateInString($registro[0])
             ]);
         }
     }
