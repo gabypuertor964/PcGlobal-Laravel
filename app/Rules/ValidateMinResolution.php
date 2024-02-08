@@ -24,10 +24,10 @@ class ValidateMinResolution implements ValidationRule
      * @param  int  $minHeight
      * @return void
      */
-    public function __construct(int $minHeight,int $minWidth,)
+    public function __construct(int $minWidth,int $minHeight)
     {
-        $this->minHeight = $minHeight;
         $this->minWidth = $minWidth;
+        $this->minHeight = $minHeight;
     }
 
     /**

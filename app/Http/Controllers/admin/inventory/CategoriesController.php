@@ -12,6 +12,7 @@ use App\Models\Category;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
@@ -74,7 +75,7 @@ class CategoriesController extends Controller
                 $photo = Image::make($request->file('photo'));
 
                 //Redimensionar imagen y establecer la resolucion DPI
-                $photo->resizeCanvas(1280, 720);
+                $photo->resizeCanvas(1920, 1080);
 
                 //Codificacion de la imagen a png
                 $photo->encode('png',100);
@@ -109,6 +110,12 @@ class CategoriesController extends Controller
         //Desencriptar el slug
         $category = GetRegister::Get($slug, 'category');
 
+        // Verificar si la categoria tiene una imagen asociada
+        $category->image = Validator::publicImageExist("/storage/categories/$category->slug.png");
+
+        //Añadir registro de slug encriptado
+        $category->slug = SlugManager::encrypt($category);
+
         //Retornar la vista con la informacion solicitada
         return view('admin.inventory.categories.edit', compact('category'));
     }
@@ -116,9 +123,9 @@ class CategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CategoriesRequest $request, string $slug)
     {
-        //
+        return dd($request->all());
     }
 
     /**

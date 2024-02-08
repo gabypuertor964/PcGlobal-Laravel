@@ -87,7 +87,7 @@ class CleanInputs{
     */
     public static function clean(String $text): String
     {
-        return trim(preg_replace('/\s+/', ' ', $text));       
+        return trim(preg_replace('/\s+/', ' ', $text)); 
     }
     
     /**
@@ -115,7 +115,7 @@ class CleanInputs{
     /**
      * @abstract Convertir la primera letra de la cadena a mayuscula
      * 
-     * @param string $text
+     * @param ?string $text
      * @return string
     */
     public static function capitalize(String $text): String

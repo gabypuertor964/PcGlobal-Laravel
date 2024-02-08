@@ -21,6 +21,9 @@
         {{-- Token de seguridad --}}
         @csrf
 
+        {{-- Metodo de envio --}}
+        @method('PUT')
+
         <div class="text-center">
             <div class="row mb-3">
 
@@ -32,7 +35,7 @@
                         <div class="col">
                             <div>
                                 <label for="name" class="form-label">Nombre</label>
-                                <input type="text" class="form-control text-center col-12" name="name" id="name" value="{{$category->name}}" min="1" max="255"/>
+                                <input type="text" class="form-control text-center col-12" name="name" id="name" value="{{$category->name}}" min="1" max="255" required/>
                             </div>
                         </div>
                     </div>
@@ -61,9 +64,9 @@
 
                         {{-- Visualizador de foto --}}
                         <div class="card-body p-3">
-                            <input type="file" name="photo" id="photo" accept=".jpeg, .png, .jpg, .svg" class="d-none" required>
+                            <input type="file" name="photo" id="photo" accept=".jpeg, .png, .jpg, .svg" class="d-none">
 
-                            <img src='{{asset("storage/categories/$category->slug.png")}}' style="width: 60%; height: 60%" id="photo_preview">
+                            <img src='{{$category->image}}' style="width: 60%; height: 60%" id="photo_preview">
                         </div>
 
                         {{-- Boton de carga --}}
@@ -82,7 +85,6 @@
 {{-- Importacion scripts --}}
 @section('js')
     @vite([
-        'resources/js/upper.js',
         'resources/js/select_preview.js'
     ])
 @endsection

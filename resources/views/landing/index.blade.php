@@ -69,78 +69,16 @@
     {{-- Imagenes enlace --}}
     <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 bg-gray-100 gap-6 transition-all">
 
-      {{-- Seccion: Tarjetas graficas --}}
-      <div class="flex flex-col justify-center transition-all">
-        <a href="{{route('category.show','tarjetas-graficas')}}" class="hover:text-gray-800">
-          <img src="{{ asset('storage/categories/graphic_card.png')}}" class="rounded ease-out duration-200 hover:scale-95 hover:shadow-2xl" alt="Img de Tarjeta Gráfica">
-          <p class="text-center py-2 font-medium text-base lg:text-lg text-gray-800">Tarjetas Gráficas</p>
-        </a>
-      </div>
+      @foreach ($categories as $category)
+        <div class="flex flex-col justify-center transition-all">
+          <a href="{{route('category.show',$category->slug)}}" class="hover:text-gray-800">
+            <img src="{{$category->image}}" class="rounded ease-out duration-200 hover:scale-95 hover:shadow-2xl" alt="Img de Tarjeta Gráfica">
 
-      {{-- Seccion: Procesadores --}}
-      <div class="flex flex-col justify-center transition-all">
-        <a href="{{route('category.show','procesadores')}}" class="hover:text-gray-800">
-          <img src="{{ asset('storage/categories/processor.png')}}" class="rounded ease-out duration-200 hover:scale-95 hover:shadow-2xl" alt="Img de Procesador">
-          <p class="text-center py-2 font-medium text-base lg:text-lg text-gray-800">Procesadores</p>
-        </a>
-      </div>
+            <p class="text-center py-2 font-medium text-base lg:text-lg text-gray-800">{{$category->name}}</p>
+          </a>
+        </div>
+      @endforeach
 
-      {{-- Seccion: Perifericos --}}
-      <div class="flex flex-col justify-center transition-all">
-        <a href="{{route('category.show','perifericos')}}" class="hover:text-gray-800">
-          <img src="{{ asset('storage/categories/peripherals.png')}}" class="rounded ease-out duration-200 hover:scale-95 hover:shadow-2xl" alt="Img de Periféricos">
-          <p class="text-center py-2 font-medium text-base lg:text-lg text-gray-800">Periféricos</p>
-        </a>
-      </div>
-
-      {{-- Seccion: Tarjetas Madre --}}
-      <div class="flex flex-col justify-center transition-all">
-        <a href="{{route('category.show','tarjetas-madre')}}" class="hover:text-gray-800">
-          <img src="{{ asset('storage/categories/mother_board.png')}}" class="rounded ease-out duration-200 hover:scale-95 hover:shadow-2xl" alt="Img de Mother-Board">
-          <p class="text-center py-2 font-medium text-base lg:text-lg text-gray-800">Tarjetas Madre</p>
-        </a>
-      </div>
-
-      {{-- Seccion: Fuentes de Poder --}}
-      <div class="flex flex-col justify-center transition-all">
-        <a href="{{route('category.show','fuentes-de-poder')}}" class="hover:text-gray-800">
-          <img src="{{ asset('storage/categories/power_supply.png')}}" class="rounded ease-out duration-200 hover:scale-95 hover:shadow-2xl" alt="Img de FdP">
-          <p class="text-center py-2 font-medium text-base lg:text-lg text-gray-800">Fuentes de Poder</p>
-        </a>
-      </div>
-
-      {{-- Seccion: Memorias Ram --}}
-      <div class="flex flex-col justify-center transition-all">
-        <a href="{{route('category.show','rams')}}" class="hover:text-gray-800">
-          <img src="{{ asset('storage/categories/ram.png')}}" class="rounded ease-out duration-200 hover:scale-95 hover:shadow-2xl" alt="Img de Ram">
-          <p class="text-center py-2 font-medium text-base lg:text-lg text-gray-800">Ram's</p>
-        </a>
-      </div>
-
-      {{-- Seccion: Almacenamiento --}}
-      <div class="flex flex-col justify-center transition-all">
-        <a href="{{route('category.show','almacenamientos')}}" class="hover:text-gray-800">
-          <img src="{{ asset('storage/categories/storage.png')}}" class="rounded ease-out duration-200 hover:scale-95 hover:shadow-2xl" alt="Img de Almcenamiento">
-          <p class="text-center py-2 font-medium text-base lg:text-lg text-gray-800">Almacenamiento</p>
-        </a>
-      </div>
-
-      {{-- Seccion: Gabinetes --}}
-      <div class="flex flex-col justify-center transition-all">
-        <a href="{{route('category.show','cases')}}" class="hover:text-gray-800">
-          <img src="{{ asset('storage/categories/cases.png')}}" class="rounded ease-out duration-200 hover:scale-95 hover:shadow-2xl" alt="Img de Almcenamiento">
-          <p class="text-center py-2 font-medium text-base lg:text-lg text-gray-800">Cases</p>
-        </a>
-      </div>
-
-      {{-- Seccion: Monitores --}}
-      <div class="flex flex-col justify-center transition-all">
-        <a href="{{route('category.show','monitores')}}" class="hover:text-gray-800">
-          <img src="{{ asset('storage/categories/monitors.png')}}" class="rounded ease-out duration-200 hover:scale-95 hover:shadow-2xl" alt="Img de Monitores">
-          <p class="text-center py-2 font-medium text-base lg:text-lg text-gray-800">Monitores</p>
-        </a>
-      </div>
-    </div>
-    
+    </div>    
   </section>
 @endsection

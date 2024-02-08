@@ -12,14 +12,14 @@
 
 {{-- Declaracion de dependencias adicionales --}}
 @section('dependences')
-    @vite([
+  @vite([
         
-        //Bootstrap
-        'resources/css/bootstrap.scss',
-        'resources/css/app.css',
-        'resources/js/font-awesome.js',
-        'resources/css/tailwind.css',
-    ])
+    //Bootstrap
+    'resources/css/bootstrap.scss',
+    'resources/css/app.css',
+    'resources/js/font-awesome.js',
+    'resources/css/tailwind.css',
+  ])
 @endsection
 
 {{-- Contenido Principal --}}

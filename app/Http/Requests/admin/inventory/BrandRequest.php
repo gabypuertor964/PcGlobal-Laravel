@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests\admin\inventory;
 
+use App\Helpers\CleanInputs;
 use App\Helpers\GetRegister;
 use App\Helpers\RolesManager;
+use App\Helpers\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class BrandRequest extends FormRequest
@@ -19,6 +21,18 @@ class BrandRequest extends FormRequest
             return true;
         }else{
             return false;
+        }
+    }
+
+    /**
+     * @abstract Alterar los valores de los campos
+     * 
+     * @return void
+    */
+    public function prepareForValidation()
+    {
+        if(Validator::run($this->input('name'))){
+            $this->request->set('name', CleanInputs::capitalize($this->name));
         }
     }
 

@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests\admin\inventory;
 
+use App\Helpers\CleanInputs;
 use App\Helpers\GetRegister;
 use App\Helpers\RolesManager;
+use App\Helpers\Validator;
 use App\Rules\ValidateMinResolution;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -18,6 +20,18 @@ class CategoriesRequest extends FormRequest
             return true;
         }else{
             return false;
+        }
+    }
+
+    /**
+     * @abstract Alterar los valores de los campos
+     * 
+     * @return void
+    */
+    public function prepareForValidation()
+    {
+        if(Validator::run($this->input('name'))){
+            $this->request->set('name', CleanInputs::capitalize($this->name));
         }
     }
 
@@ -48,8 +62,8 @@ class CategoriesRequest extends FormRequest
                 'required',
                 'image',
                 'mimes:jpeg,png,jpg,svg',
-                'max:2048',
-                new ValidateMinResolution(1280, 720)
+                'max:3072',
+                new ValidateMinResolution(1920, 1080)
             ];
         }
 

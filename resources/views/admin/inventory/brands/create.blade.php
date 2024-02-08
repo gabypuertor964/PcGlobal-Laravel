@@ -36,7 +36,7 @@
                 {{-- Campo: Nombre --}}
                 <div class="mb-3">
                     <label for="name" class="form-label">Nombre</label>
-                    <input type="text" class="form-control text-center" name="name" id="name" value="{{old('name')}}" min="1" max="255"/>
+                    <input type="text" class="form-control text-center" name="name" id="name" value="{{old('name')}}" min="1" max="255" required/>
                 </div>
 
                 <div class="flex justify-center gap-4">
@@ -58,11 +58,4 @@
         </form>
     </div>
     
-@endsection
-
-{{-- Importacion scripts --}}
-@section('js')
-    @vite([
-        'resources/js/upper.js'
-    ])
 @endsection

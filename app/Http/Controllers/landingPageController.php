@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Validator;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Facades\File;
@@ -13,7 +14,16 @@ class landingPageController extends Controller
      * @abstract Retorna la vista de la página principal
     */
     public function index(){
-        return view('landing.index');
+
+        // Obtener el listado de categorias
+        $categories = Category::all();
+
+        // Verificar si la categoria tiene una imagen asociada
+        foreach($categories as $category){
+            $category->image = Validator::publicImageExist("/storage/categories/$category->slug.png");
+        }
+
+        return view('landing.index',compact('categories'));
     }   
 
     /**

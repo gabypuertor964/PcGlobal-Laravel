@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 /**
  * @abstract Validador de entradas de texto
@@ -111,5 +112,19 @@ class Validator{
         }
     
         return true;
+    }
+
+    /**
+     * @abstract Verificar si una imagen publica existe
+     * 
+     * @return bool
+    */
+    public static function publicImageExist($directory,$default = "storage/others/default-image.png"): String 
+    {
+        if(File::exists(public_path($directory))){
+            return asset($directory);
+        }else{
+            return asset($default);
+        }
     }
 }

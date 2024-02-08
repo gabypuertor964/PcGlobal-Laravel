@@ -23,7 +23,6 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/js/navbar.js',
                 'resources/js/scroll.js',
-                'resources/js/upper.js',
                 'resources/js/select_preview.js',
             ],
             refresh: true,
