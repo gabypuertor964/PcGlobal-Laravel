@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Tabla: Productos
      */
     public function up(): void
     {
@@ -23,9 +23,9 @@ return new class extends Migration
 
                 $table->string("model")->unique()->comment("Modelo del Producto");
 
-                $table->unsignedInteger('currency_id')->comment("Id Moneda");
-
                 $table->decimal("price",10,2)->comment("Precio unitario del producto");
+
+                $table->integer("stock")->comment("Stock del producto");
 
                 $table->string("slug")->unique()->comment("Ruta Url");
             //
@@ -37,8 +37,6 @@ return new class extends Migration
                 $table->foreign("brand_id")->references("id")->on("brands")->onDelete('cascade')->onUpdate('cascade');
 
                 $table->foreign("category_id")->references("id")->on("categories")->onDelete('cascade')->onUpdate('cascade');
-
-                $table->foreign('currency_id')->references('id')->on('currencies')->onDelete('cascade')->onUpdate('cascade');
             //
         });
     }

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Table: Unidades de compra
      */
     public function up(): void
     {
@@ -19,16 +19,18 @@ return new class extends Migration
             /* Campos Personalizados */
                 $table->unsignedInteger('id_invoice')->comment('Fk Id Factura de compra');
 
-                $table->bigInteger('id_unit')->comment('Fk Id Unidad del producto');
+                $table->bigInteger('id_product')->comment('Fk Id del producto');
+
+                $table->int('quantity')->comment('Cantidad de productos');
             //
 
             //Campos create_at y update_at
             $table->timestamps();
 
             /* Llaves Foraneas */
-                $table->foreign('id_invoice')->references('id')->on('purchases');
+                $table->foreign('id_invoice')->references('id')->on('sales_invoices');
 
-                $table->foreign('id_unit')->references('id')->on('products_units');
+                $table->foreign('id_product')->references('id')->on('products');
             //
         });
     }

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Tabla: Registros de PQRS (Peticiones, Quejas, Reclamos, Sugerencias)
      */
     public function up(): void
     {

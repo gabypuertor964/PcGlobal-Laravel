@@ -12,7 +12,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        /* Ejecucion Seeders globales (Ejecucion en Cascada) */
+        /* Ejecucion Seeders locales/desarrollo */
+        if(env('APP_ENV') == 'local'){
+            $this->call([
+                //Seed: Categorias
+                CategorySeed::class,
+
+                //Seed: Marcas
+                BrandSeed::class,
+
+                //Seed: Productos
+                ProductSeed::class,
+
+                //Seed: Usuarios
+                UserSeed::class,
+            ]);
+        }
+
+        /* Ejecucion Seeders globales */
         $this->call([
 
             //Seed: Tipos de documento
@@ -27,33 +44,9 @@ class DatabaseSeeder extends Seeder
             //Seed: Estados
             StateSeed::class,
 
-            //Seed: Monedas
-            CurrencySeed::class,
-
-            //Seed: Categorias
-            CategorySeed::class,
-
-            //Seed: Marcas
-            BrandSeed::class,
-
-            //Seed: Productos
-            ProductSeed::class,
-
             //Seed: Roles y Permisos
             RolePermissionSeed::class,
         ]);
-
-        /**
-         * Ejecucion de seeders locales
-         * 
-        */
-        if(env('APP_ENV')=='local'){
-            
-            //Seed: Usuarios
-            $this->call([
-                usersSeed::class,
-            ]);
-        }
 
     }
 }

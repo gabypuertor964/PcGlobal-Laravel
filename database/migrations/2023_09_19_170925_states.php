@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Tabla: Estados de los procesos x area/departamento
      */
     public function up(): void
     {

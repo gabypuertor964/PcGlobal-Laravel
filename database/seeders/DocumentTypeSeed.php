@@ -15,7 +15,7 @@ class DocumentTypeSeed extends Seeder
     public function run(): void
     {
         //Abrir el archivo "doc_typ.csv" y guardar los datos de este en una variable
-        $csv=fopen(database_path("data/doc_typ.csv"),"r");
+        $csv=fopen(database_path("data/document_types.csv"),"r");
 
         while(($registro=fgetcsv($csv,2000,";"))!=FALSE){
             //Filtrado caracteres especiales

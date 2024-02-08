@@ -2,11 +2,11 @@
 @extends('adminlte::page')
 
 {{-- Complemento titulo --}}
-@section('title', 'Editar Categoria')
+@section('title', 'Actualizar Categoria')
 
 {{-- Titulo principal --}}
 @section('content_header')
-    <h1 class="text-center font-weight-bold font-italic">Editar Categoria</h1>
+    <h1 class="text-center font-weight-bold font-italic">Actualizar Categoria</h1>
 @stop
 
 {{-- Contenido principal --}}

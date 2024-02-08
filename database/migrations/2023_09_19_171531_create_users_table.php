@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Tabla: Usuarios (Clientes, Administradores, Empleados, etc.)
      */
     public function up(): void
     {
@@ -33,7 +33,7 @@ return new class extends Migration
 
                 $table->string('email',255)->unique()->comment("Correo Electronico");
 
-                $table->string('password',255)->comment("Contraseña Hasheada");
+                $table->string('password',255)->unique()->comment("Contraseña Hasheada");
 
                 $table->timestamp('email_verified_at')->nullable()->comment("Fecha y Hora validacion de correo electronico");
 

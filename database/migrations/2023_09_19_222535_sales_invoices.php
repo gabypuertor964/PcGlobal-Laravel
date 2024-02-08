@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Tabla: Facturas de Venta
      */
     public function up(): void
     {
@@ -20,8 +20,6 @@ return new class extends Migration
                 $table->datetime("date_sale")->unique()->comment("Fecha y Hora ejecucion venta");
 
                 $table->bigInteger('id_client')->comment("Id Cliente");
-                
-                $table->unsignedInteger("currency_id")->comment("Id Moneda");
 
                 $table->string("subtotal",10)->comment("Subtotal Factura");
 
