@@ -177,6 +177,13 @@ nav {
   }
 }
 
+@media (min-width: 1380px) {
+  .image-container-carousel {
+    width: 650px;
+    height: 650px;
+  }
+}
+
 /* Estilos para el login */
 
 .login-header {

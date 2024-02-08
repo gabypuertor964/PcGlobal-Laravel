@@ -67,7 +67,7 @@
     </div>
 
     {{-- Imagenes enlace --}}
-    <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 bg-gray-100 gap-6 transition-all">
+    <div class="grid grid-cols-2 lg:grid-cols-3 bg-gray-100 gap-6 transition-all">
 
       @foreach ($categories as $category)
         <div class="flex flex-col justify-center transition-all">
