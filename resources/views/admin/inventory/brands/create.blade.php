@@ -41,14 +41,14 @@
 
                 <div class="flex justify-center gap-4">
                     {{-- Boton: Guardar --}}
-                    <div class="button-tooltip w-1/3 lg:w-1/4" data-tooltip="Confirmar actualización">
+                    <div class="button-tooltip w-1/3 lg:w-1/4" data-tooltip="Confirmar creación">
                         <button type="submit" class="btn btn-success col-12">
                             <i class="fa-solid fa-check"></i>
                         </button>
                     </div>
     
                     {{-- Boton: Cancelar --}}
-                    <div class="button-tooltip w-1/3 lg:w-1/4" data-tooltip="Cancelar actualización">
+                    <div class="button-tooltip w-1/3 lg:w-1/4" data-tooltip="Cancelar creación">
                         <a class="btn btn-danger col-12" href="{{route("inventory.brands.index")}}" role="button">
                             <i class="fa-solid fa-plus fa-rotate-by" style="--fa-rotate-angle: 45deg;"></i>
                         </a>
