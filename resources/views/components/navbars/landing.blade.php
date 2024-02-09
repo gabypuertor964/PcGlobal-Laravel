@@ -34,8 +34,20 @@
               <i class="fa-regular fa-user"></i>
             </button>
             <div class="dropdown-menu-l" id="dropdownMenu" tabindex="-1">
-              <a href="{{route("login")}}" aria-label="Link for login" class="item">Inicia Sesión</a>
-              <a href="{{route("register")}}" aria-label="Link for registration" class="item">Regístrate</a>
+              @if (auth()->check())                
+                <a href="{{route("redirect")}}" aria-label="Link for dashboard" class="item">Dashboard</a>
+
+                {{-- Formulario de cierre de sesion --}}
+                <form action="{{route('logout')}}" method="post" class="item">
+                  {{-- Token de seguridad--}}
+                  @csrf
+
+                  <button type="submit" aria-label="Link for logout">Cerrar Sesión</button>
+                </form>
+              @else
+                <a href="{{route("login")}}" aria-label="Link for login" class="item">Inicia Sesión</a>
+                <a href="{{route("register")}}" aria-label="Link for registration" class="item">Regístrate</a>
+              @endif
             </div>
           </div>
           <div class="border"></div>

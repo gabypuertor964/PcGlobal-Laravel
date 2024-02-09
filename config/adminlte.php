@@ -152,7 +152,7 @@ return [
             'img' => [
 
                 // Ruta de la imagen a mostrar
-                'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+                'path' => 'storage/others/logotype_min_color.png',
 
                 // Texto alternativo en caso que no se muestre la imagen
                 'alt' => 'Logo PcGlobal',
@@ -161,8 +161,8 @@ return [
                 'effect' => 'animation__shake',
 
                 // Alto (Height) y Ancho (Width) de la imagen (px)
-                'width' => 60,
-                'height' => 60,
+                'width' => 100,
+                'height' => 100,
             ],
         ],
     //
@@ -462,7 +462,7 @@ return [
         'use_route_url' => true,
 
         // Nombre de Ruta/URL de redireccion al dashboard
-        'dashboard_url' => 'redirect',
+        'dashboard_url' => 'index',
 
         // Nombre de Ruta/URL de cerrado de sesion
         'logout_url' => 'logout',
