@@ -51,7 +51,7 @@ class ProductSeed extends Seeder
 
                 'category_id'=>DB::table('categories')->where('name',$registro[1])->value('id'),
 
-                'model'=>$registro[2],
+                'name'=>$registro[2],
 
                 'price'=>$registro[3],
                 'slug'=> strtolower($product_directory),

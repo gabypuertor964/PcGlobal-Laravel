@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Product;
 use App\Models\User;
 
 class GetRegister{
@@ -43,6 +44,17 @@ class GetRegister{
     }
 
     /**
+     * @abstract Obtener la informacion de un producto segun su slug
+     * 
+     * @param string $slug Slug del producto
+     * @return \App\Models\Product
+    */
+    private static function product(String $slug)
+    {
+        return Product::where('slug', SlugManager::decrypt($slug))->first();
+    }
+
+    /**
      * @abstract Obtener la información de un registro segun su tipo y slug
      * 
      * @param string $type Tipo de registro 
@@ -63,6 +75,10 @@ class GetRegister{
 
             case "category":
                 return self::category($slug);
+            break;
+
+            case "product":
+                return self::product($slug);
             break;
         }
     }

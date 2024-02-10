@@ -10,6 +10,30 @@ class Product extends Model
     use HasFactory;
 
     /**
+     * @abstract Definir los campos que se pueden llenar de forma masiva
+     * 
+     * @var array
+    */
+    protected $fillable = [
+        'brand_id',
+        'category_id',
+        'name',
+        'price',
+        'stock',
+        'slug',
+    ];
+
+    /**
+     * @abstract Obtener los campos que se pueden llenar de forma masiva
+     * 
+     * @var array
+    */
+    public static function inputs()
+    {
+        (new self)->getFillable();
+    }
+
+    /**
      * @abstract Definir el campo de busqueda por defecto
      * 
      * @return string
@@ -34,23 +58,4 @@ class Product extends Model
     {
         return $this->belongsTo(Brand::class,"brand_id");
     }
-
-    /**
-     * @abstract Obtener el numero unidades registradas
-    */
-    public function units()
-    {
-        
-    }
-
-    /**
-     * @abstract Obtener el numero de unidades disponibles del producto
-     * 
-     * @return int
-    */
-    public function unitsAvailable()
-    {
-        //return $this->hasMany(UnitsAvailable::class);
-    }
-
 }

@@ -21,7 +21,7 @@ return new class extends Migration
 
                 $table->unsignedInteger("category_id")->comment("Fk Id Categoría");
 
-                $table->string("model")->unique()->comment("Modelo del Producto");
+                $table->string("name")->unique()->comment("Modelo del Producto");
 
                 $table->decimal("price",10,2)->comment("Precio unitario del producto");
 

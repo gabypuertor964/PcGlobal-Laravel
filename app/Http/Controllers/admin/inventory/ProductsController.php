@@ -2,25 +2,43 @@
 
 namespace App\Http\Controllers\admin\inventory;
 
+use App\Helpers\SlugManager;
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @abstract Muestra una lista de los productos
      */
     public function index()
     {
-        //
+        //Obtener los productos y paginarlos
+        $products = Product::paginate(10);
+
+        //Encriptar temporalmente los slugs
+        foreach ($products as $product) {
+            $product->slug = SlugManager::encrypt($product->slug);
+        }
+
+        //Retornar la vista con los productos
+        return view('admin.inventory.products.index', compact('products'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * @abstract Muestra el formulario para crear un nuevo producto
      */
     public function create()
     {
-        //
+        // Consultar la informacion solicitada
+        $categories = Category::all();
+        $brands = Brand::all();
+
+        // Retornar la vista con la informacion solicitada
+        return view('admin.inventory.products.create', compact('categories', 'brands'));
     }
 
     /**
