@@ -37,7 +37,7 @@
     @forelse ($products as $product)
       <a href="{{route('product.show',$product->slug)}}" class="product-card my-3 border rounded-md shadow">
     
-        <h3 class="product-title p-3 text-center mx-10 font-medium">{{$product->brand->name}} - {{$product->model}}</h3>
+        <h3 class="product-title p-3 text-center mx-10 font-medium">{{$product->brand->name}} - {{$product->name}}</h3>
 
         <img src="{{ asset('storage/products/'. strtoupper($product->slug)."/images/1.png") }}" alt="{{ $product->model}}" class="product-img my-3"> 
 

@@ -49,10 +49,10 @@ class landingPageController extends Controller
             ['..', '.']
         );
 
-        $specs_file = File::get(storage_path('app/public/products/'. strtoupper($product->slug).'/specs.md'));
+        $specs_file = File::get(storage_path('app/public/products/'. strtoupper($product->slug).'/description.md'));
 
         $parsedown = new Parsedown();
-        $product->specs = $parsedown->text($specs_file);
+        $product->description = $parsedown->text($specs_file);
 
         /**
          * Consultar y retornar la informacion del producto

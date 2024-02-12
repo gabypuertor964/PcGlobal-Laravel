@@ -90,10 +90,10 @@ class CategoriesController extends Controller
                 'text' => '¡Categoria creada con exito!'
             ]);
             
-        }catch(Exception $e){
+        }catch(Exception){
             return redirect()->back()->withInput()->with('message',[
                 'status' => 'danger',
-                'text' => $e->getMessage()
+                'text' => "¡Ha ocurrido un error inesperado al crear la categoria!"
             ]);
         }
     }

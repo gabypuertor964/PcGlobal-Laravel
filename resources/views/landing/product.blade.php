@@ -2,7 +2,7 @@
 @extends('layouts.landing')
 
 {{-- Declaracion complemtento etiqueta title del Header --}}
-@section('title', $product->model . " - " . $product->category->name)
+@section('title', $product->name)
 
 {{-- Declaracion y envio de clases personalidas a la etiqueta body presente en el componente principal--}}
 @section('body_class','flex flex-col min-h-screen bg-gray-100')
@@ -62,7 +62,7 @@
         <li class="text-lg lg:text-lg -mb-2 lg:-mb-4"><p class="font-semibold">{{$product->brand->name}}</p></li>
         
         <li class="text-xl lg:text-2xl hover:underline">
-          <p class="font-bold">{{$product->model}}</p>
+          <p class="font-bold">{{$product->name}}</p>
         </li>
 
         <li class="text-lg lg:text-2xl">${{number_format($product->price, 0, '.', '.')}}</li>
@@ -70,7 +70,7 @@
       
       {{-- Especificaciones tecnicas --}}
       <div class="especificaciones prose prose-sm lg:prose-base my-2">
-        {!! $product->specs !!}
+        {!! $product->description !!}
       </div>            
       
     </aside>

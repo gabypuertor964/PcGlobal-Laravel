@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -125,6 +126,34 @@ class Validator{
             return asset($directory);
         }else{
             return asset($default);
+        }
+    }
+
+    /**
+     * @abstract Verificar si la imagen(es) recibida en la Request es valida
+     * 
+     * @param mixed $images Imagenes recibidas en la Request
+     * @return bool
+    */
+    public static function ValidateImages(mixed $value, int $minWidth, int $minHeight): bool
+    {
+        try{
+            //Obtener tamaño de la imagen
+            $imageSize = getimagesize($value);
+
+            //Comprobacion altura de la imagen
+            if ($imageSize[1] < $minHeight) {
+                return false;
+            }
+
+            //Comprobacion ancho de la imagen
+            if ($imageSize[0] < $minWidth) {
+                return false;
+            }
+
+            return true;
+        }catch(Exception){
+            return false;
         }
     }
 }
