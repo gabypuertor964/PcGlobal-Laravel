@@ -16,6 +16,20 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    /**
+     * @abstract Obtener los datos del usuario autenticado
+     * 
+     * @return \App\Models\User
+     * 
+    */
+    public static function get()
+    {
+        try{
+            return User::find(Auth::user()->id);
+        }catch(Exception){
+            return null;
+        }
+    }
 
     /**
      * @abstract Consultar y retornar la vista de registro junto con los datos requeridos
@@ -24,7 +38,6 @@ class AuthController extends Controller
     */
     public function registerView()
     {
-
         //Consultar tipos de documento
         $document_types = DocumentType::all();
 
@@ -42,15 +55,17 @@ class AuthController extends Controller
     */
     public function redirect()
     {
+        // Obtener la informacion del usuario autenticado
+        $user = self::get();
 
-        //Obtener toda la información del usuario autenticado
-        $info_usuario=User::find(Auth::user()->id);
+        /**
+         * En caso de no encontrar el usuario autenticado se redirecciona al logout
+        */
+        if($user == null){
+            return redirect()->route('logout');
+        }
 
-        //Obtener todos los roles que tenga el usuario y seleccionar el primero
-        $rol=$info_usuario->getRoleNames()[0];
-
-        //Redireccion segun rol
-        switch($rol){
+        switch($user->getRoleNames()[0]){
 
             /* Redireccion Dashboard Cliente */
                 case "cliente":
@@ -77,14 +92,12 @@ class AuthController extends Controller
     {
         try{
 
-            //Listado de campos a validar
-            $search = array_merge(User::inputs());
+            /**
+             * Ejecutar las validaciones adicionales
+            */
+            if(!Validator::runInRequest($request,User::inputs(),['state_id'])){
 
-            //Listado de campos exonerados de la validacion
-            $except = ['state_id'];
-
-            /* Ejecutar las validaciones secundarias */
-            if(!Validator::runInRequest($request,$search,$except)){
+                // Redireccion a la vista de registro con mensaje de advertencia
                 return redirect()->back()->withInput()->with('message',[
                     'status'=>'warning',
                     'text'=>'¡Verifica los campos y realiza las correcciones necesarias!'
@@ -94,7 +107,7 @@ class AuthController extends Controller
             /**
              * Transaccion para la creacion de un cliente
              * 
-             * @param \App\Http\Requests\authValidate $request
+             * @param ClientRequest $request
              * @return void
             */
             DB::transaction(function() use($request){
@@ -123,7 +136,7 @@ class AuthController extends Controller
             //Redireccion a la vista de registro con mensaje de error
             return redirect()->back()->withInput()->with('message',[
                 'status'=>'danger',
-                'text'=>'Ha ocurrido un error, contacte al administrador del sistema.'
+                'text'=>'! Ha ocurrido un error, contacte al administrador del sistema. !'
             ]);
         }
         

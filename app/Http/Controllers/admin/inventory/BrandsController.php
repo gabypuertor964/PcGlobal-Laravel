@@ -15,6 +15,21 @@ use Illuminate\Support\Facades\DB;
 class BrandsController extends Controller
 {
     /**
+     * @abstract Obtener el registro de una marca segun su slug encriptado
+     * 
+     * @param string $slug
+     * @return Brand|null 
+    */
+    public static function get(string $slug): mixed
+    {
+        try{
+            return Brand::where('slug', SlugManager::decrypt($slug))->first();
+        }catch(Exception){
+            return null;
+        }
+    }
+
+    /**
      * @abstract Metodo constructor y declaracion de middlewares
     */
     public function __construct()
@@ -99,10 +114,10 @@ class BrandsController extends Controller
     public function edit(string $slug)
     {
         try{
-            //Consultar la informacion solicitada
-            $brand = GetRegister::Get($slug, 'brand');
+            // Consultar la marca
+            $brand = self::get($slug);
 
-            //Validar si la marca existe
+            // Validar si la marca existe
             if($brand == null){
 
                 //Redireccion con mensaje de error
@@ -145,12 +160,23 @@ class BrandsController extends Controller
                 ]);
             }
 
+            // Consultar la marca
+            $brand = self::get($slug);
+
+            // Validar si la marca existe
+            if($brand == null){
+
+                //Redireccion con mensaje de error
+                return redirect()->route('inventory.brands.index')->with('message', [
+                    'status' => 'danger',
+                    'text' => '¡La marca no existe!'
+                ]);
+            }
+
             /**
              * Transaccion para la actualizacion de una marca
             */
-            DB::transaction(function() use($request,$slug){
-
-                $brand = GetRegister::Get($slug, 'brand');
+            DB::transaction(function() use($request,$brand){
 
                 //Actualizar la informacion
                 $brand->name = CleanInputs::runUpper($request->name);

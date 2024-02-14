@@ -51,8 +51,8 @@ class landingPageController extends Controller
 
         $specs_file = File::get(storage_path('app/public/products/'. strtoupper($product->slug).'/description.md'));
 
-        $parsedown = new Parsedown();
-        $product->description = $parsedown->text($specs_file);
+        //Convertir el archivo de texto a HTML
+        $product->description = (new Parsedown)->text($specs_file);
 
         /**
          * Consultar y retornar la informacion del producto

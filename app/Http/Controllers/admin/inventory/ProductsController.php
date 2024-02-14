@@ -27,9 +27,6 @@ class ProductsController extends Controller
     */
     private function saveImage($images,$slug,$replace = False): void
     {
-        if(!$replace){
-
-        }
 
         foreach($images as $key => $image){
 
@@ -88,6 +85,9 @@ class ProductsController extends Controller
      */
     public function store(ProductRequest $request)
     {
+
+        return dd($request->all());
+
         try{
             // Ejecutar las validaciones adicionales
             if(!Validator::runInRequest($request, Product::inputs(), ['slug'])){

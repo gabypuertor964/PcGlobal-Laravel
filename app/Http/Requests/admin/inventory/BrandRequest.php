@@ -6,6 +6,7 @@ use App\Helpers\CleanInputs;
 use App\Helpers\GetRegister;
 use App\Helpers\RolesManager;
 use App\Helpers\Validator;
+use App\Http\Controllers\admin\inventory\BrandsController;
 use Illuminate\Foundation\Http\FormRequest;
 
 class BrandRequest extends FormRequest
@@ -47,7 +48,7 @@ class BrandRequest extends FormRequest
         if($this->isMethod('POST')){
             $id = null;
         }else{
-            $id = GetRegister::Get($this->route('brand'), 'brand')->id;
+            $id = BrandsController::get($this->route('brand'))->id;
         }
 
         return [

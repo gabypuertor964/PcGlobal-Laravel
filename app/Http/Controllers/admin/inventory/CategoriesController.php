@@ -17,6 +17,21 @@ use Intervention\Image\Facades\Image;
 class CategoriesController extends Controller
 {
     /**
+     * @abstract Obtener el registro segun el slug encriptado
+     * 
+     * @param string $slug
+     * @return Category|null
+    */
+    public static function get(string $slug): mixed
+    {
+        try{
+            return Category::where('slug', SlugManager::decrypt($slug))->first();
+        }catch(Exception){
+            return null;
+        }
+    }
+
+    /**
      * @abstract Consultar y mostrar la lista de categorias
      */
     public function index()
@@ -106,7 +121,15 @@ class CategoriesController extends Controller
     public function edit(string $slug)
     {
         // Obtener el registro de la categoria
-        $category = GetRegister::Get($slug, 'category');
+        $category = self::get($slug);
+
+        // Verificar si la categoria existe
+        if($category == null){
+            return redirect()->route('inventory.categories.index')->with('message',[
+                'status' => 'danger',
+                'text' => '¡La categoria no existe!'
+            ]);
+        }
 
         // Verificar si la categoria tiene una imagen asociada
         $category->image = Validator::publicImageExist("/storage/categories/$category->slug.png");
