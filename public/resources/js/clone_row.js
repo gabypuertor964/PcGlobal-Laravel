@@ -5,8 +5,8 @@
  * @returns Void
 */
 function addChildToParent(parentId) {
-    var parent = document.getElementById(parentId);
-    var firstChildClone = parent.children[0].cloneNode(true);
+    let parent = document.getElementById(parentId);
+    let firstChildClone = parent.children[0].cloneNode(true);
 
     // Limpiar los contenidos del elemento clonado
     firstChildClone.querySelectorAll('input, textarea, select').forEach(function(element) {
@@ -14,10 +14,10 @@ function addChildToParent(parentId) {
     });
 
     // Ocultar los botones en todos los elementos anteriores
-    var allElements = parent.children;
-    for (var i = 0; i < allElements.length; i++) {
-        var createButton = allElements[i].querySelector('#btnCreate');
-        var deleteButton = allElements[i].querySelector('#btnDelete');
+    let allElements = parent.children;
+    for (let i = 0; i < allElements.length; i++) {
+        let createButton = allElements[i].querySelector('#btnCreate');
+        let deleteButton = allElements[i].querySelector('#btnDelete');
 
         createButton.classList.add('d-none');
         deleteButton.classList.add('d-none');
@@ -29,8 +29,8 @@ function addChildToParent(parentId) {
     parent.appendChild(firstChildClone);
 
     // Mostrar ambos botones en el último elemento
-    var createButton = firstChildClone.querySelector('#btnCreate');
-    var deleteButton = firstChildClone.querySelector('#btnDelete');
+    let createButton = firstChildClone.querySelector('#btnCreate');
+    let deleteButton = firstChildClone.querySelector('#btnDelete');
     createButton.classList.remove('d-none');
     deleteButton.classList.remove('d-none');
 
@@ -45,17 +45,17 @@ function addChildToParent(parentId) {
  * @returns Void
 */
 function removeLastChild(parentId) {
-    var parent = document.getElementById(parentId);
+    let parent = document.getElementById(parentId);
 
     if (parent && parent.children.length > 1) {
-        var lastChild = parent.lastElementChild;
+        let lastChild = parent.lastElementChild;
         parent.removeChild(lastChild);
     }
 
     // Mostrar ambos botones en el nuevo último elemento
-    var newLastChild = parent.lastElementChild;
-    var createButton = newLastChild.querySelector('#btnCreate');
-    var deleteButton = newLastChild.querySelector('#btnDelete');
+    let newLastChild = parent.lastElementChild;
+    let createButton = newLastChild.querySelector('#btnCreate');
+    let deleteButton = newLastChild.querySelector('#btnDelete');
 
     createButton.classList.remove('d-none');
     deleteButton.classList.remove('d-none');
@@ -76,13 +76,13 @@ function removeLastChild(parentId) {
  * @returns {void}
  */
 function updateButtonsVisibility(parentId) {
-    var parent = document.getElementById(parentId);
-    var allElements = parent.children;
+    let parent = document.getElementById(parentId);
+    let allElements = parent.children;
 
-    for (var i = 0; i < allElements.length; i++) {
+    for (let i = 0; i < allElements.length; i++) {
 
-        var createButton = allElements[i].querySelector('#btnCreate');
-        var deleteButton = allElements[i].querySelector('#btnDelete');
+        let createButton = allElements[i].querySelector('#btnCreate');
+        let deleteButton = allElements[i].querySelector('#btnDelete');
 
         // Ocultar ambos botones si el elemento no es el último
         if (i !== allElements.length - 1) {
