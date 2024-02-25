@@ -2,11 +2,11 @@
 @extends('adminlte::page')
 
 {{-- Complemento titulo --}}
-@section('title', 'Crear Producto')
+@section('title', 'Editar Producto')
 
 {{-- Titulo principal --}}
 @section('content_header')
-    <h1 class="text-center font-weight-bold font-italic">Crear Producto</h1>
+    <h1 class="text-center font-weight-bold font-italic">Editar Producto</h1>
 @stop
 
 {{-- Declaración de dependencias adicionales --}}
@@ -38,11 +38,13 @@
                 <div class="mb-3">
                     <label for="category_id" class="form-label">Categoria</label>
                     <select class="form-select form-select" name="category_id">
-                        <option selected class="fw-bold">Seleccione</option>
+                        <option disabled selected class="fw-bold">Seleccione</option>
                         
                         @foreach ($categories as $category)
-                            @if (old('category_id') == $category->id)
-                                <option value="{{$category->id}}" selected>{{$category->name}}</option>
+                            @if (old('category_id', $product->category_id) == $category->id)
+                                <div class="option-custom">
+                                    <option value="{{$category->id}}" selected>{{$category->name}}</option>
+                                </div>    
                             @else
                                 <option value="{{$category->id}}">{{$category->name}}</option>
                             @endif
@@ -54,10 +56,10 @@
                 <div class="mb-3">
                     <label for="brand_id" class="form-label">Marca</label>
                     <select class="form-select form-select" name="brand_id">
-                        <option selected class="fw-bold">Seleccione</option>
+                        <option disabled selected class="fw-bold">Seleccione</option>
                         
                         @foreach ($brands as $brand)
-                            @if (old('brand_id') == $brand->id)
+                            @if (old('brand_id', $product->brand_id) == $brand->id)
                                 <option value="{{$brand->id}}" selected>{{$brand->name}}</option>
                             @else
                                 <option value="{{$brand->id}}">{{$brand->name}}</option>
@@ -69,19 +71,19 @@
                 {{-- Input: Nombre/Modelo --}}
                 <div class="mb-3">
                     <label for="name" class="form-label">Nombre / Modelo</label>
-                    <input type="text" class="form-control" name="name" id="name" value="{{old('name')}}" min="1" max="255" required/>
+                    <input type="text" class="form-control" name="name" id="name" value="{{old('name', $product->name)}}" min="1" max="255" required/>
                 </div>
 
                 {{-- Input: Precio Unitario --}}
                 <div class="mb-3">
                     <label for="price" class="form-label">Precio Unitario</label>
-                    <input type="number" class="form-control" name="price" id="price" value="{{old('price')}}" min="1000" required/>
+                    <input type="number" class="form-control" name="price" id="price" value="{{old('price', $product->price)}}" min="1000" required/>
                 </div>
 
                 {{-- Input: Stock disponible --}}
                 <div class="mb-3">
                     <label for="stock" class="form-label">Stock</label>
-                    <input type="number" class="form-control" name="stock" id="stock" value="{{old('stock')}}" min="1" required/>
+                    <input type="number" class="form-control" name="stock" id="stock" value="{{old('stock', $product->stock)}}" min="1" required/>
                 </div>
             </div>
 
@@ -135,7 +137,7 @@
                     </div>
                 </div>
             </div>
-            
+
             {{-- Especificaciones del producto --}}
             <div class="edit-form col-span-2 row-span-2 min-w-full">
                 <div class="card-header font-weight-bold font-italic text-center">

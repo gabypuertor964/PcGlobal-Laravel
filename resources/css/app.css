@@ -1,29 +1,29 @@
 /* Estilos de la barra de desplazamiento */
 html {
-  scroll-behavior: smooth;
-  box-sizing: border-box;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
 }
 
 body {
-  /* Ocultar la barra de desplazamiento por defecto */
-  overflow: auto;
-  scrollbar-width: thin;
-  scrollbar-color: transparent;
-  scrollbar-gutter: stable both-edges;
+    /* Ocultar la barra de desplazamiento por defecto */
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: transparent;
+    scrollbar-gutter: stable both-edges;
 }
-  
+
 /* Estilos de la barra de desplazamiento */
 body::-webkit-scrollbar {
-  width: 8px; /* Define el ancho de la barra*/
+    width: 8px; /* Define el ancho de la barra*/
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: rgb(97, 90, 240);
-  border-radius: 4px; /* Redondeado de la barra */
+    background-color: rgb(97, 90, 240);
+    border-radius: 4px; /* Redondeado de la barra */
 }
 
 body::-webkit-scrollbar-track {
-  background-color: rgb(243 244 246); /* Color del fondo de la barra */
+    background-color: rgb(243 244 246); /* Color del fondo de la barra */
 }
 
 /* Estilos de la barra de navegación */
@@ -47,420 +47,428 @@ nav {
 /* Estilos para el menú responsive de la navbar */
 
 #menu {
-  max-height: 0;
-  transform: translateY(-300px);
-  z-index: 2;
+    max-height: 0;
+    transform: translateY(-300px);
+    z-index: 2;
 }
 
 #menu.active {
-  max-height: 1000px;
-  transform: translateY(0);
+    max-height: 1000px;
+    transform: translateY(0);
 }
 
 @media (min-width: 1024px) {
-  #menu {
-    max-height: 0;
-    transform: translateY(-300px);
-    position: relative;
-  }
+    #menu {
+        max-height: 0;
+        transform: translateY(-300px);
+        position: relative;
+    }
 }
 
 /* Estilos para el dropdown */
 
 .dropdown {
-  position: relative;
+    position: relative;
 }
 
 .dropdown-menu-l {
-  display: flex;
-  opacity: 0;
-  visibility: hidden;
-  flex-direction: column;
-  width: 291px;
-  z-index: 2;
-  background-color: #FFF;
-  position: absolute;
-  bottom: -84px;
-  right: -4px;
-  border-radius: 8px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    opacity: 0;
+    visibility: hidden;
+    flex-direction: column;
+    width: 291px;
+    z-index: 2;
+    background-color: #fff;
+    position: absolute;
+    bottom: -84px;
+    right: -4px;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .dropdown-menu-l.active {
-  transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out;
-  visibility: visible;
-  opacity: 1;
+    transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out;
+    visibility: visible;
+    opacity: 1;
 }
 
 .dropdown-menu-l::after {
-  content: '';
-  position: absolute;
-  top: -9px;
-  right: 4.5px;
-  width: 10px;
-  height: 10px;
-  background-color: #fff;
-  clip-path: polygon(50% 50%, 0% 100%, 100% 100%);
+    content: "";
+    position: absolute;
+    top: -9px;
+    right: 4.5px;
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    clip-path: polygon(50% 50%, 0% 100%, 100% 100%);
 }
 
 .dropdown .dropdown-menu-l > .item {
-  font-size: 14px;
-  font-weight: 400;
-  color: rgba(0, 0, 0, 0.95);
-  text-transform: none;
-  padding: .38rem 2.5rem;
-} 
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.95);
+    text-transform: none;
+    padding: 0.38rem 2.5rem;
+}
 
 .dropdown .dropdown-menu-l > .item:first-child {
-  margin-top: 6px;
-} 
+    margin-top: 6px;
+}
 .dropdown .dropdown-menu-l > .item:last-child {
-  margin-bottom: 6px;
-} 
+    margin-bottom: 6px;
+}
 
 .dropdown .dropdown-menu-l > .item:hover {
-  background: rgba(0, 0, 0, 0.050);
-  z-index: 3;
+    background: rgba(0, 0, 0, 0.05);
+    z-index: 3;
 }
 
 /* Estilos de las imágenes de las categorías de la landing */
 
 #categories img {
-  aspect-ratio: 4/3;
-  object-fit: cover;
+    aspect-ratio: 4/3;
+    object-fit: cover;
 }
 
 .productos img {
-  aspect-ratio: 4/3;
-  object-fit: contain;
+    aspect-ratio: 4/3;
+    object-fit: contain;
 }
 
 .desc-producto {
-  border: 1px solid rgb(0,0,0,.1);
-  border-radius: 8px;
+    border: 1px solid rgb(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 .product-title {
-  transition: color 150ms ease-in ;
+    transition: color 150ms ease-in;
 }
 
 .product-img {
-  transition: transform 100ms ease-in-out;
+    transition: transform 100ms ease-in-out;
 }
 
 .product-card:hover .product-title {
-  color: #3483fa;
+    color: #3483fa;
 }
 
 .product-card:hover .product-img {
- transform: scale(.95);
+    transform: scale(0.95);
 }
 
 /* Estilos para el contenedor de la(s) imagen(es) de los productos */
 
 .image-container-carousel {
-  width: 264px;
-  height: 200px;
+    width: 264px;
+    height: 200px;
 }
 
 @media (min-width: 768px) {
-  .image-container-carousel {
-    width: 450px;
-    height: 350px;
-  }
+    .image-container-carousel {
+        width: 450px;
+        height: 350px;
+    }
 }
 
 @media (min-width: 1024px) {
-  .image-container-carousel {
-    width: 550px;
-    height: 450px;
-  }
+    .image-container-carousel {
+        width: 550px;
+        height: 450px;
+    }
 }
 
 @media (min-width: 1380px) {
-  .image-container-carousel {
-    width: 650px;
-    height: 650px;
-  }
+    .image-container-carousel {
+        width: 650px;
+        height: 650px;
+    }
 }
 
 /* Estilos para el login */
 
 .login-header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  width: 100vw;
-  height: 35%;
-  background: rgb(79, 70, 229, 0.86);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100vw;
+    height: 35%;
+    background: rgb(79, 70, 229, 0.86);
 }
 
 .login-header-logo {
-  position: absolute;
-  width: 175px;
-  height: 120px;
-  top: -55px;
-  left: 50%;
-  transform: translate(-50%, -50%);
+    position: absolute;
+    width: 175px;
+    height: 120px;
+    top: -55px;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .login-card {
-  position: absolute;
-  width: 342px;
-  min-height: max-content;
-  background-color: rgb(35 35 37);
-  border: 1px solid rgb(0, 0, 0, 0.1);
-  border-top-left-radius: 25px;
-  border-bottom-right-radius: 25px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 3;
+    position: absolute;
+    width: 342px;
+    min-height: max-content;
+    background-color: rgb(35 35 37);
+    border: 1px solid rgb(0, 0, 0, 0.1);
+    border-top-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
 }
 
 .login-card.register {
-  width: 342px;
+    width: 342px;
 }
 
 .login-form {
-  display: flex;
-  flex-direction: column;
-  row-gap: 17px;
-  box-sizing: border-box;
-  margin: 25px 25px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 17px;
+    box-sizing: border-box;
+    margin: 25px 25px;
 }
 
 .login-container {
-  position: relative;
+    position: relative;
 }
 
 .login-input {
-  width: 100%;;
-  border: 1px solid rgb(0,0,0,.1);
-  border-radius: 5px;
-  padding: 8px;
-  box-sizing: border-box;
+    width: 100%;
+    border: 1px solid rgb(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 8px;
+    box-sizing: border-box;
 }
 
 .login-input:focus {
-  outline: none;
-  border: 1px solid #3483fa;
+    outline: none;
+    border: 1px solid #3483fa;
 }
 
 .input-label {
-  white-space: nowrap;
-  font-size: 14px;
-  position: absolute;
-  top: 50%;
-  left: 8px;
-  transform: translateY(-50%);
-  font-weight: 500;
-  pointer-events: none;
-  color: #2A2A2A;
-  transition: transform 200ms ease, color 200ms ease;
+    white-space: nowrap;
+    font-size: 14px;
+    position: absolute;
+    top: 50%;
+    left: 8px;
+    transform: translateY(-50%);
+    font-weight: 500;
+    pointer-events: none;
+    color: #2a2a2a;
+    transition: transform 200ms ease, color 200ms ease;
 }
 
 .login-input:focus + .input-label,
 .login-input:not(:placeholder-shown) + .input-label {
-  transform: translateY(-185%) scale(0.85);
-  color: #FFF;
+    transform: translateY(-185%) scale(0.85);
+    color: #fff;
 }
 
 .login-form .login-submit {
-  font-size: 14px;
-  color: #FFF;
-  padding: 4px;
-  background-color: rgb(79, 70, 229);
-  border-radius: 5px;
-  transition: background-color 200ms ease-out;
+    font-size: 14px;
+    color: #fff;
+    padding: 4px;
+    background-color: rgb(79, 70, 229);
+    border-radius: 5px;
+    transition: background-color 200ms ease-out;
 }
 
 .login-form .login-submit:hover {
-  background-color: hsl(241, 68%, 54%);
+    background-color: hsl(241, 68%, 54%);
 }
 
 .login-form .login-remember {
-  display:flex;
-  margin-bottom: 14px;
-  justify-content: space-evenly;
-  align-items: center;
-  color: #fff;
+    display: flex;
+    margin-bottom: 14px;
+    justify-content: space-evenly;
+    align-items: center;
+    color: #fff;
 }
 
 .login-form .login-remember .switch {
-  height: 40px;
-  /* background-image: linear-gradient(to top, #8a89e3 0%, #8ab3f9 100%); */
-  padding: 0 1.5rem;
-  border-radius: 0.75rem;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
+    height: 40px;
+    /* background-image: linear-gradient(to top, #8a89e3 0%, #8ab3f9 100%); */
+    padding: 0 1.5rem;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
 }
 
 .login-form .login-remember .switch .input {
-  display: none;
+    display: none;
 }
 
 .login-form .login-remember .switch .rail {
-  position: relative;
-  width: 70px;
-  height: 28px;
-  background-color: #FFF;
-  border-radius: 3rem;
+    position: relative;
+    width: 70px;
+    height: 28px;
+    background-color: #fff;
+    border-radius: 3rem;
 }
 
 .login-form .login-remember .switch .rail .circle {
-  display: block;
-  width: 26px;
-  height: 26px;
-  background-image: linear-gradient(to right, #8a89e3 0%, #8ab3f9 0%, #8ab3f9 0%, #7c79d4 33%, #6965da 66%, #6965da 100%);
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 5px;
-  transition: transform .2s;
+    display: block;
+    width: 26px;
+    height: 26px;
+    background-image: linear-gradient(
+        to right,
+        #8a89e3 0%,
+        #8ab3f9 0%,
+        #8ab3f9 0%,
+        #7c79d4 33%,
+        #6965da 66%,
+        #6965da 100%
+    );
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 5px;
+    transition: transform 0.2s;
 }
 
 .switch .indicator {
-  width: 15px;
-  height: 15px;
-  background-color: #FFF;
-  border-radius: 50%;
-  margin-left: 1.5rem;
-  transition: .2s;
+    width: 15px;
+    height: 15px;
+    background-color: #fff;
+    border-radius: 50%;
+    margin-left: 1.5rem;
+    transition: 0.2s;
 }
 
 .login-form .login-remember .switch .input:checked ~ .rail .circle {
-  transform: translate(32px, -50%);
+    transform: translate(32px, -50%);
 }
 
 .login-form .login-remember .switch .input:checked ~ .indicator {
-  background-color: rgb(67, 233, 123);
+    background-color: rgb(67, 233, 123);
 }
 
-
 .login-form .login-action-links {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  color: #FFF;
-  font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    color: #fff;
+    font-size: 14px;
 }
 
 .login-form .login-action-links > a {
-  position: absolute;
-  bottom: 10px;
+    position: absolute;
+    bottom: 10px;
 }
 
 .login-form .login-action-links > a:nth-child(2) {
-  position: absolute;
-  bottom: 28px;
+    position: absolute;
+    bottom: 28px;
 }
 
 .login-form .login-action-links > a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .login-crystals .login-crystal {
-  display: none;
-  position: absolute;
-  right: 300px;
-  bottom: 200px;
-  width: 35px;
-  height: 35px;
-  rotate: 45deg;
-  background-color: rgb(79, 70, 229, 0.86);
-  animation: levitating 4s ease-in-out infinite;
+    display: none;
+    position: absolute;
+    right: 300px;
+    bottom: 200px;
+    width: 35px;
+    height: 35px;
+    rotate: 45deg;
+    background-color: rgb(79, 70, 229, 0.86);
+    animation: levitating 4s ease-in-out infinite;
 }
 
 .login-crystals .login-crystal:nth-child(2) {
-  left: 150px;
-  bottom: 200px;
+    left: 150px;
+    bottom: 200px;
 }
 
 .login-crystals .login-crystal-2 {
-  display: none;
-  position: absolute;
-  right: 180px;
-  bottom: 215px;
-  width: 20px;
-  height: 20px;
-  rotate: 45deg;
-  background-color: rgb(79, 70, 229, 0.86);
-  animation: levitating 4s 500ms ease-in-out infinite;
+    display: none;
+    position: absolute;
+    right: 180px;
+    bottom: 215px;
+    width: 20px;
+    height: 20px;
+    rotate: 45deg;
+    background-color: rgb(79, 70, 229, 0.86);
+    animation: levitating 4s 500ms ease-in-out infinite;
 }
 
 .login-crystals .login-crystal-2:nth-child(4) {
-  left: 200px;
-  bottom: 158px;
+    left: 200px;
+    bottom: 158px;
 }
 
 .login-crystals .login-crystal-3 {
-  display: none;
-  position: absolute;
-  right: 220px;
-  bottom: 145px;
-  width: 15px;
-  height: 15px;
-  rotate: 45deg;
-  background-color: rgb(79, 70, 229, 0.86);
-  animation: levitating 4s 250ms ease-in-out infinite;
+    display: none;
+    position: absolute;
+    right: 220px;
+    bottom: 145px;
+    width: 15px;
+    height: 15px;
+    rotate: 45deg;
+    background-color: rgb(79, 70, 229, 0.86);
+    animation: levitating 4s 250ms ease-in-out infinite;
 }
 
 .login-crystals .login-crystal-3:nth-child(6) {
-  left: 95px;
-  bottom: 125px;
+    left: 95px;
+    bottom: 125px;
 }
 
-.size-image-form{
-  width: 300px;
+.size-image-form {
+    width: 300px;
 }
 
 @keyframes levitating {
-  0% {
-    transform: translate(0, 0);
-  }
-  50% {
-    transform: translate(-5.5px, -5.5px);
-  }
-  100% {
-    transform: translate(0, 0);
-  }
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(-5.5px, -5.5px);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
 }
 
 @media only screen and (min-width: 1024px) {
-  .login-crystals .login-crystal, .login-crystals .login-crystal-2, .login-crystals .login-crystal-3 {
-    display: block;
-  }
-  .login-card {
-    width: 412px;
-    min-height: max-content;
-  }
-  .login-card.register {
-    width: 612px;
-    height: max-content;
-  }
+    .login-crystals .login-crystal,
+    .login-crystals .login-crystal-2,
+    .login-crystals .login-crystal-3 {
+        display: block;
+    }
+    .login-card {
+        width: 412px;
+        min-height: max-content;
+    }
+    .login-card.register {
+        width: 612px;
+        height: max-content;
+    }
 }
 
-
 @media only screen and (max-width: 815px) and (orientation: landscape) {
-  .login-header {
-    height: 50%
-  }
-  .login-card {
-    top: 95%;
-  }
-  .login-card.register {
-    top: 115%;
-  }
+    .login-header {
+        height: 50%;
+    }
+    .login-card {
+        top: 95%;
+    }
+    .login-card.register {
+        top: 115%;
+    }
 }
 
 @media only screen and (min-width: 1536px) {
-  .login-card {
-    width: 450px;
-    min-height: max-content;
-  }
+    .login-card {
+        width: 450px;
+        min-height: max-content;
+    }
 }

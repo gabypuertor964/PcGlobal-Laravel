@@ -21,6 +21,21 @@ use Parsedown;
 class ProductsController extends Controller
 {
     /**
+     * @abstract Obtener el registro segun el slug encriptado
+     * 
+     * @param string $slug
+     * @return Product|null
+    */
+    public static function get(string $slug): mixed
+    {
+        try{
+            return Product::where('slug', SlugManager::decrypt($slug))->first();
+        }catch(Exception){
+            return null;
+        }
+    }
+
+    /**
      * @abstract Almacena una imagen individual del producto
      * 
      * 
@@ -149,19 +164,29 @@ class ProductsController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @abstract Mostrar el producto especificado
+     * 
+     * @param string $slug Slug del producto
      */
-    public function show(string $id)
+    public function edit(string $slug)
     {
-        //
-    }
+        // Obtener el registro de la categoria
+        $product = self::get($slug);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        // Consultar la informacion solicitada
+        $categories = Category::all();
+        $brands = Brand::all();
+
+        // Verificar si el producto existe
+        if($product == null){
+            return redirect()->route('inventory.prodcuts.index')->with('message',[
+                'status' => 'danger',
+                'text' => '¡El producto no existe!'
+            ]);
+        }
+
+        //Retornar la vista con la informacion solicitada
+        return view('admin.inventory.products.edit', compact('product', 'categories', 'brands'));
     }
 
     /**
