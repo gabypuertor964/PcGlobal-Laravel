@@ -84,9 +84,6 @@ class ProductsController extends Controller
             $content .= "| $spec | $values[$key] | \n";
         }
 
-        // Cierre de tabla
-        $content .= "| --- | --- | \n";
-
         // Instanciar y limpiar el contenido de la descripción
         $content = strip_tags($content);
 
@@ -250,6 +247,14 @@ class ProductsController extends Controller
         // Obtener el registro de la categoria
         $product = self::get($slug);
 
+        // Verificar si el producto existe
+        if($product == null){
+            return redirect()->route('inventory.products.index')->with('message',[
+                'status' => 'danger',
+                'text' => '¡El producto no existe!'
+            ]);
+        }
+ 
         // Consultar la informacion solicitada
         $categories = Category::all();
         $brands = Brand::all();
@@ -259,14 +264,6 @@ class ProductsController extends Controller
 
         // Enviar el contenido de las especificaciones
         $product->data_specs = self::getListsFromMarkdownSpecs(CleanInputs::runUpper($product->slug));
-
-        // Verificar si el producto existe
-        if($product == null){
-            return redirect()->route('inventory.products.index')->with('message',[
-                'status' => 'danger',
-                'text' => '¡El producto no existe!'
-            ]);
-        }
 
         //Retornar la vista con la informacion solicitada
         return view('admin.inventory.products.edit', compact('product', 'categories', 'brands'));
