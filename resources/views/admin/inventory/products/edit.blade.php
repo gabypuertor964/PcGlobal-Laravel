@@ -191,7 +191,7 @@
             </div>              
         </div>
 
-
+        {{json_encode($product->directory)}}
 
         {{-- Botones --}}
         <div class="text-center">

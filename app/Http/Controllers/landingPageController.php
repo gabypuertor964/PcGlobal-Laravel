@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Validator;
+use App\Http\Controllers\admin\inventory\ProductsController;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Facades\File;
@@ -44,10 +45,7 @@ class landingPageController extends Controller
     public function productDetail(Product $product){
 
         //Contar el numero de imagenes asociadas al producto
-        $directory = array_diff(
-            scandir(storage_path('app/public/products/'. strtoupper($product->slug).'/images')),
-            ['..', '.']
-        );
+        $directory = ProductsController::getImagesDirectory($product->slug);
 
         // Descripcion del producto
         $description_file = File::get(storage_path('app/public/products/'. strtoupper($product->slug).'/description.md'));

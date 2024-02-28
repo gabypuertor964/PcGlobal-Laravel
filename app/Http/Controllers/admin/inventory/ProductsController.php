@@ -35,6 +35,28 @@ class ProductsController extends Controller
     }
 
     /**
+     * @abstract Obtener el contenido del directorio de las imagenes del producto segun su slug no encriptado
+     * 
+     * @param string $slug
+     * @return string
+    */
+    public static function getImagesDirectory(string $slug): array
+    {
+        // Limpiar y convertir a mayusculas el slug
+        $slug = CleanInputs::runUpper($slug);
+
+        try{
+            // Retornar el contenido del directorio
+            return array_diff(
+                scandir(storage_path("app/public/products/$slug/images")),
+                ['..', '.']
+            );
+        }catch(Exception){
+            return [];
+        }
+    }
+
+    /**
      * @abstract Almacenar una lista de imagenes en el directorio del producto
      * 
      * @param $images
@@ -264,6 +286,9 @@ class ProductsController extends Controller
 
         // Enviar el contenido de las especificaciones
         $product->data_specs = self::getListsFromMarkdownSpecs(CleanInputs::runUpper($product->slug));
+
+        // Enviar directorio de imagenes
+        $product->directory = self::getImagesDirectory($product->slug);
 
         //Retornar la vista con la informacion solicitada
         return view('admin.inventory.products.edit', compact('product', 'categories', 'brands'));
