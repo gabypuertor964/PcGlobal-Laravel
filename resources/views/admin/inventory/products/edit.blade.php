@@ -133,7 +133,7 @@
                         Descripción del producto
                     </div>
                     <div class="card-body">
-                        <textarea placeholder="A continuación describe el producto..." class="form-control" name="description" rows="3" maxlength="1000" minlength="1"></textarea>
+                        <textarea placeholder="A continuación describe el producto..." class="form-control" name="description" rows="3" maxlength="1000" minlength="1">{{$product->description}}</textarea>
                     </div>
                 </div>
             </div>
@@ -148,15 +148,28 @@
                         <tbody id="specRegisters">
                             <tr class="specRegister">
                             
-                                {{-- Input: Clave --}}
-                                <td class="col-4 text-center">
-                                    <input class="form-control form-control-sm" type="text" placeholder="Valor" name="key_specs[]" required>
-                                </td>
-                            
-                                {{-- Input: Valor --}}
-                                <td class="col-6 text-center">
-                                    <input class="form-control form-control-sm" type="text" placeholder="Clave" name="value_specs[]" required>
-                                </td>
+                                @forelse ($product->data_specs["specs"] as $key => $spec)
+
+                                    {{-- Input: Clave --}}
+                                    <td class="col-4 text-center">
+                                        <input class="form-control form-control-sm" type="text" placeholder="Valor" name="key_specs[]" required value="{{$spec}}">
+                                    </td>
+                                
+                                    {{-- Input: Valor --}}
+                                    <td class="col-6 text-center">
+                                        <input class="form-control form-control-sm" type="text" placeholder="Clave" name="value_specs[]" required value="{{$product->data_specs["values"][$key]}}">
+                                    </td>
+                                @empty
+                                    {{-- Input: Clave --}}
+                                    <td class="col-4 text-center">
+                                        <input class="form-control form-control-sm" type="text" placeholder="Valor" name="key_specs[]" required>
+                                    </td>
+                                
+                                    {{-- Input: Valor --}}
+                                    <td class="col-6 text-center">
+                                        <input class="form-control form-control-sm" type="text" placeholder="Clave" name="value_specs[]" required>
+                                    </td>
+                                @endforelse
                             
                                 {{-- Botones --}}
                                 <td class="text-centerasd">

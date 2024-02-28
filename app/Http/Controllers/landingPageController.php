@@ -49,14 +49,17 @@ class landingPageController extends Controller
             ['..', '.']
         );
 
-        $specs_file = File::get(storage_path('app/public/products/'. strtoupper($product->slug).'/description.md'));
+        // Descripcion del producto
+        $description_file = File::get(storage_path('app/public/products/'. strtoupper($product->slug).'/description.md'));
+
+        // Especificaciones del producto
+        $specs_file = File::get(storage_path('app/public/products/'. strtoupper($product->slug).'/specs.md'));
 
         //Convertir el archivo de texto a HTML
-        $product->description = (new Parsedown)->text($specs_file);
-
-        /**
-         * Consultar y retornar la informacion del producto
-        */
+        $product->description = (new Parsedown)->text($description_file);
+        $product->specs = (new Parsedown)->text($specs_file);
+        
+        // Retornar la vista con la informacion solicitada
         return view('landing.product', compact('product','directory'));
     }
 }

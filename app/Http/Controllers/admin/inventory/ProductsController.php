@@ -11,7 +11,6 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -22,7 +21,7 @@ class ProductsController extends Controller
 {
     /**
      * @abstract Obtener el registro segun el slug encriptado
-     * 
+     *
      * @param string $slug
      * @return Product|null
     */
@@ -36,20 +35,23 @@ class ProductsController extends Controller
     }
 
     /**
-     * @abstract Almacena una imagen individual del producto
+     * @abstract Almacenar una lista de imagenes en el directorio del producto
      * 
-     * 
+     * @param $images
+     * @param string $slug
+     * @param bool $replace
+     *
+     * @return void
     */
-    private function saveImage($images,$slug,$replace = False): void
+    private static function saveImage($images, string $slug, bool $replace = False): void
     {
-
         foreach($images as $key => $image){
 
             // Instanciamiento imagen
             $photo = Image::make($image);
 
             //Redimensionar imagen y establecer la resolucion DPI
-            $photo->resizeCanvas(1920, 1080);
+            $photo->resizeCanvas(env("MIN_WIDTH"), env("MIN_HEIGHT"), 'center', false, 'ffffff');
 
             //Codificacion de la imagen a png
             $photo->encode('png',100);
@@ -60,6 +62,83 @@ class ProductsController extends Controller
             //Guardar la imagen
             Storage::put("public/products/$slug/images/$name", $photo->stream());
         }
+    }
+
+    /**
+     * @abstract Crear una tabla markdown de las caracteristicas del producto
+     * 
+     * @param array $specs
+     * @param array $values
+     * @param string $slug
+    */
+    private static function createMarkdownSpecs(array $specs, array $values, string $slug)
+    {
+        // Encabezado de la tabla
+        $content = "| Especificacion | Valor | \n";
+
+        // Espacio entre el encabezado y el contenido
+        $content .= "| --- | --- | \n";
+
+        // Recorrer las especificaciones y valores
+        foreach ($specs as $key => $spec) {
+            $content .= "| $spec | $values[$key] | \n";
+        }
+
+        // Cierre de tabla
+        $content .= "| --- | --- | \n";
+
+        // Instanciar y limpiar el contenido de la descripción
+        $content = strip_tags($content);
+
+        // Almacenar el contenido en el archivo description.md
+        File::put(storage_path("app/public/products/$slug/specs.md"), $content);
+    }
+
+    /**
+     * @abstract Obtener las listas de las especificaciones del producto segun el archivo markdown
+     * @return array
+    */
+    private static function getListsFromMarkdownSpecs(string $slug): array 
+    {
+        // Obtener el contenido del archivo
+        $content = File::get(storage_path("app/public/products/$slug/specs.md"));
+
+        // Separar el contenido por lineas
+        $lines = explode("\n", $content);
+
+        // Eliminar las lineas vacias
+        $lines = array_filter($lines);
+
+        // Eliminar las primeras dos lineas (Encabezado y separador)
+        array_shift($lines);
+        array_shift($lines);
+
+        // Inicializar las listas
+        $specs = [];
+        $values = [];
+
+        // Recorrer las lineas
+        foreach ($lines as $line) {
+
+            // Reemplazar los caracteres los " | " por "|"
+            $line = str_replace(" | ", "|", $line);
+
+            // Separar la linea por el caracter |
+            $line = explode("|", $line);
+
+            // Eliminar los espacios en blanco
+            $line = array_map('trim', $line);
+
+            // Almacenar los valores en las listas
+            $specs[] = $line[1];
+            $values[] = $line[2];
+        }
+
+        // Retornar las listas
+        return [
+            'specs' => $specs,
+            'values' => $values
+        ];
     }
 
     /**
@@ -96,13 +175,9 @@ class ProductsController extends Controller
      * @abstract Almacena un nuevo producto en la base de datos
      * 
      * @param ProductRequest $request
-     * @return void
      */
     public function store(ProductRequest $request)
     {
-
-        return dd($request->all());
-
         try{
             // Ejecutar las validaciones adicionales
             if(!Validator::runInRequest($request, Product::inputs(), ['slug'])){
@@ -122,18 +197,14 @@ class ProductsController extends Controller
                 // Crear el producto
                 $product = Product::create($request->all());
 
-                /**
-                 * Crear el directorio productos (si no existe)
-                */
+                // Crear el directorio productos (si no existe)
                 if(!File::exists(storage_path('app/public/products'))){
                     File::makeDirectory(storage_path('app/public/products'));
                 }
 
-                /**
-                 * Crear el directorio del producto (si no existen)
-                */
+                // Crear el directorio del producto (si no existen)
                 if(!File::exists(storage_path('app/public/products/'.CleanInputs::runUpper($product->slug)))){
-                    
+
                     // Crear el directorio del producto
                     File::makeDirectory(storage_path('app/public/products/'.CleanInputs::runUpper($product->slug)));
 
@@ -147,25 +218,31 @@ class ProductsController extends Controller
                 // Almacenar el contenido en el archivo description.md
                 File::put(storage_path('app/public/products/'.CleanInputs::runUpper($product->slug).'/description.md'), $content);
 
+                self::createMarkdownSpecs($request->key_specs, $request->value_specs, CleanInputs::runUpper($product->slug));
+
                 // Almacenar las imagenes del producto
-                $this->saveImage($request->file('images'),CleanInputs::runUpper($product->slug));
+                self::saveImage($request->file('images'),CleanInputs::runUpper($product->slug));
             });
 
-            return dd($request->all());
+            //Retornar a la vista anterior con un mensaje de error critico
+            return redirect()->route('inventory.products.index')->with('message', [
+                'status' => 'success',
+                'text' => 'Producto creado exitosamente!'
+            ]);
+
         }catch(Exception){
 
             //Retornar a la vista anterior con un mensaje de error critico
             return redirect()->back()->withInput()->with('message', [
-                'class' => 'danger',
+                'status' => 'danger',
                 'text' => '¡Ha ocurrido un error inesperado al crear el producto!'
             ]);
         }
-        
     }
 
     /**
      * @abstract Mostrar el producto especificado
-     * 
+     *
      * @param string $slug Slug del producto
      */
     public function edit(string $slug)
@@ -177,9 +254,15 @@ class ProductsController extends Controller
         $categories = Category::all();
         $brands = Brand::all();
 
+        // Enviar el contenido de los markdowns
+        $product->description = File::get(storage_path('app/public/products/'.CleanInputs::runUpper($product->slug).'/description.md'));
+
+        // Enviar el contenido de las especificaciones
+        $product->data_specs = self::getListsFromMarkdownSpecs(CleanInputs::runUpper($product->slug));
+
         // Verificar si el producto existe
         if($product == null){
-            return redirect()->route('inventory.prodcuts.index')->with('message',[
+            return redirect()->route('inventory.products.index')->with('message',[
                 'status' => 'danger',
                 'text' => '¡El producto no existe!'
             ]);
@@ -190,18 +273,53 @@ class ProductsController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * @abstract Actualizar el producto especificado
+     * 
+     * @param ProductRequest $request
+     * @param string $slug
      */
-    public function update(Request $request, string $id)
+    public function update(ProductRequest $request, string $slug)
     {
-        //
+        $product = self::get($slug);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @abstract Eliminar el producto especificado
+     * @param string $slug
      */
-    public function destroy(string $id)
+    public function destroy(string $slug)
     {
-        //
+        try{
+            // Obtener el registro del producto
+            $product = self::get($slug);
+
+            // Verificar si el producto existe
+            if($product == null){
+                return redirect()->route('inventory.products.index')->with('message',[
+                    'status' => 'danger',
+                    'text' => '¡El producto no existe!'
+                ]);
+            }
+
+            // Eliminar el directorio del producto
+            File::deleteDirectory(storage_path('app/public/products/'.CleanInputs::runUpper($product->slug)));
+
+            // Eliminar el producto
+            $product->delete();
+
+            //Retornar a la vista anterior con un mensaje de exito
+            return redirect()->route('inventory.products.index')->with('message', [
+                'status' => 'success',
+                'text' => '¡Producto eliminado exitosamente!'
+            ]);
+
+        }catch(Exception){
+
+            //Retornar a la vista anterior con un mensaje de error critico
+            return redirect()->route('inventory.products.index')->with('message', [
+                'status' => 'danger',
+                'text' => '¡Ha ocurrido un error inesperado al eliminar el producto!'
+            ]);
+        }
     }
 }

@@ -9,7 +9,6 @@ use App\Helpers\Validator;
 use App\Rules\ValidateImages;
 use App\Rules\ValidateMinResolution;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\ValidationRuleParser;
 
 class ProductRequest extends FormRequest
 {

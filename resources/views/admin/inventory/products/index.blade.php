@@ -86,13 +86,14 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="3">No hay productos disponibles</td>
+                        <td colspan="5">No hay productos disponibles</td>
                     </tr>
                 @endforelse
             </tbody>
 
         </table>
 
+        {{-- FIXME: Revisar posiciones --}}
         {{-- Paginacion --}}
         <div class="hidden sm:flex sm:justify-center">{{ $products->links('pagination::tailwind') }}</div>
     </div>
