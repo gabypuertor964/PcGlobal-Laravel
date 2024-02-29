@@ -288,7 +288,7 @@ class ProductsController extends Controller
         $product->data_specs = self::getListsFromMarkdownSpecs(CleanInputs::runUpper($product->slug));
 
         // Enviar directorio de imagenes
-        $product->directory = self::getImagesDirectory($product->slug);
+        $product->directory_images = self::getImagesDirectory($product->slug);
 
         //Retornar la vista con la informacion solicitada
         return view('admin.inventory.products.edit', compact('product', 'categories', 'brands'));

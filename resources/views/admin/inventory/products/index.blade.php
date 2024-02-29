@@ -59,7 +59,7 @@
                             <div class="flex justify-center gap-2 w-full">
 
                                 {{-- Boton: Actualizar --}}
-                                <div class="button-tooltip" data-tooltip="Editar categoría">
+                                <div class="button-tooltip" data-tooltip="Editar producto">
                                     <a class="btn btn-warning" href="{{route('inventory.products.edit', $product->slug)}}" role="button">
                                         <i class="fa-solid fa-pen"></i>
                                     </a>
@@ -75,7 +75,7 @@
                                     @method('delete')
 
                                     {{-- Boton: Eliminar --}}
-                                    <div class="button-tooltip" data-tooltip="Eliminar categoría">
+                                    <div class="button-tooltip" data-tooltip="Eliminar prodcuto">
                                         <button type="submit" class="btn btn-danger w-full">
                                             <i class="fa-solid fa-trash"></i>
                                         </button>

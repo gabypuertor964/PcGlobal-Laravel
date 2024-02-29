@@ -88,7 +88,7 @@
             </div>
 
             {{-- Input: Foto --}}
-            <div>
+            <div style="max-height: 275px; overflow-y: scroll;">
                 <div class="p-3 card min-h-full">
 
                     {{-- Titulo Card --}}
@@ -98,34 +98,32 @@
 
                     {{-- Envio dinamico de imagenes --}}
                     <div class="card-body flex justify-center">
+                        <!-- Agregar estos elementos ocultos en tu formulario Blade -->
+                        <input type="hidden" id="existing-images" name="existing_images[]" value="">
+                        <input type="hidden" id="new-images" name="new_images" value="">
+
+
                         <table class="col-12">
-                            <tbody id="registers">
-                                <tr id="register">
-
-                                    {{-- Input: Foto --}}
-                                    <td class="col-9">
-                                        <input class="form-control form-control-sm" type="file" name="images[]" required accept=".jpeg, .png, .jpg, .svg .webp">
-                                    </td>
-
-                                    {{-- Botones --}}
-                                    <td class="text-center">
-
-                                        {{-- Boton añadir --}}
-                                        <button type="button" id="btnCreate" class="btn btn-success mr-2" onclick="addChildToParent('registers')">
-                                            <i class="fas fa-plus fa-xl"></i>
-                                        </button>
-
-                                        {{-- Boton eliminar --}}
-                                        <button type="button" id="btnDelete" class="btn btn-danger d-none" onclick="removeLastChild('registers')">
-                                            <i class="fas fa-trash fa-xl"></i>
-                                        </button>
-                                    </td>
-                                </tr>
+                            <tbody id="image-rows">
+                                @foreach ($product->directory_images as $imageUrl)
+                                    <tr class="image-row">
+                                        <td class="col-9">
+                                            <img src="{{ asset("storage/products/{$product->slug}/images/{$imageUrl}") }}" alt="Product Image" class="mb-2" style="max-width: 200px;">
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-danger" onclick="removeImageRow(this)">Eliminar</button>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
+                    <div class="card-footer text-center">
+                        <button type="button" class="btn btn-success" onclick="addImageRow()">Agregar Imagen</button>
+                    </div>
                 </div>
             </div>
+            
             <div class="card min-h-full">
                 {{-- Input: Descripcion del producto--}}
                 <div class="p-3 text-center">
@@ -190,9 +188,7 @@
                 </div>
             </div>              
         </div>
-
-        {{json_encode($product->directory)}}
-
+    
         {{-- Botones --}}
         <div class="text-center">
             {{-- Boton: Guardar --}}

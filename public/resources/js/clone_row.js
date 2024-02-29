@@ -166,3 +166,66 @@ function removeSpecRow(button) {
         deleteButton.classList.add("d-none");
     }
 }
+
+// Función para agregar una nueva fila de imagen al formulario
+function addImageRow() {
+    // Obtener el elemento que contiene las filas de imágenes
+    let imageRows = document.getElementById("image-rows");
+
+    // Crear un nuevo elemento de fila (tr)
+    let newRow = document.createElement("tr");
+
+    // Establecer la clase de la nueva fila
+    newRow.className = "image-row";
+
+    // Establecer el contenido HTML de la nueva fila
+    newRow.innerHTML = `
+        <td class="col-9">
+            <input type="file" name="new_images[]" accept=".jpeg, .png, .jpg, .svg, .webp" required>
+        </td>
+        <td class="text-center">
+            <button type="button" class="btn btn-danger" onclick="removeImageRow(this, 'new')">Eliminar</button>
+        </td>
+    `;
+
+    // Agregar la nueva fila al contenedor de filas de imágenes
+    imageRows.appendChild(newRow);
+
+    // Actualizar el valor del input oculto para nuevas imágenes
+    updateHiddenInputValue("new");
+}
+
+// Función para eliminar la fila de imagen actual
+function removeImageRow(button, imageType) {
+    // Obtener la fila actual que contiene la imagen
+    let row = button.closest(".image-row");
+
+    // Eliminar la fila del DOM
+    row.parentNode.removeChild(row);
+
+    // Actualizar el valor del input oculto correspondiente
+    updateHiddenInputValue(imageType);
+}
+
+// Función para actualizar el valor del input oculto
+document.addEventListener("DOMContentLoaded", function () {
+    updateHiddenInputValue("existing");
+});
+function updateHiddenInputValue(imageType) {
+    // Obtener todas las filas de imágenes existentes y nuevas
+    let existingRows = document.querySelectorAll(".image-row");
+    let newRows = document.querySelectorAll('input[name="new_images[]"]');
+
+    // Obtener las URLs de las imágenes existentes y actualizar el input oculto correspondiente
+    let existingImageUrls = Array.from(existingRows).map(
+        (row) => row.querySelector("img").src
+    );
+    document.getElementById("existing-images").value =
+        JSON.stringify(existingImageUrls);
+
+    // Obtener los nombres de las nuevas imágenes y actualizar el input oculto correspondiente
+    let newImageNames = Array.from(newRows).map((input) =>
+        input.value.split("\\").pop()
+    );
+    document.getElementById("new-images").value = JSON.stringify(newImageNames);
+}
