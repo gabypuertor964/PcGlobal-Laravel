@@ -156,6 +156,73 @@ nav {
     transform: scale(0.95);
 }
 
+/* Estilos para la alerta de la agregación de un producto al carrito de compras */
+.custom-alert {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border: 1px solid hsl(142, 77%, 55%);
+    background: hsl(142, 77%, 60%);
+    font-weight: 500;
+    width: 100%;
+    margin-inline: auto;
+    text-align: center;
+    filter: drop-shadow(4px 4px 10px hwb(0 0% 100% / 0.2));
+}
+
+.custom-alert .btn-close {
+    padding: 0.625em 0.5rem;
+}
+
+@media (min-width: 768px) {
+    .custom-alert {
+        width: 50%;
+    }
+}
+
+/* Estilo para el nombre del producto */
+
+.product-name {
+    transition: color 100ms ease-in, transform 100ms ease-in;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.product-name:hover {
+    transform: scale(0.95);
+    color: #3483fa;
+}
+
+/* Tooltips para los botones y saber que hacen los mismos  */
+
+.button-tooltip {
+    position: relative;
+    box-sizing: border-box;
+    display: inline-block;
+}
+
+.button-tooltip::after {
+    z-index: 1;
+    content: attr(data-tooltip);
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 15px;
+    background-color: #333;
+    color: #fff;
+    font-size: 13px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+.button-tooltip:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
 /* Estilos para el contenedor de la(s) imagen(es) de los productos */
 
 .image-container-carousel {

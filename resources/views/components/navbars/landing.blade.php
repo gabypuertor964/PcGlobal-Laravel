@@ -29,13 +29,22 @@
 
         <!-- Enlaces de login y carrito -->
         <div class="nav-login hidden lg:flex gap-4">
+          <div class="relative">
+            <a href="{{route("cart.checkout")}}" role="button" aria-label="Link for shopping cart" class="hover:text-gray-200">
+              @if (Cart::count() > 0)
+              <span class="absolute -top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none text-xs font-semibold">{{ Cart::count() }}</span>
+              @endif
+              <i class="fa-solid fa-cart-shopping"></i>
+            </a>
+          </div>
+          <div class="border"></div>
           <div class="dropdown" tabindex="0">
             <button class="hover:text-gray-200" id="dropdownButton">
               <i class="fa-regular fa-user"></i>
             </button>
             <div class="dropdown-menu-l" id="dropdownMenu" tabindex="-1">
               @if (auth()->check())                
-                <a href="{{route("redirect")}}" aria-label="Link for dashboard" class="item">Dashboard</a>
+                <a href="{{route("redirect")}}" aria-label="Link for dashboard" class="item">Mi Cuenta</a>
 
                 {{-- Formulario de cierre de sesion --}}
                 <form action="{{route('logout')}}" method="post" class="item">
@@ -50,10 +59,6 @@
               @endif
             </div>
           </div>
-          <div class="border"></div>
-          <a href="#" role="button" aria-label="Link for shopping cart" class="hover:text-gray-200">
-            <i class="fa-solid fa-cart-shopping"></i>
-          </a>
         </div>
         
         <!-- Logo #2 (Este es para el responsive) -->

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\cartController;
 use App\Http\Controllers\landingPageController;
 use Illuminate\Support\Facades\Route;
 
@@ -8,7 +9,7 @@ use Illuminate\Support\Facades\Route;
  * Rutas landing page
 */
 Route::controller(landingPageController::class)->group(function(){
-
+    
     // Vista: Index/Principal
     Route::get('/', 'index')->name('index');
 
@@ -17,6 +18,24 @@ Route::controller(landingPageController::class)->group(function(){
 
     // Vista: Detallado de productos
     Route::get('products/{product}','productDetail')->name('product.show');
+});
+
+/**
+ * Rutas shopping cart
+ */
+Route::controller(cartController::class)->group(function(){
+
+    // Vista:Carrito de compras
+    Route::get("cart", "checkout")->name("cart.checkout");
+
+    // Añadir producto al carrito
+    Route::post("cart/add", "add")->name("cart.add");
+
+    // Eliminar producto del carrito
+    Route::post("cart/remove", "remove")->name("cart.remove");
+
+    // Vaciar el carrito
+    Route::get("cart/clear", "clear")->name("cart.clear");
 });
 
 /**

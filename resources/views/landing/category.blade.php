@@ -41,7 +41,7 @@
 
         <img src="{{ asset('storage/products/'. strtoupper($product->slug)."/images/1.png") }}" alt="{{ $product->model}}" class="product-img my-3"> 
 
-        <p class="text-center py-2 mx-10 mb-1">${{ number_format($product->price, 0, '.', '.') }} COP</p>
+        <p class="text-center py-2 mx-10 mb-1">${{ number_format($product->price, 0, ',', '.') }} COP</p>
       </a>
     @empty
       <div class="flex flex-col w-full sm:w-1/2 mx-auto col-span-4">

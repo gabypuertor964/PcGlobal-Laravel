@@ -13,6 +13,7 @@
 {{-- Declaracion contenido principal de la pagina web --}}
 @section('content')
 
+  @include('components.shopping-cart-alert')
   <div class="contenedor grid grid-cols-1 md:grid-cols-3 mt-3 gap-4 py-3 bg-white px-3 mx-8 rounded-lg"> 
     @if (count($directory) === 1)      
       <div class="flex flex-col text-center font-medium col-span-2">
@@ -55,7 +56,7 @@
       </div>
     @endif
 
-    <aside class="flex flex-col p-2 sm:p-3 desc-producto gap-y-2 text-start ms-3 sm:ms-0 ">
+    <aside class="flex flex-col p-2 sm:p-3 desc-producto gap-y-2 text-start ms-3 sm:ms-0 relative">
       <p class="text-gray-400 text-xs">Descripción del producto</p>
 
       <ul class="flex flex-col gap-y-2 sm:gap-y-4">
@@ -65,13 +66,27 @@
           <p class="font-bold">{{$product->name}}</p>
         </li>
 
-        <li class="text-lg lg:text-2xl">${{number_format($product->price, 0, '.', '.')}}</li>
+        <li class="text-lg lg:text-2xl">${{number_format($product->price, 0, ',', '.')}}</li>
       </ul>
       
       {{-- Especificaciones tecnicas --}}
-      <div class="especificaciones prose prose-sm lg:prose-base my-2">
+      <div class="specifications prose prose-sm lg:prose-base my-2">
         {!! $product->description !!}
-      </div>            
+      </div>
+
+      <div class="action-buttons absolute bottom-0 w-full pe-3 py-2 flex flex-col gap-y-1">
+        <button class="bg-indigo-600 text-white px-3 py-1 rounded-xl hover:bg-indigo-700 hover:text-white transition-colors font-medium w-full">Comprar</button>
+        <div>
+          <form action="{{route("cart.add")}}" method="post">
+            @csrf
+            <input type="hidden" name="slug" value="{{$product->slug}}">
+            <input type="submit" 
+            name="btn" 
+            class="text-indigo-600 border-2 border-indigo-600 px-3 py-1 rounded-xl hover:bg-indigo-600 hover:text-white transition-colors font-medium w-full" 
+            value="Añadir al carrito">
+          </form>
+        </div>
+      </div>
       
     </aside>
   </div>
