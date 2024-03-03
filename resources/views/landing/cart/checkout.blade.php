@@ -79,12 +79,12 @@
                         <button class="bg-indigo-600 text-white px-3 py-1 rounded-xl hover:bg-indigo-700 hover:text-white transition-colors font-medium w-full">
                             Comprar
                         </button>
-                        <button class="text-indigo-600 border-2 border-indigo-600 px-3 py-1 rounded-xl hover:bg-indigo-600 hover:text-white transition-colors font-medium w-full">
-                            <a href="{{route('index', '#categories')}}">Seguir comprando</a>
-                        </button>
-                        <button class="bg-red-600 text-white px-3 py-1 rounded-xl hover:bg-red-700 hover:text-white transition-colors font-medium w-full">
-                            <a href="{{route("cart.clear")}}">Vaciar el carrito</a>
-                        </button>
+                        <a role="button" href="{{route("index", "#categories")}}" class="text-indigo-600 border-2 text-center border-indigo-600 px-3 py-1 rounded-xl hover:bg-indigo-600 hover:text-white transition-colors font-medium w-full">
+                            Seguir comprando
+                        </a>
+                        <a role="button" href="{{route('cart.clear')}}"class="bg-red-600 text-white px-3 py-1 rounded-xl hover:bg-red-700 hover:text-white transition-colors font-medium w-full text-center">
+                            Vaciar el carrito
+                        </a>
                     </div>
                 </div>
             </section>
@@ -95,9 +95,9 @@
                     <h1 class="text-xl font-medium">El carrito de compras está vacío</h1>
                     <p>¡Parece que aún no has agregado ningún producto al carrito de compras!</p>
                 </div>
-                <button class="text-indigo-600 border-2 border-indigo-600 px-3 py-1 rounded-xl hover:bg-indigo-600 hover:text-white transition-colors font-medium">
-                    <a href="{{route('index', '#categories')}}">Seguir comprando</a>
-                </button>
+                <a role="button" href="{{route("index", "#categories")}}" class="text-indigo-600 border-2 text-center border-indigo-600 px-3 py-1 rounded-xl hover:bg-indigo-600 hover:text-white transition-colors font-medium">
+                    Seguir comprando
+                </a>
             </section>
         @endif
     </div>
