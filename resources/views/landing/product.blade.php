@@ -69,12 +69,12 @@
         <li class="text-lg lg:text-2xl">${{number_format($product->price, 0, ',', '.')}}</li>
       </ul>
       
-      {{-- Especificaciones tecnicas --}}
-      <div class="specifications prose prose-sm lg:prose-base my-2">
+      {{-- Descripcioón técnica --}}
+      <div class="description prose prose-sm lg:prose-base my-2">
         {!! $product->description !!}
       </div>
 
-      <div class="action-buttons absolute bottom-0 w-full pe-3 py-2 flex flex-col gap-y-1">
+      <div class="action-buttons relative md:absolute bottom-0 w-full pe-3 py-2 flex flex-col gap-y-1">
         <button class="bg-indigo-600 text-white px-3 py-1 rounded-xl hover:bg-indigo-700 hover:text-white transition-colors font-medium w-full">Comprar</button>
         <div>
           <form action="{{route("cart.add")}}" method="post">
@@ -89,6 +89,10 @@
       </div>
       
     </aside>
+    {{-- Especificaciones técnicas --}}
+    <div class="specifications prose prose-table:border prose-headings:bg-slate-700 prose-headings:text-center prose-headings:text-white prose-td:text-sm prose-td:text-center prose-td:font-medium lg:prose-lg my-2 col-span-2 mx-auto w-full">
+      {!! $product->specs !!}
+    </div>
   </div>
 
 @endsection
