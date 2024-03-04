@@ -12,8 +12,9 @@
 
       <!-- Formulario de búsqueda -->
       <div class="flex flex-grow px-2 sm:px-4 justify-center">
-        <form action="#" class="flex nav-search">
-          <input type="text" class="w-full sm:w-96 rounded-l-lg px-3 py-2 focus:ring-2 focus:ring-sky-500 text-gray-800" placeholder="¿Qué estás buscando?">
+        <form action="{{route("search.products")}}" class="flex nav-search" method="post">
+          @csrf
+          <input type="text" name="name" class="w-full sm:w-96 rounded-l-lg px-3 py-2 focus:ring-2 focus:ring-sky-500 text-gray-800" placeholder="¿Qué estás buscando?">
           <button class="w-16 bg-white py-2 px-4 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-sky-500" id="search-button" aria-label="Search Products">
             <i class="fas fa-search text-gray-700 text-lg"></i>
           </button>

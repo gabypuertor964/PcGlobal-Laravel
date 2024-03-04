@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, Searchable;
 
     /**
      * @abstract Definir los campos que se pueden llenar de forma masiva
@@ -22,6 +23,14 @@ class Product extends Model
         'stock',
         'slug',
     ];
+
+    public function toSearchableArray()
+    {
+        return [
+            'name' => $this->name,
+            'brand' => $this->brand->name,
+        ];
+    }
 
     /**
      * @abstract Obtener los campos que se pueden llenar de forma masiva

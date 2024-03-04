@@ -18,7 +18,9 @@ Route::controller(landingPageController::class)->group(function(){
 
     // Vista: Detallado de productos
     Route::get('products/{product}','productDetail')->name('product.show');
+    Route::post('search', 'searchProduct')->name("search.products");
 });
+
 
 /**
  * Rutas shopping cart
