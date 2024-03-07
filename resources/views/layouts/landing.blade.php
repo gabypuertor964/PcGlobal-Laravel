@@ -25,8 +25,10 @@
 
 {{-- Importacion de scripts --}}
 @section('scripts')
+    @routes
     @vite([
         'resources/js/navbar.js',
         'resources/js/scroll.js',
+        'resources/js/search.js'
     ])
 @endsection

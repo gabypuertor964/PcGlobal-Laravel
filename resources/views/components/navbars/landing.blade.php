@@ -10,7 +10,7 @@
         </a>
       </div>
 
-      <!-- Formulario de búsqueda -->
+      {{-- <!-- Formulario de búsqueda -->
       <div class="flex flex-grow px-2 sm:px-4 justify-center">
         <form action="{{route("search.products")}}" class="flex nav-search" method="post">
           @csrf
@@ -19,6 +19,17 @@
             <i class="fas fa-search text-gray-700 text-lg"></i>
           </button>
         </form>
+      </div> --}}
+
+      <div class="search-content">
+        <div class="search-panel flex nav-search">
+  
+          <div class="search-panel__results">
+            <div id="searchbox"></div>
+            <div id="hits">
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="nav-right flex gap-12 w-full sm:w-fit">
