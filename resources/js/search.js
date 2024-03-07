@@ -36,7 +36,7 @@ search.addWidgets([
                 html`
                     <a href="${route("product.show", hit.slug)}">
                         <article
-                            class="transition bg-white text-slate-700 my-1 rounded p-2 shadow-md hover:ring-2 hover:ring-sky-500 hover:scale-95 flex justify-between items-center"
+                            class="transition bg-white text-slate-700 my-1 rounded p-2 shadow-md 500 flex justify-between items-center"
                         >
                             <h1 class="text-sm md:text-lg font-medium">
                                 ${hit.name}

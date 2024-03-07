@@ -72,8 +72,7 @@ class ProductRequest extends FormRequest
             $rules['images.*'] = [
                 'required',
                 'image',
-                'mimes:jpeg,png,jpg,svg',
-                'max:3070',
+                'mimes:jpeg,png,jpg,svg,.wepb,.jfif',
                 new ValidateMinResolution(1920, 1080)
             ];
         }

@@ -608,3 +608,8 @@ input.ais-SearchBox-input:focus {
     color: white;
     font-size: inherit;
 }
+
+
+#hits > div > ol > li > a > article:hover {
+    background-color: #d4d4d8 !important;
+}
