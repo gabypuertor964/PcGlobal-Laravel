@@ -29,6 +29,9 @@ class Product extends Model
         return [
             'name' => $this->name,
             'brand' => $this->brand->name,
+            'stock' => $this->stock,
+            'price' => $this->price,
+            'slug' => $this->slug,
         ];
     }
 
