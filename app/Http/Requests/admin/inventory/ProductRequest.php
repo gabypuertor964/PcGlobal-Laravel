@@ -6,9 +6,12 @@ use App\Helpers\CleanInputs;
 use App\Helpers\GetRegister;
 use App\Helpers\RolesManager;
 use App\Helpers\Validator;
+use App\Http\Controllers\admin\inventory\ProductsController;
 use App\Rules\ValidateImages;
 use App\Rules\ValidateMinResolution;
+use Exception;
 use Illuminate\Foundation\Http\FormRequest;
+use PhpParser\Node\Expr\Throw_;
 
 class ProductRequest extends FormRequest
 {
@@ -47,7 +50,7 @@ class ProductRequest extends FormRequest
         if($this->routeIs('inventory.products.store')) {
             $id = null;
         }else{
-            $id = GetRegister::Get($this->route('product'), 'product')->id;
+            $id = ProductsController::get($this->route('product'))->id;
         }
 
         $rules = [

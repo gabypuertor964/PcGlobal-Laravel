@@ -35,6 +35,40 @@ class ProductsController extends Controller
     }
 
     /**
+     * @abstract Obtener los nombres de las imagenes desde su ruta absoluta
+     * 
+     * @param array $url_images Cadena de ruta de las imagenes
+     * @return array
+    */
+    private static function getNamesToAddress(array $url_images): array
+    {
+        // Convertir de arreglo a cadena 
+        $url_images = $url_images[0];
+
+        # Limpiar la cadena (eliminar los corchetes y comillas dobles)
+        $url_images = str_replace(["[", "]", "\""], "", $url_images);
+
+        // Inicializar la lista de nombres
+        $names = [];
+
+        // Convertir a una lista
+        $url_images = explode(",", $url_images);
+
+        // Recorrer las rutas de las imagenes
+        foreach ($url_images as $url) {
+            
+            // Obtener el nombre del archivo
+            $file_name = basename($url);
+
+            // Almacenar el nombre de la imagen
+            array_push($names, $file_name);
+        }
+
+        // Retornar la lista de nombres
+        return $names;
+    }
+
+    /**
      * @abstract Obtener el contenido del directorio de las imagenes del producto segun su slug no encriptado
      * 
      * @param string $slug
@@ -290,6 +324,9 @@ class ProductsController extends Controller
         // Enviar directorio de imagenes
         $product->directory_images = self::getImagesDirectory($product->slug);
 
+        //Encriptar el slug
+        $product->slug_encrypt = SlugManager::encrypt($product->slug);
+
         //Retornar la vista con la informacion solicitada
         return view('admin.inventory.products.edit', compact('product', 'categories', 'brands'));
     }
@@ -302,7 +339,8 @@ class ProductsController extends Controller
      */
     public function update(ProductRequest $request, string $slug)
     {
-        $product = self::get($slug);
+        //return dd($request->all());
+        return dd(self::getNamesToAddress($request->existing_images));
     }
 
     /**

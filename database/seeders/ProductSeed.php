@@ -43,6 +43,11 @@ class ProductSeed extends Seeder
                     storage_path("app/public/products/$product_directory/description.md"),
                     "Descripcion del producto $registro[2]"
                 );
+
+                File::put(
+                    storage_path("app/public/products/$product_directory/specs.md"),
+                    "Caracteristicas del producto $registro[2]"
+                );
             }
 
             //Guardado del registro en la BD
