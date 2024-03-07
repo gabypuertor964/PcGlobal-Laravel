@@ -27,7 +27,7 @@ search.addWidgets([
         placeholder: "Busca un producto",
         showLoadingIndicator: true,
         autoFocus: true,
-        searchAsYouType: true,
+        searchAsYouType: false, // Desactivamos la búsqueda automática para realizarla manualmente
     }),
     hits({
         container: "#hits",
@@ -61,10 +61,23 @@ search.start();
 
 const searchBoxElement = document.querySelector("#searchbox");
 const hitsContainerElement = document.querySelector("#hits");
+
+// Oculta los resultados al principio
 hitsContainerElement.style.display = "none";
 
-searchBoxElement.addEventListener("click", () => {
-    hitsContainerElement.style.display = "block";
+// Escucha el evento de entrada de texto en el cuadro de búsqueda
+searchBoxElement.addEventListener("input", (event) => {
+    const query = event.target.value;
+
+    // Muestra los resultados solo si la cadena de búsqueda no está vacía
+    if (query.trim() !== "") {
+        hitsContainerElement.style.display = "block";
+
+        // Realiza la búsqueda en Algolia
+        search.helper.setQuery(query).search();
+    } else {
+        hitsContainerElement.style.display = "none";
+    }
 });
 
 document.addEventListener("click", (event) => {
