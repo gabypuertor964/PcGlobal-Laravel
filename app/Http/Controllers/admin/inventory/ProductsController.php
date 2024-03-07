@@ -72,7 +72,7 @@ class ProductsController extends Controller
      * @abstract Obtener el contenido del directorio de las imagenes del producto segun su slug no encriptado
      * 
      * @param string $slug
-     * @return string
+     * @return array
     */
     public static function getImagesDirectory(string $slug): array
     {
@@ -90,6 +90,36 @@ class ProductsController extends Controller
         }
     }
 
+    /** 
+     * @abstract Segun el numero de imagenes almacenadas, renomrarlas de forma consecutiva
+     * 
+     * @param string $slug
+     * @return
+    */
+    private static function renameNewImages(string $slug)
+    {
+        // Obtener el directorio de las imagenes
+        $imagesDirectory = self::getImagesDirectory($slug);
+
+        // Numero de imagenes almacenadas
+        $count = count($imagesDirectory);
+
+        foreach ($imagesDirectory as $image) {
+
+            // Generar el nuevo nombre del archivo
+            $new_name = ($count).'.png';
+
+            // Renombrar el archivo
+            File::move(
+                storage_path("app/public/products/$slug/images/$image"),
+                storage_path("app/public/products/$slug/images/$new_name")
+            );
+
+            // Decrementar el contador
+            $count--;
+        }
+    }
+
     /**
      * @abstract Almacenar una lista de imagenes en el directorio del producto
      * 
@@ -97,10 +127,10 @@ class ProductsController extends Controller
      * @param string $slug
      * @param bool $replace
      *
-     * @return void
+     * @return
     */
-    private static function saveImage($images, string $slug, bool $replace = False): void
-    {
+    private static function saveImage($images, string $slug){
+        
         foreach($images as $key => $image){
 
             // Instanciamiento imagen
@@ -113,12 +143,15 @@ class ProductsController extends Controller
             $photo->encode('png',100);
 
             //Generar el nombre del archivo
-            $name = ($key+1).'.png';
+            $name = ("image_$key").'.png';
 
             //Guardar la imagen
             Storage::put("public/products/$slug/images/$name", $photo->stream());
         }
-    }
+
+        // Renombrar las imagenes
+        self::renameNewImages($slug);
+    }    
 
     /**
      * @abstract Crear una tabla markdown de las caracteristicas del producto
@@ -339,8 +372,94 @@ class ProductsController extends Controller
      */
     public function update(ProductRequest $request, string $slug)
     {
-        //return dd($request->all());
-        return dd(self::getNamesToAddress($request->existing_images));
+        try{
+            
+            // Realizar las validaciones adicionales
+            if(!Validator::runInRequest($request, Product::inputs(), ['slug'])){
+
+                // Retornar a la vista anterior con un mensaje de advertencia
+                return redirect()->back()->withInput()->with('message',[
+                    'status' => 'warning',
+                    'text' => '¡Verifica los campos y realiza las correcciones necesarias!'
+                ]);
+            }
+
+            // Ejecutar la transaccion
+            DB::transaction(function() use($request, $slug){
+
+                // Obtener el producto
+                $product = self::get($slug);
+
+                // Verificar si el producto existe
+                if($product == null){
+                    return redirect()->route('inventory.products.index')->with('message',[
+                        'status' => 'danger',
+                        'text' => '¡El producto no existe!'
+                    ]);
+                }
+
+                // Generar el slug segun el nombre del producto
+                $request["slug"] = SlugManager::generateInString($request->name);
+
+                // Verificar si el slug ha cambiado
+                if($product->slug != $request->slug){
+
+                    // Renombrar el directorio del producto
+                    File::move(
+                        storage_path('app/public/products/'.CleanInputs::runUpper($product->slug)),
+                        storage_path('app/public/products/'.CleanInputs::runUpper($request->slug))
+                    );
+                }
+
+                // Actualizar el producto
+                $product->update($request->all());
+
+                // Guardar la informacion
+                $product->save();
+
+                // Instanciar y limpiar el contenido de la descripcion
+                $content = strip_tags((new Parsedown)->text($request->description));
+
+                // Almacenar el contenido en el archivo description.md
+                File::put(storage_path('app/public/products/'.CleanInputs::runUpper($product->slug).'/description.md'), $content);
+
+                // Crear y almacenar las especificaciones del producto
+                self::createMarkdownSpecs($request->key_specs, $request->value_specs, CleanInputs::runUpper($product->slug));
+
+                // Listado de imagenes antiguas a conservar
+                $old_images = self::getNamesToAddress($request->existing_images);
+
+                // Listado de imagenes almacenadas
+                $imagesDirectory = self::getImagesDirectory($product->slug);
+
+                // Eliminar las imagenes que no se encuentran en el listado de imagenes a conservar
+                foreach ($imagesDirectory as $image) {
+
+                    if(!in_array($image, $old_images)){
+                        File::delete(storage_path("app/public/products/".CleanInputs::runUpper($product->slug)."/images/$image"));
+                    }
+                }
+                
+                // Almacenar las nuevas imagenes del producto
+                if($request->file('new_images') != null){
+                    self::saveImage($request->file('new_images'), CleanInputs::runUpper($product->slug));
+                }
+                
+            });
+
+            //Retornar a la vista anterior con un mensaje de exito
+            return redirect()->route('inventory.products.index')->with('message', [
+                'status' => 'success',
+                'text' => '¡Producto actualizado exitosamente!'
+            ]);
+
+        // Retornar a la vista anterior con un mensaje de error critico
+        }catch(Exception){
+            return redirect()->route("inventory.products.index")->withInput()->with('message', [
+                'status' => 'danger',
+                'text' => '¡Ha ocurrido un error inesperado al actualizar el producto!'
+            ]);
+        }
     }
 
     /**
