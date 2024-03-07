@@ -26,10 +26,13 @@
     @include('components.alert')
 
     {{-- Formulario --}}
-    <form action="{{route("inventory.products.store")}}" method="post" enctype="multipart/form-data">
+    <form action="{{route("inventory.products.update",$product->slug_encrypt)}}" method="post" enctype="multipart/form-data">
 
         {{-- Token de seguridad --}}
         @csrf
+
+        {{-- Metodo --}}
+        @method('PUT')
 
         {{-- Inputs --}}
         <div class="block space-y-3 md:grid grid-cols-2 grid-rows-2 md:gap-3 md:space-y-0 mb-3">
