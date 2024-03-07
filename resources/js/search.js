@@ -36,12 +36,12 @@ search.addWidgets([
                 html`
                     <a href="${route("product.show", hit.slug)}">
                         <article
-                            class="transition bg-white text-slate-700 my-1 rounded p-2 shadow-md hover:ring-2 hover:ring-sky-500 hover:scale-95"
+                            class="transition bg-white text-slate-700 my-1 rounded p-2 shadow-md hover:ring-2 hover:ring-sky-500 hover:scale-95 flex justify-between items-center"
                         >
-                            <h1 class="text-lg font-medium">${hit.name}</h1>
-                            <p>Marca: ${hit.brand}</p>
-                            <p>Unidades: ${hit.stock}</p>
-                            <p>Precio: $${formatNumber(hit.price)}</p>
+                            <h1 class="text-sm md:text-lg font-medium">
+                                ${hit.name}
+                            </h1>
+                            <p class="text-xs md:text-base">${hit.brand}</p>
                         </article>
                     </a>
                 `,
