@@ -26,13 +26,17 @@ return new class extends Migration
                 $table->string("taxes",10)->comment("Valor Impuestos");
 
                 $table->string("total",10)->comment("Valor Total Compra");
+
+                $table->unsignedInteger('id_state')->comment("Id Estado");
             //
 
             //Campos create_at y update_at
             $table->timestamps();
 
             /* Llaves foraneas */
-                $table->foreign("id_client")->references('id')->on("users");
+                $table->foreign("id_client")->references('id')->on("users")->onDelete('cascade')->onUpdate('cascade');
+
+                $table->foreign('id_state')->references('id')->on('states')->onDelete('cascade')->onUpdate('cascade');
             //
         });
     }

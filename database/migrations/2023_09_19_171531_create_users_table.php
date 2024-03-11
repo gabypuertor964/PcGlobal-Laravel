@@ -38,8 +38,6 @@ return new class extends Migration
                 $table->timestamp('email_verified_at')->nullable()->comment("Fecha y Hora validacion de correo electronico");
 
                 $table->rememberToken()->comment("Token 'recuerdame'");
-
-                $table->unsignedInteger("state_id")->comment("Id estado cuenta");
             //
 
             //Campos create_at y update_at
@@ -49,8 +47,6 @@ return new class extends Migration
                 $table->foreign('gender_id')->references('id')->on('genders')->onDelete('cascade')->onUpdate('cascade');
 
                 $table->foreign('document_type_id')->references('id')->on('document_types')->onDelete('cascade')->onUpdate('cascade');
-
-                $table->foreign('state_id')->references('id')->on('states')->onDelete('cascade')->onUpdate('cascade');
             //
         });
     }
