@@ -64,9 +64,9 @@ class landingPageController extends Controller
     
     /**
      * @abstract Consultar productos buscados en el cuadro de búsqueda
-     * FIXME: Aún no está acabado
+     * 
+     * @param \Illuminate\Http\Request $request
     */
-
     public function searchProduct(Request $request) {
     
         $query = $request->name;

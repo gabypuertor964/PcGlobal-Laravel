@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\clients\deliveryController;
-use App\Http\Controllers\clients\facturationController;
-use App\Http\Controllers\clients\PqrsController;
+use App\Http\Controllers\clients\FacturationController;
+use App\Http\Controllers\clients\pqrsController;
 use Illuminate\Support\Facades\Route;
 
 // Usuarios Autorizados: Clientes
@@ -14,8 +14,8 @@ Route::middleware(['auth', 'role:cliente'])->group(function () {
     })->name("clients.dashboard");
 
     //Funcionalidad PQRS
-    Route::resource('/pqrs', PqrsController::class)->names('clients.pqrs');
+    Route::resource('/pqrs', pqrsController::class)->names('clients.pqrs');
 
     //Funcionalidad Facturation
-    Route::resource('/facturation', facturationController::class)->names('clients.facturation');
+    Route::resource('/facturation', FacturationController::class)->names('clients.facturation');
 });

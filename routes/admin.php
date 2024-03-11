@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\deliveryController;
-use App\Http\Controllers\admin\facturationController;
+use App\Http\Controllers\admin\FacturationController;
 use App\Http\Controllers\admin\inventory\BrandsController;
 use App\Http\Controllers\admin\inventory\CategoriesController;
 use App\Http\Controllers\admin\inventory\ProductsController;
@@ -35,7 +35,7 @@ Route::middleware(['auth'])->group(function () {
             2. Gerente (Solo Lectura)
         --
     */
-    Route::resource('/facturation', facturationController::class)->names('admin.facturation')->middleware('can:facturation.read');
+    Route::resource('/facturation', FacturationController::class)->names('admin.facturation')->middleware('can:facturation.read');
 
     /*
         Modulo: Inventory/Inventario
