@@ -5,7 +5,7 @@ namespace App\Http\Controllers\clients;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class pqrsController extends Controller
+class PqrsController extends Controller
 {
     /**
      * Display a listing of the resource.

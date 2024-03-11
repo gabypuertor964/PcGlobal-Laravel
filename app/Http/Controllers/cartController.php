@@ -8,7 +8,7 @@ use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
-class cartController extends Controller
+class CartController extends Controller
 {
 
     /**

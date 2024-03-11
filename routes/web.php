@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\cartController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\landingPageController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +25,7 @@ Route::controller(landingPageController::class)->group(function(){
 /**
  * Rutas shopping cart
  */
-Route::controller(cartController::class)->group(function(){
+Route::controller(CartController::class)->group(function(){
 
     // Vista:Carrito de compras
     Route::get("cart", "checkout")->name("cart.checkout");

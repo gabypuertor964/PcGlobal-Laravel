@@ -2,12 +2,11 @@
 
 use App\Http\Controllers\admin\deliveryController;
 use App\Http\Controllers\admin\facturationController;
-use App\Http\Controllers\admin\gerencyController;
 use App\Http\Controllers\admin\inventory\BrandsController;
 use App\Http\Controllers\admin\inventory\CategoriesController;
 use App\Http\Controllers\admin\inventory\ProductsController;
-use App\Http\Controllers\admin\inventoryController;
-use App\Http\Controllers\admin\pqrsController;
+use App\Http\Controllers\admin\PqrsController;
+use App\Http\Controllers\admin\WorkersController;
 use Illuminate\Support\Facades\Route;
 
 // Usuarios Autorizados: Personal Administrativo
@@ -26,7 +25,7 @@ Route::middleware(['auth'])->group(function () {
             2. Gerente (Solo Lectura)
         --
     */
-    Route::resource('/pqrs', pqrsController::class)->names('admin.pqrs')->middleware('can:pqrs.read');
+    Route::resource('/pqrs', PqrsController::class)->names('admin.pqrs')->middleware('can:pqrs.read');
 
     /*
         Modulo: Facturation
@@ -67,7 +66,7 @@ Route::middleware(['auth'])->group(function () {
             2. Gerente (Solo Lectura)
         --
     */
-    Route::resource('/delivery', deliveryController::class)->names('admin.delivery')->middleware('can:delivery.read');
+    Route::resource('/delivery', deliveryController::class)->names('admin.delivery')->middleware('can:delivery.read')->except('delete');
 
     /*
         Modulo: Admin
@@ -76,5 +75,5 @@ Route::middleware(['auth'])->group(function () {
             1. Gerente (Todos los Permisos)
         --
     */
-    Route::resource('/gerency', gerencyController::class)->names('admin.gerency')->middleware('can:gerency.read');
+    Route::resource('/workers', WorkersController::class)->names('admin.workers')->middleware('can:gerency.read');
 });
