@@ -24,6 +24,27 @@
 
     {{-- Visualizacion de errores --}}
     @include('components.alert')
+    
+    {{-- Modal --}}
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Imagen</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img id="modalImage" src="" alt="Product Image" style="max-width: 100%;">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 
     {{-- Formulario --}}
     <form action="{{route("inventory.products.update",$product->slug_encrypt)}}" method="post" enctype="multipart/form-data">
@@ -110,8 +131,8 @@
                             <tbody id="image-rows">
                                 @foreach ($product->directory_images as $imageUrl)
                                     <tr class="image-row">
-                                        <td class="col-9">
-                                            <img src="{{ asset("storage/products/{$product->slug}/images/{$imageUrl}") }}" alt="Product Image" class="mb-2" style="max-width: 200px;">
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" data-image="{{ asset("storage/products/{$product->slug}/images/{$imageUrl}") }}">Ver imagen</button>
                                         </td>
                                         <td class="text-center">
                                             <button type="button" class="btn btn-danger" onclick="removeImageRow(this)">Eliminar</button>
@@ -150,7 +171,6 @@
                             <tr class="specRegister">
                             
                                 @forelse ($product->data_specs["specs"] as $key => $spec)
-
                                     {{-- Input: Clave --}}
                                     <td class="col-4 text-center">
                                         <input class="form-control form-control-sm" type="text" placeholder="Valor" name="key_specs[]" required value="{{$spec}}">
@@ -173,7 +193,7 @@
                                 @endforelse
                             
                                 {{-- Botones --}}
-                                <td class="text-centerasd">
+                                <td class="text-center">
                                 
                                     {{-- Boton añadir --}}
                                     <button type="button" class="btn btn-success btn-sm mr-2" onclick="addSpecRow()">
@@ -215,4 +235,16 @@
 {{-- Importacion scripts --}}
 @section('js')
     <script src="{{asset('resources/js/clone_row.js')}}"></script>
+    @vite([
+        'resources/js/bootstrap.js',
+    ])
+    <script>
+        $('#exampleModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Botón que disparó el modal
+            var imageUrl = button.data('image'); // Extraer la URL de la imagen del atributo personalizado
+    
+            var modal = $(this);
+            modal.find('.modal-body #modalImage').attr('src', imageUrl); // Actualizar el src de la imagen en el modal
+        });
+    </script>    
 @endsection
