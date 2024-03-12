@@ -9,6 +9,7 @@ use App\Models\Gender;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class WorkersController extends Controller
 {
@@ -40,7 +41,11 @@ class WorkersController extends Controller
 
         //Encriptar temporalmente los slugs
         foreach ($workers as $worker) {
+            $worker->names = ucfirst(strtolower($worker->names));
+            $worker->surnames = ucfirst(strtolower($worker->surnames));
             $worker->slug = SlugManager::encrypt($worker->id);
+            $rolName = $worker->roles->first()->name;
+            $worker->role = ucfirst(str_replace('_', ' ', $rolName));
         }
         return view("admin.workers.index", compact("workers"));
     }
@@ -53,9 +58,10 @@ class WorkersController extends Controller
         // Consultar la informacion solicitada
         $genders = Gender::all();
         $document_types = DocumentType::all();
+        $roles = Role::all();
 
         //Retornar la vista con la informacion solicitada
-        return view('admin.workers.create', compact('genders', 'document_types'));
+        return view('admin.workers.create', compact('genders', 'document_types', 'roles'));
     }
 
     /**
@@ -82,6 +88,9 @@ class WorkersController extends Controller
     {
         // Obtener el registro de la categoria
         $worker = self::get($slug);
+        
+        $worker->names = ucfirst(strtolower($worker->names));
+        $worker->surnames = ucfirst(strtolower($worker->surnames));
     
         if($worker == null){
             return redirect()->route('admin.workers.index')->with('message',[
@@ -93,12 +102,13 @@ class WorkersController extends Controller
         // Consultar la informacion solicitada
         $genders = Gender::all();
         $document_types = DocumentType::all();
+        $roles = Role::all();
     
         //Encriptar el slug
         $worker->slug_encrypt = SlugManager::encrypt($worker->id);
     
         //Retornar la vista con la informacion solicitada
-        return view('admin.workers.edit', compact('worker', 'genders', 'document_types'));
+        return view('admin.workers.edit', compact('worker', 'genders', 'document_types', 'roles'));
     }
 
     /**

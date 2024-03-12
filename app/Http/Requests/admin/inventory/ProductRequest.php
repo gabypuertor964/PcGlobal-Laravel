@@ -3,15 +3,12 @@
 namespace App\Http\Requests\admin\inventory;
 
 use App\Helpers\CleanInputs;
-use App\Helpers\GetRegister;
 use App\Helpers\RolesManager;
 use App\Helpers\Validator;
 use App\Http\Controllers\admin\inventory\ProductsController;
-use App\Rules\ValidateImages;
 use App\Rules\ValidateMinResolution;
-use Exception;
 use Illuminate\Foundation\Http\FormRequest;
-use PhpParser\Node\Expr\Throw_;
+
 
 class ProductRequest extends FormRequest
 {

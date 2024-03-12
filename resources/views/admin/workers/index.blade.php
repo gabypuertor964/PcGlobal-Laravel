@@ -45,6 +45,7 @@
                     <th>Tipo de Documento</th>
                     <th>Número de Telefono</th>
                     <th>Correo Electrónico</th>
+                    <th>Rol</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -59,6 +60,7 @@
                         <td class="align-middle">{{$worker->document_type->abbreviation}}</td>
                         <td class="align-middle">{{$worker->phone_number}}</td>
                         <td class="align-middle">{{$worker->email}}</td>
+                        <td class="align-middle">{{$worker->role}}</td>
                         <td>
                             <div class="flex justify-center gap-2 w-full">
 

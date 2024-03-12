@@ -83,7 +83,7 @@
                         @endforeach
                     </select>
                 </div>
-
+                
                 {{-- Input:  Número de telefono --}}
                 <div class="mb-3">
                     <label for="phone_number" class="form-label">Número de Telefono</label>
@@ -95,7 +95,22 @@
                     <label for="email" class="form-label">Correo Electrónico</label>
                     <input type="email" class="form-control" name="email" id="email" value="{{old('email')}}" required/>
                 </div>
-
+                
+                {{-- Select: Rol --}}
+                <div class="mb-3">
+                    <label for="role_id" class="form-label">Rol</label>
+                    <select class="form-select form-select" name="role_id">
+                        <option disabled selected class="fw-bold">Seleccione</option>
+                        
+                        @foreach ($roles as $role)
+                            @if (old('role_id') == $role->id)
+                                <option value="{{$role->id}}" selected>{{ucfirst(str_replace('_', ' ', $role->name))}}</option>
+                            @else
+                                <option value="{{$role->id}}">{{ucfirst(str_replace('_', ' ', $role->name))}}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                </div>
             </div>
             
         {{-- Botones --}}
