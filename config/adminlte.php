@@ -792,17 +792,17 @@ return [
                     [
                         'text' => 'Trabajadores',
                         'icon'    => 'nav-icon fa-fw fas fa-users',
-                        'url'  => '/admin/management/users',
+                        'url'  => '/admin/workers',
                         'submenu' => [
                             [
                                 'text' => 'Listado Trabajadores',
                                 'icon'    => 'nav-icon fa-fw fas fa-list',
-                                'url'  => '/admin/management/users',
+                                'url'  => '/admin/workers',
                             ],
                             [
                                 'text' => 'Registrar Trabajador',
                                 'icon'    => 'nav-icon fa-fw far fa-plus-square',
-                                'url'  => '/admin/management/users/create',
+                                'url'  => '/admin/workers/create',
                             ]
                         ]
                     ]

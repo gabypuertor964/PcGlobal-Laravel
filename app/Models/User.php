@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -62,10 +63,18 @@ class User extends Authenticatable
     }
 
     /**
-     * @abstract Declarar la relacion 1:N con el modelo Adress (Direcciones)
-    */
-    public function address()
+     * @abstract Declara la relacion 1:1 con el modelo Gender (Géneros) FK: gender_id (Default)
+     */
+    public function gender()
     {
-        return $this->hasMany(Adress::class,'client_id');
+        return $this->belongsTo(Gender::class);
+    }
+
+    /**
+     * @abstract Declara la relacion 1:1 con el modelo DocumentType (Tipos de Documentos) FK: document_type_id (Default)
+    */
+    public function document_type()
+    {
+        return $this->belongsTo(DocumentType::class);
     }
 }
