@@ -18,7 +18,8 @@ class UserSeed extends Seeder
         //Abrir el archivo "users.csv" y guardar los datos de este en una variable
         $csv=fopen(database_path("data/users.csv"),"r");
 
-        while(($registro=fgetcsv($csv,2000,";"))!=FALSE){
+        while(($registro=fgetcsv($csv,3000,";"))!=FALSE){
+            
             //Filtrado caracteres especiales
             $registro[0]=str_replace("﻿","",$registro[0]);
 
@@ -36,7 +37,7 @@ class UserSeed extends Seeder
                 'email'=>$registro[7],
                 'password'=>Hash::make($registro[8]),
                 
-            ])->assignRole($registro[10]);
+            ])->assignRole($registro[9]);
         }
     }
 }

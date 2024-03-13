@@ -39,6 +39,10 @@ class ProductSeed extends Seeder
 
                 File::makeDirectory(storage_path("app/public/products/$product_directory/images"));
 
+                $imageUrl = $registro[4];
+                $imagePath = storage_path("app/public/products/$product_directory/images/1.png");
+                file_put_contents($imagePath, file_get_contents($imageUrl));
+
                 File::put(
                     storage_path("app/public/products/$product_directory/description.md"),
                     "Descripcion del producto $registro[2]"

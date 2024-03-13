@@ -5,4 +5,7 @@
 !others/
 !others/*
 
+!categories/
+!categories/*
+
 !.gitignore

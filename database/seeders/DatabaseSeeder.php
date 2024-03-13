@@ -29,24 +29,18 @@ class DatabaseSeeder extends Seeder
 
             //Seed: Roles y Permisos
             RolePermissionSeed::class,
+
+            //Seed: Categorias
+            CategorySeed::class,
+
+            //Seed: Marcas
+            BrandSeed::class,
+
+            //Seed: Productos
+            ProductSeed::class,
+
+            //Seed: Usuarios
+            UserSeed::class,
         ]);
-
-        /* Ejecucion Seeders locales/desarrollo */
-        if(env('APP_ENV') == 'local'){
-            $this->call([
-                //Seed: Categorias
-                CategorySeed::class,
-
-                //Seed: Marcas
-                BrandSeed::class,
-
-                //Seed: Productos
-                ProductSeed::class,
-
-                //Seed: Usuarios
-                UserSeed::class,
-            ]);
-        }
-
     }
 }
