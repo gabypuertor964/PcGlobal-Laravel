@@ -27,16 +27,31 @@ class RolesManager{
 
     /**
      * @abstract Obtener los permisos de un usuario autenticado
-     * 
-     * @return Array
+     * @return bool
     */
-    public static function verifyPermission(array $permissions)
+    public static function verifyPermission(array $permissions): bool
     {
         //Verificar si el usuario esta autenticado
         if(Auth::check()){
 
             //Obtener y retornar los roles del usuario            
             return User::find(Auth::user()->id)->hasAnyPermission($permissions);
+        }
+    
+        return false;
+    }
+
+    /**
+     * @abstract Verificar si el usuario tiene un rol especifico
+     * @return bool
+    */
+    public static function hasRole(string $role): bool
+    {
+        //Verificar si el usuario esta autenticado
+        if(Auth::check()){
+
+            //Obtener y retornar los roles del usuario            
+            return User::find(Auth::user()->id)->hasRole($role);
         }
     
         return false;

@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\admin;
 
 use App\Helpers\SlugManager;
+use App\Helpers\Validator;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\admin\WorkersRequest;
 use App\Models\DocumentType;
 use App\Models\Gender;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
 class WorkersController extends Controller
@@ -17,7 +21,7 @@ class WorkersController extends Controller
      * @abstract Obtener el registro segun el slug encriptado
      *
      * @param string $slug
-     * @return Product|null
+     * @return User|null
     */
     public static function get(string $slug): mixed
     {
@@ -34,31 +38,37 @@ class WorkersController extends Controller
     public function index()
     {
 
-        // Obtener solo los usuariosempleados
+        /**
+         * Exclusiones: Usuarios con el rol de cliente y gerente
+        */
         $workers = User::whereDoesntHave('roles', function ($query) {
-            $query->where('id', 1);
+            $query->where('name', 'cliente');
+        })->whereDoesntHave('roles', function ($query) {
+            $query->where('name', 'gerente');
         })->paginate(10);
 
-        //Encriptar temporalmente los slugs
+        // Limpiar y organizar la informacion
         foreach ($workers as $worker) {
-            $worker->names = ucfirst(strtolower($worker->names));
-            $worker->surnames = ucfirst(strtolower($worker->surnames));
+
             $worker->slug = SlugManager::encrypt($worker->id);
             $rolName = $worker->roles->first()->name;
             $worker->role = ucfirst(str_replace('_', ' ', $rolName));
+
         }
+
+        # Retornar la vista con la informacion solicitada
         return view("admin.workers.index", compact("workers"));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * @abstract Mostrar el formulario para crear un nuevo empleado
      */
     public function create()
     {
         // Consultar la informacion solicitada
         $genders = Gender::all();
         $document_types = DocumentType::all();
-        $roles = Role::all();
+        $roles = Role::all()->where('name',"!=", "cliente")->where('name',"!=", "gerente");
 
         //Retornar la vista con la informacion solicitada
         return view('admin.workers.create', compact('genders', 'document_types', 'roles'));
@@ -69,14 +79,55 @@ class WorkersController extends Controller
      * 
      * @param Request $request
      */
-    public function store(Request $request)
+    public function store(WorkersRequest $request)
     {
-        //
-    }
+        try{
 
-    public function show(string $id)
-    {
-        //
+            /**
+             * Ejecutar las validaciones adicionales
+            */
+            if(!Validator::runInRequest($request,User::inputs())){
+
+                // Redireccion a la vista de registro con mensaje de advertencia
+                return redirect()->back()->withInput()->with('message',[
+                    'status'=>'warning',
+                    'text'=>'¡Verifica los campos y realiza las correcciones necesarias!'
+                ]);
+            }
+
+            /**
+             * Transaccion para la creacion de un cliente
+             * 
+             * @param ClientRequest $request
+             * @return void
+            */
+            DB::transaction(function() use($request){
+                User::create([
+                    'names'=>$request->names,
+                    'surnames'=>$request->surnames,
+                    'gender_id'=>$request->gender_id,
+                    'document_type_id'=>$request->document_type_id,
+                    'document_number'=>$request->document_number,
+                    'phone_number'=>$request->phone_number,
+                    'date_birth'=>$request->date_birth,
+                    'email'=>$request->email,
+                    'password'=>Hash::make($request->password)
+                ])->assignRole(Role::findById($request->role_id));
+            });
+
+            //Redireccion al login con mensaje de exito
+            return redirect()->route("admin.workers.index")->with('message',[
+                'status'=>'success',
+                'text'=>'¡Empleado registrado exitosamente!'
+            ]);
+
+
+        }catch(Exception){
+            return redirect()->back()->withInput()->with('message',[
+                'status' => 'danger',
+                'text' => '¡Ha ocurrido un error inesperado al registrar el empleado!'
+            ]);
+        }
     }
 
     /**
@@ -89,9 +140,6 @@ class WorkersController extends Controller
         // Obtener el registro de la categoria
         $worker = self::get($slug);
         
-        $worker->names = ucfirst(strtolower($worker->names));
-        $worker->surnames = ucfirst(strtolower($worker->surnames));
-    
         if($worker == null){
             return redirect()->route('admin.workers.index')->with('message',[
                 'status' => 'danger',
@@ -102,10 +150,10 @@ class WorkersController extends Controller
         // Consultar la informacion solicitada
         $genders = Gender::all();
         $document_types = DocumentType::all();
-        $roles = Role::all();
+        $roles = Role::all()->where('name',"!=", "cliente")->where('name',"!=", "gerente");
     
         //Encriptar el slug
-        $worker->slug_encrypt = SlugManager::encrypt($worker->id);
+        $worker->slug = SlugManager::encrypt($worker->id);
     
         //Retornar la vista con la informacion solicitada
         return view('admin.workers.edit', compact('worker', 'genders', 'document_types', 'roles'));
@@ -117,9 +165,71 @@ class WorkersController extends Controller
      * @param Request $request
      * @param string $slug
      */
-    public function update(Request $request, string $slug)
+    public function update(WorkersRequest $request, string $slug)
     {
-        //
+        try{
+
+            /**
+             * Ejecutar las validaciones adicionales
+            */
+            if(!Validator::runInRequest($request,User::inputs(),["password"])){
+
+                // Redireccion a la vista de registro con mensaje de advertencia
+                return redirect()->back()->withInput()->with('message',[
+                    'status'=>'warning',
+                    'text'=>'¡Verifica los campos y realiza las correcciones necesarias!'
+                ]);
+            }
+
+            // Obtener el registro del empleado
+            $worker = self::get($slug);
+
+            // Verificar si el empleado existe
+            if($worker == null){
+                return redirect()->route('admin.workers.index')->with('message',[
+                    'status' => 'danger',
+                    'text' => '¡El empleado no existe!'
+                ]);
+            }
+
+            # Transaccion para la actualizacion del empleado
+            DB::transaction(function() use($request, $worker){
+
+                # Actualizar la informacion del empleado
+                $worker->update([
+                    'names'=>$request->names,
+                    'surnames'=>$request->surnames,
+                    'gender_id'=>$request->gender_id,
+                    'document_type_id'=>$request->document_type_id,
+                    'document_number'=>$request->document_number,
+                    'phone_number'=>$request->phone_number,
+                    'date_birth'=>$request->date_birth,
+                    'email'=>$request->email
+                ]);
+
+                # Actualizar la contraseña si se ha especificado
+                if($request->password != null){
+                    $worker->update([
+                        'password'=>Hash::make($request->password)
+                    ]);
+                }
+
+                # Actualizar el rol del empleado
+                $worker->syncRoles(Role::findById($request->role_id));
+            });
+
+            //Retornar a la vista anterior con un mensaje de exito
+            return redirect()->route('admin.workers.index')->with('message', [
+                'status' => 'success',
+                'text' => '¡Empleado actualizado exitosamente!'
+            ]);
+
+        }catch(Exception){
+            return redirect()->back()->withInput()->with('message',[
+                'status' => 'danger',
+                'text' => '¡Ha ocurrido un error inesperado al actualizar el empleado!'
+            ]);
+        }
     }
 
     /**
@@ -132,16 +242,18 @@ class WorkersController extends Controller
             // Obtener el registro del empleado
             $worker = self::get($slug);
 
-            // Verificar si el producto existe
+            // Verificar si el empleado existe
             if($worker == null){
                 return redirect()->route('admin.workers.index')->with('message',[
                     'status' => 'danger',
-                    'text' => '¡El producto no existe!'
+                    'text' => '¡El empleado no existe!'
                 ]);
             }
 
-            // Eliminar el empleado
-            $worker->delete();
+            # Transaccion para la eliminacion del empleado
+            DB::transaction(function() use($worker){
+                $worker->delete();
+            });
 
             //Retornar a la vista anterior con un mensaje de exito
             return redirect()->route('admin.workers.index')->with('message', [

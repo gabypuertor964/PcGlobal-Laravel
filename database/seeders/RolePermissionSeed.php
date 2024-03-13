@@ -53,15 +53,6 @@ class RolePermissionSeed extends Seeder
                 ]
             ],
             [
-                'name'=>'repatidor',
-                'permisos'=>[
-                    'delivery.create',
-                    'delivery.read',
-                    'delivery.update',
-                    'delivery.delete',
-                ]
-            ],
-            [
                 'name'=>'gerente',
                 'permisos'=>[
                     'gerency.create',

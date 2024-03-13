@@ -95,7 +95,7 @@ class AuthController extends Controller
             /**
              * Ejecutar las validaciones adicionales
             */
-            if(!Validator::runInRequest($request,User::inputs(),['state_id'])){
+            if(!Validator::runInRequest($request,User::inputs())){
 
                 // Redireccion a la vista de registro con mensaje de advertencia
                 return redirect()->back()->withInput()->with('message',[

@@ -2,11 +2,11 @@
 @extends('adminlte::page')
 
 {{-- Complemento titulo --}}
-@section('title', 'Editar Producto')
+@section('title', 'Crear Empleado')
 
 {{-- Titulo principal --}}
 @section('content_header')
-    <h1 class="text-center font-weight-bold font-italic">Editar Empleado</h1>
+    <h1 class="text-center font-weight-bold font-italic">Crear Empleado</h1>
 @stop
 
 {{-- Declaración de dependencias adicionales --}}
@@ -26,13 +26,10 @@
     @include('components.alert')
 
     {{-- Formulario --}}
-    <form action="{{route("admin.workers.create")}}" method="post" enctype="multipart/form-data">
+    <form action="{{route("admin.workers.store")}}" method="post">
 
         {{-- Token de seguridad --}}
         @csrf
-
-        {{-- Metodo --}}
-        @method('PUT')
 
         {{-- Inputs --}}
         <div class="flex flex-col gap-3 w-full md:w-1/3 mx-auto mb-3">
@@ -52,8 +49,8 @@
 
                 {{-- Select: Género --}}
                 <div class="mb-3">
-                    <label for="category_id" class="form-label">Género</label>
-                    <select class="form-select form-select" name="category_id">
+                    <label for="gender_id" class="form-label">Género</label>
+                    <select class="form-select form-select" name="gender_id">
                         <option disabled selected class="fw-bold">Seleccione</option>
                         
                         @foreach ($genders as $gender)
@@ -70,8 +67,8 @@
 
                 {{-- Select: Tipo de Documento --}}
                 <div class="mb-3">
-                    <label for="brand_id" class="form-label">Tipo de Documento</label>
-                    <select class="form-select form-select" name="brand_id">
+                    <label for="document_type_id" class="form-label">Tipo de Documento</label>
+                    <select class="form-select form-select" name="document_type_id">
                         <option disabled selected class="fw-bold">Seleccione</option>
                         
                         @foreach ($document_types as $document_type)
@@ -84,18 +81,24 @@
                     </select>
                 </div>
                 
-                {{-- Input:  Número de telefono --}}
+                {{-- Input:  Numero de Documento --}}
                 <div class="mb-3">
-                    <label for="phone_number" class="form-label">Número de Telefono</label>
-                    <input type="number" class="form-control" name="phone_number" id="phone_number" value="{{old('phone_number')}}" required/>
+                    <label for="document_number" class="form-label">Numero de Documento</label>
+                    <input type="number" class="form-control" name="document_number" id="document_number" value="{{old('document_number')}}" required/>
                 </div>
 
-                {{-- Input:  Correo electrónico --}}
+                {{-- Input:  Numero Telefonico --}}
                 <div class="mb-3">
-                    <label for="email" class="form-label">Correo Electrónico</label>
-                    <input type="email" class="form-control" name="email" id="email" value="{{old('email')}}" required/>
+                    <label for="phone_number" class="form-label">Numero Telefonico</label>
+                    <input type="number" class="form-control" name="phone_number" id="phone_number" value="{{old('phone_number')}}" min="1" max="9999999999"required/>
                 </div>
-                
+
+                {{-- Input: Fecha de Nacimiento --}}
+                <div class="mb-3">
+                    <label for="date_birth" class="form-label">Fecha de Nacimiento</label>
+                    <input type="date" class="form-control" name="date_birth" id="date_birth" value="{{old('date_birth')}}" min="{{now()->subday()->subYears(100)->format('Y-m-d')}}" max="{{now()->subday()->subYears(18)->format('Y-m-d')}}" required/>
+                </div>
+
                 {{-- Select: Rol --}}
                 <div class="mb-3">
                     <label for="role_id" class="form-label">Rol</label>
@@ -111,8 +114,26 @@
                         @endforeach
                     </select>
                 </div>
+
+                {{-- Input:  Correo electrónico --}}
+                <div class="mb-3">
+                    <label for="email" class="form-label">Correo Electrónico</label>
+                    <input type="email" class="form-control" name="email" id="email" value="{{old('email')}}" required/>
+                </div>
+                
+                {{-- Input:  Contraseña --}}
+                <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" name="password" id="password" min="8" required/>
+                </div>
+
+                {{-- Input:  Confirmar Contraseña --}}
+                <div class="mb-3">
+                    <label for="password_confirmation" class="form-label">Confirmar Contraseña</label>
+                    <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" min="8" required/>
+                </div>
             </div>
-            
+
         {{-- Botones --}}
         <div class="text-center">
             {{-- Boton: Guardar --}}

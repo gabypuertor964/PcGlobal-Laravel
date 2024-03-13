@@ -92,7 +92,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5">No hay productos disponibles</td>
+                        <td colspan="8">No hay trabajadores registrados</td>
                     </tr>
                 @endforelse
             </tbody>

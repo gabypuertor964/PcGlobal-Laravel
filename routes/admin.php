@@ -75,5 +75,5 @@ Route::middleware(['auth'])->group(function () {
             1. Gerente (Todos los Permisos)
         --
     */
-    Route::resource('/workers', WorkersController::class)->names('admin.workers')->middleware('can:gerency.read');
+    Route::resource('/workers', WorkersController::class)->names('admin.workers')->middleware('can:gerency.read')->except('show');
 });
