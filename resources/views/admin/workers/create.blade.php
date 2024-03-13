@@ -32,8 +32,8 @@
         @csrf
 
         {{-- Inputs --}}
-        <div class="flex flex-col gap-3 w-full md:w-1/3 mx-auto mb-3">
-            <div class="edit-form min-w-full row-span-2">
+        <div class="flex flex-col gap-3 w-full md:w-1/2 mx-auto mb-3">
+            <div class="edit-form min-w-full grid grid-cols-1 lg:grid-cols-2 gap-x-2">
 
                 {{-- Input: Nombres --}}
                 <div class="mb-3">
@@ -116,7 +116,7 @@
                 </div>
 
                 {{-- Input:  Correo electrónico --}}
-                <div class="mb-3">
+                <div class="mb-3 col-span-auto lg:col-span-2">
                     <label for="email" class="form-label">Correo Electrónico</label>
                     <input type="email" class="form-control" name="email" id="email" value="{{old('email')}}" required/>
                 </div>

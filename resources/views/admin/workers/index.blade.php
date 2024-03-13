@@ -41,10 +41,10 @@
                 <tr>
                     <th>Nombres</th>
                     <th>Apellidos</th>
-                    <th>Género</th>
-                    <th>Tipo de Documento</th>
-                    <th>Número de Telefono</th>
-                    <th>Correo Electrónico</th>
+                    <th class="hidden lg:flex">Género</th>
+                    <th class="hidden lg:flex">Tipo de Documento</th>
+                    <th class="hidden lg:flex">Número de Telefono</th>
+                    <th class="hidden lg:flex">Correo Electrónico</th>
                     <th>Rol</th>
                     <th>Acciones</th>
                 </tr>
@@ -56,10 +56,10 @@
                     <tr>
                         <td class="align-middle">{{$worker->names}}</td>
                         <td class="align-middle">{{$worker->surnames}}</td>
-                        <td class="align-middle">{{$worker->gender->name}}</td>
-                        <td class="align-middle">{{$worker->document_type->abbreviation}}</td>
-                        <td class="align-middle">{{$worker->phone_number}}</td>
-                        <td class="align-middle">{{$worker->email}}</td>
+                        <td class="align-middle hidden lg:block">{{$worker->gender->name}}</td>
+                        <td class="align-middle hidden lg:block">{{$worker->document_type->abbreviation}}</td>
+                        <td class="align-middle hidden lg:block">{{$worker->phone_number}}</td>
+                        <td class="align-middle hidden lg:block">{{$worker->email}}</td>
                         <td class="align-middle">{{$worker->role}}</td>
                         <td>
                             <div class="flex justify-center gap-2 w-full">
