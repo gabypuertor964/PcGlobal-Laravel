@@ -53,6 +53,7 @@ Developed with adaptability and growth in mind, PCGlobal stands as the ideal sol
 * **Generate storage link**: `php artisan storage:link`
 * **Execute Resource Compilation**: `npm run build`
 * **Create Account Gerency**: `php artisan create-generency-account`
+* **Run Artisan Serve (Optional)**: `php artisan serve`
 
 ## Extensions and Libraries
 
