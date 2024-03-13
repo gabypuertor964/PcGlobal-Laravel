@@ -34,17 +34,17 @@
     <div class="text-center">
 
         {{-- Tabla de datos --}}
-        <table class="table table-striped table-bordered">
+        <table class="table table-striped table-bordered text-sm">
         
             {{-- Cabecera de la tabla --}}
             <thead>
                 <tr>
                     <th>Nombres</th>
                     <th>Apellidos</th>
-                    <th class="hidden lg:flex">Género</th>
-                    <th class="hidden lg:flex">Tipo de Documento</th>
-                    <th class="hidden lg:flex">Número de Telefono</th>
-                    <th class="hidden lg:flex">Correo Electrónico</th>
+                    <th class="hidden lg:table-cell">Género</th>
+                    <th class="hidden lg:table-cell">Tipo de Documento</th>
+                    <th class="hidden lg:table-cell">Número de Telefono</th>
+                    <th class="hidden lg:table-cell">Correo Electrónico</th>
                     <th>Rol</th>
                     <th>Acciones</th>
                 </tr>
@@ -56,13 +56,13 @@
                     <tr>
                         <td class="align-middle">{{$worker->names}}</td>
                         <td class="align-middle">{{$worker->surnames}}</td>
-                        <td class="align-middle hidden lg:block">{{$worker->gender->name}}</td>
-                        <td class="align-middle hidden lg:block">{{$worker->document_type->abbreviation}}</td>
-                        <td class="align-middle hidden lg:block">{{$worker->phone_number}}</td>
-                        <td class="align-middle hidden lg:block">{{$worker->email}}</td>
+                        <td class="align-middle hidden lg:table-cell">{{$worker->gender->name}}</td>
+                        <td class="align-middle hidden lg:table-cell">{{$worker->document_type->abbreviation}}</td>
+                        <td class="align-middle hidden lg:table-cell">{{$worker->phone_number}}</td>
+                        <td class="align-middle hidden lg:table-cell">{{$worker->email}}</td>
                         <td class="align-middle">{{$worker->role}}</td>
                         <td>
-                            <div class="flex justify-center gap-2 w-full">
+                            <div class="flex flex-col lg:flex-row justify-center gap-2 w-full">
 
                                 {{-- Boton: Actualizar --}}
                                 <div class="button-tooltip" data-tooltip="Editar producto">
