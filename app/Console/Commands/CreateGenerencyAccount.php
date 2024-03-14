@@ -17,7 +17,7 @@ class CreateGenerencyAccount extends Command
      *
      * @var string
      */
-    protected $signature = 'create-generency-account';
+    protected $signature = 'create-gerency-account';
 
     /**
      * The console command description.
