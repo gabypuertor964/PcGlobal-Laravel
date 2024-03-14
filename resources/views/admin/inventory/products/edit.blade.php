@@ -126,6 +126,9 @@
                         <input type="hidden" id="existing-images" name="existing_images[]" value="">
                         <input type="hidden" id="new-images" name="new_images" value="">
 
+                        @php
+                            $product->slug = strtoupper($product->slug);
+                        @endphp
 
                         <table class="col-12">
                             <tbody id="image-rows">

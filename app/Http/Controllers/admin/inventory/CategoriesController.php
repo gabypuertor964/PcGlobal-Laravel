@@ -132,7 +132,7 @@ class CategoriesController extends Controller
         }
 
         // Verificar si la categoria tiene una imagen asociada
-        $category->image = Validator::publicImageExist("/storage/categories/$category->slug.png");
+        $category->image = asset("/storage/categories/$category->slug.png");
 
         //Añadir registro de slug encriptado
         $category->slug = SlugManager::encrypt($category->slug);
