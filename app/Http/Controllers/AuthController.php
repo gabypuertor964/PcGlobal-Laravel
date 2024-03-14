@@ -121,7 +121,6 @@ class AuthController extends Controller
                     'date_birth'=>$request->date_birth,
                     'email'=>CleanInputs::runLower($request->email),
                     'password'=>Hash::make($request->password),
-                    'state_id'=>State::where('name','Activo')->first()->id
                 ])->assignRole('cliente');
             });
 
@@ -131,12 +130,12 @@ class AuthController extends Controller
                 'text'=>'¡Registro exitoso!, por favor inicia sesión.'
             ]);
 
-        }catch(Exception){
+        }catch(Exception $e){
 
             //Redireccion a la vista de registro con mensaje de error
             return redirect()->back()->withInput()->with('message',[
                 'status'=>'danger',
-                'text'=>'! Ha ocurrido un error, contacte al administrador del sistema. !'
+                'text'=>"'! Ha ocurrido un error, contacte al administrador del sistema. !'"
             ]);
         }
         
