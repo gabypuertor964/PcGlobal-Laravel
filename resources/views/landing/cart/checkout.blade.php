@@ -76,9 +76,9 @@
                         </ul>
                     </div>
                     <div class="flex flex-col gap-y-1.5">
-                        <button class="bg-indigo-600 text-white px-3 py-1 rounded-xl hover:bg-indigo-700 hover:text-white transition-colors font-medium w-full">
-                            Comprar
-                        </button>
+                        <div class="w-full" id="sectionCard">
+                            <div id="paypal-button-container"></div>
+                        </div>
                         <a role="button" href="{{route("index", "#categories")}}" class="text-indigo-600 border-2 text-center border-indigo-600 px-3 py-1 rounded-xl hover:bg-indigo-600 hover:text-white transition-colors font-medium w-full">
                             Seguir comprando
                         </a>
@@ -105,3 +105,57 @@
 
 {{-- Sobreescritura/Eliminacion del la declaracion del footer del layout de donde se extiende --}}
 @section('footer','')
+
+{{-- Importacion de scripts --}}
+@section('scripts')
+  @routes
+  @vite([
+    'resources/js/navbar.js',
+    'resources/js/scroll.js',
+    'resources/js/search.js'
+  ])
+  <script src="https://www.paypal.com/sdk/js?client-id={{ env('PAYPAL_CLIENT_ID') }}&components=buttons,funding-eligibility"></script>
+ <script>
+   paypal.Buttons({
+       createOrder: function(data, actions) {
+           return actions.order.create({
+               application_context: {
+                shipping_preference: "NO_SHIPPING"
+               },
+               payer: {
+                email_address: '{{ $user->email }}',
+                name: {
+                    given_name: '{{ $user->names }}',
+                    surname: '{{ $user->surnames }}'
+                },
+                phone: {
+                    phone_number: {
+                        national_number: '{{ $user->phone_number }}',
+                        country_code: '57'
+                    }
+                },
+                address: {
+                    country_code: 'CO'
+                }
+               },
+               purchase_units: [{
+                   amount: {
+                       currency_code: 'COP',
+                       value: "{{Cart::total()}}"
+                   }
+               }]
+           })
+   },
+   onApprove: function (data, actions) {
+        return fetch('/paypal/process/' + data.orderID)
+            .then(res => res.json())
+            .then(function(orderData) {
+                let errorDetail = Array.isArray(orderData.details) && orderData.details[0];
+            });
+    },
+    onError: function (err) {
+        alert(err);
+    }
+ }).render("#paypal-button-container");
+ </script>
+@endsection

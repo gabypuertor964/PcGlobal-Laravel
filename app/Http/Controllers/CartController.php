@@ -10,11 +10,16 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(["auth","role:cliente"]);
+    }
 
     /**
      * @abstract Consultar el carrito
     */
     public function checkout() {
+        $user = auth()->user();
         $cartCount = Cart::count();
         if ($cartCount)  {
             $cartContent = Cart::content();
@@ -22,7 +27,8 @@ class CartController extends Controller
         else{
             $cartContent = null;
         }
-        return view('landing.cart.checkout', compact("cartCount", "cartContent"));
+        
+        return view('landing.cart.checkout', compact("cartCount", "cartContent", "user"));
     }
 
     /**
