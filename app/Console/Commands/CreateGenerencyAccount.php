@@ -6,7 +6,9 @@ use App\Helpers\CleanInputs;
 use App\Models\DocumentType;
 use App\Models\Gender;
 use App\Models\User;
+use Exception;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -91,63 +93,73 @@ class CreateGenerencyAccount extends Command
      */
     public function handle()
     {
-        $names = $this->ask('Nombres');
-        $surnames = $this->ask('Apellidos');
-    
-        $genders = Gender::all()->pluck('name', 'id')->toArray();
-        $gender_name = $this->choice('Género', array_values($genders));
-        $gender_id = array_search($gender_name, $genders);
-    
-        $document_types = DocumentType::all()->pluck('name', 'id')->toArray();
-        $document_type_name = $this->choice('Tipo de Documento', array_values($document_types));
-        $document_type_id = array_search($document_type_name, $document_types);
-
-        $document_number = $this->ask('Numero de documento');
-        $phone_number = $this->ask('Numero de telefono');
-        $date_birth = $this->ask('Ingrese la fecha (formato: YYYY-MM-DD)');
-        $email = $this->ask('Correo electronico');
-        $password = $this->secret('Contraseña');
-        $password_confirmation = $this->secret('Confirmar contraseña');
-    
-        # Ejecutar las validaciones
-        $validator = Validator::make([
-            'names' => $names,
-            'surnames' => $surnames,
-            'gender_id' => $gender_id,
-            'document_type_id' => $document_type_id,
-            'document_number' => $document_number,
-            'phone_number' => $phone_number,
-            'birth_date' => $date_birth,
-            'email' => $email,
-            'password' => $password,
-            'password_confirmation' => $password_confirmation,
-        ], $this->rules, $this->messages);
-    
-        # Retornar los mensajes de error (si existen)
-        if ($validator->fails()) {
-            $this->output->error($validator->errors()->first());
-            return;
-        }
-
-        $user = new User();
-
-        $user->names = CleanInputs::upper($names);
-        $user->surnames = CleanInputs::upper($surnames);
-        $user->gender_id = $gender_id;
-        $user->document_type_id = $document_type_id;
-        $user->document_number = $document_number;
-        $user->phone_number = $phone_number;
-        $user->date_birth = $date_birth;
-        $user->email = CleanInputs::lower($email);
-        $user->password = Hash::make($password);
-
-        $user->save();
-
-        $user->assignRole('gerente');
-
-        $this->output->success('Cuenta de gerencia creada correctamente.');
+        try{
+            $names = $this->ask('Nombres');
+            $surnames = $this->ask('Apellidos');
         
+            $genders = Gender::all()->pluck('name', 'id')->toArray();
+            $gender_name = $this->choice('Género', array_values($genders));
+            $gender_id = array_search($gender_name, $genders);
+        
+            $document_types = DocumentType::all()->pluck('name', 'id')->toArray();
+            $document_type_name = $this->choice('Tipo de Documento', array_values($document_types));
+            $document_type_id = array_search($document_type_name, $document_types);
 
+            $document_number = $this->ask('Numero de documento');
+            $phone_number = $this->ask('Numero de telefono');
+            $date_birth = $this->ask('Ingrese la fecha (formato: YYYY-YYMM-DD)');
+            $email = $this->ask('Correo electronico');
+            $password = $this->secret('Contraseña');
+            $password_confirmation = $this->secret('Confirmar contraseña');
+        
+            # Ejecutar las validaciones
+            $validator = Validator::make([
+                'names' => $names,
+                'surnames' => $surnames,
+                'gender_id' => $gender_id,
+                'document_type_id' => $document_type_id,
+                'document_number' => $document_number,
+                'phone_number' => $phone_number,
+                'birth_date' => $date_birth,
+                'email' => $email,
+                'password' => $password,
+                'password_confirmation' => $password_confirmation,
+            ], $this->rules, $this->messages);
+        
+            # Retornar los mensajes de error (si existen)
+            if ($validator->fails()) {
+                $this->output->error($validator->errors()->first());
+                return;
+            }
 
+            /**
+             * Transaccion para la creacion de un gerente
+            */
+            DB::transaction(function() use($names, $surnames, $gender_id, $document_type_id, $document_number, $phone_number, $date_birth, $email, $password){
+
+                # Crear el usuario
+                $user = User::create([
+                    'names'=>CleanInputs::upper($names),
+                    'surnames'=>CleanInputs::upper($surnames),
+                    'gender_id'=>$gender_id,
+                    'document_type_id'=>$document_type_id,
+                    'document_number'=>$document_number,
+                    'phone_number'=>$phone_number,
+                    'date_birth'=>$date_birth,
+                    'email'=>CleanInputs::lower($email),
+                    'password'=>Hash::make($password),
+                ]);
+
+                # Asignar el rol de gerente
+                $user->assignRole('gerente');
+            });
+
+            // Mostrar mensaje de exito
+            $this->output->success('Cuenta de gerencia creada correctamente.');
+        }catch(Exception){
+
+            // Mostrar mensaje de error
+            $this->output->error('Ha ocurrido un error al intentar crear la cuenta de gerencia.');
+        }
     }
 }

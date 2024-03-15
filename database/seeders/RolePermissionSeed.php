@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -18,16 +17,16 @@ class RolePermissionSeed extends Seeder
         $roles=[
             [
                 'name'=>'cliente',
-                'permisos'=>[
-                    'cliente.create',
-                    'cliente.read',
-                    'cliente.update',
-                    'cliente.delete',
+                'permissions'=>[
+                    'client.create',
+                    'client.read',
+                    'client.update',
+                    'client.delete',
                 ]
             ],
             [
                 'name'=>'gestor_PQRS',
-                'permisos'=>[
+                'permissions'=>[
                     'pqrs.create',
                     'pqrs.read',
                     'pqrs.update',
@@ -35,17 +34,17 @@ class RolePermissionSeed extends Seeder
                 ]
             ],
             [
-                'name'=>'vendedor',
-                'permisos'=>[
-                    'facturation.create',
-                    'facturation.read',
-                    'facturation.update',
-                    'facturation.delete',
+                'name'=>'repartidor',
+                'permissions'=>[
+                    'delivery.create',
+                    'delivery.read',
+                    'delivery.update',
+                    'delivery.delete',
                 ]
             ],
             [
                 'name'=>'almacenista',
-                'permisos'=>[
+                'permissions'=>[
                     'inventory.create',
                     'inventory.read',
                     'inventory.update',
@@ -54,14 +53,13 @@ class RolePermissionSeed extends Seeder
             ],
             [
                 'name'=>'gerente',
-                'permisos'=>[
+                'permissions'=>[
                     'gerency.create',
                     'gerency.read',
                     'gerency.update',
                     'gerency.delete',
 
                     'pqrs.read',
-                    'facturation.read',
                     'inventory.read',
                     'delivery.read',
                 ]
@@ -73,10 +71,10 @@ class RolePermissionSeed extends Seeder
             //Crear el rol
             $role=Role::findOrCreate($rol['name']);
 
-            foreach($rol['permisos'] as $permiso){
+            foreach($rol['permissions'] as $permission_name){
 
                 //Crear o encontrar el permiso
-                $permission=Permission::findOrCreate($permiso);
+                $permission = Permission::findOrCreate($permission_name);
 
                 //Asignar el permiso al rol
                 $role->givePermissionTo($permission);

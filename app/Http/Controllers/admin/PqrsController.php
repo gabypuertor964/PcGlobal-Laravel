@@ -7,43 +7,58 @@ use Illuminate\Http\Request;
 
 class PqrsController extends Controller
 {
-
-    //Instalacion Middelware en metodos especificos
+    /**
+     * @abstract Constructor de la clase y middleware de permisos
+    */	
     public function __construct(){
-        $this->middleware('role:atencion_cliente')->except('index','show');
-    }
 
+        /**
+         * Usuarios autorizados:
+         * 
+         * index (Listar) -> Gerente, Personal de PQRS
+         * show (Ver) -> Gerente
+         * active (Listar) -> Gerente, Personal de PQRS
+         * myResponses (Listar) -> Personal de PQRS
+         * edit (Editar) -> Personal de PQRS
+         * update (Actualizar) -> Personal de PQRS
+        */
+
+        $this->middleware("can:gerency.read")->only(["show","active"]);
+
+        $this->middleware('role:gestor_PQRS')->except('index','show');
+    }
 
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return view("clients.dashboard");
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+     * @abstract Retornar el listado de PQRS sin responder
+    */
+    public function active()
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+        return "Jose";
+        return view("clients.dashboard");
     }
 
     /**
      * Display the specified resource.
-     */
+    */
     public function show(string $id)
     {
-        //
+        return view("clients.dashboard");
+    }
+
+    /**
+     * @abstract Retornar el listado de PQRS respondidas por el usuario autenticado
+    */
+    public function myResponses()
+    {
+        return view("clients.dashboard");
     }
 
     /**
@@ -51,21 +66,13 @@ class PqrsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view("clients.dashboard");
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
     {
         //
     }

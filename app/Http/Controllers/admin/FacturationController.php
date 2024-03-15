@@ -3,69 +3,29 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class FacturationController extends Controller
 {
-
-    //Instalacion Middelware en metodos especificos
+    /**
+     * @abstract Metodo constructor y declaracion de middlewares
+    */
     public function __construct(){
-        $this->middleware('role:vendedor')->except('index','show');
+        $this->middleware('can: gerency.read')->only('index','show');
     }
 
     /**
-     * Display a listing of the resource.
+     * @abstract Consultar y mostrar la lista de facturas
      */
     public function index()
     {
-        //
+        return view("clients.dashboard");
     }
 
     /**
-     * Show the form for creating a new resource.
+     * @abstract Ver la informacion detallada de una factura
      */
-    public function create()
+    public function show(string $slug)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        return "hola";
+        return view("clients.dashboard");
     }
 }

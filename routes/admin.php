@@ -12,68 +12,55 @@ use Illuminate\Support\Facades\Route;
 // Usuarios Autorizados: Personal Administrativo
 Route::middleware(['auth'])->group(function () {
 
-    //Vista: Dashboard 
-    Route::get('/dashboard', function () {
-        return view("admin.dashboard");
-    })->name("admin.dashboard");
+    /* Modulo PQRS */
+    Route::middleware(['can:pqrs.read'])->group(function () {
 
-    /*
-        Modulo: PQRS
-        Roles Autorizados:
+        // Consultar Las respuestas del usuario autenticado
+        Route::get('/pqrs/my_responses', [PqrsController::class, 'myResponses'])->name('admin.pqrs.my_responses');
 
-            1. Atencion al Cliente (Todos los Permisos)
-            2. Gerente (Solo Lectura)
-        --
-    */
-    Route::resource('/pqrs', PqrsController::class)->names('admin.pqrs')->middleware('can:pqrs.read');
+        // Ver PQRS activas (Sin responder)
+        Route::get('/pqrs/active', [PqrsController::class, 'active'])->name('admin.pqrs.active');
 
-    /*
-        Modulo: Facturation
-        Roles Autorizados:
+        // Leer, Mostrar, editar y actualizar PQRS
+        Route::resource('/pqrs', PqrsController::class)->names('admin.pqrs')->except(["create","store","destroy"]);
 
-            1. Vendedor (Todos los Permisos)
-            2. Gerente (Solo Lectura)
-        --
-    */
-    Route::resource('/facturation', FacturationController::class)->names('admin.facturation')->middleware('can:facturation.read');
+    });
 
-    /*
-        Modulo: Inventory/Inventario
-        Roles Autorizados:
+    /* Modulo Facturacion */
+    Route::controller(FacturationController::class)->group(function(){
 
-            1. Almacenista (Todos los Permisos)
-            2. Gerente (Solo Lectura)
-        --
-    */
+        // Listar facturas
+        Route::get('/facturation', 'index')->name('admin.facturation.index');
+
+        // Ver factura
+        Route::get('/facturation/{slug}', 'show')->name('admin.facturation.show');
+
+    })->middleware('can: gerency.read');
+
+    /* Modulo Inventario */
     Route::middleware('can:inventory.read')->group(function () {
         
-        //CRUD Marcas
-        Route::resource('/brands', BrandsController::class)->names('inventory.brands')->except('show');
+        // CRUD Marcas
+        Route::resource('/brands', BrandsController::class)->names('inventory.brands');
 
-        //CRUD Categorias
+        // CRUD Categorias
         Route::resource('/categories', CategoriesController::class)->names('inventory.categories');
 
-        //CRUD Productos
+        // CRUD Productos
         Route::resource('/products', ProductsController::class)->names('inventory.products');
 
     })->prefix('inventory');
 
-    /*
-        Modulo: Delivery
-        Roles Autorizados:
+    /* Modulo Entregas */
+    Route::middleware(['can:delivery.read'])->group(function () {
 
-            1. Repartidor (Todos los Permisos)
-            2. Gerente (Solo Lectura)
-        --
-    */
-    Route::resource('/delivery', deliveryController::class)->names('admin.delivery')->middleware('can:delivery.read')->except('delete');
+        // Buscar Entregas
+        Route::get('/delivery/search', [deliveryController::class, 'search'])->name('admin.delivery.search');
 
-    /*
-        Modulo: Admin
-        Roles Autorizados:
+        // Listar, Ver, Editar y Actualizar Entregas
+        Route::resource('/delivery', deliveryController::class)->names('admin.delivery')->except(["create","store","destroy"]);
+    });
 
-            1. Gerente (Todos los Permisos)
-        --
-    */
+    /* Modulo Trabajadores */
     Route::resource('/workers', WorkersController::class)->names('admin.workers')->middleware('can:gerency.read')->except('show');
 });

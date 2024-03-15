@@ -565,23 +565,18 @@ return [
             //Modulo PQRS
             [
                 'text'    => 'PQRS',
-                'can' => 'cliente.read',
-                'icon'    => 'nav-icon fas fa-flag',
+                'can' => 'client.read',
+                'icon'    => 'nav-icon fa-fw fas fa-flag',
                 'submenu' => [
                     [
                         'text' => 'Mis Reportes',
                         'icon'    => 'nav-icon far fa-fw fa-clipboard',
-                        'url'  => '/client/pqrs',
+                        'url'  => '/clients/pqrs',
                     ],
                     [
                         'text' => 'Crear una PQRS',
                         'icon'    => 'nav-icon fa-fw fas fa-plus',
-                        'url'  => '/client/pqrs/create',
-                    ],
-                    [
-                        'text' => 'Respuestas',
-                        'icon'    => 'nav-icon fa-fw fas fa-share',
-                        'url'  => '/client/pqrs/responses',
+                        'url'  => '/clients/pqrs/create',
                     ],
                 ],
             ],
@@ -589,40 +584,17 @@ return [
             //Modulo Facturacion
             [
                 'text'    => 'Mis compras',
-                'can' => 'cliente.read',
+                'can' => 'client.read',
                 'icon'    => 'nav-icon fas fa-shopping-bag',
                 'submenu' => [
                     [
-                        'text' => 'Compras Activas',
-                        'icon'    => 'nav-icon fas fa-fw fa-tag',
-                        'url'  => '/client/facturation/active',
-                    ],
-                    [
                         'text' => 'Historial de Compras',
                         'icon'    => 'nav-icon far fa-fw fa-clock',
-                        'url'  => '/client/facturation',
+                        'url'  => '/clients/facturation',
                     ]
                 ],
             ],
 
-            //Modulo Entregas
-            [
-                'text'    => 'Mis entregas',
-                'can' => 'cliente.read',
-                'icon'    => 'nav-icon fas fa-truck',
-                'submenu' => [
-                    [
-                        'text' => 'Entregas Activas',
-                        'icon'    => 'nav-icon fas fa-fw fa-tag',
-                        'url'  => '/client/delivery/active',
-                    ],
-                    [
-                        'text' => 'Historial de Entregas',
-                        'icon'    => 'nav-icon far fa-fw fa-clock',
-                        'url'  => '/client/delivery',
-                    ]
-                ],
-            ],
         //
 
         /* Opciones Panel Administrativo */
@@ -634,15 +606,20 @@ return [
                 'icon'    => 'nav-icon fa-fw fas fa-flag',
                 'submenu' => [
                     [
-                        'text' => 'Historico',
-                        'icon' => 'nav-icon far fa-fw fa-clock',
+                        'text' => 'Historial',
+                        'icon' => 'nav-icon fa-fw fas fa-history',
                         'url'  => '/admin/pqrs',
                     ],
                     [
+                        'text' => 'Pendientes',
+                        'icon' => 'nav-icon fa-fw fas fa-tasks',
+                        'url'  => '/admin/pqrs/active',
+                    ],
+                    [
                         'text' => 'Mis respuestas',
-                        'icon'    => 'nav-icon fas fa-fw fa-share',
                         'can' => 'pqrs.create',
-                        'url'  => '/admin/pqrs/responses',
+                        'icon'    => 'nav-icon fas fa-fw fa-check',
+                        'url'  => '/admin/pqrs/my_responses',
                     ]
                 ],
             ],
@@ -650,47 +627,13 @@ return [
             //Modulo Facturacion
             [
                 'text'    => 'Facturacion',
-                'can' => 'facturation.read',
+                'can' => 'gerency.read',
                 'icon'    => 'nav-icon fa-fw fas fa-shopping-cart',
                 'submenu' => [
                     [
-                        'text' => 'Compras',
-                        'icon'    => 'nav-icon fa-fw fas fa-shopping-basket',
-                        'submenu' => [
-                            [
-                                'text' => 'Historico',
-                                'icon'    => 'nav-icon far fa-fw fa-clock',
-                                'url'  => '/admin/facturation/shopping/',
-                            ],
-                            [
-                                'text' => 'Registrar Compra',
-                                'icon' => 'nav-icon fa-fw fas fa-plus',
-                                'url'  => '/admin/facturation/shopping/create',
-                                'can' => 'facturation.create',
-                            ],
-                            [
-                                'text' => 'Compras Activas',
-                                'icon' => 'nav-icon fas fa-fw fa-tag',
-                                'url'  => '/admin/facturation/shopping/active',
-                            ],
-                        ]
-                    ],
-                    [
-                        'text' => 'Ventas',
+                        'text' => 'Historial',
                         'icon'    => 'nav-icon fa-fw fas fa-receipt',
-                        'submenu' => [
-                            [
-                                'text' => 'Historico',
-                                'icon'    => 'nav-icon far fa-fw fa-clock',
-                                'url'  => '/admin/facturation/sales',
-                            ],
-                            [
-                                'text' => 'Registrar Venta',
-                                'icon' => 'nav-icon fa-fw fas fa-plus',
-                                'url'  => '/admin/facturation/sales/create',
-                                'can' => 'facturation.create',
-                            ]
-                        ]
+                        'url'  => '/admin/facturation',
                     ],
                 ],
             ],
@@ -704,7 +647,6 @@ return [
                     [
                         'text' => 'Categorias',
                         'icon'    => 'nav-icon fa-fw far fa-copyright',
-                        'can' => 'inventory.read',
                         'submenu'=>[
                             [
                                 'text' => 'Listado Categorias',
@@ -713,9 +655,9 @@ return [
                             ],
                             [
                                 'text' => 'Crear Categoria',
+                                'can' => 'inventory.create',
                                 'icon'    => 'nav-icon fa-fw far fa-plus-square',
                                 'url'  => '/admin/categories/create',
-                                'can' => 'inventory.create',
                             ]
                         ]
                     ],
@@ -749,9 +691,9 @@ return [
                             ],
                             [
                                 'text' => 'Crear Producto',
+                                'can' => 'inventory.create',
                                 'icon'    => 'nav-icon fa-fw far fa-plus-square',
                                 'url'  => '/admin/products/create',
-                                'can' => 'inventory.create',
                             ]
                         ]
                     ]
@@ -766,20 +708,22 @@ return [
                 'submenu' => [
                     [
                         'text' => 'Historico',
+                        "can" => 'gerency.read',
                         'icon'    => 'nav-icon far fa-fw fa-clock',
                         'url'  => '/admin/delivery',
                     ],
                     [
-                        'text' => 'Registrar Entrega',
-                        'icon'    => 'nav-icon fa-fw fas fa-plus',
-                        'url'  => '/admin/delivery/create',
+                        'text' => 'Buscar Entrega',
                         'can' => 'delivery.create',
+                        'icon'    => 'nav-icon fa-fw fas fa-search',
+                        'url'  => '/admin/delivery/search',
                     ],
                     [
-                        'text' => 'Entregas Activas',
-                        'icon'    => 'nav-icon fas fa-fw fa-tag',
-                        'url'  => '/admin/delivery/active',
-                    ],
+                        'text' => 'Registrar Entrega',
+                        'can' => 'delivery.create',
+                        'icon'    => 'nav-icon fa-fw fas fa-plus',
+                        'url'  => '/admin/delivery/create',
+                    ]
                 ]
             ],
 

@@ -18,6 +18,8 @@ Route::controller(landingPageController::class)->group(function(){
 
     // Vista: Detallado de productos
     Route::get('products/{product}','productDetail')->name('product.show');
+
+    // Buscador de productos
     Route::post('search', 'searchProduct')->name("search.products");
 });
 
@@ -38,6 +40,7 @@ Route::controller(CartController::class)->group(function(){
 
     // Vaciar el carrito
     Route::get("cart/clear", "clear")->name("cart.clear");
+
 });
 
 /**

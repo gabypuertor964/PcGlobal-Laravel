@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\CleanInputs;
 use App\Http\Controllers\admin\inventory\ProductsController;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;

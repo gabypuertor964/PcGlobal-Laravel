@@ -62,22 +62,36 @@ class AuthController extends Controller
          * En caso de no encontrar el usuario autenticado se redirecciona al logout
         */
         if($user == null){
-            return redirect()->route('logout');
+            Auth::logout();
+
+            return redirect()->route("login")->with('message',[
+                'status'=>'danger',
+                'text'=>'¡No hemos encontrado tu informacion de usuario!'
+            ]);
         }
 
-        switch($user->getRoleNames()[0]){
+        # Rutas segun el rol del usuario
+        $routeByRole = [
+            "cliente" => "clients.facturation.index",
+            "gestor_PQRS" => "admin.pqrs.index",
+            "repartidor" => "admin.delivery.search",
+            "almacenista" => "inventory.products.index",
+            "gerente" => "admin.workers.index",
+        ];
 
-            /* Redireccion Dashboard Cliente */
-                case "cliente":
-                    return redirect()->route("clients.dashboard");
-                break;
-            //
+        # Obtener el rol del usuario
+        $role = $user->getRoleNames()[0];
 
-            /* Redireccion panel Administrativo */
-                default:
-                    return redirect()->route("admin.dashboard");
-                break;
-            //
+        # Redireccionar segun el rol del usuario
+        if (array_key_exists($role, $routeByRole)) {
+            return redirect()->route($routeByRole[$role]);
+        }else{
+            Auth::logout();
+
+            return redirect()->route("login")->with('message',[
+                'status'=>'danger',
+                'text'=>'¡No tienes permisos para acceder al sistema!'
+            ]);
         }
     }
 

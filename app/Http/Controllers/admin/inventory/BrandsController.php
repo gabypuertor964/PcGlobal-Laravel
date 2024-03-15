@@ -15,6 +15,26 @@ use Illuminate\Support\Facades\DB;
 class BrandsController extends Controller
 {
     /**
+     * @abstract Metodo constructor y declaracion de middlewares
+    */
+    public function __construct()
+    {
+        /**
+         * Usuarios autorizados:
+         * 
+         * index (Listar) -> Almacenista, Gerente
+         * show (Ver) -> Gerente
+         * create (Crear) -> Almacenista
+         * edit (Editar) -> Almacenista
+         * update (Actualizar) -> Almacenista
+         * destroy (Eliminar) -> Almacenista
+        */
+
+        $this->middleware("can:gerency.read")->only(["show"]);
+        $this->middleware("can:inventory.create")->except(["index"]);
+    }
+
+    /**
      * @abstract Obtener el registro de una marca segun su slug encriptado
      * 
      * @param string $slug
@@ -27,17 +47,6 @@ class BrandsController extends Controller
         }catch(Exception){
             return null;
         }
-    }
-
-    /**
-     * @abstract Metodo constructor y declaracion de middlewares
-    */
-    public function __construct()
-    {
-        //Middleware de permisos especificos
-        $this->middleware('can:inventory.create')->only('create','store');
-        $this->middleware('can:inventory.delete')->only('delete');
-        $this->middleware('can:inventory.update')->only('edit','update');
     }
 
     /**
@@ -56,6 +65,15 @@ class BrandsController extends Controller
         //Retornar la vista con la informacion
         return view('admin.inventory.brands.index', compact('brands'));
     }
+
+    /**
+     * @abstract Visualizar la informacion de una marca
+    */
+    public function show()
+    {
+
+    }
+
 
     /**
      * Show the form for creating a new resource.

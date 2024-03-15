@@ -20,6 +20,26 @@ use Parsedown;
 class ProductsController extends Controller
 {
     /**
+     * @abstract Metodo constructor de la clase (Middleware)
+    */
+    public function __construct()
+    {
+        /**
+         * Usuarios autorizados:
+         * 
+         * index (Listar) -> Almacenista, Gerente
+         * show (Ver) -> Gerente
+         * create (Crear) -> Almacenista
+         * edit (Editar) -> Almacenista
+         * update (Actualizar) -> Almacenista
+         * destroy (Eliminar) -> Almacenista
+        */
+
+        $this->middleware("can:gerency.read")->only(["show"]);
+        $this->middleware("can:inventory.create")->except(["index"]);
+    }
+
+    /**
      * @abstract Obtener el registro segun el slug encriptado
      *
      * @param string $slug
