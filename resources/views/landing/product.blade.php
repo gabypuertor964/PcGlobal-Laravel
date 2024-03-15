@@ -74,25 +74,30 @@
         {!! $product->description !!}
       </div>
 
-      <div class="action-buttons relative md:absolute bottom-0 w-full pe-3 py-2 flex flex-col gap-y-1">
-        <button class="bg-indigo-600 text-white px-3 py-1 rounded-xl hover:bg-indigo-700 hover:text-white transition-colors font-medium w-full">Comprar</button>
+      <div class="action-buttons relative md:absolute bottom-2 w-full pe-3 py-2 flex flex-col gap-y-1">
         <div>
-          <form action="{{route("cart.add")}}" method="post">
+          <form action="{{route("cart.add")}}" method="post" class="w-3/4 mx-auto ">
             @csrf
             <input type="hidden" name="slug" value="{{$product->slug}}">
             <input type="submit" 
+            @if ( $product->stock < 1 )
+            disabled
+            @endif
             name="btn" 
-            class="text-indigo-600 border-2 border-indigo-600 px-3 py-1 rounded-xl hover:bg-indigo-600 hover:text-white transition-colors font-medium w-full" 
-            value="Añadir al carrito">
+            class="text-indigo-600 border-2 border-indigo-600 px-3 py-2 rounded-xl hover:bg-indigo-600 hover:text-white transition-colors font-medium w-full disabled:opacity-75" 
+            value="@if ( $product->stock > 0) Añadir al carrito @else Sin stock @endif">
           </form>
         </div>
       </div>
       
     </aside>
     {{-- Especificaciones técnicas --}}
-    <div class="specifications prose prose-table:border prose-headings:bg-slate-700 prose-headings:text-center prose-headings:text-white prose-td:text-sm prose-td:text-center prose-td:font-medium lg:prose-lg my-2 col-span-2 mx-auto w-full">
-      {!! $product->specs !!}
-    </div>
+    <section class="col-span-2">
+      <h1 class="text-center font-semibold text-xl">Caracterísitcas</h1>
+      <div class="specifications prose prose-table:border prose-headings:bg-slate-700 prose-headings:text-center prose-headings:text-white prose-td:text-sm prose-td:text-center prose-td:font-medium lg:prose-lg my-2 mx-auto w-full">
+        {!! $product->specs !!}
+      </div>
+    </section>
   </div>
 
 @endsection

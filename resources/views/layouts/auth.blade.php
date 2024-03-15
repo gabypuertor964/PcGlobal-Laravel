@@ -65,7 +65,8 @@
             @if (request()->routeIs('login'))
                 <input type="submit" class="login-submit" value="Inicia sesión">
 
-                <div class="login-remember">
+                {{-- Ocultar el botoón --}}
+                {{-- <div class="login-remember invisible">
                     <span>Recuérdame</span>
                     <label class="switch">
                         <input type="checkbox" class="input">
@@ -74,16 +75,16 @@
                             </div>
                         <span class="indicator"></span>
                     </label>
-                </div>
+                </div> --}}
             @else
                 <input type="submit" class="login-submit col-span-2" value="Regístrate">
             @endif
 
             {{-- Enlaces segun ruta actual --}}
-            <div class="login-action-links col-span-2">
+            <div class="login-action-links col-span-2 @if (request()->routeIs('login')) mt-4 @endif">
                 @if (request()->routeIs('login'))
                     <a href="{{route('register')}}" role="link" aria-label="Registrate">¿No tienes cuenta? Regístrate.</a>
-                    <a href="{{route('password.request')}}" role="link" aria-label="¿Olvidaste tu contraseña?">¿Olvidaste tu    contraseña?</a>
+                    <a href="{{route('password.request')}}" role="link" aria-label="¿Olvidaste tu contraseña?">¿Olvidaste tu contraseña?</a>
                 @else
                     <a href="{{ route('login') }}" role="link" aria-label="Inicia sesión">¿Ya tienes cuenta? Inicia sesión.</a>
                 @endif
