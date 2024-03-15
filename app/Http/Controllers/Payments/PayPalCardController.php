@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Payments;
 
+use App\Http\Controllers\AuthController;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Controller;
 use App\Models\SaleInvoice;
@@ -52,10 +54,14 @@ class PayPalCardController extends Controller
             ]
         ]);
 
+        $user = AuthController::get();
         $data = json_decode($response->getBody(), true);
-        if ($data['status'] === 'APPROVED') {
+        if ($data['status'] === 'APPROVED' && $user !== null) {
             // TODO: Finalizar la inserción de la venta
-            $sale = SaleInvoice::create([]);
+            return redirect()->back()->with('message',[
+                'status' => 'success',
+                'text' => '¡Compra exitosa! Para ver más detalles sobre tu compra, por favor revisa tu historial de pedidos.',
+            ]);
         } else {
             return 
             [
