@@ -58,15 +58,12 @@ class PayPalCardController extends Controller
         $data = json_decode($response->getBody(), true);
         if ($data['status'] === 'APPROVED' && $user !== null) {
             // TODO: Finalizar la inserción de la venta
-            return redirect()->back()->with('message',[
-                'status' => 'success',
-                'text' => '¡Compra exitosa! Para ver más detalles sobre tu compra, por favor revisa tu historial de pedidos.',
-            ]);
-        } else {
-            return 
-            [
-                'success' => false
-            ];
+            return ['success' => "Hola"];
         }
+        return 
+        [
+            'success' => false
+        ];
+        
     }
 }

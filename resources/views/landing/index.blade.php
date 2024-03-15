@@ -12,6 +12,7 @@
 
 {{-- Declaracion contenido principal de la pagina web --}}
 @section('content')
+  @include('components.alert')
   <div class="hidden md:grid grid-cols-3 gap-y-2 sm:gap-1 imgs-landing -mt-3">
 
     <div class="sm:col-span-2">

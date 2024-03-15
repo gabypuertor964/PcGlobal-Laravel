@@ -146,14 +146,15 @@
                 }]
             })
         },
-        onApprove: function (data, actions) {
-            return fetch('/paypal/process/' + data.orderID)
-            .then(res => res.json())
-            .then(function(orderData) {
-            })
+        onApprove: function (data, actions)
+        {
+            return actions.order.capture().then(function (details) {
+                alert('Pago exitoso, realizado por: ' + details.payer.name.given_name);
+                window.location.href = "{{ route('index') }}";
+            });   
         },
         onError: function (err) {
-         alert(err);
+            alert(err);
         }
     }).render("#paypal-button-container");
   </script>
