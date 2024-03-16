@@ -52,7 +52,9 @@ Developed with adaptability and growth in mind, PCGlobal stands as the ideal sol
 * **Execute Seed**: `php artisan db:seed`
 * **Generate storage link**: `php artisan storage:link`
 * **Execute Resource Compilation**: `npm run build`
-* **Create Account Gerency**: `php artisan create-generency-account`
+* **Insert the tokens for Algolia and PayPal usage into the environment file**
+* **Initialize the product finder service**: `php artisan scout:flush "App\Models\Product" && php artisan scout:import "App\Models\Product"`
+* **Create Account Gerency**: `php artisan create-gerency-account`
 * **Run Artisan Serve (Optional)**: `php artisan serve`
 
 ## Extensions and Libraries
