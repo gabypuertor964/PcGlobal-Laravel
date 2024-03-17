@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\landingPageController;
+use App\Http\Controllers\Payments\PayPalCardController;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -35,11 +36,17 @@ Route::controller(CartController::class)->group(function(){
     // Añadir producto al carrito
     Route::post("cart/add", "add")->name("cart.add");
 
+    // Actualizar producto al carrito
+    Route::post("cart/update", "update")->name("cart.update");
+
     // Eliminar producto del carrito
     Route::post("cart/remove", "remove")->name("cart.remove");
 
     // Vaciar el carrito
     Route::get("cart/clear", "clear")->name("cart.clear");
+
+    // Vaciar el carrito
+    Route::get("cart/clearAfterPurchase", "clearAfterPurchase")->name("cart.clear.after.purchase");
 
 });
 
@@ -60,3 +67,9 @@ Route::middleware(['auth'])->group(function () {
     // Redireccionamiento al dashboard correspondiente segun el rol
     Route::get('/redirect',[authController::class,'redirect'])->name('redirect');
 });
+
+
+/**
+ * Ruta de compra
+*/
+Route::get('/paypal/process/{orderId}', [PayPalCardController::class, 'process'])->name('paypal.process');

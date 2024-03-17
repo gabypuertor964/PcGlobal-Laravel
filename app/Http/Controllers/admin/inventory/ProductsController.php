@@ -45,10 +45,14 @@ class ProductsController extends Controller
      * @param string $slug
      * @return Product|null
     */
-    public static function get(string $slug): mixed
+    public static function get(string $slug, bool $is_decrypt = true): mixed
     {
         try{
-            return Product::where('slug', SlugManager::decrypt($slug))->first();
+            if($is_decrypt){
+                return Product::where('slug', SlugManager::decrypt($slug))->first();
+            }
+            return Product::where('slug', $slug)->first();
+            
         }catch(Exception){
             return null;
         }

@@ -12,8 +12,26 @@
 
 {{-- Declaracion contenido principal de la pagina web --}}
 @section('content')
-    @include('components.shopping-cart-alert')
-    <div>
+        @include('components.custom-alert')
+        <style>
+            input[type=number]::-webkit-inner-spin-button,
+            input[type=number]::-webkit-outer-spin-button {
+              -webkit-appearance: none;
+              margin: 0; /* Espacio adicional para navegadores compatibles */
+            }
+            input[type=number] {
+            -moz-appearance: textfield; /* Restaurar apariencia predeterminada en Firefox */
+            }
+            input[type=number]:focus,
+            input[type=number]:focus-visible {
+              outline: none;
+              border: 1px solid rgb(0, 0, 0, 0.1);
+            }
+          </style>
+        <div id="loader-overlay">
+            <div class="loader"></div>
+          </div>
+        <div>
         @if ($cartContent)
         <h1 class="text-center text-xl font-semibold py-2.5">Carrito de compras</h1>
         <section class="grid grid-cols-3 gap-2">
@@ -37,7 +55,23 @@
                                         <td>
                                             <a class="product-name" href="{{route('product.show',$cartProduct->options->slug)}}">{{$cartProduct->name}}</a>
                                         </td>
-                                        <td>{{($cartProduct->qty)}}</td>
+                                        <td>
+                                            <form action="{{route("cart.update")}}" method="post" class="w-full mx-auto" id="cartForm">
+                                                @csrf
+                                  
+                                                <input type="hidden" name="rowId" value="{{$cartProduct->rowId}}">
+                                                <input type="hidden" name="slug" value="{{$cartProduct->options->slug}}">
+                                  
+                                                <div class="flex flex-col lg:flex-row gap-2">
+                                                  <div class="relative flex">
+                                                    <input type="button" value="-" class="minus absolute left-0 top-1/2 transform -translate-y-1/2 p-1 font-semibold">
+                                                    <input type="number" name="qty" id="valueProduct" min="1" max="{{$cartProduct->options->stock}}" value="{{ $cartProduct->qty }}" class="bg-indigo-200 text-center px-4 py-1 rounded font-semibold h-full w-full lg:w-auto">
+                                                    <input type="button" value="+" class="plus absolute right-0 top-1/2 transform -translate-y-1/2 p-1 font-semibold">
+                                                  </div>
+                                                </div>
+                                  
+                                            </form>
+                                        </td>
                                         <td>${{number_format($cartProduct->price, 0, ',', '.')}}</td>
                                         <td>${{number_format($cartProduct->qty * $cartProduct->price, 0, ',', '.')}}</td>
                                         <td>
@@ -111,51 +145,117 @@
   @routes
   @vite([
     'resources/js/navbar.js',
-    'resources/js/scroll.js',
     'resources/js/search.js',
+    'resources/js/fade-alert.js',
   ])
   <script src="https://www.paypal.com/sdk/js?client-id={{ env('PAYPAL_CLIENT_ID') }}&components=buttons,funding-eligibility"></script>
   <script>
-    paypal.Buttons({
-        createOrder: function(data, actions) {
-            return actions.order.create({
-                application_context: {
-                 shipping_preference: "NO_SHIPPING"
+    const loaderOverlay = document.getElementById('loader-overlay');
+    const paypalButtonContainer = document.getElementById('paypal-button-container');
+    
+    if (paypalButtonContainer) { // Verificar si el contenedor del botón de PayPal existe
+        paypal
+            .Buttons({
+                fundingSource: paypal.FUNDING.CARD,
+                createOrder: function (data, actions) {
+                    return actions.order.create({
+                        application_context: {
+                            shipping_preference: "NO_SHIPPING",
+                        },
+                        payer: {
+                            email_address: "{{ $user->email }}",
+                            name: {
+                                given_name: "{{ $user->names }}",
+                                surname: "{{ $user->surnames }}",
+                            },
+                            phone: {
+                                phone_number: {
+                                    national_number: "{{ $user->phone_number }}",
+                                    country_code: "57",
+                                },
+                            },
+                            address: {
+                                country_code: "CO",
+                            },
+                        },
+                        purchase_units: [
+                            {
+                                amount: {
+                                    currency_code: "USD",
+                                    value: "{{ intval(Cart::total() / 3893) }}",
+                                },
+                            },
+                        ],
+                    });
                 },
-                payer: {
-                 email_address: '{{ $user->email }}',
-                 name: {
-                     given_name: '{{ $user->names }}',
-                     surname: '{{ $user->surnames }}'
-                 },
-                 phone: {
-                     phone_number: {
-                         national_number: '{{ $user->phone_number }}',
-                         country_code: '57'
-                     }
-                 },
-                 address: {
-                     country_code: 'CO'
-                 }
+                onApprove: function (data, actions) {
+                    loaderOverlay.style.display = "block";
+
+
+                    return fetch("/paypal/process/" + data.orderID)                        
+                        .then((res) => res.json())
+                        .then(function (response) {
+                            if (!response.success) {
+                                const msg =
+                                    "Lo sentimos, tu transacción no pudo ser procesada, intenta más tarde.";
+                                alert(msg);
+                            } else {
+                                // Vaciar el carrito y redireccionar al index
+                                fetch("/cart/clear")
+                                    .then(() => {
+                                        location.href = response.url;
+                                    })
+                                    .catch((error) => {
+                                        console.error(
+                                            "Error al vaciar el carrito:",
+                                            error
+                                        );
+                                        // En caso de error, redireccionar al index de todos modos
+                                        location.href = response.url;
+                                    });
+                            }
+                        })
+                        .finally(() => {
+                            loaderOverlay.style.display = "none"; // Ocultar la pantalla de carga una vez que la solicitud haya finalizado
+                        });
                 },
-                purchase_units: [{
-                    amount: {
-                        currency_code: 'USD',
-                        value: "{{ intval(Cart::total() / 3893) }}"
-                    }
-                }]
+                onError: function (err) {
+                    alert(err);
+                },
             })
-        },
-        onApprove: function (data, actions)
-        {
-            return actions.order.capture().then(function (details) {
-                alert('Pago exitoso, realizado por: ' + details.payer.name.given_name);
-                window.location.href = "{{ route('index') }}";
-            });   
-        },
-        onError: function (err) {
-            alert(err);
-        }
-    }).render("#paypal-button-container");
+            .render("#paypal-button-container");
+    }
   </script>
+  <script>
+    const minus = document.querySelector(".minus");
+    const plus = document.querySelector(".plus");
+    const valueProduct = document.getElementById("valueProduct");
+    const cartForm = document.getElementById("cartForm");
+    const minValue = parseInt(valueProduct.min);
+    const maxValue = parseInt(valueProduct.max);
+
+    minus.addEventListener("click", () => {
+        if (parseInt(valueProduct.value) > minValue) {
+            valueProduct.value = parseInt(valueProduct.value) - 1;
+            cartForm.submit();
+        }
+    });
+
+    plus.addEventListener("click", () => {
+        if (parseInt(valueProduct.value) < maxValue) {
+            valueProduct.value = parseInt(valueProduct.value) + 1;
+            cartForm.submit();
+        }
+    });
+
+    valueProduct.addEventListener("change", () => {
+        const enteredValue = parseInt(valueProduct.value);
+        if (enteredValue < minValue || enteredValue > maxValue || isNaN(enteredValue)) {
+            valueProduct.value = 1;
+            cartForm.submit();
+        }
+    });
+  </script>
+
+
 @endsection

@@ -29,6 +29,7 @@
     @vite([
         'resources/js/navbar.js',
         'resources/js/scroll.js',
-        'resources/js/search.js'
+        'resources/js/search.js',
+        'resources/js/fade-alert.js',
     ])
 @endsection

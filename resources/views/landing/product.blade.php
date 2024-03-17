@@ -13,7 +13,22 @@
 {{-- Declaracion contenido principal de la pagina web --}}
 @section('content')
 
-  @include('components.shopping-cart-alert')
+  @include('components.custom-alert')
+  <style>
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0; /* Espacio adicional para navegadores compatibles */
+    }
+    input[type=number] {
+    -moz-appearance: textfield; /* Restaurar apariencia predeterminada en Firefox */
+    }
+    input[type=number]:focus,
+    input[type=number]:focus-visible {
+      outline: none;
+      border: 1px solid rgb(0, 0, 0, 0.1);
+    }
+  </style>
   <div class="contenedor grid grid-cols-1 md:grid-cols-3 mt-3 gap-4 py-3 bg-white px-3 mx-8 rounded-lg"> 
     @if (count($directory) === 1)      
       <div class="flex flex-col text-center font-medium col-span-2">
@@ -56,37 +71,51 @@
       </div>
     @endif
 
-    <aside class="flex flex-col p-2 sm:p-3 desc-producto gap-y-2 text-start ms-3 sm:ms-0 relative">
+    <aside class="flex flex-col p-2 sm:p-3 desc-producto gap-y-2 text-start ms-3 sm:ms-0 relative min-h-max">
       <p class="text-gray-400 text-xs">Descripción del producto</p>
 
       <ul class="flex flex-col gap-y-2 sm:gap-y-4">
-        <li class="text-lg lg:text-lg -mb-2 lg:-mb-4"><p class="font-semibold">{{$product->brand->name}}</p></li>
+        <div class="flex gap-1">
+          <li class="text-lg lg:text-lg -mb-2 lg:-mb-4"><p class="font-semibold">{{$product->category->name}},</p></li>
+          <li class="text-lg lg:text-lg -mb-2 lg:-mb-4"><p class="font-semibold">{{$product->brand->name}}</p></li>
+        </div>
         
-        <li class="text-xl lg:text-2xl hover:underline">
+        <li class="text-xl lg:text-3xl hover:underline">
           <p class="font-bold">{{$product->name}}</p>
         </li>
-
+        
+        <li class="text-lg lg:text-xl">{{ $product->stock }} unidad(es)</li>
         <li class="text-lg lg:text-2xl">${{number_format($product->price, 0, ',', '.')}}</li>
       </ul>
       
       {{-- Descripcioón técnica --}}
-      <div class="description prose prose-sm lg:prose-base my-2">
+      <div class="description prose prose-sm lg:prose-base mt-2 pb-20">
         {!! $product->description !!}
       </div>
 
-      <div class="action-buttons relative md:absolute bottom-2 w-full pe-3 py-2 flex flex-col gap-y-1">
+      <div class="action-buttons relative md:absolute bottom-2 w-full pe-3 py-2 mt-5 flex flex-col gap-y-1">
         <div>
-          <form action="{{route("cart.add")}}" method="post" class="w-3/4 mx-auto ">
-            @csrf
-            <input type="hidden" name="slug" value="{{$product->slug}}">
-            <input type="submit" 
-            @if ( $product->stock < 1 )
-            disabled
-            @endif
-            name="btn" 
-            class="text-indigo-600 border-2 border-indigo-600 px-3 py-2 rounded-xl hover:bg-indigo-600 hover:text-white transition-colors font-medium w-full disabled:opacity-75" 
-            value="@if ( $product->stock > 0) Añadir al carrito @else Sin stock @endif">
-          </form>
+          @if($product->stock > 0)
+            <form action="{{route("cart.add")}}" method="post" class="w-full mx-auto ">
+              @csrf
+
+              <input type="hidden" name="slug" value="{{$product->slug}}">
+
+              <div class="flex flex-col lg:flex-row gap-2">
+                <div class="relative flex">
+                  <span class="absolute -top-5 text-sm left-1/2 transform -translate-x-1/2 font-medium">Cantidad</span>
+                  <input type="button" value="-" class="minus absolute left-0 top-1/2 transform -translate-y-1/2 p-1 font-semibold">
+                  <input type="number" name="qty" id="valueProduct" min="1" max="{{$product->stock}}" value="1" class="bg-indigo-200 text-center px-4 py-1 rounded font-semibold h-full w-full lg:w-auto">
+                  <input type="button" value="+" class="plus absolute right-0 top-1/2 transform -translate-y-1/2 p-1 font-semibold">
+                </div>
+
+                <input type="submit" name="btn" class="text-indigo-600 border-2 focus:outline-none focus-visible:outline border-indigo-600 px-3 py-2 rounded-xl hover:bg-indigo-600 hover:text-white transition-colors font-medium w-full disabled:opacity-75" value="Añadir al carrito">
+              </div>
+
+            </form>
+          @else
+            <div class="w-full bg-red-600 text-center py-2 text-white font-semibold rounded">Sin stock</div>
+          @endif
         </div>
       </div>
       
@@ -99,5 +128,35 @@
       </div>
     </section>
   </div>
+
+@endsection
+
+
+{{-- Importacion de scripts --}}
+@section('scripts')
+    @routes
+    @vite([
+        'resources/js/navbar.js',
+        'resources/js/scroll.js',
+        'resources/js/search.js',
+        'resources/js/fade-alert.js',
+    ])
+  <script>
+    const minus = document.querySelector(".minus");
+    const plus = document.querySelector(".plus");
+    const valueProduct = document.getElementById("valueProduct");
+
+    minus.addEventListener("click", () => {
+        if (parseInt(valueProduct.value) > parseInt(valueProduct.min)) {
+            valueProduct.value = parseInt(valueProduct.value) - 1;
+        }
+    });
+
+    plus.addEventListener("click", () => {
+        if (parseInt(valueProduct.value) < parseInt(valueProduct.max)) {
+            valueProduct.value = parseInt(valueProduct.value) + 1;
+        }
+    });
+  </script>
 
 @endsection
