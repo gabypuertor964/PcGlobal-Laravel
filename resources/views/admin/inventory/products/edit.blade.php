@@ -56,7 +56,7 @@
 
         {{-- Inputs --}}
         <div class="block space-y-3 md:grid grid-cols-2 grid-rows-2 md:gap-3 md:space-y-0 mb-3">
-            <div class="edit-form min-w-full row-span-2">
+            <div class="edit-form min-w-full row-span-2 flex flex-col justify-center">
                 {{-- Select: Categoria --}}
                 <div class="mb-3">
                     <label for="category_id" class="form-label">Categoria</label>
@@ -111,7 +111,7 @@
             </div>
 
             {{-- Input: Foto --}}
-            <div style="max-height: 275px; overflow-y: scroll;">
+            <div class="row-span-2">
                 <div class="p-3 card min-h-full">
 
                     {{-- Titulo Card --}}
@@ -128,7 +128,7 @@
                     </div>
 
                     <div class="card-footer text-muted">
-                        <button type="button" name="browse" id="browse" class="btn btn-success btn-sm col-12"">Cargar imagen</button>
+                        <button type="button" name="browse" id="browse" class="btn btn-success btn-sm col-12">Cargar imagen</button>
                     </div>
 
                     {{-- Visualizacion Error de validacion --}}
@@ -138,7 +138,7 @@
                 </div>
             </div>
             
-            <div class="card min-h-full">
+            <div class="card row-span-2 min-h-full">
                 {{-- Input: Descripcion del producto--}}
                 <div class="p-3 text-center">
                     <div class="card-header font-weight-bold font-italic text-center">
@@ -151,7 +151,7 @@
             </div>
 
             {{-- Especificaciones del producto --}}
-            <div class="edit-form col-span-2 row-span-2 min-w-full">
+            <div class="edit-form row-span-2 min-w-full">
                 <div class="card-header font-weight-bold font-italic text-center">
                     Especificaciones del producto
                 </div>
@@ -161,17 +161,17 @@
                             @forelse ($product->data_specs["specs"] as $key => $spec)
                                     <tr class="specRegister">
                                         {{-- Input: Clave --}}
-                                        <td class="col-4 text-center">
+                                        <td class="col-5 text-center">
                                             <input class="form-control form-control-sm" type="text" placeholder="Valor" name="key_specs[]" required value="{{$spec}}">
                                         </td>
                                     
                                         {{-- Input: Valor --}}
-                                        <td class="col-6 text-center">
+                                        <td class="col-5 text-center">
                                             <input class="form-control form-control-sm" type="text" placeholder="Clave" name="value_specs[]" required value="{{$product->data_specs["values"][$key]}}">
                                         </td>
 
                                         {{-- Botones --}}
-                                        <td class="text-center">
+                                        <td class="text-center flex col-2">
                                         
                                             {{-- Boton añadir --}}
                                             <button type="button" class="btn btn-success btn-sm mr-2" id="btnCreate" onclick="addChildToParent('specRegisters')">

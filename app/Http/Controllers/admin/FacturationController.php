@@ -43,7 +43,13 @@ class FacturationController extends Controller
     */
     public function search(Request $request)
     {
+        $query = $request->name;
+    
+        $sales = SaleInvoice::search($query)->get()->first();
 
+        if ($sales) return redirect()->route("product.show", $sales->slug);
+
+        return "No hay resultados";
     }
     
     /**

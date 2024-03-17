@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\clients\FacturationController;
+use App\Helpers\SlugManager;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class SaleInvoice extends Model
 {
-    use HasFactory;
+    use HasFactory, Searchable;
 
     // Nombre tabla
     protected $table = 'sales_invoices';
@@ -21,6 +24,17 @@ class SaleInvoice extends Model
         'total',
         'id_state'
     ];
+
+    public function toSearchableArray()
+    {
+        return [
+            'name' => $this->client->fullName(),
+            'date' => FacturationController::getDateTimeInArray($this->date_sale)["date"],
+            'slug' => SlugManager::encrypt($this->id),
+            'document' => $this->client->document_number,
+            'state' => $this->state->name,
+        ];
+    }
 
     /**
      * @abstract Relación uno a muchos con el modelo PurchaseUnit (detalles de la factura de compra) FK: id_invoice

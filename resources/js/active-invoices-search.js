@@ -9,7 +9,7 @@ const searchClient = algoliasearch(
 
 const search = instantsearch({
     searchClient,
-    indexName: "products",
+    indexName: "sales_invoices",
     insights: true,
     future: {
         preserveSharedStateOnUnmount: true,
@@ -20,7 +20,7 @@ search.addWidgets([
     searchBox({
         container: "#searchbox",
         showSubmit: false,
-        placeholder: "Busca un producto",
+        placeholder: "Busca una factura",
         showLoadingIndicator: true,
         autoFocus: true,
         searchAsYouType: false, // Desactivamos la búsqueda automática para realizarla manualmente
@@ -28,19 +28,27 @@ search.addWidgets([
     hits({
         container: "#hits",
         templates: {
-            item: (hit, { html }) =>
-                html`
-                    <a href="${route("product.show", hit.slug)}">
-                        <article
-                            class="transition bg-white text-slate-700 my-1 rounded p-2 shadow-md 500 flex justify-between items-center"
-                        >
-                            <h1 class="text-sm md:text-lg font-medium">
-                                ${hit.name}
-                            </h1>
-                            <p class="text-xs md:text-base">${hit.brand}</p>
-                        </article>
-                    </a>
-                `,
+            item: (hit, { html }) => {
+                // Verifica si el estado es "Pendiente por entregar"
+                if (hit.state === "Pendiente por entregar") {
+                    // Si es "Pendiente por entregar", muestra el resultado
+                    return html`
+                        <a href="${route("admin.facturation.show", hit.slug)}">
+                            <article
+                                class="transition bg-white text-slate-700 my-1 rounded p-2 shadow-md 500 flex justify-between items-center"
+                            >
+                                <h1 class="text-sm md:text-lg font-medium">
+                                    ${hit.name} - ${hit.state}
+                                </h1>
+                                <p class="text-xs md:text-base">${hit.date}</p>
+                            </article>
+                        </a>
+                    `;
+                } else {
+                    // Si no es "Pendiente por entregar", no muestra el resultado
+                    return "";
+                }
+            },
             empty: '<div class="no-results transition bg-white text-slate-700 my-1 rounded p-2 shadow-md">No se encontraron resultados</div>',
         },
         cssClasses: {

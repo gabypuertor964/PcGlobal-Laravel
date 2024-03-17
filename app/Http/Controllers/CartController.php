@@ -45,7 +45,10 @@ class CartController extends Controller
             // Validar que el producto asociado al slug exista
             if($product === null)
             {
-                return redirect()->back()->with("success", "Producto no encontrado.");
+                return redirect()->back()->with("message", [
+                    'status' => 'error',
+                    'content' => 'Producto no encontrado.'
+                ]);
             }
 
             // Reglas de validación
@@ -77,7 +80,10 @@ class CartController extends Controller
 
             # Retornar los mensajes de error (si existen)
             if ($validation->fails()) {
-                return redirect()->back()->with("success", $validation->errors()->first());
+                return redirect()->back()->with("message", [
+                    'status' => 'error',
+                    'content' => $validation->errors()->first()
+                ]);
             }
             
             //Obtener el directoria de las imágenes
@@ -103,15 +109,24 @@ class CartController extends Controller
                     ["image" => $directoryImage[2], "slug" => $product->slug, "stock" => $product->stock]
                 );
             } else {
-                return redirect()->back()->with("success", "Cantidad máxima alcanzada.");
+                return redirect()->back()->with("message", [
+                    'status' => 'error',
+                    'content' => 'Cantidad máxima alcanzada.'
+                ]);
             }
 
 
-            return redirect()->back()->with("success", "Producto agregado al carrito.");
+            return redirect()->back()->with("message", [
+                'status' => 'success',
+                'content' => 'Producto agregado al carrito.'
+            ]);
         }
         catch(Exception)
         {
-            return redirect()->back()->with("success", "Ha ocurrido un error al agregar el producto al carrito.");
+            return redirect()->back()->with("message", [
+                'status' => 'error',
+                'content' => 'Ha ocurrido un error al agregar el producto al carrito.'
+            ]);
         }
     }
 
@@ -127,7 +142,10 @@ class CartController extends Controller
             // Validar que el producto asociado al slug exista
             if($product === null)
             {
-                return redirect()->back()->with("success", "Producto no encontrado.");
+                return redirect()->back()->with("message", [
+                    'status' => 'error',
+                    'content' => 'Producto no encontrado.'
+                ]);
             }
 
             // Reglas de validación
@@ -159,7 +177,10 @@ class CartController extends Controller
 
             # Retornar los mensajes de error (si existen)
             if ($validation->fails()) {
-                return redirect()->back()->with("success", $validation->errors()->first());
+                return redirect()->back()->with("message", [
+                    'status' => 'error',
+                    'content' => $validation->errors()->first()
+                ]);
             }
 
             $canAddToCart = true;
@@ -176,15 +197,24 @@ class CartController extends Controller
             if ($canAddToCart) {
                 Cart::update($request->rowId, $request->qty);
             } else {
-                return redirect()->back()->with("success", "Cantidad máxima alcanzada.");
+                return redirect()->back()->with("message", [
+                    'status' => 'error',
+                    'content' => 'Cantidad máxima alcanzada.'
+                ]);
             }
 
 
-            return redirect()->back()->with("success", "Producto actualizado.");
+            return redirect()->back()->with("message", [
+                'status' => 'info',
+                'content' => 'Producto actualizado.'
+            ]);
         }
         catch(Exception $e)
         {
-            return redirect()->back()->with("success", $e->getMessage());
+            return redirect()->back()->with("message", [
+                'status' => 'error',
+                'content' => $e->getMessage()
+            ]);
         }
     }
     
@@ -193,7 +223,10 @@ class CartController extends Controller
     */
     public function remove(Request $request) {
         Cart::remove($request->rowId);
-        return redirect()->back()->with("success", "Producto eliminado");
+        return redirect()->back()->with("message", [
+            'status' => 'info',
+            'content' => 'Producto eliminado.'
+        ]);
     }
 
     /**
@@ -201,7 +234,10 @@ class CartController extends Controller
     */
     public function clear() {
         Cart::destroy();
-        return redirect()->back()->with("success", "Carrito vaciado");
+        return redirect()->back()->with("message", [
+            'status' => 'info',
+            'content' => 'Carrito vaciado.'
+        ]);
     }
 
     /**
@@ -209,7 +245,10 @@ class CartController extends Controller
     */
     public function clearAfterPurchase() {
         Cart::destroy();
-        return redirect()->route("index")->with("success", "¡Compra exitosa! Para ver más detalles sobre tu compra, por favor revisa tu historial de pedidos.");
+        return redirect()->route("index")->with("message", [
+            'status' => 'success',
+            'content' => '¡Compra exitosa! Para ver más detalles sobre tu compra, por favor revisa tu historial de pedidos.'
+        ]);
     }
 
 }

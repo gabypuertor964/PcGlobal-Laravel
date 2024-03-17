@@ -55,7 +55,7 @@ class deliveryController extends Controller
         if($facturation->state->name == "Entregado"){
             return redirect()->route('admin.delivery.index')->with('message',[
                 'status' => 'danger',
-                'message' => '!Error, La factura ya fue entregada!'
+                'message' => '¡Error, La factura ya fue entregada!'
             ]);
         }
 

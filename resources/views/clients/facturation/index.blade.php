@@ -7,7 +7,7 @@
 {{-- Titulo principal --}}
 @section('content_header')
     <div class="flex flex-col md:flex-row gap-y-2 justify-content-between align-items-center text-center">
-        <h1 class="font-weight-bold font-italic">¿Que compras he realizado?</h1>
+        <h1 class="font-weight-bold font-italic">¿Qué compras he realizado?</h1>
     </div>
 @stop
 
@@ -81,7 +81,6 @@
 
         </table>
 
-        {{-- FIXME: Revisar posiciones --}}
         {{-- Paginacion --}}
         <div class="hidden sm:flex sm:justify-center">{{ $facturations->links('pagination::tailwind') }}</div>
     </div>

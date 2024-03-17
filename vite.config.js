@@ -21,6 +21,9 @@ export default defineConfig({
                 //Recursos Nativos de la App
                 "resources/css/admin.css",
                 "resources/js/search.js",
+                "resources/js/invoices-search.js",
+                "resources/js/active-invoices-search.js",
+                "resources/js/active-invoices-search-edit.js",
                 "resources/css/app.css",
                 "resources/js/navbar.js",
                 "resources/js/scroll.js",

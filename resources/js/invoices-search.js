@@ -9,7 +9,7 @@ const searchClient = algoliasearch(
 
 const search = instantsearch({
     searchClient,
-    indexName: "products",
+    indexName: "sales_invoices",
     insights: true,
     future: {
         preserveSharedStateOnUnmount: true,
@@ -20,7 +20,7 @@ search.addWidgets([
     searchBox({
         container: "#searchbox",
         showSubmit: false,
-        placeholder: "Busca un producto",
+        placeholder: "Busca una factura",
         showLoadingIndicator: true,
         autoFocus: true,
         searchAsYouType: false, // Desactivamos la búsqueda automática para realizarla manualmente
@@ -30,14 +30,14 @@ search.addWidgets([
         templates: {
             item: (hit, { html }) =>
                 html`
-                    <a href="${route("product.show", hit.slug)}">
+                    <a href="${route("admin.facturation.show", hit.slug)}">
                         <article
                             class="transition bg-white text-slate-700 my-1 rounded p-2 shadow-md 500 flex justify-between items-center"
                         >
                             <h1 class="text-sm md:text-lg font-medium">
-                                ${hit.name}
+                                ${hit.name} - ${hit.state}
                             </h1>
-                            <p class="text-xs md:text-base">${hit.brand}</p>
+                            <p class="text-xs md:text-base">${hit.date}</p>
                         </article>
                     </a>
                 `,

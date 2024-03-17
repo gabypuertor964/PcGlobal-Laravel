@@ -28,14 +28,24 @@
         {{-- Visualizacion de mensajes --}}
         @include('components.alert')
 
+        {{-- Buscador --}}
+        <div class="search-content">
+            <div class="search-panel flex nav-search">
+                <div class="search-panel__results">
+                    <div id="searchbox"></div>
+                    <div id="hits"></div>
+                </div>
+            </div>
+        </div>
+
         {{-- Tabla de datos --}}
         <table class="table table-striped table-bordered">
         
             {{-- Cabecera de la tabla --}}
             <thead>
                 <tr>
-                    <th>Fecha</th>
-                    <th>Hora</th>
+                    <th class="hidden lg:table-cell">Fecha</th>
+                    <th class="hidden lg:table-cell">Hora</th>
                     <th>Cliente</th>
                     <th>Valor Total</th>
                     <th>Estado</th>
@@ -47,8 +57,8 @@
             <tbody>
                 @forelse ($facturations as $facturation)
                     <tr>
-                        <td class="align-middle">{{$facturation->datetime["date"]}}</td>
-                        <td class="align-middle">{{$facturation->datetime["time"]}}</td>
+                        <td class="align-middle hidden lg:table-cell">{{$facturation->datetime["date"]}}</td>
+                        <td class="align-middle hidden lg:table-cell">{{$facturation->datetime["time"]}}</td>
                         <td class="align-middle">{{$facturation->client->fullName()}}</td>
                         <td class="align-middle">${{number_format($facturation->total, 0, ',', '.')}}</td>
                         <td class="align-middle">{{$facturation->state->name}}</td>
@@ -78,4 +88,11 @@
         <div class="flex justify-center mb-3">{{ $facturations->links('pagination::tailwind') }}</div>
     </div>
 
+@endsection
+
+@section('js')
+    @routes
+    @vite([
+        'resources/js/active-invoices-search-edit.js'
+    ])
 @endsection

@@ -28,6 +28,16 @@
         {{-- Visualizacion de mensajes --}}
         @include('components.alert')
 
+        {{-- Buscador --}}
+        <div class="search-content">
+            <div class="search-panel flex nav-search">
+                <div class="search-panel__results">
+                    <div id="searchbox"></div>
+                    <div id="hits"></div>
+                </div>
+            </div>
+        </div>
+
         {{-- Tabla de datos --}}
         <table class="table table-striped table-bordered">
         
@@ -78,4 +88,11 @@
         <div class="flex justify-center mb-3">{{ $facturations->links('pagination::tailwind') }}</div>
     </div>
 
+@endsection
+
+@section('js')
+    @routes
+    @vite([
+        'resources/js/active-invoices-search.js'
+    ])
 @endsection

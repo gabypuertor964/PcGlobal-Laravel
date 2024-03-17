@@ -6,7 +6,7 @@
 
 {{-- Titulo principal --}}
 @section('content_header')
-    <div class="flex flex-col md:flex-row gap-y-2 justify-content-between align-items-center text-center">
+    <div class="w-fit mx-auto">
         <h1 class="font-weight-bold font-italic">Registrar Entrega</h1>
     </div>
 @stop
@@ -28,196 +28,175 @@
     {{-- Visualizacion de mensajes --}}
     @include('components.alert')
 
-    {{-- Informacion basica --}}
-    <div class="container align-middle text-center">
+    {{-- Card de la factura --}}
+    <div class="bg-white shadow-md invoice-card">
+        {{-- Título: Información básica --}}
+        <p class="text-lg text-center border-b w-fit mx-auto mt-3">Información básica</p>
 
-        {{-- Titulo Seccion --}}
-        <div class="text-center">
-            <h2>Informacion Básica</h2>
+        {{-- Apartado: Información básica --}}
+        <div class="invoice-card-content basics">
+            <ul class="list-disc">
+                {{-- Fecha --}}
+                <li>
+                    <span class="font-semibold">Fecha: </span> 
+                    {{$facturation->datetime["date"]}}
+                </li>
+
+                {{-- Hora --}}
+                <li>
+                    <span class="font-semibold">Fecha: </span> 
+                    {{$facturation->datetime["time"]}}
+                </li>
+            </ul>
         </div>
 
-        {{-- Fecha y hora de la transaccion --}}
-        <table class="table table-striped table-bordered">
+        {{-- Título: Información básica --}}
+        <p class="text-lg text-center border-b w-fit mx-auto mt-3">Información del Cliente</p>
 
-            {{-- Cabecera de la tabla --}}
-            <thead>
-                <tr>
-                    <th colspan="2">Fecha y hora de la transaccion</th>
-                </tr>
-            </thead>
+        {{-- Apartado: Información del cliente --}}
+        <div class="invoice-card-content basics grid grid-cols-1 lg:grid-cols-3 text-center">
+            {{-- Nombres --}}
+            <p class="flex flex-col">
+                <span class="font-semibold">Nombre</span> 
+                {{$facturation->client->names}}
+            </p>
 
-            {{-- Cuerpo de la tabla --}}
-            <tbody>
-                <tr>
-                    <td class="align-middle">{{$facturation->datetime["date"]}}</td>
-                    <td class="align-middle">{{$facturation->datetime["time"]}} (UTC-5)</td>
-                </tr>
-            </tbody>
-        </table>
-
-    </div>
-
-    {{-- Informacion del Cliente --}}
-    <div class="container align-middle text-center">
-
-        {{-- Titulo Seccion --}}
-        <div class="text-center">
-            <h2>Informacion del Cliente</h2>
-        </div>
-
-        {{-- Grupo 1--}}
-        <div class="row">
-
-            {{-- Nombre del cliente --}}
-            <div class="mb-3 col-4">
-                <label class="form-label">Nombres</label>
-                <input type="text" class="form-control text-center" disabled value="{{ucfirst(strtolower($facturation->client->names))}}"/>
-            </div>
-
-            {{-- Apellidos del cliente --}}
-            <div class="mb-3 col-4">
-                <label class="form-label">Apellidos</label>
-                <input type="text" class="form-control text-center" disabled value="{{ucfirst(strtolower($facturation->client->surnames))}}"/>   
-            </div>
-
-            {{-- Sexo/Genero del cliente --}}
-            <div class="mb-3 col-4">
-                <label class="form-label">Genero/Sexo</label>
-                <input type="text" class="form-control text-center" disabled value="{{$facturation->client->gender->name}}"/>
-            </div>
-        </div>
-
-        {{-- Grupo 2 --}}
-        <div class="row">
+            {{-- Apellidos --}}
+            <p class="flex flex-col">
+                <span class="font-semibold">Apellidos</span> 
+                {{$facturation->client->surnames}}
+            </p>
+            
+            {{-- Género/Sexo --}}
+            <p class="flex flex-col">
+                <span class="font-semibold">Género/Sexo</span> 
+                {{$facturation->client->gender->name}}
+            </p>
 
             {{-- Tipo de documento --}}
-            <div class="mb-3 col-4">
-                <label class="form-label">Tipo de documento</label>
-                <input type="text" class="form-control text-center" disabled value="{{$facturation->client->document_type->name}}"/>
-            </div>
+            <p class="flex flex-col">
+                <span class="font-semibold">Tipo de Documento</span> 
+                {{$facturation->client->document_type->name}} - {{ $facturation->client->document_type->abbreviation }}
+            </p>            
 
-            {{-- Numero de documento --}}
-            <div class="mb-3 col-4">
-                <label class="form-label">Numero de documento</label>
-                <input type="text" class="form-control text-center" disabled value="{{$facturation->client->document_number}}"/>
-            </div>
+            {{-- Número de documento --}}
+            <p class="flex flex-col">
+                <span class="font-semibold">Número de documento</span> 
+                {{$facturation->client->document_number}}
+            </p>
 
             {{-- Fecha de nacimiento --}}
-            <div class="mb-3 col-4">
-                <label class="form-label">Fecha de nacimiento</label>
-                <input type="text" class="form-control text-center" disabled value="{{$facturation->client->date_birth}}"/>
-            </div>
-        </div>
+            <p class="flex flex-col">
+                <span class="font-semibold">Fecha de Nacimiento</span> 
+                {{$facturation->client->date_birth}}
+            </p>
 
-        {{-- Grupo 3 --}}
-        <div class="row justify-content-center">
+            {{-- Teléfono --}}
+            <p class="flex flex-col">
+                <span class="font-semibold">Teléfono</span> 
+                {{$facturation->client->phone_number}}
+            </p>
 
-            {{-- Telefono --}}
-            <div class="mb-3 col-4">
-                <label class="form-label">Telefono</label>
-                <input type="text" class="form-control text-center" disabled value="{{$facturation->client->phone_number}}"/>
-            </div>
+            {{-- Correo Electrónico --}}
+            <p class="flex flex-col">
+                <span class="font-semibold">Fecha de Nacimiento</span> 
+                {{$facturation->client->email}}
+            </p>
+            
+        </div>        
 
-            {{-- Correo electronico --}}
-            <div class="mb-3 col-4">
-                <label class="form-label">Correo electronico</label>
-                <input type="text" class="form-control text-center" disabled value="{{$facturation->client->email}}"/>
-            </div>
-    </div>
+        {{-- Título: Detalles --}}
+        <p class="text-lg text-center border-b w-fit mx-auto mt-3">Detalles</p>
 
-    {{-- Detallado --}}
-    <div class="container align-middle text-center mt-4">
-
-        {{-- Titulo Seccion --}}
-        <div class="text-center">
-            <h2>Detallado</h2>
-        </div>
-
-        {{-- Listado de productos facturados --}}
-        <table class="table table-striped table-bordered">
-        
-            {{-- Cabecera de la tabla --}}
-            <thead>
-                <tr>
-                    <th>Marca</th>
-                    <th>Nombre/Modelo</th>
-                    <th>Cantidad</th>
-                    <th>Valor Unitario</th>
-                    <th>Valor Neto</th>
-                </tr>
-            </thead>
-
-            {{-- Cuerpo de la tabla --}}
-            <tbody>
+        {{-- Apartado: Detalles --}}
+        <div class="invoice-card-content details grid grid-cols-1 lg:grid-cols-2">
+            {{-- Subapartado: Productos --}}
+            <ul class="border-r-0 lg:border-r my-2">
+                {{-- Título: Productos --}}
+                <p class="font-semibold text-center border-b-2 w-full md:w-fit mx-auto">Productos</p>
                 @foreach ($facturation->details as $detail)
-                    <tr>
-                        <td class="align-middle">{{$detail->product->brand->name}}</td>
-                        <td class="align-middle">{{$detail->product->name}}</td>
-                        <td class="align-middle">{{$detail->quantity}}</td>
-                        <td class="align-middle">${{number_format($detail->unit_price, 0, ',', '.')}}</td>
-                        <td class="align-middle">${{number_format(($detail->unit_price * $detail->quantity), 0, ',', '.')}}</td>
-                    </tr>
+                <div class="border-s-4 border-slate-600/25 my-3 py-1 px-3">
+                    {{-- Marca --}}
+                    <li>
+                        <span class="font-semibold">Marca: </span> 
+                        {{$detail->product->brand->name}}
+                    </li>
+                    
+                    {{-- Nombre/Modelo --}}
+                    <li>
+                        <span class="font-semibold">Nombre/Modelo: </span> 
+                        {{$detail->product->name}}
+                    </li>
+                    
+                    {{-- Cantidad --}}
+                    <li>
+                        <span class="font-semibold">Cantidad: </span> 
+                        {{$detail->quantity}}
+                    </li>
+                    
+                    {{-- Precio Unitario --}}
+                    <li>
+                        <span class="font-semibold">Precio Unitario: </span> 
+                        ${{number_format($detail->unit_price, 0, ',', '.')}}
+                    </li>
+                    
+                    {{-- Precio neto --}}
+                    <li>
+                        <span class="font-semibold">Precio Neto: </span> 
+                        ${{number_format(($detail->unit_price * $detail->quantity), 0, ',', '.')}}
+                    </li>
+                </div>
                 @endforeach
-            </tbody>
+            </ul>
+            
+            {{-- Subapartado: Precios --}}
+            <ul class="border-l-0 lg:border-l my-2">
+                {{-- Título: Productos --}}
+                <p class="font-semibold text-center border-b-2 w-full md:w-fit mx-auto">Precios</p>
+                <div class="border-s-4 border-slate-600/25 my-3 py-1 px-3">
+                    {{-- Subtotal --}}
+                    <li>
+                        <span class="font-semibold">Subtotal: </span> 
+                        ${{number_format($facturation->subtotal, 0, ',', '.')}}
+                    </li>
 
-        </table>
-    </div>
+                    {{-- Impuestos --}}
+                    <li>
+                        <span class="font-semibold">Impuestos ({{$facturation->tax_percentage}}%): </span> 
+                        ${{number_format($facturation->taxes, 0, ',', '.')}}
+                    </li>
 
-    {{-- Resumen --}}
-    <div class="container align-middle text-center w-auto mt-4">
+                    {{-- Total --}}
+                    <li>
+                        <span class="font-semibold">Total: </span>
+                        ${{number_format($facturation->total, 0, ',', '.')}}
+                    </li>
+                </div>
+            </ul>
+        </div>
 
-        {{-- Listado de productos facturados --}}
-        <table class="table table-bordered">
-
-            {{-- Subtotal de la factura --}}
-            <tr>
-                <td class="align-middle fw-bolder">Subtotal</td>
-                <td class="align-middle">${{number_format($facturation->subtotal, 0, ',', '.')}}</td>
-            </tr>
-
-            {{-- Impuestos --}}
-            <tr>
-                <td class="align-middle fw-bolder">Impuestos ({{$facturation->tax_percentage}}%)</td>
-                <td class="align-middle">${{number_format($facturation->taxes, 0, ',', '.')}}</td>
-            </tr>
-
-            {{-- Total de la factura --}}
-            <tr>
-                <td class="align-middle fw-bolder">Total</td>
-                <td class="align-middle fw-bolder">${{number_format($facturation->total, 0, ',', '.')}}</td>
-            </tr>
-
-        </table>
-        
-    </div>
-
-    {{-- Botones --}}
-    <div class="text-center">
-
-        {{-- Boton: Registrar entrega --}}
-        <form action="{{route("admin.delivery.update", $facturation->slug)}}" method="post">
-
-            {{-- Token de seguridad --}}
-            @csrf
-
-            {{-- Metodo de envio --}}
-            @method("PUT")
-
-            {{-- Boton: Guardar --}}
-            <div class="button-tooltip w-1/3 lg:w-1/4" data-tooltip="Confirmar creación">
-                <button type="submit" class="btn btn-success col-12">
-                    Registrar Entrega
-                </button>
-            </div>
-
-            {{-- Boton: Cancelar --}}
-            <div class="button-tooltip w-1/3 lg:w-1/4" data-tooltip="Cancelar creación">
-                <a class="btn btn-danger col-12" href="{{route("admin.delivery.index")}}" role="button">
-                    Cancelar
-                </a>
-            </div>
-
-        </form>
+        {{-- Boton: Volver --}}
+        <div class="text-center mt-3">
+            {{-- Boton: Registrar entrega --}}
+            <form action="{{route("admin.delivery.update", $facturation->slug)}}" method="post">
+                {{-- Token de seguridad --}}
+                @csrf
+                {{-- Metodo de envio --}}
+                @method("PUT")
+                {{-- Boton: Guardar --}}
+                <div class="button-tooltip w-1/3 lg:w-1/4" data-tooltip="Confirmar creación">
+                    <button type="submit" class="btn btn-success col-12">
+                        Registrar Entrega
+                    </button>
+                </div>
+                {{-- Boton: Cancelar --}}
+                <div class="button-tooltip w-1/3 lg:w-1/4" data-tooltip="Cancelar creación">
+                    <a class="btn btn-danger col-12" href="{{route("admin.delivery.index")}}" role="button">
+                        Cancelar
+                    </a>
+                </div>
+            </form>
+        </div>
     </div>
 
 @endsection

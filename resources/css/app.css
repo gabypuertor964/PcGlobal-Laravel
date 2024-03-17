@@ -171,7 +171,7 @@ nav {
     transform: scale(0.95);
 }
 
-/* Estilos para la alerta de la agregación de un producto al carrito de compras */
+/* Estilos para la alerta personalizada */
 .custom-alert {
     position: absolute;
     left: 50%;
@@ -179,7 +179,6 @@ nav {
     z-index: 10;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
-    background: #83ea8a;
     font-weight: 500;
     width: 100%;
     margin-inline: auto;
@@ -187,8 +186,32 @@ nav {
     filter: drop-shadow(4px 4px 10px hwb(0 0% 100% / 0.2));
 }
 
+.custom-alert.success {
+    background: #83ea8a;
+}
+
+.custom-alert.error {
+    background: #f05441;
+    color: #fff;
+}
+
+.custom-alert.info {
+    background: #4f46e5;
+    color: #fff;
+}
+
 .custom-alert .btn-close {
     padding: 0.625em 0.5rem;
+}
+
+.custom-alert.error .btn-close {
+    color: #fff;
+    opacity: 0.85;
+}
+
+.custom-alert.info .btn-close {
+    color: #fff;
+    opacity: 0.85;
 }
 
 @media (min-width: 768px) {
