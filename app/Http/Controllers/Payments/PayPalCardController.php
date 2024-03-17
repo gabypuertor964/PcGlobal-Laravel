@@ -96,7 +96,7 @@ class PayPalCardController extends Controller
                     'subtotal' => $subtotal,
                     'taxes' => $taxes,
                     'total' => $total,
-                    'id_state' => State::where('name', 'Por entregar')->first()->id
+                    'id_state' => State::where('name', 'Pendiente por entrega')->first()->id
                 ]);
 
                 foreach ($cartContent as $cartProduct)

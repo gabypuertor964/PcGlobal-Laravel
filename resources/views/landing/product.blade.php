@@ -85,7 +85,7 @@
         </li>
         
         <li class="text-lg lg:text-xl">{{ $product->stock }} unidad(es)</li>
-        <li class="text-lg lg:text-2xl">${{number_format($product->price, 0, ',', '.')}}</li>
+        <li class="text-lg lg:text-2xl">${{number_format($product->price, 0, ',', '.')}} (Sin IVA)</li>
       </ul>
       
       {{-- Descripcioón técnica --}}

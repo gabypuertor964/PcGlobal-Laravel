@@ -20,4 +20,12 @@ class PurchaseUnit extends Model
         'quantity',
         'unit_price'
     ];
+
+    /**
+     * @abstract Relación 1:N con el modelo Product (productos) FK: id_product
+    */
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'id_product');
+    }
 }

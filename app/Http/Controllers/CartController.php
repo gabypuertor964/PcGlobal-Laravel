@@ -80,7 +80,6 @@ class CartController extends Controller
                 return redirect()->back()->with("success", $validation->errors()->first());
             }
             
-
             //Obtener el directoria de las imágenes
             $directoryImage = ProductsController::getImagesDirectory($product->slug);
 

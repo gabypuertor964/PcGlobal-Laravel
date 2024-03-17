@@ -30,7 +30,7 @@ return new class extends Migration
             $table->timestamps();
 
             /* Llaves Foraneas */
-                $table->foreign('id_invoice')->references('id')->on('sales_invoices');
+                $table->foreign('id_invoice')->references('id')->on('sales_invoices')->onDelete('cascade')->onUpdate('cascade');
 
                 $table->foreign('id_product')->references('id')->on('products');
             //
