@@ -145,8 +145,7 @@
   @routes
   @vite([
     'resources/js/navbar.js',
-    'resources/js/search.js',
-    'resources/js/fade-alert.js',
+    'resources/js/search.js'
   ])
   <script src="https://www.paypal.com/sdk/js?client-id={{ env('PAYPAL_CLIENT_ID') }}&components=buttons,funding-eligibility"></script>
   <script>

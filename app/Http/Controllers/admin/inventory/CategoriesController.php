@@ -33,7 +33,7 @@ class CategoriesController extends Controller
         */
 
         $this->middleware("can:gerency.read")->only(["show"]);
-        $this->middleware("can:inventory.create")->except(["index"]);
+        $this->middleware("can:inventory.create")->except(["index","show"]);
     }
 
     /**
@@ -66,6 +66,31 @@ class CategoriesController extends Controller
 
         //Retornar la vista con la informacion
         return view('admin.inventory.categories.index', compact('categories'));
+    }
+
+    /**
+     * @abstract Mostrar la categoria especificada
+     * 
+     * @param string $slug Slug de la categoria
+     */
+    public function show(string $slug)
+    {
+        // Obtener el registro de la categoria
+        $category = self::get($slug);
+
+        // Verificar si la categoria existe
+        if($category == null){
+            return redirect()->route('inventory.categories.index')->with('message',[
+                'status' => 'danger',
+                'text' => '¡La categoria no existe!'
+            ]);
+        }
+
+        // Verificar si la categoria tiene una imagen asociada
+        $category->image = asset("/storage/categories/$category->slug.png");
+
+        //Retornar la vista con la informacion solicitada
+        return view('admin.inventory.categories.show', compact('category'));
     }
 
     /**

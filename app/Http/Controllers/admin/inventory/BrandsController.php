@@ -31,7 +31,7 @@ class BrandsController extends Controller
         */
 
         $this->middleware("can:gerency.read")->only(["show"]);
-        $this->middleware("can:inventory.create")->except(["index"]);
+        $this->middleware("can:inventory.create")->except(["index","show"]);
     }
 
     /**
@@ -69,9 +69,23 @@ class BrandsController extends Controller
     /**
      * @abstract Visualizar la informacion de una marca
     */
-    public function show()
+    public function show(string $slug)
     {
+        //Consultar la marca
+        $brand = self::get($slug);
 
+        //Validar si la marca existe
+        if($brand == null){
+
+            //Redireccion con mensaje de error
+            return redirect()->route('inventory.brands.index')->with('message', [
+                'status' => 'danger',
+                'text' => '¡La marca no existe!'
+            ]);
+        }
+
+        //Retornar la vista con la informacion
+        return view('admin.inventory.brands.show', compact('brand'));
     }
 
 

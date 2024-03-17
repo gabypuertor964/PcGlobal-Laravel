@@ -57,29 +57,40 @@
                         <td>
                             <div class="flex justify-center gap-2 w-full">
 
-                                {{-- Boton: Actualizar --}}
-                                <div class="button-tooltip" data-tooltip="Editar categoría">
-                                    <a class="btn btn-warning" href="{{route('inventory.categories.edit', $category->slug)}}" role="button">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </a>
-                                </div>
-
-                                {{-- Formulario: Eliminar --}}
-                                <form action="{{route('inventory.categories.destroy', $category->slug)}}" method="POST">
-
-                                    {{-- Token CSRF --}}
-                                    @csrf
-
-                                    {{-- Metodo de comunicacion --}}
-                                    @method('delete')
-
-                                    {{-- Boton: Eliminar --}}
-                                    <div class="button-tooltip" data-tooltip="Eliminar categoría">
-                                        <button type="submit" class="btn btn-danger w-full">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
+                                @role("gerente")
+                                    {{-- Boton: Ver --}}
+                                    <div class="button-tooltip" data-tooltip="Ver categoría">
+                                        <a class="btn btn-primary" href="{{route('inventory.categories.show', $category->slug)}}" role="button">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
                                     </div>
-                                </form>
+                                @endrole
+
+                                @role("almacenista")
+                                    {{-- Boton: Actualizar --}}
+                                    <div class="button-tooltip" data-tooltip="Editar categoría">
+                                        <a class="btn btn-warning" href="{{route('inventory.categories.edit', $category->slug)}}" role="button">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                    </div>
+
+                                    {{-- Formulario: Eliminar --}}
+                                    <form action="{{route('inventory.categories.destroy', $category->slug)}}" method="POST">
+
+                                        {{-- Token CSRF --}}
+                                        @csrf
+
+                                        {{-- Metodo de comunicacion --}}
+                                        @method('delete')
+
+                                        {{-- Boton: Eliminar --}}
+                                        <div class="button-tooltip" data-tooltip="Eliminar categoría">
+                                            <button type="submit" class="btn btn-danger w-full">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </form>
+                                @endrole
                             </div>
                         </td>
                     </tr>

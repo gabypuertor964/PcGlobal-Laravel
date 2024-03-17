@@ -38,7 +38,7 @@ class ProductsController extends Controller
         */
 
         $this->middleware("can:gerency.read")->only(["show"]);
-        $this->middleware("can:inventory.create")->except(["index"]);
+        $this->middleware("can:inventory.create")->except(["index","show"]);
     }
 
     /**
@@ -268,6 +268,35 @@ class ProductsController extends Controller
 
         //Retornar la vista con los productos
         return view('admin.inventory.products.index', compact('products'));
+    }
+
+    /**
+     * @abstract Mostrar el producto especificado
+    */
+    public function show(string $slug){
+
+        // Obtener el registro del producto
+        $product = self::get($slug);
+
+        // Verificar si el producto existe
+        if($product == null){
+            return redirect()->route('inventory.products.index')->with('message',[
+                'status' => 'danger',
+                'text' => '¡El producto no existe!'
+            ]);
+        }
+
+        // Enviar el contenido de los markdowns
+        $product->description = File::get(storage_path('app/public/products/'.CleanInputs::runUpper($product->slug).'/description.md'));
+
+        // Enviar el contenido de las especificaciones
+        $product->data_specs = self::getListsFromMarkdownSpecs(CleanInputs::runUpper($product->slug));
+
+        // Enviar ruta de imagen
+        $product->image_route = Validator::publicImageExist("storage/products/".CleanInputs::runUpper($product->slug)."/images/1.png");
+
+        //Retornar la vista con el producto
+        return view('admin.inventory.products.show', compact('product'));
     }
 
     /**

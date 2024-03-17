@@ -55,20 +55,35 @@
                         <td class="align-middle">{{$brand->products->count()}}</td>
                         <td>
                             <div class="flex justify-center gap-2 w-full">
-                                <div class="button-tooltip" data-tooltip="Editar marca">
-                                    <a class="btn btn-warning" href="{{route('inventory.brands.edit', $brand->slug)}}" role="button">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </a>
-                                </div>
-                                <form action="{{route('inventory.brands.destroy', $brand->slug)}}" method="POST">
-                                    @csrf
-                                    @method('delete')
-                                    <div class="button-tooltip" data-tooltip="Eliminar marca">
-                                        <button type="submit" class="btn btn-danger w-full">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
+
+                                @role("gerente")
+                                    {{-- Boton Ver --}}
+                                    <div class="button-tooltip" data-tooltip="Ver marca">
+                                        <a class="btn btn-primary" href="{{route('inventory.brands.show', $brand->slug)}}" role="button">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
                                     </div>
-                                </form>
+                                @endrole
+
+                                @role("almacenista")
+                                    {{-- Boton Editar --}}
+                                    <div class="button-tooltip" data-tooltip="Editar marca">
+                                        <a class="btn btn-warning" href="{{route('inventory.brands.edit', $brand->slug)}}" role="button">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                    </div>
+
+                                    {{-- Boton Eliminar --}}
+                                    <form action="{{route('inventory.brands.destroy', $brand->slug)}}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <div class="button-tooltip" data-tooltip="Eliminar marca">
+                                            <button type="submit" class="btn btn-danger w-full">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </form>
+                                @endrole
                             </div>
                         </td>
                     </tr>

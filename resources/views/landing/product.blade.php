@@ -139,7 +139,6 @@
         'resources/js/navbar.js',
         'resources/js/scroll.js',
         'resources/js/search.js',
-        'resources/js/fade-alert.js',
     ])
   <script>
     const minus = document.querySelector(".minus");
