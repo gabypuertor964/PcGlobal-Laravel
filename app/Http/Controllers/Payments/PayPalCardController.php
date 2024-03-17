@@ -111,6 +111,7 @@ class PayPalCardController extends Controller
                         'id_invoice' => $sale->id,
                         'id_product' => $cartProduct->id,
                         'quantity' => $cartProduct->qty,
+                        'unit_price' => $cartProduct->price
                     ]);
                 }
             });

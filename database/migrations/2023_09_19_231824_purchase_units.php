@@ -22,6 +22,8 @@ return new class extends Migration
                 $table->unsignedBigInteger('id_product')->comment('Fk Id del producto');
 
                 $table->unsignedInteger('quantity')->comment('Cantidad de productos');
+
+                $table->string('unit_price', 10)->comment('Precio unitario del producto');
             //
 
             //Campos create_at y update_at

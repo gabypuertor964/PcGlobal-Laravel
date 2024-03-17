@@ -12,10 +12,12 @@ class PurchaseUnit extends Model
     // Especificar el nombre de la tabla
     protected $table = 'purchase_units';
 
+    // Campos autorizados para asignación masiva
     protected $fillable = 
     [
         'id_invoice',
         'id_product',
-        'quantity'
+        'quantity',
+        'unit_price'
     ];
 }

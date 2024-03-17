@@ -110,9 +110,9 @@ class CartController extends Controller
 
             return redirect()->back()->with("success", "Producto agregado al carrito.");
         }
-        catch(Exception $e)
+        catch(Exception)
         {
-            return redirect()->back()->with("success", $e->getMessage());
+            return redirect()->back()->with("success", "Ha ocurrido un error al agregar el producto al carrito.");
         }
     }
 
@@ -214,4 +214,3 @@ class CartController extends Controller
     }
 
 }
-;
