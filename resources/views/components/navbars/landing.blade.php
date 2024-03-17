@@ -10,13 +10,12 @@
         </a>
       </div>
 
+      {{-- Buscador --}}
       <div class="search-content">
         <div class="search-panel flex nav-search">
-  
           <div class="search-panel__results">
             <div id="searchbox"></div>
-            <div id="hits">
-            </div>
+            <div id="hits"></div>
           </div>
         </div>
       </div>

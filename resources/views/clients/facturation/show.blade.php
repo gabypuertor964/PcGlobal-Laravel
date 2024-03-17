@@ -27,117 +27,111 @@
     {{-- Visualizacion de mensajes --}}
     @include('components.alert')
 
-    {{-- Informacion basica --}}
-    <div class="container align-middle text-center">
+    {{-- Card de la factura --}}
+    <div class="bg-white shadow-md invoice-card">
+        {{-- Título: Información básica --}}
+        <p class="text-lg text-center border-b w-fit mx-auto mt-3">Información básica</p>
 
-        {{-- Titulo Seccion --}}
-        <div class="text-center">
-            <h2>Informacion basica</h2>
-        </div>
-
-        {{-- Informacion --}}
-        <div class="row">
-
-            {{-- Transaccion --}}
-            <div class="col">
-
+        {{-- Apartado: Información básica --}}
+        <div class="invoice-card-content basics">
+            <ul class="list-disc">
                 {{-- Fecha --}}
-                <div class="text-center">
-                    <label class="form-label">Fecha</label>
-                    <input type="date" class="form-control text-center" value="{{$facturation->date}}" disabled/>
-                </div>
+                <li>
+                    <span class="font-semibold">Fecha: </span> 
+                    {{$facturation->date}}
+                </li>
 
                 {{-- Hora --}}
-                <div class="text-center">
-                    <label class="form-label">Hora</label>
-                    <input type="time" class="form-control text-center" value="{{$facturation->time}}" disabled/>
-                </div>
+                <li>
+                    <span class="font-semibold">Hora: </span> 
+                    {{$facturation->time}}
+                </li>
 
-            </div>
-
-            {{-- Estado --}}
-            <div class="col">
-                <div class="text-center">
-                    <label class="form-label">Estado</label>
-                    <input type="text" class="form-control text-center" value="{{$facturation->state->name}}" disabled/>
-                </div>
-            </div>
-    
-        </div>
-    </div>
-
-    {{-- Detallado --}}
-    <div class="container align-middle text-center mt-4">
-
-        {{-- Titulo Seccion --}}
-        <div class="text-center">
-            <h2>Detallado</h2>
+                {{-- Estado --}}
+                <li>
+                    <span class="font-semibold">Estado: </span> 
+                    {{$facturation->state->name}}
+                </li>
+            </ul>
         </div>
 
-        {{-- Listado de productos facturados --}}
-        <table class="table table-striped table-bordered">
-        
-            {{-- Cabecera de la tabla --}}
-            <thead>
-                <tr>
-                    <th>Marca</th>
-                    <th>Nombre/Modelo</th>
-                    <th>Cantidad</th>
-                    <th>Valor Unitario</th>
-                    <th>Valor Neto</th>
-                </tr>
-            </thead>
+        {{-- Título: Detalles --}}
+        <p class="text-lg text-center border-b w-fit mx-auto mt-3">Detalles</p>
 
-            {{-- Cuerpo de la tabla --}}
-            <tbody>
+        {{-- Apartado: Detalles --}}
+        <div class="invoice-card-content details grid grid-cols-1 lg:grid-cols-2">
+            {{-- Subapartado: Productos --}}
+            <ul class="border-r-0 lg:border-r my-2">
+                {{-- Título: Productos --}}
+                <p class="font-semibold text-center border-b-2 w-full md:w-fit mx-auto">Productos</p>
                 @foreach ($facturation->details as $detail)
-                    <tr>
-                        <td class="align-middle">{{$detail->product->brand->name}}</td>
-                        <td class="align-middle">{{$detail->product->name}}</td>
-                        <td class="align-middle">{{$detail->quantity}}</td>
-                        <td class="align-middle">${{number_format($detail->unit_price, 0, ',', '.')}}</td>
-                        <td class="align-middle">${{number_format(($detail->unit_price * $detail->quantity), 0, ',', '.')}}</td>
-                    </tr>
+                <div class="border-s-4 border-slate-600/25 my-3 py-1 px-3">
+                    {{-- Marca --}}
+                    <li>
+                        <span class="font-semibold">Marca: </span> 
+                        {{$detail->product->brand->name}}
+                    </li>
+                    
+                    {{-- Nombre/Modelo --}}
+                    <li>
+                        <span class="font-semibold">Nombre/Modelo: </span> 
+                        {{$detail->product->name}}
+                    </li>
+                    
+                    {{-- Cantidad --}}
+                    <li>
+                        <span class="font-semibold">Cantidad: </span> 
+                        {{$detail->quantity}}
+                    </li>
+                    
+                    {{-- Precio Unitario --}}
+                    <li>
+                        <span class="font-semibold">Precio Unitario: </span> 
+                        ${{number_format($detail->unit_price, 0, ',', '.')}}
+                    </li>
+                    
+                    {{-- Precio neto --}}
+                    <li>
+                        <span class="font-semibold">Precio Neto: </span> 
+                        ${{number_format(($detail->unit_price * $detail->quantity), 0, ',', '.')}}
+                    </li>
+                </div>
                 @endforeach
-            </tbody>
+            </ul>
+            
+            {{-- Subapartado: Precios --}}
+            <ul class="border-l-0 lg:border-l my-2">
+                {{-- Título: Productos --}}
+                <p class="font-semibold text-center border-b-2 w-full md:w-fit mx-auto">Precios</p>
+                <div class="border-s-4 border-slate-600/25 my-3 py-1 px-3">
+                    {{-- Subtotal --}}
+                    <li>
+                        <span class="font-semibold">Subtotal: </span> 
+                        ${{number_format($facturation->subtotal, 0, ',', '.')}}
+                    </li>
 
-        </table>
-    </div>
+                    {{-- Impuestos --}}
+                    <li>
+                        <span class="font-semibold">Impuestos ({{$facturation->tax_percentage}}%): </span> 
+                        ${{number_format($facturation->taxes, 0, ',', '.')}}
+                    </li>
 
-    {{-- Resumen --}}
-    <div class="container align-middle text-center w-auto mt-4">
+                    {{-- Total --}}
+                    <li>
+                        <span class="font-semibold">Total: </span>
+                        ${{number_format($facturation->total, 0, ',', '.')}}
+                    </li>
+                </div>
+            </ul>
+        </div>
 
-        {{-- Listado de productos facturados --}}
-        <table class="table table-bordered">
-
-            {{-- Subtotal de la factura --}}
-            <tr>
-                <td class="align-middle fw-bolder">Subtotal</td>
-                <td class="align-middle">${{number_format($facturation->subtotal, 0, ',', '.')}}</td>
-            </tr>
-
-            {{-- Impuestos --}}
-            <tr>
-                <td class="align-middle fw-bolder">Impuestos ({{$facturation->tax_percentage}}%)</td>
-                <td class="align-middle">${{number_format($facturation->taxes, 0, ',', '.')}}</td>
-            </tr>
-
-            {{-- Total de la factura --}}
-            <tr>
-                <td class="align-middle fw-bolder">Total</td>
-                <td class="align-middle fw-bolder">${{number_format($facturation->total, 0, ',', '.')}}</td>
-            </tr>
-
-        </table>
-        
-    </div>
-
-    {{-- Boton: Volver --}}
-    <div class="text-center">
-        <div class="button-tooltip w-1/3 lg:w-1/4" data-tooltip="Volver a la vista anterior">
-            <a class="btn btn-primary col-12" href="{{route("clients.facturation.index")}}" role="button">
-                Volver al listado
-            </a>
+        {{-- Boton: Volver --}}
+        <div class="text-center mt-3">
+            <div class="button-tooltip w-full lg:w-1/3" data-tooltip="Volver al listado de las compras">
+                <a class="btn btn-primary col-12" href="{{route("clients.facturation.index")}}" role="button">
+                    Volver al listado
+                </a>
+            </div>
         </div>
     </div>
 

@@ -39,17 +39,17 @@
                     <div class="card-body">
                         <table class="table table-striped">
                             <thead>
-                                <th class="font-medium">Imágen</th>
+                                <th class="font-medium hidden lg:table-cell">Imágen</th>
                                 <th class="font-medium">Nombre</th>
                                 <th class="font-medium">Cantidad</th>
-                                <th class="font-medium">Precio Unitario</th>
-                                <th class="font-medium">Precio Total</th>
+                                <th class="font-medium">Precio Unitario (Sin IVA)</th>
+                                <th class="font-medium hidden lg:table-cell">Precio Total (Sin IVA)</th>
                                 <th></th>
                             </thead>
                             <tbody>
                                  @foreach ($cartContent as $cartProduct)
                                      <tr class="align-middle">
-                                        <td>
+                                        <td class="hidden lg:table-cell">
                                             <img src="{{ asset('storage/products/'. strtoupper($cartProduct->options->slug)."/images/". $cartProduct->options->image) }}" alt="{{ $cartProduct->name }}" width="50">
                                         </td>
                                         <td>
@@ -73,7 +73,7 @@
                                             </form>
                                         </td>
                                         <td>${{number_format($cartProduct->price, 0, ',', '.')}}</td>
-                                        <td>${{number_format($cartProduct->qty * $cartProduct->price, 0, ',', '.')}}</td>
+                                        <td class="hidden lg:table-cell">${{number_format($cartProduct->qty * $cartProduct->price, 0, ',', '.')}}</td>
                                         <td>
                                             <form action="{{route("cart.remove")}}" method="post">
                                                 @csrf

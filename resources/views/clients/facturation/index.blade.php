@@ -35,7 +35,7 @@
             <thead>
                 <tr>
                     <th>Fecha</th>
-                    <th>Hora</th>
+                    <th class="hidden lg:table-cell">Hora</th>
                     <th>Valor Total</th>
                     <th>Estado</th>
                     <th>Acciones</th>
@@ -47,7 +47,7 @@
                 @forelse ($facturations as $facturation)
                     <tr>
                         <td class="align-middle">{{$facturation->date}}</td>
-                        <td class="align-middle">{{$facturation->time}} (UTC-5)</td>
+                        <td class="align-middle hidden lg:table-cell">{{$facturation->time}} (UTC-5)</td>
                         <td class="align-middle">${{number_format($facturation->total, 0, ',', '.')}}</td>
                         <td class="align-middle">{{$facturation->state->name}}</td>
                         <td>
@@ -65,13 +65,13 @@
                         <td colspan="5">
 
                             <div class="d-block mb-2">
-                                ¿Aun no has realizado ninguna compra?
+                                Aún no has realizado ninguna compra.
                             </div>
                             
                             {{-- Boton ir a categorias --}}
                             <a class="btn btn-primary col-5" href="{{route('index',"#categories")}}" role="button">
                                 <i class="fa-solid fa-shopping-bag"></i>
-                                Ver Catalogo
+                                Ver catálogo
                             </a>
                             
                         </td>

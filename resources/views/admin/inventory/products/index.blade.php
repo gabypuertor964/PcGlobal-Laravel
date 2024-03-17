@@ -44,7 +44,7 @@
                     <th>Nombre</th>
                     <th>Marca</th>
                     <th>Categoria</th>
-                    <th>Unidades disponibles</th>
+                    <th class="hidden lg:table-cell">Unidades disponibles</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -56,13 +56,13 @@
                         <td class="align-middle">{{$product->name}}</td>
                         <td class="align-middle">{{$product->brand->name}}</td>
                         <td class="align-middle">{{$product->category->name}}</td>
-                        <td class="align-middle">{{$product->stock}}</td>
+                        <td class="align-middle hidden lg:table-cell">{{$product->stock}}</td>
                         <td>
                             <div class="flex justify-center gap-2 w-full">
 
                                 @role("gerente")
                                     {{-- Boton: Detalles --}}
-                                    <div class="button-tooltip" data-tooltip="Ver detalles del producto">
+                                    <div class="button-tooltip" data-tooltip="Ver producto">
                                         <a class="btn btn-primary" href="{{route('inventory.products.show', $product->slug)}}" role="button">
                                             <i class="fa-solid fa-eye"></i>
                                         </a>
@@ -108,7 +108,6 @@
 
         </table>
 
-        {{-- FIXME: Revisar posiciones --}}
         {{-- Paginacion --}}
         <div class="hidden sm:flex sm:justify-center">{{ $products->links('pagination::tailwind') }}</div>
     </div>

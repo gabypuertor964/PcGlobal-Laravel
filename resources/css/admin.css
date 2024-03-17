@@ -47,3 +47,25 @@
         width: 50%;
     }
 }
+
+/* Estilos de la card de la factura */
+
+.invoice-card {
+    width: 100%;
+    margin-inline: auto;
+    border-radius: 20px;
+    padding: 1rem;
+}
+
+.invoice-card .invoice-card-content {
+    border-radius: 15px;
+    padding: 0.5rem;
+    background: #f3f3f3;
+}
+
+@media (min-width: 1024px) {
+    .invoice-card {
+        padding: 1rem 2.5rem;
+        width: 50%;
+    }
+}
