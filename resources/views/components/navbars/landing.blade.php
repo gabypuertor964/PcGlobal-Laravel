@@ -25,20 +25,35 @@
         <!-- Enlaces de productos -->
         <div class="nav-productos justify-evenly hidden lg:flex gap-4 ps-3">
           <p><a class="hover:text-gray-200" href="{{route('index',"#categories")}}">Categorías</a></p>
-          <p><a class="hover:text-gray-200" href="#">PQRS</a></p>
+
+          @if (!Auth::check())
+            <p><a class="hover:text-gray-200" href="{{route('login')}}">PQRS</a></p>
+          @else
+            @if (Auth::user()->hasRole('cliente'))
+              <p><a class="hover:text-gray-200" href="{{route('clients.pqrs.index')}}">PQRS</a></p>
+            @elseif(Auth::user()->hasRole(["gerente","gestor_PQRS"]))
+              <p><a class="hover:text-gray-200" href="{{route('admin.pqrs.index')}}">PQRS</a></p>
+            @endif
+          @endif
+                  
         </div>
 
         <!-- Enlaces de login y carrito -->
         <div class="nav-login hidden lg:flex gap-4">
-          <div class="relative">
-            <a href="{{route("cart.checkout")}}" role="button" aria-label="Link for shopping cart" class="hover:text-gray-200">
-              @if (Cart::count() > 0)
-              <span class="absolute -top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none text-xs font-semibold">{{ Cart::count() }}</span>
-              @endif
-              <i class="fa-solid fa-cart-shopping"></i>
-            </a>
-          </div>
-          <div class="border"></div>
+
+          {{-- Si el usuario no está autenticado o si está autenticado y es cliente, se muestra el carrito --}}
+          @if(!Auth::check() || (Auth::check() && Auth::user()->hasRole('cliente')))
+            <div class="relative">
+              <a href="{{route("cart.checkout")}}" role="button" aria-label="Link for shopping cart" class="hover:text-gray-200">
+                @if (Cart::count() > 0)
+                <span class="absolute -top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none text-xs font-semibold">{{ Cart::count() }}</span>
+                @endif
+                <i class="fa-solid fa-cart-shopping"></i>
+              </a>
+            </div>
+            <div class="border"></div>
+          @endif
+
           <div class="dropdown" tabindex="0">
             <button class="hover:text-gray-200" id="dropdownButton">
               <i class="fa-regular fa-user"></i>

@@ -93,31 +93,33 @@
         {!! $product->description !!}
       </div>
 
-      <div class="action-buttons relative md:absolute bottom-2 w-full pe-3 py-2 mt-5 flex flex-col gap-y-1">
-        <div>
-          @if($product->stock > 0)
-            <form action="{{route("cart.add")}}" method="post" class="w-full mx-auto ">
-              @csrf
+      @if(!Auth::check() || (Auth::check() && Auth::user()->hasRole('cliente')))
+        <div class="action-buttons relative md:absolute bottom-2 w-full pe-3 py-2 mt-5 flex flex-col gap-y-1">
+          <div>
+            @if($product->stock > 0)
+              <form action="{{route("cart.add")}}" method="post" class="w-full mx-auto ">
+                @csrf
 
-              <input type="hidden" name="slug" value="{{$product->slug}}">
+                <input type="hidden" name="slug" value="{{$product->slug}}">
 
-              <div class="flex flex-col lg:flex-row gap-2">
-                <div class="relative flex">
-                  <span class="absolute -top-5 text-sm left-1/2 transform -translate-x-1/2 font-medium">Cantidad</span>
-                  <input type="button" value="-" class="minus absolute left-0 top-1/2 transform -translate-y-1/2 p-1 font-semibold">
-                  <input type="number" name="qty" id="valueProduct" min="1" max="{{$product->stock}}" value="1" class="bg-indigo-200 text-center px-4 py-1 rounded font-semibold h-full w-full lg:w-auto">
-                  <input type="button" value="+" class="plus absolute right-0 top-1/2 transform -translate-y-1/2 p-1 font-semibold">
+                <div class="flex flex-col lg:flex-row gap-2">
+                  <div class="relative flex">
+                    <span class="absolute -top-5 text-sm left-1/2 transform -translate-x-1/2 font-medium">Cantidad</span>
+                    <input type="button" value="-" class="minus absolute left-0 top-1/2 transform -translate-y-1/2 p-1 font-semibold">
+                    <input type="number" name="qty" id="valueProduct" min="1" max="{{$product->stock}}" value="1" class="bg-indigo-200 text-center px-4 py-1 rounded font-semibold h-full w-full lg:w-auto">
+                    <input type="button" value="+" class="plus absolute right-0 top-1/2 transform -translate-y-1/2 p-1 font-semibold">
+                  </div>
+
+                  <input type="submit" name="btn" class="text-indigo-600 border-2 focus:outline-none focus-visible:outline border-indigo-600 px-3 py-2 rounded-xl hover:bg-indigo-600 hover:text-white transition-colors font-medium w-full disabled:opacity-75" value="Añadir al carrito">
                 </div>
 
-                <input type="submit" name="btn" class="text-indigo-600 border-2 focus:outline-none focus-visible:outline border-indigo-600 px-3 py-2 rounded-xl hover:bg-indigo-600 hover:text-white transition-colors font-medium w-full disabled:opacity-75" value="Añadir al carrito">
-              </div>
-
-            </form>
-          @else
-            <div class="w-full bg-red-600 text-center py-2 text-white font-semibold rounded">Sin stock</div>
-          @endif
+              </form>
+            @else
+              <div class="w-full bg-red-600 text-center py-2 text-white font-semibold rounded">Sin stock</div>
+            @endif
+          </div>
         </div>
-      </div>
+      @endif
       
     </aside>
     {{-- Especificaciones técnicas --}}
