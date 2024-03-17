@@ -134,8 +134,7 @@ class AuthController extends Controller
                     'phone_number'=>$request->phone_number,
                     'date_birth'=>$request->date_birth,
                     'email'=>CleanInputs::runLower($request->email),
-                    'password'=>Hash::make($request->password),
-                    'state_id'=>State::where('name','Activo')->first()->id
+                    'password'=>Hash::make($request->password)
                 ])->assignRole('cliente');
             });
 
