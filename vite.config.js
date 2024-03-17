@@ -25,7 +25,6 @@ export default defineConfig({
                 "resources/js/navbar.js",
                 "resources/js/scroll.js",
                 "resources/js/select_preview.js",
-                "resources/js/fade-alert.js",
             ],
             refresh: true,
         }),
