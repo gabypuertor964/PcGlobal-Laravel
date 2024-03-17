@@ -10,10 +10,12 @@ use App\Http\Requests\admin\inventory\ProductRequest;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Rules\ValidateMinResolution;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator as FacadesValidator;
 use Intervention\Image\Facades\Image;
 use Parsedown;
 
@@ -167,14 +169,14 @@ class ProductsController extends Controller
             $photo->encode('png',100);
 
             //Generar el nombre del archivo
-            $name = ("image_$key").'.png';
+            $name = ($key+1).'.png';
 
             //Guardar la imagen
             Storage::put("public/products/$slug/images/$name", $photo->stream());
         }
 
         // Renombrar las imagenes
-        self::renameNewImages($slug);
+        #self::renameNewImages($slug);
     }    
 
     /**
@@ -331,7 +333,7 @@ class ProductsController extends Controller
                 self::createMarkdownSpecs($request->key_specs, $request->value_specs, CleanInputs::runUpper($product->slug));
 
                 // Almacenar las imagenes del producto
-                self::saveImage($request->file('images'),CleanInputs::runUpper($product->slug));
+                self::saveImage([$request->file('photo')],CleanInputs::runUpper($product->slug));
             });
 
             //Retornar a la vista anterior con un mensaje de error critico
@@ -379,7 +381,9 @@ class ProductsController extends Controller
         $product->data_specs = self::getListsFromMarkdownSpecs(CleanInputs::runUpper($product->slug));
 
         // Enviar directorio de imagenes
-        $product->directory_images = self::getImagesDirectory($product->slug);
+        #$product->directory_images = self::getImagesDirectory($product->slug);
+
+        $product->image_route = Validator::publicImageExist("storage/products/".CleanInputs::runUpper($product->slug)."/images/1.png");
 
         //Encriptar el slug
         $product->slug_encrypt = SlugManager::encrypt($product->slug);
@@ -408,19 +412,36 @@ class ProductsController extends Controller
                 ]);
             }
 
-            // Ejecutar la transaccion
-            DB::transaction(function() use($request, $slug){
+            // Obtener el producto
+            $product = self::get($slug);
 
-                // Obtener el producto
-                $product = self::get($slug);
+            // Verificar si el producto existe
+            if($product == null){
+                return redirect()->route('inventory.products.index')->with('message',[
+                    'status' => 'danger',
+                    'text' => '¡El producto no existe!'
+                ]);
+            }
 
-                // Verificar si el producto existe
-                if($product == null){
-                    return redirect()->route('inventory.products.index')->with('message',[
-                        'status' => 'danger',
-                        'text' => '¡El producto no existe!'
+            // Validar si se ha subido una nueva imagen
+            if ($request->file('photo') != null) {
+                
+                // Validar la resolucion de la imagen
+                $validation =  FacadesValidator::make($request->all(), [
+                    'photo' => new ValidateMinResolution(env("MIN_WIDTH"), env("MIN_HEIGHT"))
+                ]);
+
+                // Verificar si la validacion falla y retornar un mensaje de error
+                if($validation->fails()){
+                    return redirect()->back()->withInput()->with('message', [
+                        'status' => 'warning',
+                        'text' => '¡La imagen debe tener una resolucion minima de '.env("MIN_WIDTH").'x'.env("MIN_HEIGHT").' pixeles!'
                     ]);
                 }
+            }
+
+            // Ejecutar la transaccion
+            DB::transaction(function() use($request, $product){                
 
                 // Generar el slug segun el nombre del producto
                 $request["slug"] = SlugManager::generateInString($request->name);
@@ -447,9 +468,20 @@ class ProductsController extends Controller
                 // Almacenar el contenido en el archivo description.md
                 File::put(storage_path('app/public/products/'.CleanInputs::runUpper($product->slug).'/description.md'), $content);
 
+                // Actualizar la imagen del producto
+                if ($request->file('photo') != null) {
+
+                    // Eliminar la imagen anterior
+                    File::delete(storage_path('app/public/products/'.CleanInputs::runUpper($product->slug).'/images/1.png'));
+
+                    // Almacenar la nueva imagen del producto
+                    self::saveImage([$request->file('photo')], CleanInputs::runUpper($product->slug));
+                }
+
                 // Crear y almacenar las especificaciones del producto
                 self::createMarkdownSpecs($request->key_specs, $request->value_specs, CleanInputs::runUpper($product->slug));
 
+                /*
                 // Listado de imagenes antiguas a conservar
                 $old_images = self::getNamesToAddress($request->existing_images);
 
@@ -468,6 +500,7 @@ class ProductsController extends Controller
                 if($request->file('new_images') != null){
                     self::saveImage($request->file('new_images'), CleanInputs::runUpper($product->slug));
                 }
+                */
                 
             });
 

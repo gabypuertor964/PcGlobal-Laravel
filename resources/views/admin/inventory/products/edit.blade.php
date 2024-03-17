@@ -117,37 +117,25 @@
 
                     {{-- Titulo Card --}}
                     <div class="card-header font-weight-bold font-italic text-center">
-                        Imágenes del producto
+                        Imagen del producto
                     </div>
 
                     {{-- Envio dinamico de imagenes --}}
                     <div class="card-body flex justify-center">
-                        <!-- Agregar estos elementos ocultos en tu formulario Blade -->
-                        <input type="hidden" id="existing-images" name="existing_images[]" value="">
-                        <input type="hidden" id="new-images" name="new_images" value="">
 
-                        @php
-                            $product->slug = strtoupper($product->slug);
-                        @endphp
+                        <input type="file" name="photo" id="photo" accept=".jpg, .jpeg, .png, .svg, .webp" class="d-none">
 
-                        <table class="col-12">
-                            <tbody id="image-rows">
-                                @foreach ($product->directory_images as $imageUrl)
-                                    <tr class="image-row">
-                                        <td class="text-center">
-                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" data-image="{{ asset("storage/products/{$product->slug}/images/{$imageUrl}") }}">Ver imagen</button>
-                                        </td>
-                                        <td class="text-center">
-                                            <button type="button" class="btn btn-danger" onclick="removeImageRow(this)">Eliminar</button>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                        <img src="{{asset($product->image_route)}}" class="img-student size-image-form" id="photo_preview" alt="Imagen del producto {{$product->model}}">
                     </div>
-                    <div class="card-footer text-center">
-                        <button type="button" class="btn btn-success" onclick="addImageRow()">Agregar Imagen</button>
+
+                    <div class="card-footer text-muted">
+                        <button type="button" name="browse" id="browse" class="btn btn-success btn-sm col-12"">Cargar imagen</button>
                     </div>
+
+                    {{-- Visualizacion Error de validacion --}}
+                    @if ($errors->has('photo'))
+                        <small id="helpId" class="form-text text-danger text-sm">{{ $errors->first('photo') }}</small>
+                    @endif
                 </div>
             </div>
             
@@ -171,44 +159,59 @@
                 <div class="card-body">
                     <table class="col-12">
                         <tbody id="specRegisters">
-                            <tr class="specRegister">
-                            
-                                @forelse ($product->data_specs["specs"] as $key => $spec)
+                            @forelse ($product->data_specs["specs"] as $key => $spec)
+                                    <tr class="specRegister">
+                                        {{-- Input: Clave --}}
+                                        <td class="col-4 text-center">
+                                            <input class="form-control form-control-sm" type="text" placeholder="Valor" name="key_specs[]" required value="{{$spec}}">
+                                        </td>
+                                    
+                                        {{-- Input: Valor --}}
+                                        <td class="col-6 text-center">
+                                            <input class="form-control form-control-sm" type="text" placeholder="Clave" name="value_specs[]" required value="{{$product->data_specs["values"][$key]}}">
+                                        </td>
+
+                                        {{-- Botones --}}
+                                        <td class="text-center">
+                                        
+                                            {{-- Boton añadir --}}
+                                            <button type="button" class="btn btn-success btn-sm mr-2" id="btnCreate" onclick="addChildToParent('specRegisters')">
+                                                <i class="fas fa-plus fa-xl"></i>
+                                            </button>
+                                        
+                                            {{-- Boton eliminar --}}
+                                            <button type="button" class="btn btn-danger btn-sm d-none" id="btnDelete" onclick="removeLastChild('specRegisters')">
+                                                <i class="fas fa-trash fa-xl"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                            @empty
+                                <tr class="specRegister">
                                     {{-- Input: Clave --}}
-                                    <td class="col-4 text-center">
-                                        <input class="form-control form-control-sm" type="text" placeholder="Valor" name="key_specs[]" required value="{{$spec}}">
-                                    </td>
-                                
-                                    {{-- Input: Valor --}}
-                                    <td class="col-6 text-center">
-                                        <input class="form-control form-control-sm" type="text" placeholder="Clave" name="value_specs[]" required value="{{$product->data_specs["values"][$key]}}">
-                                    </td>
-                                @empty
-                                    {{-- Input: Clave --}}
-                                    <td class="col-4 text-center">
+                                    <td class="col-5 text-center">
                                         <input class="form-control form-control-sm" type="text" placeholder="Valor" name="key_specs[]" required>
                                     </td>
-                                
+                                    
                                     {{-- Input: Valor --}}
                                     <td class="col-6 text-center">
                                         <input class="form-control form-control-sm" type="text" placeholder="Clave" name="value_specs[]" required>
                                     </td>
-                                @endforelse
-                            
-                                {{-- Botones --}}
-                                <td class="text-center">
-                                
-                                    {{-- Boton añadir --}}
-                                    <button type="button" class="btn btn-success btn-sm mr-2" onclick="addSpecRow()">
-                                        <i class="fas fa-plus fa-xl"></i>
-                                    </button>
-                                
-                                    {{-- Boton eliminar --}}
-                                    <button type="button" class="btn btn-danger btn-sm d-none" onclick="removeSpecRow(this)">
-                                        <i class="fas fa-trash fa-xl"></i>
-                                    </button>
-                                </td>
-                            </tr>
+
+                                    {{-- Botones --}}
+                                    <td class="text-centerasd">
+                                    
+                                        {{-- Boton añadir --}}
+                                        <button type="button" class="btn btn-success btn-sm mr-2" id="btnCreate" onclick="addSpecRow()">
+                                            <i class="fas fa-plus fa-xl"></i>
+                                        </button>
+                                    
+                                        {{-- Boton eliminar --}}
+                                        <button type="button" class="btn btn-danger btn-sm d-none" id="btnDelete" onclick="removeSpecRow(this)">
+                                            <i class="fas fa-trash fa-xl"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -240,8 +243,13 @@
     <script src="{{asset('resources/js/clone_row.js')}}"></script>
     @vite([
         'resources/js/bootstrap.js',
+        'resources/js/select_preview.js',
     ])
+    {{-- Activar el ocultamiento dinamico de botones --}}
     <script>
+        updateButtonsVisibility('specRegisters');
+    </script>
+    {{--<script>
         $('#exampleModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget); // Botón que disparó el modal
             var imageUrl = button.data('image'); // Extraer la URL de la imagen del atributo personalizado
@@ -249,5 +257,6 @@
             var modal = $(this);
             modal.find('.modal-body #modalImage').attr('src', imageUrl); // Actualizar el src de la imagen en el modal
         });
-    </script>    
+    </script>
+    --}}    
 @endsection

@@ -57,20 +57,23 @@ class ProductRequest extends FormRequest
             'price' => 'required|numeric|min:1000',
             'stock' => 'required|integer|min:1',
             'description' => 'required|string|max:1000|min:1',
+            'key_specs.*' => 'regex:/^[a-zA-Z0-9\sñÑáéíóúÁÉÍÓÚüÜ]+$/u',
+            'value_specs.*' => 'regex:/^[a-zA-Z0-9\sñÑáéíóúÁÉÍÓÚüÜ]+$/u',
         ];
 
         //Si se esta actualizando el producto, se debe validar que la imagen sea opcional
-        if($this->routeIs('inventory.products.store')) {
-            $rules['images'] = [
-                'required',
-                'array',
-            ];
-            
-            $rules['images.*'] = [
+        if($this->routeIs('inventory.products.store')) {         
+            $rules['photo'] = [
                 'required',
                 'image',
-                'mimes:jpeg,png,jpg,svg,.wepb,.jfif',
-                new ValidateMinResolution(1920, 1080)
+                'mimes:jpg,jpeg,png,svg,wepb',
+                new ValidateMinResolution(env("MIN_WIDTH"), env("MIN_HEIGHT"))
+            ];
+        }else{
+            $rules['photo'] = [
+                'nullable',
+                'image',
+                'mimes:jpg,jpeg,png,svg,wepb',
             ];
         }
 
@@ -110,6 +113,9 @@ class ProductRequest extends FormRequest
             'description.string' => 'El campo descripción debe ser una cadena de texto.',
             'description.max' => 'El campo descripción no debe superar los 1000 caracteres.',
             'description.min' => 'El campo descripción debe tener al menos 1 caracter.',
+
+            'key_specs.*.regex' => 'Los titulos de las especificaciones no pueden contener caracteres especiales.',
+            'value_specs.*.regex' => 'Los contenido de las especificaciones no pueden contener caracteres especiales.',
 
             'photo.required' => 'El campo imagen es obligatorio.',
             'photo.image' => 'El campo imagen debe ser una imagen.',

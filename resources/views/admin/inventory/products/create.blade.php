@@ -86,44 +86,33 @@
             </div>
 
             {{-- Input: Foto --}}
-            <div>
+            <div style="max-height: 275px; overflow-y: scroll;">
                 <div class="p-3 card min-h-full">
 
                     {{-- Titulo Card --}}
                     <div class="card-header font-weight-bold font-italic text-center">
-                        Imágenes del producto
+                        Imagen del producto
                     </div>
 
                     {{-- Envio dinamico de imagenes --}}
                     <div class="card-body flex justify-center">
-                        <table class="col-12">
-                            <tbody id="registers">
-                                <tr id="register">
 
-                                    {{-- Input: Foto --}}
-                                    <td class="col-9">
-                                        <input class="form-control form-control-sm" type="file" name="images[]" required accept=".jpeg, .png, .jpg, .svg .webp">
-                                    </td>
+                        <input type="file" name="photo" id="photo" accept=".jpg, .jpeg, .png, .svg, .webp" class="d-none">
 
-                                    {{-- Botones --}}
-                                    <td class="text-center">
-
-                                        {{-- Boton añadir --}}
-                                        <button type="button" id="btnCreate" class="btn btn-success mr-2" onclick="addChildToParent('registers')">
-                                            <i class="fas fa-plus fa-xl"></i>
-                                        </button>
-
-                                        {{-- Boton eliminar --}}
-                                        <button type="button" id="btnDelete" class="btn btn-danger d-none" onclick="removeLastChild('registers')">
-                                            <i class="fas fa-trash fa-xl"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <img src="{{asset("storage/others/default-image.png")}}" class="img-student size-image-form" id="photo_preview" alt="Imagen del producto">
                     </div>
+
+                    <div class="card-footer text-muted">
+                        <button type="button" name="browse" id="browse" class="btn btn-success btn-sm col-12"">Cargar imagen</button>
+                    </div>
+
+                    {{-- Visualizacion Error de validacion --}}
+                    @if ($errors->has('photo'))
+                        <small id="helpId" class="form-text text-danger text-sm">{{ $errors->first('photo') }}</small>
+                    @endif
                 </div>
             </div>
+            
             <div class="card min-h-full">
                 {{-- Input: Descripcion del producto--}}
                 <div class="p-3 text-center">
@@ -157,15 +146,15 @@
                                 </td>
                             
                                 {{-- Botones --}}
-                                <td class="text-centerasd">
+                                <td class="text-center">
                                 
                                     {{-- Boton añadir --}}
-                                    <button type="button" class="btn btn-success btn-sm mr-2" onclick="addSpecRow()">
+                                    <button type="button" class="btn btn-success btn-sm mr-2" id="btnCreate" onclick="addChildToParent('specRegisters')">
                                         <i class="fas fa-plus fa-xl"></i>
                                     </button>
                                 
                                     {{-- Boton eliminar --}}
-                                    <button type="button" class="btn btn-danger btn-sm d-none" onclick="removeSpecRow(this)">
+                                    <button type="button" class="btn btn-danger btn-sm d-none" id="btnDelete" onclick="removeLastChild('specRegisters')">
                                         <i class="fas fa-trash fa-xl"></i>
                                     </button>
                                 </td>
@@ -201,4 +190,12 @@
 {{-- Importacion scripts --}}
 @section('js')
     <script src="{{asset('resources/js/clone_row.js')}}"></script>
+    @vite([
+        'resources/js/select_preview.js',
+    ])
+
+    {{-- Activar el ocultamiento dinamico de botones --}}
+    <script>
+        updateButtonsVisibility('specRegisters');
+    </script>
 @endsection

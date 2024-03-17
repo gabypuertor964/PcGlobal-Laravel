@@ -14,7 +14,7 @@ $(document).ready(function () {
         } else {
 
             /* Mensaje de error en caso de que la imagen no tenga el formato valido */
-            alert("Por favor, selecciona un archivo de imagen válido (jpeg, png, jpg, svg).");
+            alert("Por favor, selecciona un archivo de imagen válido (jpg, jpeg, png, svg, webp).");
         }
     });
 
@@ -38,7 +38,7 @@ $(document).ready(function () {
      * @returns 
      */
     function ValidateExtension(fileInput) {
-        var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.svg)$/i;
+        var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.svg|\.webp)$/i;
         return allowedExtensions.test(fileInput.value);
     }
 });

@@ -60,6 +60,13 @@
                         <td>
                             <div class="flex justify-center gap-2 w-full">
 
+                                {{-- Boton: Detalles --}}
+                                <div class="button-tooltip" data-tooltip="Ver detalles del producto">
+                                    <a class="btn btn-primary" href="{{route('inventory.products.show', $product->slug)}}" role="button">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+                                </div>
+
                                 {{-- Boton: Actualizar --}}
                                 <div class="button-tooltip" data-tooltip="Editar producto">
                                     <a class="btn btn-warning" href="{{route('inventory.products.edit', $product->slug)}}" role="button">

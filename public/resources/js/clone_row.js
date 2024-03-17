@@ -107,7 +107,7 @@ function updateButtonsVisibility(parentId) {
         }
     }
 }
-
+/*
 function addSpecRow() {
     let specTable = document.getElementById("specRegisters");
     let lastRow = specTable.lastElementChild.cloneNode(true);
@@ -207,6 +207,7 @@ function removeImageRow(button, imageType) {
     updateHiddenInputValue(imageType);
 }
 
+
 // Función para actualizar el valor del input oculto
 document.addEventListener("DOMContentLoaded", function () {
     updateHiddenInputValue("existing");
@@ -229,3 +230,4 @@ function updateHiddenInputValue(imageType) {
     );
     document.getElementById("new-images").value = JSON.stringify(newImageNames);
 }
+*/
