@@ -19,7 +19,7 @@ class FacturationController extends Controller
      * @param string $date
      * @return array
     */
-    private static function getDateTimeInArray(string $date): array
+    public static function getDateTimeInArray(string $date): array
     {
         // Parsear la fecha de la factura
         $datetime = Carbon::parse($date);
@@ -32,6 +32,17 @@ class FacturationController extends Controller
     }
 
     /**
+     * @abstract Obtener el porcentaje de impuestos de la factura
+     * 
+     * @param SaleInvoice $facturation
+     * @return float|int
+    */
+    public static function getTaxPercentage(SaleInvoice $facturation): float|int
+    {
+        return ($facturation->taxes / $facturation->subtotal) * 100;
+    }
+
+    /**
      * @abstract Obtener la informacion de la factura seleccionada segun su slug (Codificado o decodificado)
      * 
      * @param string $slug
@@ -39,7 +50,6 @@ class FacturationController extends Controller
     public static function get(string $slug, bool $decryp = true)
     {
         try{
-
             // Verificar si se debe decodificar el slug
             if($decryp){
                 $slug = SlugManager::decrypt($slug);
@@ -98,14 +108,13 @@ class FacturationController extends Controller
             ]);
         }
 
-
         // Obtener y separar como arreglo asociativo la fecha y hora de la factura
         $datetime = self::getDateTimeInArray($facturation->date_sale);
         $facturation->date = $datetime['date'];
         $facturation->time = $datetime['time'];
 
         // Calcular el porcentaje de impuestos
-        $facturation->tax_percentage = ($facturation->taxes / $facturation->subtotal) * 100;
+        $facturation->tax_percentage = self::getTaxPercentage($facturation);
 
         // Retornar la vista con la informacion de la factura
         return view('clients.facturation.show', compact('facturation'));

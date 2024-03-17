@@ -37,4 +37,12 @@ class SaleInvoice extends Model
     {
         return $this->belongsTo(State::class, 'id_state');
     }
+
+    /**
+     * @abstract Relacion 1:1 con el modelo Clients (clientes) FK: id_client
+    */
+    public function client()
+    {
+        return $this->belongsTo(User::class, 'id_client');
+    }
 }

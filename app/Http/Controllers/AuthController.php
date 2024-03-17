@@ -74,7 +74,7 @@ class AuthController extends Controller
         $routeByRole = [
             "cliente" => "clients.facturation.index",
             "gestor_PQRS" => "admin.pqrs.index",
-            "repartidor" => "admin.delivery.search",
+            "repartidor" => "admin.delivery.index",
             "almacenista" => "inventory.products.index",
             "gerente" => "admin.workers.index",
         ];

@@ -32,38 +32,96 @@
 
         {{-- Titulo Seccion --}}
         <div class="text-center">
-            <h2>Informacion basica</h2>
+            <h2>Informacion Básica</h2>
         </div>
 
-        {{-- Informacion --}}
+        {{-- Fecha y hora de la transaccion --}}
+        <table class="table table-striped table-bordered">
+
+            {{-- Cabecera de la tabla --}}
+            <thead>
+                <tr>
+                    <th colspan="2">Fecha y hora de la transaccion</th>
+                </tr>
+            </thead>
+
+            {{-- Cuerpo de la tabla --}}
+            <tbody>
+                <tr>
+                    <td class="align-middle">{{$facturation->datetime["date"]}}</td>
+                    <td class="align-middle">{{$facturation->datetime["time"]}} (UTC-5)</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    {{-- Informacion del Cliente --}}
+    <div class="container align-middle text-center">
+
+        {{-- Titulo Seccion --}}
+        <div class="text-center">
+            <h2>Informacion del Cliente</h2>
+        </div>
+
+        {{-- Grupo 1--}}
         <div class="row">
 
-            {{-- Transaccion --}}
-            <div class="col">
-
-                {{-- Fecha --}}
-                <div class="text-center">
-                    <label class="form-label">Fecha</label>
-                    <input type="date" class="form-control text-center" value="{{$facturation->date}}" disabled/>
-                </div>
-
-                {{-- Hora --}}
-                <div class="text-center">
-                    <label class="form-label">Hora</label>
-                    <input type="time" class="form-control text-center" value="{{$facturation->time}}" disabled/>
-                </div>
-
+            {{-- Nombre del cliente --}}
+            <div class="mb-3 col-4">
+                <label class="form-label">Nombres</label>
+                <input type="text" class="form-control text-center" disabled value="{{ucfirst(strtolower($facturation->client->names))}}"/>
             </div>
 
-            {{-- Estado --}}
-            <div class="col">
-                <div class="text-center">
-                    <label class="form-label">Estado</label>
-                    <input type="text" class="form-control text-center" value="{{$facturation->state->name}}" disabled/>
-                </div>
+            {{-- Apellidos del cliente --}}
+            <div class="mb-3 col-4">
+                <label class="form-label">Apellidos</label>
+                <input type="text" class="form-control text-center" disabled value="{{ucfirst(strtolower($facturation->client->surnames))}}"/>   
             </div>
-    
+
+            {{-- Sexo/Genero del cliente --}}
+            <div class="mb-3 col-4">
+                <label class="form-label">Genero/Sexo</label>
+                <input type="text" class="form-control text-center" disabled value="{{$facturation->client->gender->name}}"/>
+            </div>
         </div>
+
+        {{-- Grupo 2 --}}
+        <div class="row">
+
+            {{-- Tipo de documento --}}
+            <div class="mb-3 col-4">
+                <label class="form-label">Tipo de documento</label>
+                <input type="text" class="form-control text-center" disabled value="{{$facturation->client->document_type->name}}"/>
+            </div>
+
+            {{-- Numero de documento --}}
+            <div class="mb-3 col-4">
+                <label class="form-label">Numero de documento</label>
+                <input type="text" class="form-control text-center" disabled value="{{$facturation->client->document_number}}"/>
+            </div>
+
+            {{-- Fecha de nacimiento --}}
+            <div class="mb-3 col-4">
+                <label class="form-label">Fecha de nacimiento</label>
+                <input type="text" class="form-control text-center" disabled value="{{$facturation->client->date_birth}}"/>
+            </div>
+        </div>
+
+        {{-- Grupo 3 --}}
+        <div class="row justify-content-center">
+
+            {{-- Telefono --}}
+            <div class="mb-3 col-4">
+                <label class="form-label">Telefono</label>
+                <input type="text" class="form-control text-center" disabled value="{{$facturation->client->phone_number}}"/>
+            </div>
+
+            {{-- Correo electronico --}}
+            <div class="mb-3 col-4">
+                <label class="form-label">Correo electronico</label>
+                <input type="text" class="form-control text-center" disabled value="{{$facturation->client->email}}"/>
+            </div>
     </div>
 
     {{-- Detallado --}}
@@ -135,7 +193,7 @@
     {{-- Boton: Volver --}}
     <div class="text-center">
         <div class="button-tooltip w-1/3 lg:w-1/4" data-tooltip="Volver a la vista anterior">
-            <a class="btn btn-primary col-12" href="{{route("clients.facturation.index")}}" role="button">
+            <a class="btn btn-primary col-12" href="{{route("admin.facturation.index")}}" role="button">
                 Volver al listado
             </a>
         </div>

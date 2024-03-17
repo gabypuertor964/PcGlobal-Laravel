@@ -32,10 +32,16 @@ Route::middleware(['auth'])->group(function () {
         // Listar facturas
         Route::get('/facturation', 'index')->name('admin.facturation.index');
 
+        // Listar facturas pendientes por entregar
+        Route::get('/facturation/active', 'active')->name('admin.facturation.active');
+
         // Ver factura
         Route::get('/facturation/{slug}', 'show')->name('admin.facturation.show');
 
-    })->middleware('can: gerency.read');
+        // Buscar Entregas segun numero de documento del cliente
+        Route::get('/facturation/search', 'search')->name('admin.facturation.search');
+
+    })->middleware('can:gerency.read');
 
     /* Modulo Inventario */
     Route::middleware('can:inventory.read')->group(function () {
@@ -54,11 +60,8 @@ Route::middleware(['auth'])->group(function () {
     /* Modulo Entregas */
     Route::middleware(['can:delivery.read'])->group(function () {
 
-        // Buscar Entregas
-        Route::get('/delivery/search', [deliveryController::class, 'search'])->name('admin.delivery.search');
-
         // Listar, Ver, Editar y Actualizar Entregas
-        Route::resource('/delivery', deliveryController::class)->names('admin.delivery')->except(["create","store","destroy"]);
+        Route::resource('/delivery', deliveryController::class)->names('admin.delivery')->except(["create","store","destroy","show"]);
     });
 
     /* Modulo Trabajadores */

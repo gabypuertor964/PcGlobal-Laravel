@@ -76,4 +76,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo(DocumentType::class);
     }
+
+    /**
+     * @abstract Obtener el nombre completo del usuario
+     * 
+     * @return string
+    */
+    public function fullName()
+    {
+        return $this->names . ' ' . $this->surnames;
+    }
 }

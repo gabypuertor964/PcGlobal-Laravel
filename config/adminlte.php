@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+
 return [
 
     /*
@@ -626,14 +628,19 @@ return [
 
             //Modulo Facturacion
             [
-                'text'    => 'Facturacion',
+                'text'    => "Facturacion",
                 'can' => 'gerency.read',
                 'icon'    => 'nav-icon fa-fw fas fa-shopping-cart',
                 'submenu' => [
                     [
-                        'text' => 'Historial',
+                        'text' => 'Historico',
                         'icon'    => 'nav-icon fa-fw fas fa-receipt',
-                        'url'  => '/admin/facturation',
+                        'url'  => '/admin/facturation', 
+                    ],
+                    [
+                        'text' => 'Entregas Pendientes',
+                        'icon'    => 'nav-icon fa-fw fas fa-box',
+                        'url'  => '/admin/facturation/active', 
                     ],
                 ],
             ],
@@ -703,27 +710,14 @@ return [
             //Modulo Entregas
             [
                 'text'    => 'Entregas',
-                'can' => 'delivery.read',
+                'can' => 'delivery.create',
                 'icon'    => 'nav-icon fa-fw fas fa-truck',
                 'submenu' => [
                     [
-                        'text' => 'Historico',
-                        "can" => 'gerency.read',
-                        'icon'    => 'nav-icon far fa-fw fa-clock',
-                        'url'  => '/admin/delivery',
+                        'text' => 'Entregas Pendientes',
+                        'icon'    => 'nav-icon fa-fw fas fa-receipt',
+                        'url'  => '/admin/delivery', 
                     ],
-                    [
-                        'text' => 'Buscar Entrega',
-                        'can' => 'delivery.create',
-                        'icon'    => 'nav-icon fa-fw fas fa-search',
-                        'url'  => '/admin/delivery/search',
-                    ],
-                    [
-                        'text' => 'Registrar Entrega',
-                        'can' => 'delivery.create',
-                        'icon'    => 'nav-icon fa-fw fas fa-plus',
-                        'url'  => '/admin/delivery/create',
-                    ]
                 ]
             ],
 
