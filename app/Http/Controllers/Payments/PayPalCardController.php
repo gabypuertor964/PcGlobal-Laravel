@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Payments;
 use App\Http\Controllers\AuthController;
 use GuzzleHttp\Client;
 use App\Http\Controllers\Controller;
+use App\Mail\facturation\CreateFacturationMail;
 use App\Models\Product;
 use App\Models\PurchaseUnit;
 use App\Models\SaleInvoice;
@@ -14,6 +15,7 @@ use Carbon\Carbon;
 use Exception;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class PayPalCardController extends Controller
 {
@@ -114,6 +116,9 @@ class PayPalCardController extends Controller
                         'unit_price' => $cartProduct->price
                     ]);
                 }
+
+                Mail::to($user->email)->send(new CreateFacturationMail($sale));
+
             });
 
             return true;

@@ -38,6 +38,9 @@ class DatabaseSeeder extends Seeder
 
             //Seed: Productos
             ProductSeed::class,
+
+            //Seed: Tipos de PQRS
+            PqrsTypeSeed::class,
         ]);
     }
 }

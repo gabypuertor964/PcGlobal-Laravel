@@ -108,6 +108,14 @@ class FacturationController extends Controller
             ]);
         }
 
+        // Verificar si el cliente no tiene asociada esta compra
+        if ($facturation->id_client != auth()->user()->id) {
+            return redirect()->back()->with('message', [
+                'status' => 'danger',
+                'text' => '!Usted no tiene asociada esta compra!'
+            ]);
+        }
+
         // Obtener y separar como arreglo asociativo la fecha y hora de la factura
         $datetime = self::getDateTimeInArray($facturation->date_sale);
         $facturation->date = $datetime['date'];

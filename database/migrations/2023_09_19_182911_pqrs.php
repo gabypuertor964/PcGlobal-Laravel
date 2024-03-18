@@ -21,17 +21,17 @@ return new class extends Migration
 
                 $table->unsignedInteger("pqrs_type_id")->comment("Id Tipo de PQRS");
 
-                $table->string("title",50)->comment("Titulo de la PQRS");
+                $table->string("title", 20)->comment("Titulo de la PQRS");
 
-                $table->string("description",500)->comment("Descripcion de la PQRS");
+                $table->string("description", 500)->comment("Descripcion de la PQRS");
 
-                $table->date("date_ocurrence")->comment("Fecha de Ocurrencia");
-
-                $table->string("file",100)->nullable()->comment("Archivo de la PQRS");
+                $table->date("date_ocurrence")->comment("Fecha de Ocurrencia")->nullable();
 
                 $table->bigInteger('worker_id')->nullable()->comment("Id Trabajador");
 
                 $table->string("response",500)->nullable()->comment("Respuesta de la PQRS");
+
+                $table->unsignedInteger("state_id")->comment("Id Estado");
             //
 
             //Campos create_at y update_at
@@ -43,6 +43,8 @@ return new class extends Migration
                 $table->foreign("pqrs_type_id")->references("id")->on("pqrs_types");
 
                 $table->foreign("worker_id")->references("id")->on("users");
+
+                $table->foreign("state_id")->references("id")->on("states");
             //
         });
     }

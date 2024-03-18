@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\CleanInputs;
 use App\Helpers\Validator;
-use App\Http\Requests\ClientRequest;
+use App\Http\Requests\client\ClientRequest;
 use App\Models\DocumentType;
 use App\Models\Gender;
 use App\Models\State;
@@ -98,7 +98,7 @@ class AuthController extends Controller
     /**
      * @abstract Registro de cliente
      * 
-     * @param \App\Http\Requests\ClientRequest $request
+     * @param \App\Http\Requests\client\ClientRequest $request
      * 
      * @return \Illuminate\Http\RedirectResponse
     */
@@ -109,7 +109,7 @@ class AuthController extends Controller
             /**
              * Ejecutar las validaciones adicionales
             */
-            if(!Validator::runInRequest($request,User::inputs())){
+            if(!Validator::runInRequest($request, User::inputs())){
 
                 // Redireccion a la vista de registro con mensaje de advertencia
                 return redirect()->back()->withInput()->with('message',[
