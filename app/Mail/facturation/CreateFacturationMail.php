@@ -54,7 +54,7 @@ class CreateFacturationMail extends Mailable
         return new Content(
             view: 'mail.facturation.create_invoice',
             with: [
-                'invoice' => $this->invoice
+                'facturation' => $this->invoice
             ]
         );
     }

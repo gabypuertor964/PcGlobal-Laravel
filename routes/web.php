@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\clients\FacturationController;
 use App\Http\Controllers\landingPageController;
 use App\Http\Controllers\Payments\PayPalCardController;
+use App\Models\SaleInvoice;
 use Illuminate\Support\Facades\Route;
 
 /**

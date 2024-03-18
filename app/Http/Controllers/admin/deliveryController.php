@@ -5,11 +5,13 @@ namespace App\Http\Controllers\admin;
 use App\Helpers\SlugManager;
 use App\Http\Controllers\clients\FacturationController;
 use App\Http\Controllers\Controller;
+use App\Mail\facturation\ProductDeliveryMail;
 use App\Models\SaleInvoice;
 use App\Models\State;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class deliveryController extends Controller
 {
@@ -88,7 +90,7 @@ class deliveryController extends Controller
             if($facturation->state->name == "Entregado"){
                 return redirect()->route('admin.delivery.index')->with('message',[
                     'status' => 'danger',
-                    'text' => '!Error, La factura ya fue entregada!'
+                    'text' => '¡Error, La factura ya fue entregada!'
                 ]);
             }
 
@@ -98,6 +100,8 @@ class deliveryController extends Controller
                 $facturation->save();
             });
 
+            Mail::to($facturation->client->email)->send(new ProductDeliveryMail($facturation));
+
             // Retornar la vista con la informacion
             return redirect()->route('admin.delivery.index')->with('message',[
                 'status' => 'success',
@@ -105,9 +109,9 @@ class deliveryController extends Controller
             ]);
 
         }catch(Exception){
-            return redirect()->back()->route('admin.delivery.index')->with('message',[
+            return redirect()->route('admin.delivery.index')->with('message',[
                 'status' => 'danger',
-                'text' => '!Error, No se ha podido actualizar la entrega!'
+                'text' => '¡Error, No se ha podido actualizar la entrega!'
             ]);
         }        
     }

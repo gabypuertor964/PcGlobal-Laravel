@@ -41,7 +41,7 @@ class ProductDeliveryMail extends Mailable
     {
         return new Envelope(
             from: new Address(env('MAIL_FROM_ADDRESS'), "PcGlobal E-commerce"),
-            subject: 'Entrega realizada: Detalles de tu pedido',
+            subject: 'Entrega realizada: Detalles de tu pedido.',
         );
     }
 
