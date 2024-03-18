@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\client\PqrsRequest;
 use App\Mail\facturation\CreateFacturationMail;
 use App\Mail\pqrs\CreatePqrsMail;
+use App\Mail\pqrs\DeletePqrsEmail;
+use App\Mail\pqrs\ResponsePqrsMail;
 use App\Models\Pqrs;
 use App\Models\PqrsType;
 use App\Models\SaleInvoice;
@@ -39,8 +41,6 @@ class PqrsController extends Controller
      */
     public function index()
     {
-        Mail::to(User::find(1)->email)->send(new CreateFacturationMail(SaleInvoice::latest()->first()));
-
         // Obtener la informacion del usuario autenticado
         $user = User::find(Auth::user()->id);
 
@@ -205,6 +205,9 @@ class PqrsController extends Controller
             DB::transaction(function() use($request, $pqrs){
                 $pqrs->update($request->all());
                 $pqrs->save();
+
+                // Envio de Correo electronico
+                Mail::to($pqrs->client->email)->send(new ResponsePqrsMail($pqrs));
             });
 
             // Retornar el mensaje de exito
@@ -250,6 +253,9 @@ class PqrsController extends Controller
             DB::transaction(function() use($pqrs){
                 $pqrs->delete();
             });
+
+            // Envio de correo electronico
+            Mail::to($pqrs->client->email)->send(new DeletePqrsEmail($pqrs));
 
             // Retornar el mensaje de exito
             return redirect()->back()->with("message",[
