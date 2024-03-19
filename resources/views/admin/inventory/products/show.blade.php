@@ -79,7 +79,7 @@
         </div>
 
         {{-- Input: Foto --}}
-        <div style="max-height: 275px; overflow-y: scroll;">
+        <div class="row-span-2">
             <div class="p-3 card min-h-full">
 
                 {{-- Titulo Card --}}
@@ -95,7 +95,7 @@
         </div>
         
         {{-- Input: Descripcion del producto--}}
-        <div class="card min-h-full">
+        <div class="card min-h-full row-span-2">
             <div class="p-3 text-center">
                 <div class="card-header font-weight-bold font-italic text-center">
                     Descripción del producto
@@ -107,7 +107,7 @@
         </div>
 
         {{-- Especificaciones del producto --}}
-        <div class="edit-form col-span-2 row-span-2 min-w-full">
+        <div class="edit-form row-span-2 min-w-full">
             <div class="card-header font-weight-bold font-italic text-center">
                 Especificaciones del producto
             </div>
