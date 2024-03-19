@@ -75,14 +75,3 @@ Route::middleware(['auth'])->group(function () {
  * Ruta de compra
 */
 Route::get('/paypal/process/{orderId}', [PayPalCardController::class, 'process'])->name('paypal.process');
-
-
-// Prueba
-
-Route::get('popo', function() {
-    $facturation = SaleInvoice::find(4);
-    $facturation->datetime = FacturationController::getDateTimeInArray($facturation->date_sale);
-    $facturation->tax_percentage = FacturationController::getTaxPercentage($facturation);
-
-    return view('mail.facturation.create_invoice', ['facturation' => $facturation]);
-});

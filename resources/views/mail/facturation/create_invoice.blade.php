@@ -26,7 +26,7 @@
         }
 
         .invoice-card {
-            width: 100%;
+            width: calc(100% - 60px);
             margin-inline: auto;
             border-radius: 20px;
             padding: 1rem;
