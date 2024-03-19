@@ -2,7 +2,7 @@
 @extends('adminlte::page')
 
 {{-- Complemento titulo --}}
-@section('title', 'Editar PQRS')
+@section('title', 'Ver PQRS')
 
 {{-- Titulo principal --}}
 @section('content_header')
@@ -94,46 +94,34 @@
                     {{$pqrs->client->fullName()}}
                 </p>
             @endif
+
+            {{-- Respuesta --}}
+            @if ($pqrs->response === null)
+                <p class="flex flex-col col-span-3">
+                    <span class="font-semibold">Respuesta:</span> 
+                    <span class="font-semibold">N/A</span>
+                    Aún no hay una respuesta
+                </p>
+            @else
+                <p class="flex flex-col col-span-3">
+                    <span class="font-semibold">Respuesta:</span> 
+                    {{ $pqrs->response }}
+                </p>
+            @endif
             
         </div>        
 
         {{-- Título: Detalles --}}
-        <p class="text-lg text-center border-b w-fit mx-auto mt-3">Respuesta</p>
+        {{-- <p class="text-lg text-center border-b w-fit mx-auto mt-3">Detalles</p> --}}
 
-        {{-- Apartado: Respuesta del empleado --}}
-        <div class="invoice-card-content basics ">
-            <form action="{{route("admin.pqrs.update", $pqrs->slug)}}" method="post">
-                {{-- Tóken CSRF --}}
-                @csrf
-                
-                {{-- Método --}}
-                @method("PUT")
-
-                <div class="mb-3">
-                    <label for="response">Descripción</label>
-                    <textarea placeholder="A continuación escribe la respuesta para el caso..." class="form-control" name="response" rows="8" maxlength="500" minlength="1" required></textarea>
-                </div>
-
-                {{-- Botones del formulario --}}
-                <div class="text-center mt-3">
-                    {{-- Boton: Guardar --}}
-                    <div class="button-tooltip w-1/3 lg:w-1/4" data-tooltip="Confirmar actualización">
-                        <button type="submit" class="btn btn-success col-12">
-                            <i class="fa-solid fa-check"></i>
-                        </button>
-                    </div>
-        
-                    {{-- Boton: Cancelar --}}
-                    <div class="button-tooltip w-1/3 lg:w-1/4" data-tooltip="Cancelar actualización">
-                        <a class="btn btn-danger col-12" href="{{route("admin.pqrs.index")}}" role="button">
-                            <i class="fa-solid fa-plus fa-rotate-by" style="--fa-rotate-angle: 45deg;"></i>
-                        </a>
-                    </div>
-                </div>
-
-            </form>
+        {{-- Boton: Volver --}}
+        <div class="text-center mt-3">
+            <div class="button-tooltip w-full lg:w-1/3" data-tooltip="Volver al listado de los PQRS">
+                <a class="btn btn-primary col-12" href="{{route("admin.pqrs.index")}}" role="button">
+                    Volver al listado
+                </a>
+            </div>
         </div>
-
     </div>
     
 @endsection

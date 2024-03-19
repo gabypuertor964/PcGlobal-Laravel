@@ -29,7 +29,7 @@ class PqrsController extends Controller
     public function index()
     {
         // Listar todas las PQRS
-        $pqrs_s = Pqrs::all();
+        $pqrs_s = Pqrs::paginate(15);
 
         //Encriptar el slug
         foreach ($pqrs_s as $pqrs) {
@@ -39,7 +39,7 @@ class PqrsController extends Controller
         // Retornar la vista con el listado de PQRS
         return view("admin.pqrs.index", [
             "pqrs_s" => $pqrs_s,
-            "title" => "Listado de PQRS",
+            "title" => "Listado de PQRS"
         ]);
     }
 
@@ -49,7 +49,7 @@ class PqrsController extends Controller
     public function active()
     {
         // Listar todas las PQRS
-        $pqrs_s = Pqrs::where("state_id", State::where("name","Sin responder")->first()->id)->get();
+        $pqrs_s = Pqrs::where("state_id", State::where("name","En espera")->first()->id)->paginate(15);
 
         //Encriptar el slug
         foreach ($pqrs_s as $pqrs) {
@@ -88,7 +88,7 @@ class PqrsController extends Controller
     public function myResponses()
     {
         // Listar todas las PQRS
-        $pqrs_s = Pqrs::where("worker_id", auth()->user()->id)->get();
+        $pqrs_s = Pqrs::where("worker_id", auth()->user()->id)->paginate(15);
 
         //Encriptar el slug
         foreach ($pqrs_s as $pqrs) {
@@ -144,26 +144,25 @@ class PqrsController extends Controller
             if(!Validator::runInRequest($request,["response"])){
                 return redirect()->back()->withInput()->with("message",[
                     'status' => 'danger',
-                    'text' => '¡Los datos ingresados no son validos!'
+                    'text' => '¡Los datos ingresados no son válidos!'
                 ]);
             }
 
             // Obtener la PQRS
             $pqrs = ClientsPqrsController::get($slug);
-
-            // Validar si la PQRS ya fue respondida
-            if($pqrs->state->name == "Respondida"){
-                return redirect()->back()->with("message",[
-                    'status' => 'danger',
-                    'text' => '¡La pqrs ya fue respondida!'
-                ]);
-            }
-
+            
             // Validar si la pqrs existe
             if($pqrs == null){
                 return redirect()->back()->with("message",[
                     'status' => 'danger',
                     'text' => '¡La pqrs no existe!'
+                ]);
+            }
+            // Validar si la PQRS ya fue respondida
+            if($pqrs->state->name == "Respondida"){
+                return redirect()->back()->with("message",[
+                    'status' => 'danger',
+                    'text' => '¡La pqrs ya fue respondida!'
                 ]);
             }
 
@@ -178,7 +177,7 @@ class PqrsController extends Controller
                 $pqrs->save();
 
                 // Enviar correo de respuesta
-                Mail::to($pqrs->client->email)->send(new ResponsePqrsMail($pqrs));
+                // Mail::to($pqrs->client->email)->send(new ResponsePqrsMail($pqrs));
 
             });
 

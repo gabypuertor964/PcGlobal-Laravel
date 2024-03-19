@@ -124,7 +124,7 @@ nav {
 .dropdown .dropdown-menu-l > .item:first-child {
     margin-top: 6px;
 }
-.dropdown .dropdown-menu-l > * > .item:last-child {
+.dropdown .dropdown-menu-l > .item:last-child {
     margin-bottom: 6px;
 }
 

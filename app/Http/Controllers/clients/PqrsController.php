@@ -210,7 +210,7 @@ class PqrsController extends Controller
                 $pqrs->save();
 
                 // Envio de Correo electronico
-                Mail::to($pqrs->client->email)->send(new UpdatePqrsMail($pqrs));
+                // Mail::to($pqrs->client->email)->send(new UpdatePqrsMail($pqrs));
             });
 
             // Retornar el mensaje de exito

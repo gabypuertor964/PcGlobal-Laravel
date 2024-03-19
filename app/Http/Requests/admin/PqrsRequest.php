@@ -12,15 +12,11 @@ class PqrsRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        /**
-         * Usuarios autorizados: gestor_pqrs, cliente
-        */
-        if(RolesManager::getRoles() == "gestor_pqrs" || RolesManager::getRoles() == "cliente")
-        {
+        if(RolesManager::hasRole("gestor_PQRS")){
             return true;
+        }else{
+            return false;
         }
-
-        return false;
     }
 
     /**

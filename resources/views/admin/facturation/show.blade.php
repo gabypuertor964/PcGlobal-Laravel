@@ -43,7 +43,7 @@
 
                 {{-- Hora --}}
                 <li>
-                    <span class="font-semibold">Fecha: </span> 
+                    <span class="font-semibold">Hora: </span> 
                     {{$facturation->datetime["time"]}}
                 </li>
             </ul>
