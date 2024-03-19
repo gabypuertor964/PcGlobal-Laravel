@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Pqrs;
 use Illuminate\Http\Request;
 
 class PqrsController extends Controller
@@ -33,7 +34,11 @@ class PqrsController extends Controller
      */
     public function index()
     {
-        return view("clients.dashboard");
+        // Listar todas las PQRS
+        $pqrs = Pqrs::all();
+
+        // Retornar la vista con el listado de PQRS
+        return view("admin.pqrs.index");
     }
 
     /**
