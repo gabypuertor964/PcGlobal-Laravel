@@ -99,10 +99,7 @@
     <title>Tu recibo de compra - {{$facturation->client->fullName()}}</title>
 </head>
 <body style="display:flex; flex-direction:column; min-height: 100vh; justify-content: center; position: relative; background: rgb(79, 70, 229, 0.86); margin:0; padding: 0; box-sizing: border-box;">
-
-        {{-- Logo --}}
-        <img src="{{ asset('storage/others/logotype.png') }}" class="img" alt="Img Logo">
-
+    
         {{-- Título --}}
         <div class="titles" style="display:flex; flex-direction:column; margin-top: 1.5rem;">
             <h1 class="main-title" style="width: fit-content; margin-left: auto; margin-right: auto; color: #fff;">Tu compra ha sido registrada</h1>
