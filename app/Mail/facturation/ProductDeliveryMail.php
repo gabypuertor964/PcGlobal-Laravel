@@ -53,7 +53,7 @@ class ProductDeliveryMail extends Mailable
         return new Content(
             view: 'mail.facturation.product_delivery',
             with: [
-                'invoice' => $this->invoice
+                'facturation' => $this->invoice
             ]
         );
     }
