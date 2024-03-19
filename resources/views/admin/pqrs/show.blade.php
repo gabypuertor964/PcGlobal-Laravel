@@ -42,10 +42,16 @@
                     <span class="font-semibold">Típo de PQRS: </span> 
                     {{$pqrs->type->name}}
                 </li>
-
+                
                 {{-- Fecha y hora --}}
                 <li>
                     <span class="font-semibold">Fecha y hora: </span> 
+                    {{$pqrs->created_at}}
+                </li>
+
+                {{-- Fecha y hora Ocurrencia --}}
+                <li>
+                    <span class="font-semibold">Fecha y hora (Ocurrencia): </span> 
                     @if ($pqrs->date_ocurrence === null)
                         N/A
                     @else

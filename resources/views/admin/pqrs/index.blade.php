@@ -46,11 +46,7 @@
         <tbody>
             @forelse ($pqrs_s as $pqrs)
                 <tr>
-                    @if ($pqrs->date_ocurrence === null)
-                        <td class="align-middle">N/A</td>
-                    @else
-                        <td class="align-middle">{{$pqrs->date_ocurrence}}</td>
-                    @endif
+                    <td class="align-middle">{{$pqrs->created_at}}</td>
                     <td class="align-middle">{{$pqrs->state->name}}</td>
                     <td class="align-middle">{{$pqrs->client->fullName()}}</td>
                     @if ($pqrs->worker === null)
