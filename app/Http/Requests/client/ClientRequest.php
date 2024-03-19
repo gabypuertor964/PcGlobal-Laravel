@@ -89,7 +89,7 @@ class ClientRequest extends FormRequest
                 'required',
                 'date',
                 'before:'.now()->subYear(18)->format('Y-m-d'),
-                'after:'. now()->subYear(100)->format('Y-m-d')
+                'after:'.now()->subYear(100)->format('Y-m-d')
             ],
 
             'email' => 'required|string|email|unique:users,email,'.$id,
