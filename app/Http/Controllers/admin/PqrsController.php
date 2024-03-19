@@ -2,9 +2,17 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Helpers\SlugManager;
+use App\Helpers\Validator;
 use App\Http\Controllers\Controller;
 use App\Models\Pqrs;
-use Illuminate\Http\Request;
+use App\Http\Controllers\clients\PqrsController as ClientsPqrsController;
+use App\Http\Requests\admin\PqrsRequest;
+use App\Mail\pqrs\ResponsePqrsMail;
+use App\Models\State;
+use Exception;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class PqrsController extends Controller
 {
@@ -12,33 +20,27 @@ class PqrsController extends Controller
      * @abstract Constructor de la clase y middleware de permisos
     */	
     public function __construct(){
-
-        /**
-         * Usuarios autorizados:
-         * 
-         * index (Listar) -> Gerente, Personal de PQRS
-         * show (Ver) -> Gerente
-         * active (Listar) -> Gerente, Personal de PQRS
-         * myResponses (Listar) -> Personal de PQRS
-         * edit (Editar) -> Personal de PQRS
-         * update (Actualizar) -> Personal de PQRS
-        */
-
-        $this->middleware("can:gerency.read")->only(["show","active"]);
-
-        $this->middleware('role:gestor_PQRS')->except('index','show');
+        $this->middleware('role:gestor_PQRS')->only(["edit","update"]);
     }
 
     /**
-     * Display a listing of the resource.
+     * @abstract Listar todas las PQRS
      */
     public function index()
     {
         // Listar todas las PQRS
-        $pqrs = Pqrs::all();
+        $pqrs_s = Pqrs::all();
+
+        //Encriptar el slug
+        foreach ($pqrs_s as $pqrs) {
+            $pqrs->slug = SlugManager::encrypt($pqrs->id);
+        }
 
         // Retornar la vista con el listado de PQRS
-        return view("admin.pqrs.index");
+        return view("admin.pqrs.index", [
+            "pqrs_s" => $pqrs_s,
+            "title" => "Listado de PQRS",
+        ]);
     }
 
     /**
@@ -46,16 +48,38 @@ class PqrsController extends Controller
     */
     public function active()
     {
-        return "Jose";
-        return view("clients.dashboard");
+        // Listar todas las PQRS
+        $pqrs_s = Pqrs::where("state_id", State::where("name","Sin responder")->first()->id)->get();
+
+        //Encriptar el slug
+        foreach ($pqrs_s as $pqrs) {
+            $pqrs->slug = SlugManager::encrypt($pqrs->id);
+        }
+
+        // Retornar la vista con el listado de PQRS
+        return view("admin.pqrs.index", [
+            "pqrs_s" => $pqrs_s,
+            "title" => "PQRS sin responder"
+        ]);
     }
 
     /**
-     * Display the specified resource.
+     * @abstract Ver la informacion de las PQRS.
     */
-    public function show(string $id)
+    public function show(string $slug)
     {
-        return view("clients.dashboard");
+        // Obtener la PQRS
+        $pqrs = ClientsPqrsController::get($slug);
+
+        // Validar si la pqrs existe
+        if($pqrs == null){
+            return redirect()->back()->with("message",[
+                'status' => 'danger',
+                'text' => '¡La pqrs no existe!'
+            ]);
+        }
+
+        return view("admin.pqrs.show", compact("pqrs"));
     }
 
     /**
@@ -63,22 +87,114 @@ class PqrsController extends Controller
     */
     public function myResponses()
     {
-        return view("clients.dashboard");
+        // Listar todas las PQRS
+        $pqrs_s = Pqrs::where("worker_id", auth()->user()->id)->get();
+
+        //Encriptar el slug
+        foreach ($pqrs_s as $pqrs) {
+            $pqrs->slug = SlugManager::encrypt($pqrs->id);
+        }
+
+        // Retornar la vista con el listado de PQRS
+        return view("admin.pqrs.index", [
+            "pqrs_s" => $pqrs_s,
+            "title" => "Mis respuestas"
+        ]);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * @abstract Retornar la vista con la informacion de la PQRS
      */
-    public function edit(string $id)
+    public function edit(string $slug)
     {
-        return view("clients.dashboard");
+        // Obtener la PQRS
+        $pqrs = ClientsPqrsController::get($slug);
+
+        // Validar si la pqrs existe
+        if($pqrs == null){
+            return redirect()->back()->with("message",[
+                'status' => 'danger',
+                'text' => '¡La pqrs no existe!'
+            ]);
+        }
+
+        // Validar si la PQRS ya fue respondida
+        if($pqrs->state->name == "Respondida"){
+            return redirect()->back()->with("message",[
+                'status' => 'danger',
+                'text' => '¡La pqrs ya fue respondida!'
+            ]);
+        }
+
+        // Encriptar el slug
+        $pqrs->slug = SlugManager::encrypt($pqrs->id);
+
+        // Retornar la vista de edicion con la informacion solicitada
+        return view("admin.pqrs.edit", compact("pqrs"));
     }
 
     /**
-     * Update the specified resource in storage.
+     * @abstract Responder la PQRS
      */
-    public function update(Request $request, string $id)
+    public function update(PqrsRequest $request, string $slug)
     {
-        //
+        try{
+
+            // Ejecutar validaciones personalizadas
+            if(!Validator::runInRequest($request,["response"])){
+                return redirect()->back()->withInput()->with("message",[
+                    'status' => 'danger',
+                    'text' => '¡Los datos ingresados no son validos!'
+                ]);
+            }
+
+            // Obtener la PQRS
+            $pqrs = ClientsPqrsController::get($slug);
+
+            // Validar si la PQRS ya fue respondida
+            if($pqrs->state->name == "Respondida"){
+                return redirect()->back()->with("message",[
+                    'status' => 'danger',
+                    'text' => '¡La pqrs ya fue respondida!'
+                ]);
+            }
+
+            // Validar si la pqrs existe
+            if($pqrs == null){
+                return redirect()->back()->with("message",[
+                    'status' => 'danger',
+                    'text' => '¡La pqrs no existe!'
+                ]);
+            }
+
+            DB::transaction(function () use ($request, $pqrs) {
+
+                // Actualizar la PQRS
+                $pqrs->response = $request->response;
+                $pqrs->worker_id = auth()->user()->id;
+                $pqrs->state_id = State::where("name","Respondida")->first()->id;
+
+                // Guardar cambios
+                $pqrs->save();
+
+                // Enviar correo de respuesta
+                Mail::to($pqrs->client->email)->send(new ResponsePqrsMail($pqrs));
+
+            });
+
+            // Retornar la vista de edicion con la informacion solicitada
+            return redirect()->route("admin.pqrs.index")->with("message",[
+                'status' => 'success',
+                'text' => '¡La pqrs fue respondida correctamente!'
+            ]);
+
+        }catch(Exception){
+
+            // Retornar la vista de edicion con mensaje de error 
+            return redirect()->back()->with("message",[
+                'status' => 'danger',
+                'text' => '¡Ocurrio un error al responder la pqrs!'
+            ]);
+        }
     }
 }
