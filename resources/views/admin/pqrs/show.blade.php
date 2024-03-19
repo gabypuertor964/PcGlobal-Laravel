@@ -82,7 +82,7 @@
 
             {{-- Descripción de la PQRS --}}
             <p class="flex flex-col">
-                <span class="font-semibold">Descripción</span> 
+                <span class="font-semibold">Descripción:</span> 
                 {{$pqrs->description}}
             </p>
 
@@ -103,13 +103,13 @@
 
             {{-- Respuesta --}}
             @if ($pqrs->response === null)
-                <p class="flex flex-col col-span-3">
+                <p class="flex flex-col col-span-1 lg:col-span-3">
                     <span class="font-semibold">Respuesta:</span> 
                     <span class="font-semibold">N/A</span>
                     Aún no hay una respuesta
                 </p>
             @else
-                <p class="flex flex-col col-span-3">
+                <p class="flex flex-col col-span-1 lg:col-span-3">
                     <span class="font-semibold">Respuesta:</span> 
                     {{ $pqrs->response }}
                 </p>

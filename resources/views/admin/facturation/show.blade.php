@@ -46,6 +46,12 @@
                     <span class="font-semibold">Hora: </span> 
                     {{$facturation->datetime["time"]}}
                 </li>
+
+                {{-- Estado --}}
+                <li>
+                    <span class="font-semibold">Estado: </span> 
+                    {{$facturation->state->name}}
+                </li>
             </ul>
         </div>
 
