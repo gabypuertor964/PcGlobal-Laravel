@@ -36,7 +36,7 @@
             <div class="edit-form min-w-full row-span-2 flex flex-col justify-center">
                 {{-- Select: Categoria --}}
                 <div class="mb-3">
-                    <label for="category_id" class="form-label">Categoria</label>
+                    <label for="category_id" class="form-label">Categoría</label>
                     <select class="form-select form-select" name="category_id">
                         <option selected class="fw-bold">Seleccione</option>
                         

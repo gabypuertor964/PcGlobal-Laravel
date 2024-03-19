@@ -84,4 +84,5 @@
         {{-- Paginacion --}}
         <div class="hidden sm:flex sm:justify-center">{{ $facturations->links('pagination::tailwind') }}</div>
     </div>
+
 @endsection

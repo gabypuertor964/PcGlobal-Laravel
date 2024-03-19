@@ -30,7 +30,7 @@ class PqrsRequest extends FormRequest
             "pqrs_type_id" => "required|integer|exists:pqrs_types,id",
             "title" => "required|string|max:20|min:1",
             "description" => "required|string|min:1|max:500",
-            "date_ocurrence" => "nullable|date|before_or_equal:today",
+            "date_ocurrence" => "nullable|date|before_or_equal:today|after_or_equal:".now()->subDays(30)->format('Y-m-d'),
         ];
     }
 
@@ -53,6 +53,7 @@ class PqrsRequest extends FormRequest
             
             'date_ocurrence.date' => 'La fecha de ocurrencia debe ser una fecha válida.',
             'date_ocurrence.before_or_equal' => 'La fecha de ocurrencia debe ser igual o anterior a hoy.',
+            'date_ocurrence.after_or_equal' => 'La fecha de ocurrencia debe ser igual o anterior al '.now()->subDays(30)->format('Y-m-d'),
         ];
     }
 

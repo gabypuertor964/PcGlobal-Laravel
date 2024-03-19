@@ -10,6 +10,7 @@ use App\Mail\facturation\CreateFacturationMail;
 use App\Mail\pqrs\CreatePqrsMail;
 use App\Mail\pqrs\DeletePqrsEmail;
 use App\Mail\pqrs\ResponsePqrsMail;
+use App\Mail\pqrs\UpdatePqrsMail;
 use App\Models\Pqrs;
 use App\Models\PqrsType;
 use App\Models\SaleInvoice;
@@ -41,7 +42,6 @@ class PqrsController extends Controller
      */
     public function index()
     {
-        // Obtener la informacion del usuario autenticado
         $user = User::find(Auth::user()->id);
 
         // Validar el rol del usuario autenticado
@@ -94,7 +94,7 @@ class PqrsController extends Controller
 
             // Ejecutar las validaciones personalizadas
             if(!Validator::runInRequest($request, Pqrs::inputs(), $except)){
-                return redirect()->back()->with("message",[
+                return redirect()->back()->withInput()->with("message",[
                     'status' => 'warning',
                     'text' => '¡Verifica los campos y realiza las correcciones necesarias!'
                 ]);
@@ -103,7 +103,7 @@ class PqrsController extends Controller
             //Obtener la informacion del usuario autenticado
             $user = User::find(Auth::user()->id);
 
-            // Incluir el id del cliente en la peticion
+            // Incluir el id del cliente en la petición
             $request->merge(["client_id" => $user->id]);
 
             // Consultar el estado "En espera" de las PQRS
@@ -114,18 +114,18 @@ class PqrsController extends Controller
                 $pqrs = Pqrs::create($request->all());
 
                 // Envio de Correo electronico
-                Mail::to($user->email)->send(new CreatePqrsMail($pqrs));
+                // Mail::to($user->email)->send(new CreatePqrsMail($pqrs));
             });
 
-            return redirect()->back()->with("message",[
+            return redirect()->route("clients.pqrs.index")->with("message",[
                 'status' => 'success',
                 'text' => '¡PQRS registrada correctamente!'
             ]);
 
         }catch(Exception){
-            return redirect()->back()->with("message",[
+            return redirect()->back()->withInput()->with("message",[
                 'status' => 'danger',
-                'text' => '¡Ha ocurrido un error inesperado al registrar la PQRS'
+                'text' => '¡Ha ocurrido un error inesperado al registrar la PQRS!'
             ]);
         }
     }
@@ -137,6 +137,7 @@ class PqrsController extends Controller
     {
         // Obtener la informacion de la PQRS
         $pqrs = self::get($slug);
+        $pqrs_types = PqrsType::all();
 
         // Verificar si la PQRS no existe
         if($pqrs == null){
@@ -147,15 +148,17 @@ class PqrsController extends Controller
         }
 
         // Verificar si el cliente no tiene asociada esta PQRS
-        if($pqrs->client_id != Auth::user()->id){
+        if($pqrs->client_id !== Auth::user()->id){
             return redirect()->back()->with("message",[
                 'status' => 'danger',
                 'text' => '¡Usted no tiene asociada esta PQRS!'
             ]);
         }
 
+        $pqrs->slug = SlugManager::encrypt($pqrs->id);
+
         // Retornar la vista con la informacion de la PQRS
-        return view("clients.pqrs.edit", compact("pqrs"));
+        return view("clients.pqrs.edit", compact("pqrs", "pqrs_types"));
     }
 
     /**
@@ -176,7 +179,7 @@ class PqrsController extends Controller
 
             // Ejecutar las validaciones personalizadas
             if(!Validator::runInRequest($request, Pqrs::inputs(), $except)){
-                return redirect()->back()->with("message",[
+                return redirect()->back()->withInputs()->with("message",[
                     'status' => 'warning',
                     'text' => '¡Verifica los campos y realiza las correcciones necesarias!'
                 ]);
@@ -195,7 +198,7 @@ class PqrsController extends Controller
 
             // Verificar si el cliente no tiene asociada esta PQRS
             if($pqrs->client_id != Auth::user()->id){
-                return redirect()->back()->with("message",[
+                return redirect()->back()->withInputs()->with("message",[
                     'status' => 'danger',
                     'text' => '¡Usted no tiene asociada esta PQRS!'
                 ]);
@@ -207,17 +210,17 @@ class PqrsController extends Controller
                 $pqrs->save();
 
                 // Envio de Correo electronico
-                Mail::to($pqrs->client->email)->send(new ResponsePqrsMail($pqrs));
+                Mail::to($pqrs->client->email)->send(new UpdatePqrsMail($pqrs));
             });
 
             // Retornar el mensaje de exito
-            return redirect()->back()->with("message",[
+            return redirect()->route("clients.pqrs.index")->with("message",[
                 'status' => 'success',
                 'text' => '¡PQRS actualizada correctamente!'
             ]);
 
         }catch(Exception){
-            return redirect()->back()->with("message",[
+            return redirect()->back()->withInputs()->with("message",[
                 'status' => 'danger',
                 'text' => '¡Ha ocurrido un error inesperado al actualizar la PQRS'
             ]);

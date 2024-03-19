@@ -42,7 +42,7 @@
             <thead>
                 <tr>
                     <th>Fecha</th>
-                    <th>Hora</th>
+                    <th class="hidden lg:table-cell">Hora</th>
                     <th>Estado</th>
                     <th>Titulo</th>
                     <th>Acciones</th>
@@ -54,9 +54,9 @@
                 @forelse ($pqrs_s as $pqrs)
                     <tr>
                         <td class="align-middle col-1">{{$pqrs->datetime["date"]}}</td>
-                        <td class="align-middle col-1">{{$pqrs->datetime["time"]}} (UTC-5)</td>
+                        <td class="align-middle col-1 hidden lg:table-cell">{{$pqrs->datetime["time"]}} (UTC-5)</td>
                         <td class="align-middle col-1">{{$pqrs->state->name}}</td>
-                        <td class="align-middle">{{$pqrs->title}}</td>        
+                        <td class="align-middle col-5">{{$pqrs->title}}</td>        
                         <td class="col-1">
                             <div class="flex justify-center gap-2 w-full">
 
