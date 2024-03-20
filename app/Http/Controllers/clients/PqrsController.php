@@ -131,6 +131,34 @@ class PqrsController extends Controller
     }
 
     /**
+     * @abstract Ver la informacion de la PQRS
+    */
+    public function show(string $slug)
+    {
+        // Obtener la informacion de la PQRS
+        $pqrs = self::get($slug);
+
+        // Verificar si la PQRS no existe
+        if($pqrs == null){
+            return redirect()->back()->with("message",[
+                'status' => 'danger',
+                'text' => '¡La PQRS seleccionada no existe!'
+            ]);
+        }
+
+        // Verificar si el cliente no tiene asociada esta PQRS
+        if($pqrs->client_id != Auth::user()->id){
+            return redirect()->back()->with("message",[
+                'status' => 'danger',
+                'text' => '¡Usted no tiene asociada esta PQRS!'
+            ]);
+        }
+
+        // Retornar la vista con la informacion de la PQRS
+        return view("clients.pqrs.show", compact("pqrs"));
+    }
+
+    /**
      * Ver la informacion de la PQRS
      */
     public function edit(string $slug)
@@ -152,6 +180,14 @@ class PqrsController extends Controller
             return redirect()->back()->with("message",[
                 'status' => 'danger',
                 'text' => '¡Usted no tiene asociada esta PQRS!'
+            ]);
+        }
+
+        // Verificar si la PQRS ya tiene una respuesta
+        if($pqrs->state->name == "Respondida"){
+            return redirect()->back()->with("message",[
+                'status' => 'danger',
+                'text' => '¡La PQRS ya tiene una respuesta!'
             ]);
         }
 
@@ -193,6 +229,14 @@ class PqrsController extends Controller
                 return redirect()->back()->with("message",[
                     'status' => 'danger',
                     'text' => '¡La PQRS seleccionada no existe!'
+                ]);
+            }
+
+            // Verificar si la PQRS ya tiene una respuesta
+            if($pqrs->state->name == "Respondida"){
+                return redirect()->back()->with("message",[
+                    'status' => 'danger',
+                    'text' => '¡La PQRS ya tiene una respuesta!'
                 ]);
             }
 
@@ -249,6 +293,14 @@ class PqrsController extends Controller
                 return redirect()->back()->with("message",[
                     'status' => 'danger',
                     'text' => '¡Usted no tiene asociada esta PQRS!'
+                ]);
+            }
+
+            // Verificar si la PQRS ya tiene una respuesta
+            if($pqrs->state->name == "Respondida"){
+                return redirect()->back()->with("message",[
+                    'status' => 'danger',
+                    'text' => '¡La PQRS ya tiene una respuesta!'
                 ]);
             }
 

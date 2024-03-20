@@ -153,6 +153,10 @@
     const paypalButtonContainer = document.getElementById('paypal-button-container');
     
     if (paypalButtonContainer) { // Verificar si el contenedor del botón de PayPal existe
+        loaderOverlay.style.display = "block"; // Mostrar el loader
+        setTimeout(function () {
+            loaderOverlay.style.display = "none"; // Ocultar el loader después de 2 segundos
+        }, 2500);
         paypal
             .Buttons({
                 fundingSource: paypal.FUNDING.CARD,

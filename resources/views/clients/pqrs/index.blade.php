@@ -60,29 +60,39 @@
                         <td class="col-1">
                             <div class="flex justify-center gap-2 w-full">
 
-                                {{-- Boton: Actualizar --}}
-                                <div class="button-tooltip" data-tooltip="Editar producto">
-                                    <a class="btn btn-warning" href="{{route('clients.pqrs.edit', $pqrs->slug)}}" role="button">
-                                        <i class="fa-solid fa-pen"></i>
+                                <div class="button-tooltip" data-tooltip="Ver detalles de la factura">
+                                    <a class="btn btn-primary" href="{{route('clients.pqrs.show', $pqrs->slug)}}" role="button">
+                                        <i class="fa-solid fa-eye"></i>
                                     </a>
                                 </div>
 
-                                {{-- Formulario: Eliminar --}}
-                                <form action="{{route('clients.pqrs.destroy', $pqrs->slug)}}" method="POST">
+                                @if ($pqrs->state->name == "En espera")
 
-                                    {{-- Token CSRF --}}
-                                    @csrf
-
-                                    {{-- Metodo de comunicacion --}}
-                                    @method('delete')
-
-                                    {{-- Boton: Eliminar --}}
-                                    <div class="button-tooltip" data-tooltip="Eliminar prodcuto">
-                                        <button type="submit" class="btn btn-danger w-full">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
+                                    {{-- Boton: Actualizar --}}
+                                    <div class="button-tooltip" data-tooltip="Editar producto">
+                                        <a class="btn btn-warning" href="{{route('clients.pqrs.edit', $pqrs->slug)}}" role="button">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
                                     </div>
-                                </form>
+                                
+                                    {{-- Formulario: Eliminar --}}
+                                    <form action="{{route('clients.pqrs.destroy', $pqrs->slug)}}" method="POST">
+
+                                        {{-- Token CSRF --}}
+                                        @csrf
+
+                                        {{-- Metodo de comunicacion --}}
+                                        @method('delete')
+
+                                        {{-- Boton: Eliminar --}}
+                                        <div class="button-tooltip" data-tooltip="Eliminar prodcuto">
+                                            <button type="submit" class="btn btn-danger w-full">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </form>
+
+                                @endif
                             </div>
                         </td>
                     </tr>
