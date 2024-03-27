@@ -1,137 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @vite([
-        // Hojas de estilos personalizada
-        'resources/css/app.css',
-
-        // Tailwind CSS
-        'resources/css/tailwind.css',
-
-        // Bootstrap
-        "resources/css/bootstrap.scss",
-
-        // Admin
-        "resources/css/admin.css",
-    ])
-    <title>Tu recibo de compra - {{$facturation->client->fullName()}}</title>
+    @vite(['resources/css/tailwind.css', 'resources/css/pdf-styles.css'])
+    <title>Tu recibo de compra - {{ $facturation->client->fullName() }}</title>
 </head>
-<body class="flex flex-col min-h-screen justify-center relative" style="background: rgb(79, 70, 229, 0.86);">
 
-        {{-- Logo --}}
-        <img src="{{ asset('storage/others/logotype.png') }}" class="w-52 lg:w-64 block mx-auto lg:absolute top-0 left-0" alt="">
-
-        {{-- Título --}}
-        <div class="titles flex flex-col mt-6">
-            <h1 class="w-fit mx-auto text-white">Tu compra ha sido registrada</h1>
-            <h2 class="w-fit mx-auto text-white text-lg">{{ $facturation->client->fullName() }}</h2>
-        </div>
-
-        {{-- Card de la factura --}}
-        <div class="bg-white shadow-md invoice-card email w-full my-6">
-            {{-- Título: Información básica --}}
-            <p class="text-lg text-center border-b w-fit mx-auto mt-3 font-medium">Información básica</p>
-    
-            {{-- Apartado: Información básica --}}
+<body>
+    <header class="logotype-container font-semibold py-2">
+        <img src="{{ asset('storage/others/logotype.png') }}" alt="PcGlobal Logo" class="logotype">
+        <h1 class="text-center text-xl">¡Tu compra ha sido registrada!</h1>
+    </header>
+    <main>
+        <div class="invoice-card my-4 mx-auto">
+            <p class="font-semibold text-center my-2">Tu información:</p>
             <div class="invoice-card-content basics">
                 <ul class="list-disc">
-                    {{-- Fecha --}}
-                    <li class="mt-3">
-                        <span class="font-semibold">Fecha: </span> 
-                        {{$facturation->datetime["date"]}}
-                    </li>
-    
-                    {{-- Hora --}}
                     <li>
-                        <span class="font-semibold">Hora: </span> 
-                        {{$facturation->datetime["time"]}}
+                        <p>
+                            <span class="font-semibold">Fecha: </span>
+                            {{ $facturation->datetime['date'] }}
+                        </p>
                     </li>
-    
-                    {{-- Estado --}}
                     <li>
-                        <span class="font-semibold">Estado: </span> 
-                        {{$facturation->state->name}}
+                        <p>
+                            <span class="font-semibold">Hora: </span>
+                            {{ $facturation->datetime['time'] }}
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <span class="font-semibold">Estado: </span>
+                            {{ $facturation->state->name }}
+                        </p>
                     </li>
                 </ul>
             </div>
-    
-            {{-- Título: Detalles --}}
-            <p class="text-lg text-center border-b w-fit mx-auto mt-3 font-medium">Detalles</p>
-    
-            {{-- Apartado: Detalles --}}
-            <div class="invoice-card-content details grid grid-cols-1 lg:grid-cols-2">
-                {{-- Subapartado: Productos --}}
-                <ul class="border-r-0 lg:border-r my-2">
-                    {{-- Título: Productos --}}
-                    <p class="font-semibold text-center border-b-2 w-full md:w-fit mx-auto">Productos</p>
-                    @foreach ($facturation->details as $detail)
-                    <div class="border-s-4 border-slate-600/25 my-3 py-1 px-3">
+
+            <p class="font-semibold text-center my-2">Detalles:</p>
+            <div class="invoice-card-content products">
+                <p class="font-medium text-center my-2">Productos</p>
+                <div class="border mb-2"></div>
+                @foreach ($facturation->details as $detail)
+                    <ul class="list-none relative my-2">
+                        <div class="border-2 absolute h-full left-0"></div>
                         {{-- Marca --}}
                         <li>
-                            <span class="font-semibold">Marca: </span> 
-                            {{$detail->product->brand->name}}
+                            <span class="font-semibold">Marca: </span>
+                            {{ $detail->product->brand->name }}
                         </li>
-                        
+
                         {{-- Nombre/Modelo --}}
                         <li>
-                            <span class="font-semibold">Nombre/Modelo: </span> 
-                            {{$detail->product->name}}
+                            <span class="font-semibold">Nombre/Modelo: </span>
+                            {{ $detail->product->name }}
                         </li>
-                        
+
                         {{-- Cantidad --}}
                         <li>
-                            <span class="font-semibold">Cantidad: </span> 
-                            {{$detail->quantity}}
+                            <span class="font-semibold">Cantidad: </span>
+                            {{ $detail->quantity }}
                         </li>
-                        
+
                         {{-- Precio Unitario --}}
                         <li>
-                            <span class="font-semibold">Precio Unitario: </span> 
-                            ${{number_format($detail->unit_price, 0, ',', '.')}}
+                            <span class="font-semibold">Precio Unitario: </span>
+                            ${{ number_format($detail->unit_price, 0, ',', '.') }}
                         </li>
-                        
+
                         {{-- Precio neto --}}
                         <li>
-                            <span class="font-semibold">Precio Neto: </span> 
-                            ${{number_format(($detail->unit_price * $detail->quantity), 0, ',', '.')}}
+                            <span class="font-semibold">Precio Neto: </span>
+                            ${{ number_format($detail->unit_price * $detail->quantity, 0, ',', '.') }}
                         </li>
-                    </div>
-                    @endforeach
-                </ul>
-                
+                    </ul>
+                @endforeach
+            </div>
+
+            <div class="invoice-card-content prices my-2">
+                <p class="font-medium text-center my-2">Precios</p>
+                <div class="border mb-2"></div>
                 {{-- Subapartado: Precios --}}
-                <ul class="border-l-0 lg:border-l my-2">
-                    {{-- Título: Productos --}}
-                    <p class="font-semibold text-center border-b-2 w-full md:w-fit mx-auto">Precios</p>
-                    <div class="border-s-4 border-slate-600/25 my-3 py-1 px-3">
+                <ul class="relative">
+                    <div class="border-2 absolute h-full left-0"></div>
+                    <div class="my-3 py-1">
                         {{-- Subtotal --}}
                         <li>
-                            <span class="font-semibold">Subtotal: </span> 
-                            ${{number_format($facturation->subtotal, 0, ',', '.')}}
+                            <span class="font-semibold">Subtotal: </span>
+                            ${{ number_format($facturation->subtotal, 0, ',', '.') }}
                         </li>
-    
+
                         {{-- Impuestos --}}
                         <li>
-                            <span class="font-semibold">Impuestos ({{$facturation->tax_percentage}}%): </span> 
-                            ${{number_format($facturation->taxes, 0, ',', '.')}}
+                            <span class="font-semibold">Impuestos ({{ $facturation->tax_percentage }}%): </span>
+                            ${{ number_format($facturation->taxes, 0, ',', '.') }}
                         </li>
-    
+
                         {{-- Total --}}
                         <li>
                             <span class="font-semibold">Total: </span>
-                            ${{number_format($facturation->total, 0, ',', '.')}}
+                            ${{ number_format($facturation->total, 0, ',', '.') }}
                         </li>
                     </div>
                 </ul>
             </div>
         </div>
-
-        {{-- Gracias --}}
-        <div class="greetings flex flex-col mb-6">
-            <h1 class="w-fit mx-auto text-white text-2xl italic">Gracias por tu compra en PcGlobal</h1>
-        </div>
+    </main>
+    <footer>
+        <p class="text-center my-3 text-lg font-semibold italic">¡Gracias por comprar en PcGlobal!</p>
+    </footer>
 </body>
-</html>

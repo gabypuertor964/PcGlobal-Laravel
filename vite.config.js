@@ -25,6 +25,7 @@ export default defineConfig({
                 "resources/js/active-invoices-search.js",
                 "resources/js/active-invoices-search-edit.js",
                 "resources/css/app.css",
+                "resources/css/pdf-styles.css",
                 "resources/js/navbar.js",
                 "resources/js/scroll.js",
                 "resources/js/select_preview.js",

@@ -1,0 +1,42 @@
+* {
+    font-family: ui-sans-serif,system-ui,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji";
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.logotype-container {
+    border-radius: 4px;
+    background: #4f46e5;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.logotype-container h1 {
+    color: #fff;
+}
+
+.logotype {
+    width: 11rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.invoice-card {
+    width: 80%;
+    filter: drop-shadow(0 4px 3px #00000012) drop-shadow(0 2px 2px #0000000f);
+    background: #f1f1f1;
+    border-radius: 20px;
+    padding: 1rem;
+}
+
+.invoice-card .invoice-card-content {
+    background: #fff;
+    border-radius: 15px;
+    padding: 0.5rem;
+}
+
+.invoice-card .invoice-card-content ul {
+    padding-left: 1.5rem;
+}

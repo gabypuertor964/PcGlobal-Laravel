@@ -596,7 +596,7 @@ input.ais-SearchBox-input:focus {
     height: 100%;
     background-color: rgb(107, 114, 128, 0.7);
     display: none;
-    z-index: 150;
+    z-index: 999;
 }
 
 .loader {

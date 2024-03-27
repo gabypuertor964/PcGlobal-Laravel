@@ -24,7 +24,7 @@ class PayPalCardController extends Controller
     private $clientId;
     private $secret;
 
-    public function __construct() 
+    public function __construct()
     {
         $this->client = new Client([
             'base_uri' => 'https://api-m.sandbox.paypal.com'
@@ -34,7 +34,7 @@ class PayPalCardController extends Controller
         $this->secret = env('PAYPAL_SECRET');
     }
 
-    private function getAccessToken() 
+    private function getAccessToken()
     {
         $response = $this->client->request('POST', '/v1/oauth2/token', [
             'headers' => [
@@ -55,42 +55,39 @@ class PayPalCardController extends Controller
     {
         $accessToken = $this->getAccessToken();
 
-        $response = $this->client->request('GET', '/v2/checkout/orders/'. $orderId, [
+        $response = $this->client->request('GET', '/v2/checkout/orders/' . $orderId, [
             'headers' => [
                 'Accept' => 'application/json',
                 'Authorization' => "Bearer $accessToken"
-                ]
+            ]
         ]);
 
         $user = AuthController::get();
         $data = json_decode($response->getBody(), true);
 
-        if ($data['status'] === 'APPROVED' && $user !== null) 
-        {
+        if ($data['status'] === 'APPROVED' && $user !== null) {
             $subtotal = Cart::subtotal();
             $taxes = Cart::tax();
-            $total = Cart::total();     
+            $total = Cart::total();
             $cartContent = Cart::content();
-            return 
-            [
-                'success' => $this->createInvoicePayment($user, $subtotal, $taxes, $total, $cartContent),
-                'url' => route('cart.clear.after.purchase')
-            ];
+            return
+                [
+                    'success' => $this->createInvoicePayment($user, $subtotal, $taxes, $total, $cartContent),
+                    'url' => route('cart.clear.after.purchase')
+                ];
         }
 
-        return 
-        [
-            'success' => false
-        ];
-        
+        return
+            [
+                'success' => false
+            ];
     }
 
 
     private function createInvoicePayment(User $user, float $subtotal, float $taxes, float $total, mixed $cartContent): bool
     {
-        try
-        {
-            DB::transaction(function() use($user, $subtotal, $taxes, $total, $cartContent) {
+        try {
+            DB::transaction(function () use ($user, $subtotal, $taxes, $total, $cartContent) {
 
                 $sale = SaleInvoice::create([
                     'date_sale' => Carbon::now(),
@@ -101,8 +98,7 @@ class PayPalCardController extends Controller
                     'id_state' => State::where('name', 'Pendiente por entregar')->first()->id
                 ]);
 
-                foreach ($cartContent as $cartProduct)
-                {
+                foreach ($cartContent as $cartProduct) {
                     //Actualizar la cantidad 
                     $product = Product::all()->where('id', '=', $cartProduct->id)->first();
                     $product->stock -= $cartProduct->qty;
@@ -117,14 +113,12 @@ class PayPalCardController extends Controller
                     ]);
                 }
 
-                Mail::to($user->email)->send(new CreateFacturationMail($sale));
+                // Mail::to($user->email)->send(new CreateFacturationMail($sale));
 
             });
 
             return true;
-        }
-        catch(Exception)
-        {
+        } catch (Exception) {
             return false;
         }
     }
