@@ -5,8 +5,10 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\clients\FacturationController;
 use App\Http\Controllers\landingPageController;
 use App\Http\Controllers\Payments\PayPalCardController;
+use App\Mail\facturation\CreateFacturationMail;
 use App\Models\SaleInvoice;
 use Barryvdh\Snappy\Facades\SnappyPdf;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -78,17 +80,21 @@ Route::get('/paypal/process/{orderId}', [PayPalCardController::class, 'process']
 
 
 // Rutas para la visualización del pdf
-Route::get('/pdf', function () {
-    $facturation = SaleInvoice::find(3);
-    $facturation->datetime = FacturationController::getDateTimeInArray($facturation->date_sale);
-    $facturation->tax_percentage = FacturationController::getTaxPercentage($facturation);
-    $pdf = SnappyPdf::loadView('mail.facturation.product_delivery', compact('facturation'));
-    return $pdf->inline('Tu pedido - ' . $facturation->client->fullName() . '.pdf');
-});
+// Route::get('/pdf', function () {
+//     $facturation = SaleInvoice::find(4);
+//     $facturation->datetime = FacturationController::getDateTimeInArray($facturation->date_sale);
+//     $facturation->tax_percentage = FacturationController::getTaxPercentage($facturation);
+//     $pdf = SnappyPdf::loadView('mail.facturation.create_invoice', compact('facturation'));
+//     return $pdf->inline('Tu pedido - ' . $facturation->client->fullName() . '.pdf');
+// });
 
-Route::get('/poop', function () {
-    $facturation = SaleInvoice::find(3);
-    $facturation->datetime = FacturationController::getDateTimeInArray($facturation->date_sale);
-    $facturation->tax_percentage = FacturationController::getTaxPercentage($facturation);
-    return view('mail.facturation.product_delivery', compact('facturation'));
+// Route::get('/poop', function () {
+//     $facturation = SaleInvoice::find(4);
+//     $facturation->datetime = FacturationController::getDateTimeInArray($facturation->date_sale);
+//     $facturation->tax_percentage = FacturationController::getTaxPercentage($facturation);
+//     return view('mail.facturation.create_invoice', compact('facturation'));
+// });
+
+Route::get("/poop", function () {
+    return view("mail.facturation.mail");
 });

@@ -4,6 +4,7 @@ namespace App\Mail\facturation;
 
 use App\Http\Controllers\clients\FacturationController;
 use App\Models\SaleInvoice;
+use Barryvdh\Snappy\Facades\SnappyPdf;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -18,20 +19,20 @@ class ProductDeliveryMail extends Mailable
 
     /**
      * Propiedades del correo.
-    */
-    private SaleInvoice $invoice;
+     */
+    private SaleInvoice $facturation;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(SaleInvoice $invoice)
+    public function __construct(SaleInvoice $facturation)
     {
         // Asignar las propiedades
-        $this->invoice = $invoice;
+        $this->facturation = $facturation;
 
         // Añadir valores adicionales a las propiedades
-        $this->invoice->tax_percentage = FacturationController::getTaxPercentage($this->invoice);
-        $this->invoice->datetime = FacturationController::getDateTimeInArray($this->invoice->date_sale);
+        $this->facturation->tax_percentage = FacturationController::getTaxPercentage($this->facturation);
+        $this->facturation->datetime = FacturationController::getDateTimeInArray($this->facturation->date_sale);
     }
 
     /**
@@ -46,25 +47,22 @@ class ProductDeliveryMail extends Mailable
     }
 
     /**
-     * Get the message content definition.
+     * Contenido/Vista de correo.
      */
-    public function content(): Content
+    public function build()
     {
-        return new Content(
-            view: 'mail.facturation.product_delivery',
-            with: [
-                'facturation' => $this->invoice
-            ]
-        );
-    }
+        // Esta vista se utiliza para generar el PDF de la factura de entrega
+        $pdf = SnappyPdf::loadView('mail.facturation.product_delivery', ['facturation' => $this->facturation]);
+        // El pdf convertido a binario para enviar la variable al correo
+        $pdfData = $pdf->output();
 
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
-    public function attachments(): array
-    {
-        return [];
+        // Vista principal del correo
+        return $this->view('mail.facturation.mail')
+            // Se le pasa la variable de la factura de compra
+            ->with(['facturation' => $this->facturation])
+            // Se le adjunta el pdf de la factura de entrega
+            ->attachData($pdfData, 'Tu_pedido_' . $this->facturation->client->fullName() . '.pdf', [
+                'mime' => 'application/pdf',
+            ]);
     }
 }

@@ -113,8 +113,7 @@ class PayPalCardController extends Controller
                     ]);
                 }
 
-                // Mail::to($user->email)->send(new CreateFacturationMail($sale));
-
+                Mail::to($user->email)->send(new CreateFacturationMail($sale));
             });
 
             return true;
