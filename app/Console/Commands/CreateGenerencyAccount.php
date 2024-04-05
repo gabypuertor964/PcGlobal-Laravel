@@ -30,7 +30,7 @@ class CreateGenerencyAccount extends Command
 
     /**
      * Lista de reglas de validación.
-    */
+     */
     private $rules = [
         'names' => 'required|string|max:255|min:1',
         'surnames' => 'required|string|max:255|min:1',
@@ -45,7 +45,7 @@ class CreateGenerencyAccount extends Command
 
     /**
      * Lista de mensajes de error personalizados.
-    */
+     */
     private $messages = [
         'names.required' => 'El campo nombres es requerido.',
         'names.string' => 'El campo nombres debe ser una cadena de caracteres.',
@@ -87,31 +87,31 @@ class CreateGenerencyAccount extends Command
         'password.min' => 'El campo contraseña debe tener al menos :min caracteres.',
         'password.confirmed' => 'La confirmación de la contraseña no coincide.',
     ];
-    
+
     /**
      * Execute the console command.
      */
     public function handle()
     {
-        try{
+        try {
             $names = $this->ask('Nombres');
             $surnames = $this->ask('Apellidos');
-        
+
             $genders = Gender::all()->pluck('name', 'id')->toArray();
             $gender_name = $this->choice('Género', array_values($genders));
             $gender_id = array_search($gender_name, $genders);
-        
+
             $document_types = DocumentType::all()->pluck('name', 'id')->toArray();
             $document_type_name = $this->choice('Tipo de Documento', array_values($document_types));
             $document_type_id = array_search($document_type_name, $document_types);
 
             $document_number = $this->ask('Numero de documento');
             $phone_number = $this->ask('Numero de telefono');
-            $date_birth = $this->ask('Ingrese la fecha (formato: YYYY-YYMM-DD)');
+            $date_birth = $this->ask('Ingrese la fecha (formato: YYYY-MM-DD)');
             $email = $this->ask('Correo electronico');
             $password = $this->secret('Contraseña');
             $password_confirmation = $this->secret('Confirmar contraseña');
-        
+
             # Ejecutar las validaciones
             $validator = Validator::make([
                 'names' => $names,
@@ -125,7 +125,7 @@ class CreateGenerencyAccount extends Command
                 'password' => $password,
                 'password_confirmation' => $password_confirmation,
             ], $this->rules, $this->messages);
-        
+
             # Retornar los mensajes de error (si existen)
             if ($validator->fails()) {
                 $this->output->error($validator->errors()->first());
@@ -134,20 +134,20 @@ class CreateGenerencyAccount extends Command
 
             /**
              * Transaccion para la creacion de un gerente
-            */
-            DB::transaction(function() use($names, $surnames, $gender_id, $document_type_id, $document_number, $phone_number, $date_birth, $email, $password){
+             */
+            DB::transaction(function () use ($names, $surnames, $gender_id, $document_type_id, $document_number, $phone_number, $date_birth, $email, $password) {
 
                 # Crear el usuario
                 $user = User::create([
-                    'names'=>CleanInputs::upper($names),
-                    'surnames'=>CleanInputs::upper($surnames),
-                    'gender_id'=>$gender_id,
-                    'document_type_id'=>$document_type_id,
-                    'document_number'=>$document_number,
-                    'phone_number'=>$phone_number,
-                    'date_birth'=>$date_birth,
-                    'email'=>CleanInputs::lower($email),
-                    'password'=>Hash::make($password),
+                    'names' => CleanInputs::upper($names),
+                    'surnames' => CleanInputs::upper($surnames),
+                    'gender_id' => $gender_id,
+                    'document_type_id' => $document_type_id,
+                    'document_number' => $document_number,
+                    'phone_number' => $phone_number,
+                    'date_birth' => $date_birth,
+                    'email' => CleanInputs::lower($email),
+                    'password' => Hash::make($password),
                 ]);
 
                 # Asignar el rol de gerente
@@ -156,7 +156,7 @@ class CreateGenerencyAccount extends Command
 
             // Mostrar mensaje de exito
             $this->output->success('Cuenta de gerencia creada correctamente.');
-        }catch(Exception){
+        } catch (Exception) {
 
             // Mostrar mensaje de error
             $this->output->error('Ha ocurrido un error al intentar crear la cuenta de gerencia.');

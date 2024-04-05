@@ -58,7 +58,7 @@ class CreateFacturationMail extends Mailable
         $pdfData = $pdf->output();
 
         // Vista principal del correo
-        return $this->view('mail.facturation.mail')
+        return $this->view('mail.facturation.create_invoice_mail')
             // Variable de la factura de compra
             ->with(['facturation' => $this->facturation])
             // Se le adjunta el pdf de la factura de compra

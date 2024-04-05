@@ -57,7 +57,7 @@ class ProductDeliveryMail extends Mailable
         $pdfData = $pdf->output();
 
         // Vista principal del correo
-        return $this->view('mail.facturation.mail')
+        return $this->view('mail.facturation.product_delivery_mail')
             // Se le pasa la variable de la factura de compra
             ->with(['facturation' => $this->facturation])
             // Se le adjunta el pdf de la factura de entrega
