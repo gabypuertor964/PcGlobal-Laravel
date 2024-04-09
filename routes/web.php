@@ -7,7 +7,7 @@ use App\Http\Controllers\landingPageController;
 use App\Http\Controllers\Payments\PayPalCardController;
 use App\Mail\facturation\CreateFacturationMail;
 use App\Models\SaleInvoice;
-use Barryvdh\Snappy\Facades\SnappyPdf;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -80,21 +80,30 @@ Route::get('/paypal/process/{orderId}', [PayPalCardController::class, 'process']
 
 
 // Rutas para la visualización del pdf
-// Route::get('/pdf', function () {
-//     $facturation = SaleInvoice::find(1);
-//     $facturation->datetime = FacturationController::getDateTimeInArray($facturation->date_sale);
-//     $facturation->tax_percentage = FacturationController::getTaxPercentage($facturation);
-//     $pdf = SnappyPdf::loadView('mail.facturation.create_invoice', compact('facturation'));
-//     return $pdf->inline('Tu pedido - ' . $facturation->client->fullName() . '.pdf');
-// });
 
-// Route::get('/poop', function () {
-//     $facturation = SaleInvoice::find(1);
-//     $facturation->datetime = FacturationController::getDateTimeInArray($facturation->date_sale);
-//     $facturation->tax_percentage = FacturationController::getTaxPercentage($facturation);
-//     return view('mail.facturation.create_invoice', compact('facturation'));
-// });
+Route::get('/pdf', function () {
+    // Obtener los datos necesarios para la vista
+    $facturation = SaleInvoice::find(1);
+    $facturation->datetime = FacturationController::getDateTimeInArray($facturation->date_sale);
+    $facturation->tax_percentage = FacturationController::getTaxPercentage($facturation);
 
-// Route::get("/poop", function () {
-//     return view("mail.facturation.mail");
-// });
+    // Generar el PDF
+    $pdf = PDF::loadView('mail.facturation.product_delivery', compact('facturation'));
+
+    // Retornar el PDF como una descarga o visualización en el navegador
+    return $pdf->stream('invoice.pdf');
+});
+Route::get('/poop', function () {
+    // Obtener los datos necesarios para la vista
+    $facturation = SaleInvoice::find(1);
+    $facturation->datetime = FacturationController::getDateTimeInArray($facturation->date_sale);
+    $facturation->tax_percentage = FacturationController::getTaxPercentage($facturation);
+
+    // Generar el PDF
+    return view('mail.facturation.product_delivery', compact('facturation'));
+});
+
+Route::get("/qp", function () {
+    $facturation = SaleInvoice::find(1);
+    Mail::to("danies1507@gmail.com")->send(new CreateFacturationMail($facturation));
+});

@@ -9,7 +9,7 @@
     <title>Tu recibo de compra - {{ $facturation->client->fullName() }}</title>
 </head>
 
-<body>
+<body class="m-16" style="font-size: 14.5px;">
     <header class="logotype-container font-semibold py-2">
         <img src="{{ asset('storage/others/logotype.png') }}" alt="PcGlobal Logo" class="logotype">
         <h1 class="text-center text-xl">¡Tu compra ha sido registrada!</h1>
@@ -45,8 +45,7 @@
                 <p class="font-medium text-center my-2">Productos</p>
                 <div class="border mb-2"></div>
                 @foreach ($facturation->details as $detail)
-                    <ul class="list-none relative my-2">
-                        <div class="border-2 absolute h-full left-0"></div>
+                    <ul class="list-none border-l-4 my-2">
                         {{-- Marca --}}
                         <li>
                             <span class="font-semibold">Marca: </span>
@@ -84,8 +83,7 @@
                 <p class="font-medium text-center my-2">Precios</p>
                 <div class="border mb-2"></div>
                 {{-- Subapartado: Precios --}}
-                <ul class="relative">
-                    <div class="border-2 absolute h-full left-0"></div>
+                <ul class="border-l-4 list-none">
                     <div class="my-3 py-1">
                         {{-- Subtotal --}}
                         <li>
