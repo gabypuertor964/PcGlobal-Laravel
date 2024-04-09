@@ -81,7 +81,7 @@ Route::get('/paypal/process/{orderId}', [PayPalCardController::class, 'process']
 
 // Rutas para la visualización del pdf
 // Route::get('/pdf', function () {
-//     $facturation = SaleInvoice::find(4);
+//     $facturation = SaleInvoice::find(1);
 //     $facturation->datetime = FacturationController::getDateTimeInArray($facturation->date_sale);
 //     $facturation->tax_percentage = FacturationController::getTaxPercentage($facturation);
 //     $pdf = SnappyPdf::loadView('mail.facturation.create_invoice', compact('facturation'));
@@ -89,12 +89,12 @@ Route::get('/paypal/process/{orderId}', [PayPalCardController::class, 'process']
 // });
 
 // Route::get('/poop', function () {
-//     $facturation = SaleInvoice::find(4);
+//     $facturation = SaleInvoice::find(1);
 //     $facturation->datetime = FacturationController::getDateTimeInArray($facturation->date_sale);
 //     $facturation->tax_percentage = FacturationController::getTaxPercentage($facturation);
 //     return view('mail.facturation.create_invoice', compact('facturation'));
 // });
 
-Route::get("/poop", function () {
-    return view("mail.facturation.mail");
-});
+// Route::get("/poop", function () {
+//     return view("mail.facturation.mail");
+// });
